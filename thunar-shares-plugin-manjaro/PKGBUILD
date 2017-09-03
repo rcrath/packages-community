@@ -36,5 +36,5 @@ package() {
   
   install -Dm644 "${srcdir}/smb.conf" "${pkgdir}/etc/samba/smb.conf"
   mkdir -p "${pkgdir}/var/lib/samba/usershare"
-  chmod 1775 "${pkgdir}/var/lib/samba/usershare"
+  chmod 1770 "${pkgdir}/var/lib/samba/usershare"
 }
