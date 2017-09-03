@@ -1,12 +1,12 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Josip Ponjavic <josipponjavic at gmail dot com>
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
 _pkgname=$pkgname-manjaro
 pkgver=4.0.14
-pkgrel=1
+pkgrel=2
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
 url="https://github.com/oberon2007/$_pkgname"
@@ -26,7 +26,7 @@ provides=('lightdm-deepin-greeter')
 conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
 source=("$url/archive/$pkgver.tar.gz")
-sha512sums=('25eae005f47849149b80e92db7203ec276962ce708a2ec1c7ff31f57645cfc02f46b6720921228415fab086bf0d38d15d5a8ca9b47f19375d1bf9d1541ad5265')
+md5sums=('8a5758885c4a1bf5b8f28d40bcdf114a')
 
 build() {
     cd $_pkgname-$pkgver

@@ -5,8 +5,7 @@
 
 pkgname=deepin-account-faces
 pkgver=1.0.10
-_commit=7bbe244538bbe3241b660336e5e0102161a45167
-pkgrel=3
+pkgrel=5
 pkgdesc='Account faces for Linux Deepin'
 arch=('any')
 license=('GPL3')
@@ -16,7 +15,7 @@ backup=('var/lib/AccountsService/icons/manjaro.png')
 conflicts=('dde-account-faces')
 replaces=('dde-account-faces')
 groups=('deepin')
-source=("git+$url.git#commit=$_commit")
+source=("git+$url.git")
 md5sums=('SKIP')
 
 package() {

@@ -4,7 +4,7 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-desktop-base
-pkgver=2016.12.6
+pkgver=20170903
 pkgrel=1
 epoch=1
 pkgdesc='Base component for Deepin'
@@ -16,6 +16,10 @@ makedepends=('git')
 groups=('deepin')
 source=("git+$url.git")
 sha256sums=('SKIP')
+
+pkgver() {
+    date +%Y%m%d
+}
 
 build() {
   cd $pkgname
