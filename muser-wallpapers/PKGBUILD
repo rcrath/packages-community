@@ -1,5 +1,5 @@
-# Maintainer: Stefano Capitani <stefano@manjaro.org>
-
+# Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
+# Author: Muser <forumatmanjarodotorg>
 pkgname=muser-wallpapers
 _repo=muser-collection
 pkgver=20171008
