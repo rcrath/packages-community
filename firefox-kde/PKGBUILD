@@ -4,16 +4,16 @@
 
 pkgname=firefox-kde
 _pkgname=firefox
-pkgver=55.0.3
-pkgrel=2
+pkgver=56.0
+pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with OpenSUSE patch, integrate better with KDE"
 arch=(i686 x86_64)
 license=(MPL GPL LGPL)
 url="https://build.opensuse.org/package/show/mozilla:Factory/MozillaFirefox"
 depends=(gtk3 gtk2 mozilla-common libxt startup-notification mime-types dbus-glib ffmpeg
-         nss hunspell sqlite ttf-font libpulse icu kmozillahelper)
+         nss hunspell sqlite ttf-font libpulse kmozillahelper)
 makedepends=(unzip zip diffutils python2 yasm mesa imake gconf inetutils xorg-server-xvfb
-             autoconf2.13 rust)
+             autoconf2.13 rust clang llvm jack)
 optdepends=('networkmanager: Location detection via available WiFi networks'
             'libnotify: Notification integration'
             'pulseaudio: Audio support'
@@ -21,16 +21,15 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
 provides=("firefox=${pkgver}")
 conflicts=('firefox' 'firefox-kde-opensuse')
 options=(!emptydirs !makeflags !strip)
-_patchrev=b2ba34e0dc10
+_patchrev=6c6109948e35
 _patchurl=http://www.rosenauer.org/hg/mozilla/raw-file/$_patchrev
-source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
-        firefox.desktop firefox-symbolic.svg
+source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz        
         wifi-disentangle.patch wifi-fix-interface.patch
-        clip-ft-glyph.diff harmony-fix.diff
-        firefox-install-dir.patch no-crmf.diff
+        0001-Bug-1384062-Make-SystemResourceMonitor.stop-more-res.patch
+        no-plt.diff plugin-crash.diff
+        firefox.desktop firefox-symbolic.svg firefox-install-dir.patch
         kde.js
         # Firefox patchset
-
         firefox-branded-icons-$_patchrev.patch::$_patchurl/firefox-branded-icons.patch
         firefox-kde-$_patchrev.patch::$_patchurl/firefox-kde.patch
         firefox-no-default-ualocale-$_patchrev.patch::$_patchurl/firefox-no-default-ualocale.patch
@@ -39,26 +38,24 @@ source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/
         mozilla-language-$_patchrev.patch::$_patchurl/mozilla-language.patch
         mozilla-nongnome-proxies-$_patchrev.patch::$_patchurl/mozilla-nongnome-proxies.patch
         mozilla-ucontext-$_patchrev.patch::$_patchurl/mozilla-ucontext.patch
-        fixformach.diff
         pgo_fix_missing_kdejs.patch)
-sha256sums=('891836df85f8798c49f7b25661820f64d1311d59703c716eda471819b93ccda2'
-            'ada313750e6fb14558b37c764409a17c1672a351a46c73b350aa1fe4ea9220ef'
-            'a2474b32b9b2d7e0fb53a4c89715507ad1c194bef77713d798fa39d507def9e9'
+sha256sums=('0d8b7e91429f622c25509b7e73530807506ef3ff9f749d962251a35ed2bfed7e'
             'f068b84ad31556095145d8fefc012dd3d1458948533ed3fff6cbc7250b6e73ed'
             'e98a3453d803cc7ddcb81a7dc83f883230dd8591bdf936fc5a868428979ed1f1'
-            'd5e5580a96ecc4a66ce12dde0737c1ed5cb31017a6ec488ffe372192ed893e1b'
-            '16bb776e9f3039321db747b2eaece0cda1320f3711fb853a68d67247b0aa065d'
+            'aba767995ffb1a55345e30aaba667f43d469e23bd9b1b68263cf71b8118acc96'
+            'ea8e1b871c0f1dd29cdea1b1a2e7f47bf4713e2ae7b947ec832dba7dfcc67daa'
+            'a7e5d2430bb562f6367deb07417dad4368317e8e8be5d1cfa842c3356de3cfc0'
+            'ada313750e6fb14558b37c764409a17c1672a351a46c73b350aa1fe4ea9220ef'
+            'a2474b32b9b2d7e0fb53a4c89715507ad1c194bef77713d798fa39d507def9e9'
             'd86e41d87363656ee62e12543e2f5181aadcff448e406ef3218e91865ae775cd'
-            'fb85a538044c15471c12cf561d6aa74570f8de7b054a7063ef88ee1bdfc1ccbb'
             '1ca0debb89d1d2f0becf21bac2d5e87857d58b37b16d9b6cf559607e5a993238'
             'c85a37e71f2bd511fac88d41ca0618ee375c49fc86bc2beddf6dc17c3f17508d'
-            'a3af6d55c07fd4cd06c044bc1bf289caf16f40d8eb150bc505e035e37696bfa2'
+            'f672e60e22869381e9c4cdd90353a053a0171778eca40d4664bc733822fd535f'
             'b941790009bb9eda46c2d96fb0d1c83b0fe2d1acf74754ab08e6b18c1e0c6b16'
-            '512d9a06acdb30b023a0601ecf2f7b5104e2838d4431957b97910f24d98b5bef'
-            '2720e418edaab7b305087b325604fe134dab1b743dae6e924aba7b4bd73ea389'
-            'e8289ea4c1f8191e1e23661312ceee2128b8e790501b9a589d0d7bfc4384553f'
+            'e25b9fa2e4ac279b5e073286b7dc9956822bf508eccb67eb870921013274a709'
+            '6793ac5899fa946fa3a84628aeba2a70a25147c4717fa282809c559500215fbd'
+            'ef0f90c9134ef05b950f06a3ffbd699c2e5a5f99a4cdf9868e799534d68c204f'
             '96d9accb74e19f640e356572b3c0914c6be867cbdf351392b0cb5c00161ee012'
-            '9a354afad0042e2fa4bf29cb32f6c179669ad26f1764325443d1339a23f245f0'
             '55c4d93761ad46326c511246cef05abc09407d8f8f7131c9dad865b35cbcfad2')
 validpgpkeys=('2B90598A745E992F315E22C58AB132963A06537A')
 
@@ -81,26 +78,23 @@ prepare() {
 
   cd $_pkgname-$pkgver
   patch -Np1 -i ../firefox-install-dir.patch
+  
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=1314968
+  patch -Np1 -i ../wifi-disentangle.patch
+  patch -Np1 -i ../wifi-fix-interface.patch
+  
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=1384062
+  patch -Np1 -i ../0001-Bug-1384062-Make-SystemResourceMonitor.stop-more-res.patch
 
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1371991
-  patch -Np1 -i ../no-crmf.diff
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=1382942
+  patch -Np1 -i ../no-plt.diff
+
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=1400175
+  patch -Np1 -i ../plugin-crash.diff
 
   # https://bugzilla.mozilla.org/show_bug.cgi?id=1385667
   # https://bugzilla.mozilla.org/show_bug.cgi?id=1394149
   patch -Np1 -i ../mozilla-ucontext-$_patchrev.patch
-
-  # Fix build with latest Python
-  patch -Np1 -i ../fixformach.diff
-
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1314968
-  patch -Np1 -i ../wifi-disentangle.patch
-  patch -Np1 -i ../wifi-fix-interface.patch
-
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1393467
-  patch -Np1 -i ../clip-ft-glyph.diff
-
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1400721
-  patch -Np1 -i ../harmony-fix.diff
 
   echo -n "$_google_api_key" >google-api-key
   echo -n "$_mozilla_api_key" >mozilla-api-key
@@ -127,17 +121,15 @@ ac_add_options --with-google-api-keyfile=${PWD@Q}/google-api-key
 ac_add_options --with-mozilla-api-keyfile=${PWD@Q}/mozilla-api-key
 
 # System libraries
-ac_add_options --with-system-nspr
-ac_add_options --with-system-nss
-ac_add_options --with-system-icu
 ac_add_options --with-system-zlib
 ac_add_options --with-system-bz2
 ac_add_options --enable-system-hunspell
 ac_add_options --enable-system-sqlite
 ac_add_options --enable-system-ffi
-ac_add_options --enable-system-pixman
 
 # Features
+ac_add_options --enable-alsa
+ac_add_options --enable-jack
 ac_add_options --enable-startup-notification
 ac_add_options --enable-crashreporter
 ac_add_options --disable-updater
@@ -178,7 +170,7 @@ package() {
   cp "$srcdir/kde.js" obj-$CARCH-pc-linux-gnu/dist/bin/defaults/pref
 
   DESTDIR="$pkgdir" ./mach install
-  find . -name '*crashreporter-symbols.zip' -exec cp -fvt "$startdir" {} +
+  find . -name '*crashreporter-symbols-full.zip' -exec cp -fvt "$startdir" {} +
 
   _vendorjs="$pkgdir/usr/lib/firefox/browser/defaults/preferences/vendor.js"
   install -Dm644 /dev/stdin "$_vendorjs" <<END
@@ -230,5 +222,9 @@ END
   # Replace duplicate binary with wrapper
   # https://bugzilla.mozilla.org/show_bug.cgi?id=658850
   ln -srf "$pkgdir/usr/bin/firefox" \
-    "$pkgdir/usr/lib/firefox/firefox-bin"
+    "$pkgdir/usr/lib/$_pkgname/firefox-bin"
+
+  # Use system certificates
+  ln -srf "$pkgdir/usr/lib/libnssckbi.so" \
+    "$pkgdir/usr/lib/$_pkgname/libnssckbi.so"
 }
