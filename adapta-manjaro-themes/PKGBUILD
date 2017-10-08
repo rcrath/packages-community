@@ -12,10 +12,10 @@ pkgname=('adapta-maia-theme'
 		 'manjaro-gnome-maia-theme')
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver="3.91.2.209"
-pkgrel=2
+pkgver="3.91.2.223"
+pkgrel=1
 arch=(any)
-_commit=e6553e2f0a95654c3daae797e22764ece4af7b9e
+_commit=8c033459e5a8f08858c8045a1a42f1f974ebaab7
 url="https://github.com/adapta-project/${_pkgname}"
 _url="https://github.com/Ste74/$_theme"
 license=('GPL2' 'CCPL')
@@ -32,8 +32,8 @@ makedepends=('libxml2'
 	         'gnome-shell')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz")
-sha256sums=('1f67c22a8d10a3cd5cd5eb8877dffec9fd16caddc6f0f99a47c2ff8dd4ef5475'
-            'b4fb5fc36def1a2f3868e3a45fb782511d0f2807f387e953bea1ddb3122831d3')
+sha256sums=('7378cd171e9e9c7240708ce9d3085cb314cecbbc7533437f7ccf4e9641ae9e0e'
+            '6d1f9b9d29a6c612938899691c97b77fb8f4e8ad25d8df40b7a5327bbcb07ceb')
 
 prepare() {
 
@@ -48,10 +48,10 @@ build_maia-theme() {
 
 #Change background of GDM 
 cd $srcdir
-    cp -f $_theme-$_commit/common/manjaro-label.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
-    cd adapta-maia-theme-$pkgver/shell/sass/gnome-shell
-    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
-    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
+    cp -f $_theme-$_commit/common/tiled-logo.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
+#    cd adapta-maia-theme-$pkgver/shell/sass/gnome-shell
+#    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
+#    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
 
 #build
 cd $srcdir
@@ -70,10 +70,10 @@ build_breath-theme() {
 
 #Change background of GDM 
 cd $srcdir
-    cp -f $_theme-$_commit/common/manjaro-label.png adapta-breath-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
-    cd adapta-breath-theme-$pkgver/shell/sass/gnome-shell
-    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
-    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
+    cp -f $_theme-$_commit/common/tiled-logo.png adapta-breath-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
+#    cd adapta-breath-theme-$pkgver/shell/sass/gnome-shell
+#    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
+#    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
 
 #build
 cd $srcdir
