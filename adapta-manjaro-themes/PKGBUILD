@@ -12,7 +12,7 @@ pkgname=('adapta-maia-theme'
 		 'manjaro-gnome-maia-theme')
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver="3.91.2.223"
+pkgver="3.91.2.233"
 pkgrel=1
 arch=(any)
 _commit=8c033459e5a8f08858c8045a1a42f1f974ebaab7
@@ -21,7 +21,8 @@ _url="https://github.com/Ste74/$_theme"
 license=('GPL2' 'CCPL')
 optdepends=('ttf-roboto: The recommended font'
             'noto-fonts: The recommended font for improved language support'
-            'gtk-engine-murrine: for gtk2 themes')
+            'gtk-engine-murrine: for gtk2 themes'
+            'kvantum-manjaro: qt5 engine for adapta')
 makedepends=('libxml2'
 	         'libsass'
 	         'sassc'
@@ -32,7 +33,7 @@ makedepends=('libxml2'
 	         'gnome-shell')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz")
-sha256sums=('7378cd171e9e9c7240708ce9d3085cb314cecbbc7533437f7ccf4e9641ae9e0e'
+sha256sums=('196ccf090b223f31aa5fd4815886e99619a22f90e7aaaf11aa35d115d5a9777b'
             '6d1f9b9d29a6c612938899691c97b77fb8f4e8ad25d8df40b7a5327bbcb07ceb')
 
 prepare() {
@@ -42,11 +43,11 @@ cd $srcdir
     for theme in adapta-maia-theme adapta-breath-theme adapta-black-maia-theme adapta-black-breath-theme; do
 		cp -r $_pkgname-$pkgver $theme-$pkgver
 	done
-} 
+}
 
 build_maia-theme() {
 
-#Change background of GDM 
+#Change background of GDM
 cd $srcdir
     cp -f $_theme-$_commit/common/tiled-logo.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
 #    cd adapta-maia-theme-$pkgver/shell/sass/gnome-shell
@@ -56,19 +57,24 @@ cd $srcdir
 #build
 cd $srcdir
     cd "adapta-maia-theme-${pkgver}"
+		msg "Apply Maia theme"
+
+	find . -type f -name '*.*' -exec sed -i \
+	"s/#00BCD4/#16a085/Ig;\
+	s/#4DD0E1/#4fbfa9/Ig;\
+	s/#03A9F4/#299984/Ig" {} \;
+
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
       --disable-unity \
-      --with-selection_color=#16A085 \
-      --with-second_selection_color=#16A085 \
-      --enable-parallel #--enable-gtk_next
+      --enable-parallel #--enable-gtk_next --with-selection_color=#16A085 --with-second_selection_color=#16A085
     make
 }
 
 build_breath-theme() {
 
-#Change background of GDM 
+#Change background of GDM
 cd $srcdir
     cp -f $_theme-$_commit/common/tiled-logo.png adapta-breath-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
 #    cd adapta-breath-theme-$pkgver/shell/sass/gnome-shell
@@ -78,15 +84,20 @@ cd $srcdir
 #build
 cd $srcdir
     cd "adapta-breath-theme-${pkgver}"
+		    msg "Apply Breath theme"
+
+	find . -type f -name '*.*' -exec sed -i \
+	"s/#00BCD4/#1abc9c/Ig;\
+	s/#009688/#1abc9c/Ig;\
+	s/#4DD0E1/#2fe2bf/Ig;\
+	s/#4DB6AC/#2fe2bf/Ig;\
+	s/#03A9F4/#299984/Ig" {} \;
+
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
       --disable-unity \
-      --with-selection_color=#1abc9c \
-      --with-second_selection_color=#2fe2bf \
-      --with-accent_color=#2fe2bf \
-      --with-suggestion_color=#1abc9c \
-      --enable-parallel #--enable-gtk_next
+      --enable-parallel #--enable-gtk_next --with-selection_color=#1abc9c --with-second_selection_color=#2fe2bf --with-accent_color=#2fe2bf --with-suggestion_color=#1abc9c
     make
 }
 
@@ -214,6 +225,7 @@ _adapta-black() {
 	's/#F7F9F9/#f1fef4/Ig'  -e \
 	's/#FAFBFC/#f5fef8/Ig'  -e \
 	's/#fdfdfe/#fbfffa/Ig'  -e \
+	's/#eeefef/#e7feeb/Ig'  -e \
 	's/rgba(19, 25, 28,/rgba(2, 14, 12,/Ig'  -e \
 	's/19;;25;;28;;/2;;14;;12;;/Ig'  -e \
 	's/28;;36;;41;;/2;;18;;16;;/Ig'  -e \
@@ -225,14 +237,14 @@ _adapta-black() {
 build_black-maia-theme() {
 cd $srcdir
     cd "adapta-black-maia-theme-${pkgver}"
-    msg "Apply black theme"
-    
+    msg "Apply Black Maia theme"
+
     find . -type f -name '*.*' -exec sed -i \
-	"s/#00BCD4/#16a085/g;\
-	s/#4DD0E1/#4fbfa9/g" {} \;
+	"s/#00BCD4/#16a085/Ig;\
+	s/#4DD0E1/#4fbfa9/Ig" {} \;
 
     _adapta-black
-		
+
 	./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
@@ -244,16 +256,16 @@ cd $srcdir
 build_black-breath-theme() {
 cd $srcdir
     cd "adapta-black-breath-theme-${pkgver}"
-    msg "Apply Black theme"
-    
+    msg "Apply Black Breath theme"
+
     find . -type f -name '*.*' -exec sed -i \
-	"s/#00BCD4/#1abc9c/g;\
-	s/#009688/#1abc9c/g;\
-	s/#4DD0E1/#2fe2bf/g;\
-	s/#4DB6AC/#2fe2bf/g" {} \;
-    
+	"s/#00BCD4/#1abc9c/Ig;\
+	s/#009688/#1abc9c/Ig;\
+	s/#4DD0E1/#2fe2bf/Ig;\
+	s/#4DB6AC/#2fe2bf/Ig" {} \;
+
     _adapta-black
-	
+
 	./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
@@ -272,7 +284,7 @@ replaces=('adapta-maia-theme-dev')
     install -dm 755 "${pkgdir}"/usr/share/plank/themes
   	ln -s /usr/share/themes/Adapta-Maia/plank "${pkgdir}"/usr/share/plank/themes/Adapta-Maia
 
-  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-maia-theme/    
+  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-maia-theme/
 
 # Move the file into another folder to match with name
 cd "$pkgdir/usr/share/themes"
@@ -294,20 +306,20 @@ cd "$pkgdir/usr/share/themes/Adapta-Nokto-Maia"
     ln -sf /usr/share/themes/Adapta-Maia/plank plank
     ln -sf /usr/share/themes/Adapta-Maia/gedit gedit
     ln -sf /usr/share/themes/Adapta-Maia/metacity-1 metacity-1
-    ln -sf /usr/share/themes/Adapta-Maia/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Maia/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Maia/gtk-3.0 gtk-3.0
 
 cd "$pkgdir/usr/share/themes/Adapta-Eta-Maia"
     ln -sf /usr/share/themes/Adapta-Maia/xfce-notify-4.0 xfce-notify-4.0
-    ln -sf /usr/share/themes/Adapta-Maia/plank plank 
-    ln -sf /usr/share/themes/Adapta-Maia/telegram telegram     
+    ln -sf /usr/share/themes/Adapta-Maia/plank plank
+    ln -sf /usr/share/themes/Adapta-Maia/telegram telegram
     ln -sf /usr/share/themes/Adapta-Maia/metacity-1 metacity-1
 
 cd "$pkgdir/usr/share/themes/Adapta-Nokto-Eta-Maia"
-    ln -sf /usr/share/themes/Adapta-Eta-Maia/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Eta-Maia/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Maia/metacity-1 metacity-1
     ln -sf /usr/share/themes/Adapta-Maia/plank plank
-    ln -sf /usr/share/themes/Adapta-Nokto-Maia/telegram telegram 
+    ln -sf /usr/share/themes/Adapta-Nokto-Maia/telegram telegram
     ln -sf /usr/share/themes/Adapta-Maia/xfce-notify-4.0 xfce-notify-4.0
 }
 
@@ -318,11 +330,11 @@ replaces=('adapta-breath-theme-dev')
 	build_breath-theme
     #cd "adapta-breath-theme-${pkgver}"
     make install
-	
+
 	install -dm 755 "${pkgdir}"/usr/share/plank/themes
   	ln -s /usr/share/themes/Adapta-Breath/plank "${pkgdir}"/usr/share/plank/themes/Adapta-Breath
 
-  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-breath-theme/ 
+  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-breath-theme/
 
 # Move the file into another folder to match with name
 cd "$pkgdir/usr/share/themes"
@@ -344,20 +356,20 @@ cd "$pkgdir/usr/share/themes/Adapta-Nokto-Breath"
     ln -sf /usr/share/themes/Adapta-Breath/plank plank
     ln -sf /usr/share/themes/Adapta-Breath/gedit gedit
     ln -sf /usr/share/themes/Adapta-Breath/metacity-1 metacity-1
-    ln -sf /usr/share/themes/Adapta-Breath/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Breath/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Breath/gtk-3.0 gtk-3.0
 
 cd "$pkgdir/usr/share/themes/Adapta-Eta-Breath"
     ln -sf /usr/share/themes/Adapta-Breath/xfce-notify-4.0 xfce-notify-4.0
-    ln -sf /usr/share/themes/Adapta-Breath/plank plank 
-    ln -sf /usr/share/themes/Adapta-Breath/telegram telegram    
+    ln -sf /usr/share/themes/Adapta-Breath/plank plank
+    ln -sf /usr/share/themes/Adapta-Breath/telegram telegram
     ln -sf /usr/share/themes/Adapta-Breath/metacity-1 metacity-1
 
 cd "$pkgdir/usr/share/themes/Adapta-Nokto-Eta-Breath"
-    ln -sf /usr/share/themes/Adapta-Eta-Breath/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Eta-Breath/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Breath/metacity-1 metacity-1
     ln -sf /usr/share/themes/Adapta-Breath/plank plank
-    ln -sf /usr/share/themes/Adapta-Nokto-Breath/telegram telegram    
+    ln -sf /usr/share/themes/Adapta-Nokto-Breath/telegram telegram
     ln -sf /usr/share/themes/Adapta-Breath/xfce-notify-4.0 xfce-notify-4.0
 }
 
@@ -382,7 +394,7 @@ pkgdesc="An adaptive Gtk+ theme based on Material Design Guidelines.Build with M
     install -dm 755 "${pkgdir}"/usr/share/plank/themes
   	ln -s /usr/share/themes/Adapta-Black-Maia/plank "${pkgdir}"/usr/share/plank/themes/Adapta-Black-Maia
 
-  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-black-maia-theme/    
+  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-black-maia-theme/
 
 # Move the file into another folder to match with name
 cd "$pkgdir/usr/share/themes"
@@ -404,20 +416,20 @@ cd "$pkgdir/usr/share/themes/Adapta-Black-Nokto-Maia"
     ln -sf /usr/share/themes/Adapta-Black-Maia/plank plank
     ln -sf /usr/share/themes/Adapta-Black-Maia/gedit gedit
     ln -sf /usr/share/themes/Adapta-Black-Maia/metacity-1 metacity-1
-    ln -sf /usr/share/themes/Adapta-Black-Maia/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Black-Maia/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Black-Maia/gtk-3.0 gtk-3.0
 
 cd "$pkgdir/usr/share/themes/Adapta-Black-Eta-Maia"
     ln -sf /usr/share/themes/Adapta-Black-Maia/xfce-notify-4.0 xfce-notify-4.0
-    ln -sf /usr/share/themes/Adapta-Black-Maia/plank plank 
-    ln -sf /usr/share/themes/Adapta-Black-Maia/telegram telegram     
+    ln -sf /usr/share/themes/Adapta-Black-Maia/plank plank
+    ln -sf /usr/share/themes/Adapta-Black-Maia/telegram telegram
     ln -sf /usr/share/themes/Adapta-Black-Maia/metacity-1 metacity-1
 
 cd "$pkgdir/usr/share/themes/Adapta-Black-Nokto-Eta-Maia"
-    ln -sf /usr/share/themes/Adapta-Black-Eta-Maia/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Black-Eta-Maia/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Black-Maia/metacity-1 metacity-1
     ln -sf /usr/share/themes/Adapta-Black-Maia/plank plank
-    ln -sf /usr/share/themes/Adapta-Black-Nokto-Maia/telegram telegram 
+    ln -sf /usr/share/themes/Adapta-Black-Nokto-Maia/telegram telegram
     ln -sf /usr/share/themes/Adapta-Black-Maia/xfce-notify-4.0 xfce-notify-4.0
 }
 
@@ -426,11 +438,11 @@ pkgdesc="An adaptive Gtk+ theme based on Material Design Guidelines.Build with M
 	build_black-breath-theme
     #cd "adapta-breath-theme-${pkgver}"
     make install
-	
+
 	install -dm 755 "${pkgdir}"/usr/share/plank/themes
   	ln -s /usr/share/themes/Adapta-Black-Breath/plank "${pkgdir}"/usr/share/plank/themes/Adapta-Black-Breath
 
-  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-black-breath-theme/ 
+  	install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-black-breath-theme/
 
 # Move the file into another folder to match with name
 cd "$pkgdir/usr/share/themes"
@@ -452,20 +464,20 @@ cd "$pkgdir/usr/share/themes/Adapta-Black-Nokto-Breath"
     ln -sf /usr/share/themes/Adapta-Black-Breath/plank plank
     ln -sf /usr/share/themes/Adapta-Black-Breath/gedit gedit
     ln -sf /usr/share/themes/Adapta-Black-Breath/metacity-1 metacity-1
-    ln -sf /usr/share/themes/Adapta-Black-Breath/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Black-Breath/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Black-Breath/gtk-3.0 gtk-3.0
 
 cd "$pkgdir/usr/share/themes/Adapta-Black-Eta-Breath"
     ln -sf /usr/share/themes/Adapta-Black-Breath/xfce-notify-4.0 xfce-notify-4.0
-    ln -sf /usr/share/themes/Adapta-Black-Breath/plank plank 
-    ln -sf /usr/share/themes/Adapta-Black-Breath/telegram telegram    
+    ln -sf /usr/share/themes/Adapta-Black-Breath/plank plank
+    ln -sf /usr/share/themes/Adapta-Black-Breath/telegram telegram
     ln -sf /usr/share/themes/Adapta-Black-Breath/metacity-1 metacity-1
 
 cd "$pkgdir/usr/share/themes/Adapta-Black-Nokto-Eta-Breath"
-    ln -sf /usr/share/themes/Adapta-Black-Eta-Breath/gtk-3.22 gtk-3.22 
+    ln -sf /usr/share/themes/Adapta-Black-Eta-Breath/gtk-3.22 gtk-3.22
     ln -sf /usr/share/themes/Adapta-Black-Breath/metacity-1 metacity-1
     ln -sf /usr/share/themes/Adapta-Black-Breath/plank plank
-    ln -sf /usr/share/themes/Adapta-Black-Nokto-Breath/telegram telegram    
+    ln -sf /usr/share/themes/Adapta-Black-Nokto-Breath/telegram telegram
     ln -sf /usr/share/themes/Adapta-Black-Breath/xfce-notify-4.0 xfce-notify-4.0
 }
 
@@ -475,6 +487,7 @@ pkgdesc="Manjaro Gnome Breath theme: provides a dash-to-dock and gdm theme based
 depends=('adapta-breath-theme')
 conflicts=('manjaro-gnome-maia-theme' 'manjaro-gdm-breath-theme-dev')
 replace=('manjaro-gdm-breath-theme-dev')
+optdepends=('adapta-black-breath-theme: black variant of adapta breath theme')
 
 install -dm755 $pkgdir/etc/skel
 install -dm755 $pkgdir/usr/share/themes/manjaro-gnome-theme
@@ -499,6 +512,7 @@ pkgdesc="Manjaro Gnome Maia theme: provides a dash-to-dock and gdm theme based o
 depends=('adapta-maia-theme')
 conflicts=('manjaro-gnome-breath-theme' 'manjaro-gdm-maia-theme-dev')
 replace=('manjaro-gdm-maia-theme-dev')
+optdepends=('adapta-black-maia-theme: black variant of adapta maia theme')
 
 install -dm755 $pkgdir/etc/skel
 
@@ -510,11 +524,10 @@ cd $srcdir/$_theme-$_commit/common
 for i in $(ls *.svg); do
 	cp $i $pkgdir/usr/share/themes/manjaro-gnome-theme
 done
-	
+
 #Hook
 install -Dm644 $srcdir/$_theme-$_commit/$_hook-install.hook $pkgdir/usr/share/libalpm/hooks/$_hook-install.hook
 install -Dm755 $srcdir/$_theme-$_commit/$_hook-install.script $pkgdir/usr/share/libalpm/scripts/$_hook-install
 install -Dm644 $srcdir/$_theme-$_commit/$_hook-remove.hook $pkgdir/usr/share/libalpm/hooks/$_hook-remove.hook
 install -Dm755 $srcdir/$_theme-$_commit/$_hook-remove.script $pkgdir/usr/share/libalpm/scripts/$_hook-remove
 }
-
