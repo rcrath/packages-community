@@ -4,15 +4,15 @@ _pkgbase=timeshift
 pkgname=$_pkgbase
 _ver=17.10
 pkgver=v$_ver
-pkgrel=1
+pkgrel=2
 pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
 url="https://github.com/teejee2008/$_pkgbase"
 license=('GPL')
-depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync')
+depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee')
 optdepends=('zensu: Open gui ( Legacy mode )'
 			'gksu: Alternative a zensu')
-makedepends=('vala' 'diffutils' 'coreutils' 'vte3' 'libgee' )
+makedepends=('vala' 'diffutils' 'coreutils' 'vte3')
 conflicts=("$_pkgbase")
 
 source=("https://github.com/teejee2008/$_pkgbase/archive/$pkgver.tar.gz")

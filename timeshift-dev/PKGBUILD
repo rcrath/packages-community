@@ -2,16 +2,16 @@
 
 _pkgbase=timeshift
 pkgname=$_pkgbase-dev
-pkgver=v17.2.r41.gdf5b91c
+pkgver=v17.10.r3.g8b5dde8
 pkgrel=1
 pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
 url="https://github.com/teejee2008/$_pkgbase"
 license=('GPL')
-depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync')
+depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee')
 optdepends=('zensu'
 			'gksu')
-makedepends=('vala' 'diffutils' 'coreutils' 'vte3' 'libgee' 'git')
+makedepends=('vala' 'diffutils' 'coreutils' 'vte3' 'git')
 conflicts=("$_pkgbase")
 
 source=("git+$url.git#branch=master")
@@ -22,12 +22,12 @@ pkgver() {
     git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-prepare() {
+#prepare() {
 #workaround for wayland session otherwise no GUI 
-  cd $_pkgbase/src
-  sed -i '4d' timeshift-gtk.desktop
-  echo "Exec=sh -c 'xhost +SI:localuser:root && timeshift-launcher'" >> timeshift-gtk.desktop
-}
+#  cd $_pkgbase/src
+#  sed -i '4d' timeshift-gtk.desktop
+#  echo "Exec=sh -c 'xhost +SI:localuser:root && timeshift-launcher'" >> timeshift-gtk.desktop
+#}
 
 build() {
   cd $_pkgbase/src
