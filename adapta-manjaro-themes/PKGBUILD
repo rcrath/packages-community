@@ -13,7 +13,7 @@ pkgname=('adapta-maia-theme'
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
 pkgver="3.91.2.233"
-pkgrel=1
+pkgrel=2
 arch=(any)
 _commit=8c033459e5a8f08858c8045a1a42f1f974ebaab7
 url="https://github.com/adapta-project/${_pkgname}"
@@ -46,7 +46,6 @@ cd $srcdir
 }
 
 build_maia-theme() {
-
 #Change background of GDM
 cd $srcdir
     cp -f $_theme-$_commit/common/tiled-logo.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
@@ -60,9 +59,11 @@ cd $srcdir
 		msg "Apply Maia theme"
 
 	find . -type f -name '*.*' -exec sed -i \
-	"s/#00BCD4/#16a085/Ig;\
-	s/#4DD0E1/#4fbfa9/Ig;\
-	s/#03A9F4/#299984/Ig" {} \;
+	"s/#00BCD4/#16a085/g;\
+	s/#4DD0E1/#4fbfa9/g" {} \;
+	
+	find . -type f -name '*.*' -exec sed -i "s|#2196F3|#38a8a3|g" {} \;
+	find . -type f -name '*.*' -exec sed -i "s|#03A9F4|#299984|g" {} \;
 
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
@@ -87,11 +88,13 @@ cd $srcdir
 		    msg "Apply Breath theme"
 
 	find . -type f -name '*.*' -exec sed -i \
-	"s/#00BCD4/#1abc9c/Ig;\
-	s/#009688/#1abc9c/Ig;\
-	s/#4DD0E1/#2fe2bf/Ig;\
-	s/#4DB6AC/#2fe2bf/Ig;\
-	s/#03A9F4/#299984/Ig" {} \;
+	"s/#00BCD4/#1abc9c/g;\
+	s/#009688/#1abc9c/g;\
+	s/#4DD0E1/#2fe2bf/g;\
+	s/#4DB6AC/#2fe2bf/g" {} \;
+	
+	find . -type f -name '*.*' -exec sed -i "s|#2196F3|#38a8a3|g" {} \;
+	find . -type f -name '*.*' -exec sed -i "s|#03A9F4|#299984|g" {} \;
 
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
