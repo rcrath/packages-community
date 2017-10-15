@@ -3,7 +3,7 @@
 
 _pkgname=deepin-desktop-schemas
 pkgname=$_pkgname-manjaro
-pkgver=3.1.16
+pkgver=3.1.17
 pkgrel=1
 pkgdesc='Manjaro Linux Deepin gschemas'
 arch=('any')
