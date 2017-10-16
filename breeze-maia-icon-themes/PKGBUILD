@@ -5,7 +5,7 @@
 
 pkgname=breeze-maia-icon-themes
 _pkgname=breeze-icons
-pkgver=5.38.0
+pkgver=5.39.0
 pkgrel=1
 pkgdesc='Breeze icon themes with Maia colors'
 arch=('any')
