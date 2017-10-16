@@ -2,7 +2,7 @@
 
 pkgbase=('ms-office-online')
 pkgname=('ms-office-online')
-pkgver=17.10
+pkgver=17.10.1
 pkgrel=1
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
@@ -18,7 +18,8 @@ source=('PowerPoint.png'
         'Excel.desktop'
         'Word.desktop'
         'Outlook.desktop'
-        'OneNote.desktop')
+        'OneNote.desktop'
+        'application-settings.json')
 sha256sums=('2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
             'e58d848d97212c0faa4c4c854931422c714f603636f41f1ab69798f50322a62f'
             '30054dc858159919b71fb92c047a596696717c1a744bba9388320b354f1a50fa'
@@ -28,16 +29,61 @@ sha256sums=('2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
             '5eb8fa731876811fa57079f7a7a28ee7b803b1b95cc836637361be5728c8b1a6'
             '5ae79390d43e82273c5acd76b65bcc610ac37420faae4ce9c8e74d71e1e08355'
             '439143c1fa418a2aa460bb2b181b575975dc2eda0acacfd6601bd427a4d0e7fa'
-            '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29')
+            '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29'
+            '2a8bbbb5b70114a58b500fa4e2c438483091b7c241bd4af1362efae32ea802be')
 package() {
     # Create binaries
     mkdir -p "${pkgdir}"/usr/bin
-    echo "jak https://office.live.com/start/PowerPoint.aspx" > "${pkgdir}"/usr/bin/powerpoint
-    echo "jak https://office.live.com/start/Excel.aspx" > "${pkgdir}"/usr/bin/excel
-    echo "jak https://office.live.com/start/Word.aspx" > "${pkgdir}"/usr/bin/word
-    echo "jak https://outlook.live.com/owa/#path=/mail" > "${pkgdir}"/usr/bin/outlook
-    echo "jak http://www.onenote.com/notebooks" > "${pkgdir}"/usr/bin/onenote
+
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/powerpoint
+    echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/powerpoint
+    echo "jak https://office.live.com/start/PowerPoint.aspx" >> "${pkgdir}"/usr/bin/powerpoint
+
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/excel
+    echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/excel
+    echo "jak https://office.live.com/start/Excel.aspx" >> "${pkgdir}"/usr/bin/excel
+
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/word
+    echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/word
+    echo "jak https://office.live.com/start/Word.aspx" >> "${pkgdir}"/usr/bin/word
+
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/outlook
+    echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/outlook
+    echo "jak https://outlook.live.com/owa/#path=/mail" >> "${pkgdir}"/usr/bin/outlook
+
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/onenote
+    echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/onenote
+    echo "jak http://www.onenote.com/notebooks" >> "${pkgdir}"/usr/bin/onenote
+
     chmod a+x "${pkgdir}"/usr/bin/*
+
+    # Install json settings
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/word/application-settings.json
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+
+    # Configure json settings
+    sed -i -e "s|_name_|Microsoft PowerPoint Online|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
+    sed -i -e "s|_description_|Work together on PowerPoint presentations|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/PowerPoint.png|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
+
+    sed -i -e "s|_name_|Microsoft Excel Online|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
+    sed -i -e "s|_description_|Work together on Excel spreadsheets|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Excel.png|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
+
+    sed -i -e "s|_name_|Microsoft Word Online|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
+    sed -i -e "s|_description_|Work together on Word documents|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
+
+    sed -i -e "s|_name_|Microsoft Outlook Online|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
+    sed -i -e "s|_description_|Check your Emails|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
+
+    sed -i -e "s|_name_|Microsoft OneNote Online|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    sed -i -e "s|_description_|Work together on OneNote documents|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
 
     # Install icons
     install -Dm644 "${srcdir}"/PowerPoint.png "${pkgdir}"/usr/share/icons/ms-office/PowerPoint.png
