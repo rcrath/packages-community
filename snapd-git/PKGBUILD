@@ -4,8 +4,8 @@
 
 pkgbase=snapd
 pkgname=snapd-git
-_commit=6650575af8d006a8ed09477419d050735e0d8fe7
-pkgver=2.28dev+170927+g6650575
+_commit=8541f6889870b3ff4490434c2816efec0dbbad81
+pkgver=2.28dev+171013+g8541f68
 pkgrel=1
 arch=('i686' 'x86_64')
 url="https://github.com/snapcore/snapd"
@@ -19,7 +19,7 @@ source=("$pkgname-$pkgver-$pkgrel.tar.gz::https://github.com/snapcore/snapd/arch
         'snapd.sh'
         '0001-cmd-snap-seccomp-link-to-libseccomp-dynamically.patch'
         '0002-fix-core.patch::https://github.com/snapcore/snapd/commit/8c821c13bb62703c5119a1b0b1edbd53ce7f48aa.patch')
-sha256sums=('f6ca6421993de75545f79f3dcd19dcd555d44ace87297dba9b70bf48813229dd'
+sha256sums=('c81ca9f509290b2a52ad355bd3b8705bf4a28964099c6951c094cd2e4dfcf3a8'
             'a86620433eccb32a35b5a71e1809e3dd1a0399b421d91b4043cb2c1cc02ec24e'
             'ee3c9584426e9ef237ceca94c2ddeb495bf04a5e2a303b05c36b189e0c6a16e9'
             '4391395969fd75df79ae12ed733f1377013b5017724b75c1a001e8792241a74c')
@@ -37,6 +37,7 @@ prepare() {
   # above describes.
   mkdir -p "$(dirname "$GOPATH/src/${_gourl}")"
   ln --no-target-directory -fs "$srcdir/$pkgbase-$_commit" "$GOPATH/src/${_gourl}"
+  mv tests/main/snap-confine/task.yaml tests/main/snap-confine/task-nvidia.yaml
   # Apply some patches that didn't make it into the release
   for p in $srcdir/*.patch; do
       patch -d "$srcdir/$pkgbase-$_commit" -p1 < $p
