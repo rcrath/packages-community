@@ -3,9 +3,9 @@
 
 pkgname=gnome-shell-extension-manjaro-update
 _pkgname=arch-update
-pkgver=1.2
-_pkgver=21
-pkgrel=4
+pkgver=2.1
+_pkgver=24
+pkgrel=1
 _notray=no-tray-icon
 pkgdesc="Convenient indicator for Manjaro updates in GNOME Shell."
 arch=('any')
@@ -23,8 +23,8 @@ source=("git://github.com/Chrysostomus/arch-update"
         "$_notray-remove.script")
         
 sha512sums=('SKIP'
-            '1f2f4809429d51893fe3a8ba46e168efbae9c0ab94581c08b29b4cbbe41870d0ff58c4d8939b85b400a3dbf082e64fc45a8cfa612aa78ed77a6fd0e62626b0d3'
-            '5e83cccde7cf341e0ada4166b53cf2aaffc49135482876a84f587b62d21cc93fc13ab0efd3940a8f940c7190bdc753ec0e00e0a6b838444ebe242a54990a3bf3'
+            '7f18968f3abb512449d13fb66a94e95fa4a9170a164f6e979394f5e5cdc88587e8b04f01e923879a30231f794b3c8f4a64b471692e04acad5a9d113a48b4bc84'
+            '88d7e3d31030a23aacc81db66a18ec0b95c51ce615a62d910a2a81bbe279abe4058b4392f4e3bf04cd07c6b141da0b315bcb8b6274d75f4a08c62c4ecd84496a'
             '98e66a892fb17faa038c5f75debfc7fe239b97444ee454112d18c87d20715371bf6fc78f6e4e820bcfe1a42fc552c324a91559a5ae7f7c4a79bfa7343993c4a3'
             '1becc32627fcb63186e3c37a7a0c5387b189e7a20a1cc57f4291c2f1606943f0d904faf9a4a8e857d9bc4876a2ee2d5033eea32f8ef65453f145d791a5e44280'
             '0673fb49025c9665c091f2246d3cb7e979d968c53dfe0dd8abcb6184997448f0712046ee0e0ffab80f04f13fbb080133e38de86237db403e63737c70765b9607'
@@ -40,7 +40,7 @@ mv $_pkgname-$_pkgver $_pkgname
 cd $srcdir/$_pkgname
 patch -p1 -i ../manjaro.patch
 VER=$pkgver
-sed -i "s/\"version\": 20.*/\"version\": $VER/" metadata.json
+sed -i "s/\"version\": 24.*/\"version\": $VER/" metadata.json
 }
 
 package() {
