@@ -22,7 +22,7 @@ sha512sums=('cafa0fbb4f965bf3eef450d0192fd038aefad75c1a6c6ec239088aaec2575eed99b
 package_mhwd-db-amdgpu-experimental()
 {
     pkgdesc="Enables experimental AMDGPU support for Sea Islands(GCN1.1) and Southern Islands(GCN 1.0)"
-    depends=('bash')
+    depends=('bash' 'mhwd-amdgpu')
     replaces=("mhwd-addon-amdgpu-hwe")
     conflicts=("mhwd-addon-amdgpu-hwe")
 
