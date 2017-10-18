@@ -8,7 +8,7 @@ pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
 url="https://github.com/teejee2008/$_pkgbase"
 license=('GPL')
-depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee')
+depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee' 'vte3')
 optdepends=('zensu'
 			'gksu')
 makedepends=('vala' 'diffutils' 'coreutils' 'vte3' 'git')
