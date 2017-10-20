@@ -1,7 +1,7 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname="deepin-wallpapers"
-pkgver=20170726
+pkgver=20171020
 pkgrel=1
 epoch=1
 _snapshot=9f4c4e27c0cb10ac7d35a4e5b9c188882bb9361e
@@ -26,6 +26,6 @@ package() {
     install -dm755 $pkgdir/var/cache
     cp -r backgrounds $pkgdir/usr/share
     cp -r image-blur $pkgdir/var/cache
-    ln -s ../deep_sea.jpg $bgd/desktop.jpg   # upstream installs this via deepin-desktop-base
+#    ln -s ../deep_sea.jpg $bgd/desktop.jpg   # upstream installs this via deepin-desktop-base
     ln -s ant_man_deepin03.jpg $bg/default_background.jpg # greeter default
 }
