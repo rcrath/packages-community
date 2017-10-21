@@ -85,7 +85,7 @@ prepare() {
   cat "${srcdir}/config.x86_64" > ./.config
   cat "${srcdir}/config.rt" >> ./.config
 
-  # Set processor interupt frequency to 1000Hz
+  # Set processor interrupt frequency to 1000Hz
   sed -i "s|CONFIG_HZ_300=y|# CONFIG_HZ_300 is not set|g" ./.config
   sed -i "s|# CONFIG_HZ_1000 is not set|CONFIG_HZ_1000=y|g" ./.config
   sed -i "s|CONFIG_HZ=300|CONFIG_HZ=1000|g" ./.config
