@@ -2,55 +2,43 @@
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
 pkgname=gnome-shell-extension-manjaro-update
-_pkgname=arch-update
-pkgver=2.1
-_pkgver=24
-pkgrel=1
+_pkgname=manjaro-update
 _notray=no-tray-icon
+pkgver=3
+pkgrel=1
 pkgdesc="Convenient indicator for Manjaro updates in GNOME Shell."
 arch=('any')
-url="https://github.com/Chrysostomus/arch-update"
+url="https://github.com/Ste74/manjaro-update"
 license=('GPL3')
+install="$_pkgname.install"
 depends=('gnome-shell>=3.18' 'update-notifier>=0.6' 'dunstify' 'pamac' 'mhwd')
-makedepends=('git')
-#install=manjaro-update.install
-source=("git://github.com/Chrysostomus/arch-update" 
-        "https://github.com/RaphaelRochet/$_pkgname/archive/v$_pkgver.tar.gz" 
-        'manjaro.patch'
+source=("$url/archive/v$pkgver.tar.gz"
         "$_notray-install.hook"
         "$_notray-install.script"
         "$_notray-remove.hook"
-        "$_notray-remove.script")
+        "$_notray-remove.script"
+        "10_manjaro-update.gschema.override")
         
-sha512sums=('SKIP'
-            '7f18968f3abb512449d13fb66a94e95fa4a9170a164f6e979394f5e5cdc88587e8b04f01e923879a30231f794b3c8f4a64b471692e04acad5a9d113a48b4bc84'
-            '88d7e3d31030a23aacc81db66a18ec0b95c51ce615a62d910a2a81bbe279abe4058b4392f4e3bf04cd07c6b141da0b315bcb8b6274d75f4a08c62c4ecd84496a'
-            '98e66a892fb17faa038c5f75debfc7fe239b97444ee454112d18c87d20715371bf6fc78f6e4e820bcfe1a42fc552c324a91559a5ae7f7c4a79bfa7343993c4a3'
-            '1becc32627fcb63186e3c37a7a0c5387b189e7a20a1cc57f4291c2f1606943f0d904faf9a4a8e857d9bc4876a2ee2d5033eea32f8ef65453f145d791a5e44280'
-            '0673fb49025c9665c091f2246d3cb7e979d968c53dfe0dd8abcb6184997448f0712046ee0e0ffab80f04f13fbb080133e38de86237db403e63737c70765b9607'
-            'b715b963aa9eb0b54a7efc31a9ed01e77c789c97adbbcab75877b58cefa5b9033772b082f326b7a29911195b48bdc87c4baa117fb5d3a4be0c76a81a46d141f6')
-
-prepare(){
-# Patch and merge the upstream repo with Chrysostomus repo
-cd $srcdir
-rm -f $_pkgname-$_pkgver/icons/*
-mv $_pkgname/icons/* $_pkgname-$_pkgver/icons
-rm -rf $_pkgname
-mv $_pkgname-$_pkgver $_pkgname
-cd $srcdir/$_pkgname
-patch -p1 -i ../manjaro.patch
-VER=$pkgver
-sed -i "s/\"version\": 24.*/\"version\": $VER/" metadata.json
-}
-
+md5sums=('e9177b42ed0da5aadbad6d9367fe7495'
+         'a04f49caef5583ce9b8c581d4630e38f'
+         'e833709e7f0dedc737559f116a7861fa'
+         'fffd68e0249da86384823b6319727951'
+         '7f4828e35bcf97fc22e238365a5f804f'
+         '84f422b4997edd037e856b7f92a21051')
+         
 package() {
+
+  #create the extension container
   _uuid='manjaro-update@Chrysostomus'
   _install_dir="${pkgdir}/usr/share/gnome-shell/extensions/${_uuid}"
 
   install -dm655 $_install_dir
-  cp -rf "$srcdir"/arch-update/* $_install_dir
+  cp -rf "$srcdir"/$_pkgname-$pkgver/* $_install_dir
+  rm $_install_dir/*.txt
   
   cd $startdir
+  #copy gsettings key for override command
+  install -Dm644 10_manjaro-update.gschema.override $_install_dir/schemas
   
   #install hook and script	
 	install -Dm644 $_notray-install.hook ${pkgdir}/usr/share/libalpm/hooks/$_notray-install.hook

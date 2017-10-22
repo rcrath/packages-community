@@ -12,7 +12,7 @@ pkgname=('adapta-maia-theme'
 		 'manjaro-gnome-maia-theme')
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver="3.91.2.233"
+pkgver="3.91.2.247"
 pkgrel=2
 arch=(any)
 _commit=8c033459e5a8f08858c8045a1a42f1f974ebaab7
@@ -33,7 +33,7 @@ makedepends=('libxml2'
 	         'gnome-shell')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz")
-sha256sums=('196ccf090b223f31aa5fd4815886e99619a22f90e7aaaf11aa35d115d5a9777b'
+sha256sums=('d53501c8cda442d566d8810ec0b1cb688097496ab26042cfecf52dc967b85bd5'
             '6d1f9b9d29a6c612938899691c97b77fb8f4e8ad25d8df40b7a5327bbcb07ceb')
 
 prepare() {
@@ -62,9 +62,8 @@ cd $srcdir
 	"s/#00BCD4/#16a085/g;\
 	s/#4DD0E1/#4fbfa9/g" {} \;
 	
-	find . -type f -name '*.*' -exec sed -i "s|#2196F3|#38a8a3|g" {} \;
-	find . -type f -name '*.*' -exec sed -i "s|#03A9F4|#299984|g" {} \;
-
+	_adapta-var
+	
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
@@ -93,8 +92,7 @@ cd $srcdir
 	s/#4DD0E1/#2fe2bf/g;\
 	s/#4DB6AC/#2fe2bf/g" {} \;
 	
-	find . -type f -name '*.*' -exec sed -i "s|#2196F3|#38a8a3|g" {} \;
-	find . -type f -name '*.*' -exec sed -i "s|#03A9F4|#299984|g" {} \;
+	_adapta-var
 
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
@@ -115,6 +113,40 @@ cd $srcdir
     --enable-telegram \
     --disable-unity
   make
+}
+
+_adapta-var() {
+   find ./extra/gedit/adapta.xml \
+	./extra/plank/dock.theme \
+	./extra/telegram/dark/colors.tdesktop-theme \
+	./extra/telegram/light/colors.tdesktop-theme \
+	./gtk/asset/assets-gtk2.svg.in \
+	./gtk/asset/assets-gtk3.svg.in \
+	./gtk/asset/assets-clone/bar-blue.svg \
+	./gtk/asset/assets-clone/z-depth-1.svg \
+	./gtk/asset/assets-clone/z-depth-2.svg \
+	./gtk/gtk-2.0/colors.rc.in \
+	./gtk/gtk-2.0/colors-dark.rc.in \
+	./gtk/gtk-2.0/common.rc \
+	./gtk/gtk-2.0/common-eta.rc \
+	./gtk/sass/common/_colors.scss \
+	./m4/adapta-color-scheme.m4 \
+	./shell/asset/assets-cinnamon/ \
+	./shell/asset/assets-gnome-shell/ \
+	./shell/asset/assets-xfce/ \
+	./shell/sass/common/_colors.scss \
+	./shell/sass/gnome-shell/3.24/_extension-workspaces-to-dock.scss \
+	./shell/sass/gnome-shell/3.26/_extension-workspaces-to-dock.scss \
+	./shell/xfce-notify-4.0/gtkrc \
+	./wm/asset/assets-metacity/ \
+	./wm/asset/assets-openbox/ \
+	./wm/asset/assets-xfwm/ \
+	./wm/metacity-1/metacity-theme-2.xml \
+	./wm/openbox-3/themerc \
+	./wm/openbox-3/themerc-nokto \
+	./wm/xfwm4/themerc -type f -print | xargs sed -i -e \
+	's/#2196F3/#38a8a3/Ig'  -e \
+	's/#03A9f4/#299984/Ig'
 }
 
 _adapta-black() {
