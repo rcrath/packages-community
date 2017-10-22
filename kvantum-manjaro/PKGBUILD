@@ -2,8 +2,8 @@
 # Contributor: ceyhunnabiyev
 
 pkgname=kvantum-manjaro
-pkgver=0.10.4
-pkgrel=2
+pkgver=0.10.5
+pkgrel=1
 pkgdesc="Maia and Breath themes for kvantum-qt5"
 arch=('any')
 url="https://github.com/manjaro/$pkgname"
