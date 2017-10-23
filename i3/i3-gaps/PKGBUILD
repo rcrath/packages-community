@@ -2,7 +2,7 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=i3-gaps
-pkgver=4.14
+pkgver=4.14.1
 pkgrel=1
 pkgdesc='A fork of i3wm tiling window manager with more features, including gaps'
 url=https://github.com/Airblader/i3
@@ -24,7 +24,7 @@ optdepends=('dmenu: As menu.'
 	
 options=('docs' '!strip')
 source=("$url/archive/$pkgver.tar.gz")
-sha1sums=('7457b0d650373b7bede45e0dcc3a633743af17ae')
+sha1sums=('0df480d25f915f312813d9223e9b2025d20e2d56')
 
 build() {
   cd i3-$pkgver
