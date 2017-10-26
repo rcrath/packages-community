@@ -12,10 +12,10 @@ pkgname=('adapta-maia-theme'
 		 'manjaro-gnome-maia-theme')
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver="3.91.2.247"
-pkgrel=2
+pkgver="3.92.1.29"
+pkgrel=1
 arch=(any)
-_commit=8c033459e5a8f08858c8045a1a42f1f974ebaab7
+_commit=8fba171c99281f1eeaa8456c7388ff0c3cd0230f
 url="https://github.com/adapta-project/${_pkgname}"
 _url="https://github.com/Ste74/$_theme"
 license=('GPL2' 'CCPL')
@@ -33,8 +33,8 @@ makedepends=('libxml2'
 	         'gnome-shell')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz")
-sha256sums=('d53501c8cda442d566d8810ec0b1cb688097496ab26042cfecf52dc967b85bd5'
-            '6d1f9b9d29a6c612938899691c97b77fb8f4e8ad25d8df40b7a5327bbcb07ceb')
+sha256sums=('a4d56b3a43e7809b95cd3f8847381c9ed0de3756b22edf2d2b990716eb2bd813'
+            'e6ecce9f2437ab639045eacb5c4d43202f3c0551faf294396cc973fe9830cdfa')
 
 prepare() {
 
@@ -48,7 +48,7 @@ cd $srcdir
 build_maia-theme() {
 #Change background of GDM
 cd $srcdir
-    cp -f $_theme-$_commit/common/tiled-logo.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
+    cp -f $_theme-$_commit/common/maia.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
 #    cd adapta-maia-theme-$pkgver/shell/sass/gnome-shell
 #    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
 #    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
