@@ -36,49 +36,29 @@ class applicationWindow(AppWindow):
                   if url.startswith(domain):
                       print("Domain Allowed - loading")
                       self.webview.load_uri(url)
-
-                else:
-                    msg = "Opening link in external browser - "
-                    print(msg)
-
-                    decision.ignore()
-                    return True
-
+                      
+                  else:
+                    print("Domain Not Allowed - " + url)
 
             if decision_type == WebKit2.PolicyDecisionType.NEW_WINDOW_ACTION:
                 print("New Browser Tab Request")
                 url = decision.get_navigation_action().get_request().get_uri()
                 checkLink(url)
 
-            if decision_type == WebKit2.PolicyDecisionType.NAVIGATION_ACTION:
-
-                navigation_action = decision.get_navigation_action()
-                navigation_request = navigation_action.get_request()
-                navigation_type = navigation_action.get_navigation_type()
-                url = navigation_request.get_uri()
-
-                if url.startswith(url):
-                    pass
-
-                elif navigation_type == WebKit2.NavigationType.LINK_CLICKED:
-                    print("Link Clicked")
-                    print(url + " <- Action Denied Repeated URL")
-                    decision.ignore()
-                    return True
-
-                elif navigation_type == WebKit2.NavigationType.OTHER:
-                    print("Unknown Navigation Request " + url)
-                    if url.startswith("http"):
-                       checkLink(url)
-
-                else:
-                    print(url + " <- Action Denied")
-                    decision.ignore()
-                    return True
-
+            
             return False
 
+        def on_title_changed(webview, title):
+
+            """
+            :param webview:
+            :param title:
+            """
+            title = self.webview.get_title()
+            Gtk.Window.set_title(self, title)
+                    
         self.webview.load_uri(URL)
+        self.webview.connect("notify::title", on_title_changed)
         self.webview.connect("decide-policy", on_decide_policy)
 
 
