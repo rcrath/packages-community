@@ -8,6 +8,7 @@ arch=('i686' 'x86_64')
 url="https://bitbucket.org/trialuser02/${pkgname}"
 license=('GPL')
 depends=('qt5-base')
+makedepends=('gtk2')
 source=("${url}/downloads/${pkgname}-${pkgver}.tar.bz2")
 sha256sums=('4743de9559606bacd6f3d8835aac769b13c3d76d8698a05c95888430c4f0fbbd')
 
