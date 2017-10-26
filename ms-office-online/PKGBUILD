@@ -2,14 +2,15 @@
 
 pkgbase=('ms-office-online')
 pkgname=('ms-office-online')
-pkgver=17.10.1
+pkgver=17.10.3
 pkgrel=1
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
 depends=('python-jade-application-kit>=0.a26')
 license=('custom')
 arch=('any')
-source=('PowerPoint.png'
+source=('ms-office-online'
+        'PowerPoint.png'
         'Excel.png'
         'Word.png'
         'Outlook.png'
@@ -20,7 +21,8 @@ source=('PowerPoint.png'
         'Outlook.desktop'
         'OneNote.desktop'
         'application-settings.json')
-sha256sums=('2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
+sha256sums=('191093bc8576f068eb381f7df552e7f6a43323ac6c1da73667485c67ee3e7a87'
+            '2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
             'e58d848d97212c0faa4c4c854931422c714f603636f41f1ab69798f50322a62f'
             '30054dc858159919b71fb92c047a596696717c1a744bba9388320b354f1a50fa'
             '067b43cfe2c1f2a6298a39509992525e03e95d8ffb0140b887e4e68706925efd'
@@ -32,28 +34,40 @@ sha256sums=('2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
             '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29'
             '2a8bbbb5b70114a58b500fa4e2c438483091b7c241bd4af1362efae32ea802be')
 package() {
+    # Install ms-office-online launcher
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/powerpoint/ms-office-online
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/excel/ms-office-online
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/word/ms-office-online
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/outlook/ms-office-online
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
+
     # Create binaries
     mkdir -p "${pkgdir}"/usr/bin
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/powerpoint
     echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/powerpoint
-    echo "jak https://office.live.com/start/PowerPoint.aspx" >> "${pkgdir}"/usr/bin/powerpoint
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/powerpoint
+    sed -i -e "s|_URL_|https://office.live.com/start/PowerPoint.aspx|" "${pkgdir}"/usr/share/ms-office/powerpoint/ms-office-online
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/excel
     echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/excel
-    echo "jak https://office.live.com/start/Excel.aspx" >> "${pkgdir}"/usr/bin/excel
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/excel
+    sed -i -e "s|_URL_|https://office.live.com/start/Excel.aspx|" "${pkgdir}"/usr/share/ms-office/excel/ms-office-online
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/word
     echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/word
-    echo "jak https://office.live.com/start/Word.aspx" >> "${pkgdir}"/usr/bin/word
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/word
+    sed -i -e "s|_URL_|https://office.live.com/start/Word.aspx|" "${pkgdir}"/usr/share/ms-office/word/ms-office-online
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/outlook
     echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/outlook
-    echo "jak https://outlook.live.com/owa/#path=/mail" >> "${pkgdir}"/usr/bin/outlook
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/outlook
+    sed -i -e "s|_URL_|https://outlook.live.com/owa/#path=/mail|" "${pkgdir}"/usr/share/ms-office/word/ms-office-online
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/onenote
     echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/onenote
-    echo "jak http://www.onenote.com/notebooks" >> "${pkgdir}"/usr/bin/onenote
+    echo "./ms-office-online" >>echo "jak http://www.onenote.com/notebooks" >> "${pkgdir}"/usr/bin/onenote
+    sed -i -e "s|_URL_|https://www.onenote.com/notebooks|" "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
 
     chmod a+x "${pkgdir}"/usr/bin/*
 

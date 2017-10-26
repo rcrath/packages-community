@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+# coding: utf-8
+try:
+    from j.AK import Api, AppWindow
+
+except Exception as err:
+    print("Ops something went wrong: " + str(err))
+
+from gi.repository import Gtk, WebKit2
+
+URL = "_URL_"
+
+class applicationWindow(AppWindow):
+    """
+    extends AK.AppWindow functionality
+    """
+
+    def __init__(self):
+
+        super(applicationWindow, self).__init__()
+
+        def on_decide_policy(webview, decision, decision_type):
+
+            """
+            :param webview:
+            :param decision:
+            :param decision_type:
+            :return: if is not a predicted action do nothing.
+            """
+
+            def checkLink(url):
+                print("checking URL - " + url)
+                allowedDomains = ("https://www.onenote.com", "https://outlook.live.com", "https://office.live.com/", URL)
+                
+                for domain in allowedDomains:
+                  if url.startswith(domain):
+                      print("Domain Allowed - loading")
+                      self.webview.load_uri(url)
+
+                else:
+                    msg = "Opening link in external browser - "
+                    print(msg)
+
+                    decision.ignore()
+                    return True
+
+
+            if decision_type == WebKit2.PolicyDecisionType.NEW_WINDOW_ACTION:
+                print("New Browser Tab Request")
+                url = decision.get_navigation_action().get_request().get_uri()
+                checkLink(url)
+
+            if decision_type == WebKit2.PolicyDecisionType.NAVIGATION_ACTION:
+
+                navigation_action = decision.get_navigation_action()
+                navigation_request = navigation_action.get_request()
+                navigation_type = navigation_action.get_navigation_type()
+                url = navigation_request.get_uri()
+
+                if url.startswith(url):
+                    pass
+
+                elif navigation_type == WebKit2.NavigationType.LINK_CLICKED:
+                    print("Link Clicked")
+                    print(url + " <- Action Denied Repeated URL")
+                    decision.ignore()
+                    return True
+
+                elif navigation_type == WebKit2.NavigationType.OTHER:
+                    print("Unknown Navigation Request " + url)
+                    if url.startswith("http"):
+                       checkLink(url)
+
+                else:
+                    print(url + " <- Action Denied")
+                    decision.ignore()
+                    return True
+
+            return False
+
+        self.webview.load_uri(URL)
+        self.webview.connect("decide-policy", on_decide_policy)
+
+
+applicationWindow()
+Gtk.main()
