@@ -2,7 +2,7 @@
 
 pkgbase=('ms-office-online')
 pkgname=('ms-office-online')
-pkgver=17.10.3
+pkgver=17.10.4
 pkgrel=1
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
@@ -21,7 +21,7 @@ source=('ms-office-online'
         'Outlook.desktop'
         'OneNote.desktop'
         'application-settings.json')
-sha256sums=('191093bc8576f068eb381f7df552e7f6a43323ac6c1da73667485c67ee3e7a87'
+sha256sums=('0b586cec923ef651156f7cd91440a2ddb0faf107177356a891136b89dc54dd3e'
             '2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
             'e58d848d97212c0faa4c4c854931422c714f603636f41f1ab69798f50322a62f'
             '30054dc858159919b71fb92c047a596696717c1a744bba9388320b354f1a50fa'
@@ -32,7 +32,7 @@ sha256sums=('191093bc8576f068eb381f7df552e7f6a43323ac6c1da73667485c67ee3e7a87'
             '5ae79390d43e82273c5acd76b65bcc610ac37420faae4ce9c8e74d71e1e08355'
             '439143c1fa418a2aa460bb2b181b575975dc2eda0acacfd6601bd427a4d0e7fa'
             '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29'
-            '2a8bbbb5b70114a58b500fa4e2c438483091b7c241bd4af1362efae32ea802be')
+            'f6f495b08137736b97d19478ad56e56a26f893775428af8489a12795e94fe843')
 package() {
     # Install ms-office-online launcher
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/powerpoint/ms-office-online
@@ -79,24 +79,10 @@ package() {
     install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
 
     # Configure json settings
-    sed -i -e "s|_name_|Microsoft PowerPoint Online|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
-    sed -i -e "s|_description_|Work together on PowerPoint presentations|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/PowerPoint.png|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
-
-    sed -i -e "s|_name_|Microsoft Excel Online|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
-    sed -i -e "s|_description_|Work together on Excel spreadsheets|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Excel.png|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
-
-    sed -i -e "s|_name_|Microsoft Word Online|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
-    sed -i -e "s|_description_|Work together on Word documents|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
-
-    sed -i -e "s|_name_|Microsoft Outlook Online|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
-    sed -i -e "s|_description_|Check your Emails|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
-
-    sed -i -e "s|_name_|Microsoft OneNote Online|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
-    sed -i -e "s|_description_|Work together on OneNote documents|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
 
     # Install icons
