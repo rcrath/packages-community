@@ -2,28 +2,18 @@
     "application": {
 
         "name": "_name_",
-        "description": "_description_",
-        "version": "",
-        "author": "",
-        "url": "",
-        "license": ""
+        "description": "_description_"
     },
 
     "window": {
 
-        "hint_type": "",
         "width": "1024",
         "height": "600",
-        "fullscreen": "",
-        "resizable": "",
-        "decorated": "yes",
-        "transparent": "",
         "window_icon": "_icon_"
     },
 
     "webkit": {
 
-        "debug": "no",
         "cache": "online"
     }
 }
