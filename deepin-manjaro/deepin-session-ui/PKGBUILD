@@ -1,40 +1,39 @@
-# Maintainer: Bernhard Landauer <oberon@manjaro.org>
+# $Id: PKGBUILD 264426 2017-10-26 07:56:46Z felixonmars $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Josip Ponjavic <josipponjavic at gmail dot com>
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-_pkgname=$pkgname-manjaro
-pkgver=4.0.15
-pkgrel=1
+pkgver=4.0.17
+pkgrel=1.1
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
-url="https://github.com/oberon2007/$_pkgname"
+url="https://github.com/linuxdeepin/dde-session-ui"
 license=('GPL3')
 groups=('deepin')
-depends=('deepin-control-center'
-    'deepin-daemon'
-    'deepin-qt-dbus-factory'
-    'dtkwidget'
-    'gsettings-qt'
-    'liblightdm-qt5'
-    'qt5-svg'
-    'startdde'
-    'xorg-xrandr')
-makedepends=('git' 'qt5-tools' 'deepin-gettext-tools')
+depends=('gsettings-qt' 'dtkwidget' 'liblightdm-qt5' 'qt5-svg' 'deepin-daemon' 'xorg-server'
+         'deepin-control-center' 'startdde' 'xorg-xrandr' 'deepin-qt-dbus-factory')
+makedepends=('qt5-tools' 'deepin-gettext-tools')
 provides=('lightdm-deepin-greeter')
 conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
-source=("$url/archive/$pkgver.tar.gz")
-md5sums=('b2a357e1f0509c30d708aaa24d2bfdac')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/dde-session-ui/archive/$pkgver.tar.gz"
+    wm-chooser-text.patch::https://github.com/oberon2007/$pkgname-manjaro/commit/3c02f306ee18070757c88e61bd7c8c964bb14a85.patch)
+sha512sums=('6226527293013882fc14efa5e9ec5dc450ff55143f14a478728deaef83ba7d43867f2f50e8b8422ca0fcaaa3a9227734afda72f99f1bb6adff6e616f49e1344b'
+            'd106f23e259f1dc96813eeceeacb90eb69ebac8b675fc30d74c4275303087026eb9f1b9afd6cff0a2745300ce2542b974c1206d4999d7df6bac95c4ae4f6bd71')
+
+prepare() {
+  cd dde-session-ui-$pkgver
+  patch -p1 -i $srcdir/wm-chooser-text.patch
+}
 
 build() {
-    cd $_pkgname-$pkgver
-    qmake-qt5 PREFIX=/usr
-    make
+  cd dde-session-ui-$pkgver
+  qmake-qt5 PREFIX=/usr
+  make
 }
 
 package() {
-    cd $_pkgname-$pkgver
-    make INSTALL_ROOT="$pkgdir" install
+  cd dde-session-ui-$pkgver
+  make INSTALL_ROOT="$pkgdir" install
 }

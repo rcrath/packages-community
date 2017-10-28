@@ -1,8 +1,8 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname="deepin-wallpapers"
-pkgver=20171026
-pkgrel=1
+pkgver=20171028
+pkgrel=2
 epoch=1
 pkgdesc="Wallpapers for manjaro-deepin"
 arch=('any')
@@ -26,9 +26,17 @@ build() {
 
 package() {
   cd $pkgname
-  install -dm755 $pkgdir/usr/share
+  install -dm755 $pkgdir/usr/share/backgrounds/deepin
   cp -r backgrounds $pkgdir/usr/share
 
   install -dm755 $pkgdir/var/cache
   cp -r image-blur $pkgdir/var/cache
+
+# link desktop-base and wm-switcher defaults
+  ln -s ../deep_sea.jpg $pkgdir/usr/share/backgrounds/deepin/desktop.jpg
+  ln -s ../deep_sea.jpg $pkgdir/usr/share/backgrounds/default_background.jpg
+  ln -s 3dfc86ec0502839255bd522063e53a24.jpg \
+    $pkgdir/var/cache/image-blur/eff98ab2b2d91574a79fabd2b79eb7a9.jpg
+  ln -s 3dfc86ec0502839255bd522063e53a24.jpg \
+    $pkgdir/var/cache/image-blur/13ada65a5cf7674cb0a68dd1db9cb37c.jpg
 }
