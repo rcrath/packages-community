@@ -10,7 +10,7 @@ pkgname=('manjaro-bspwm-settings'
         'manjaro-mate-settings'
         'manjaro-netbook-settings')
 pkgver=20171029
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')

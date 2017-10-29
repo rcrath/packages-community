@@ -2,7 +2,7 @@
 
 pkgname=manjaro-deepin-settings
 pkgver=20171029
-pkgrel=1
+pkgrel=2
 pkgdesc='Manjaro Linux deepin settings'
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"

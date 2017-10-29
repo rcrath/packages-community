@@ -4,7 +4,7 @@ pkgbase=manjaro-kde-settings
 pkgname=('manjaro-kde-settings'
          'manjaro-kde-minimal-settings')
 pkgver=20171029
-pkgrel=1
+pkgrel=2
 pkgdesc="Manjaro Linux KDE settings"
 arch=('any')
 url="https://github.com/manjaro/manjaro-kde-settings"

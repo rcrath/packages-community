@@ -3,7 +3,7 @@
 _pkgbase=desktop-settings
 pkgname=manjaro-i3-settings
 pkgver=20171029
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
 license=('GPL')
