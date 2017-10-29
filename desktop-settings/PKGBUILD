@@ -9,8 +9,8 @@ pkgname=('manjaro-bspwm-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         'manjaro-netbook-settings')
-pkgver=20170910
-pkgrel=2
+pkgver=20171029
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -46,7 +46,6 @@ package_manjaro-bspwm-settings() {
     depends=('bspwm-wallpapers'
         'xcursor-breeze'
         'feh'
-        'gcc' # needed for .extend.Xresources
         'rootmenu'
         'mygtkmenui'
         'limepanel'
@@ -95,7 +94,6 @@ package_manjaro-budgie-settings() {
 package_manjaro-jwm-settings() {
     pkgdesc='Manjaro Linux jwm settings'
     depends=('cantarell-fonts'
-        'gcc' # needed for .extend.Xresources
         'gtk-theme-stylishdark'
         'jwm-artwork'
         'jwm-wallpapers'
