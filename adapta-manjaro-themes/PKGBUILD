@@ -12,7 +12,7 @@ pkgname=('adapta-maia-theme'
 		 'manjaro-gnome-maia-theme')
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver="3.92.1.29"
+pkgver="3.92.1.43"
 pkgrel=1
 arch=(any)
 _commit=8fba171c99281f1eeaa8456c7388ff0c3cd0230f
@@ -32,10 +32,14 @@ makedepends=('libxml2'
 	         'parallel'
 	         'gnome-shell')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
-        "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz")
-sha256sums=('a4d56b3a43e7809b95cd3f8847381c9ed0de3756b22edf2d2b990716eb2bd813'
-            'e6ecce9f2437ab639045eacb5c4d43202f3c0551faf294396cc973fe9830cdfa')
-
+        "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
+        'manjaro-xfce-override-maia-theme'
+        'manjaro-xfce-override-breath-theme')
+sha256sums=('f7ee509761e82ee4370598ef1e0b2b8ab9a4b601d061fd073385184eb7eb8ff9'
+            'e6ecce9f2437ab639045eacb5c4d43202f3c0551faf294396cc973fe9830cdfa'
+            'd1c2b76c1c566a3a928c02844392c79ce6dd8fd3402326dae8bad90296562706'
+            '242843bb01d7e9798697a99e4727ddde84b77dbb84d33b38058ee95f2fda876c')
+            
 prepare() {
 
 #Create separate dir theme
@@ -43,6 +47,14 @@ cd $srcdir
     for theme in adapta-maia-theme adapta-breath-theme adapta-black-maia-theme adapta-black-breath-theme; do
 		cp -r $_pkgname-$pkgver $theme-$pkgver
 	done
+}
+
+_override-xfce-maia-theme() {
+    find . -type f -name '_3rd-party.scss' -exec sh -c "cat $srcdir/manjaro-xfce-override-theme >> {}" \;
+}
+
+_override-xfce-breath-theme() {
+    find . -type f -name '_3rd-party.scss' -exec sh -c "cat $srcdir/manjaro-xfce-override-theme >> {}" \;
 }
 
 build_maia-theme() {
@@ -63,6 +75,7 @@ cd $srcdir
 	s/#4DD0E1/#4fbfa9/g" {} \;
 	
 	_adapta-var
+	_override-xfce-maia-theme
 	
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
@@ -93,7 +106,8 @@ cd $srcdir
 	s/#4DB6AC/#2fe2bf/g" {} \;
 	
 	_adapta-var
-
+	_override-xfce-breath-theme
+	
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
@@ -279,6 +293,7 @@ cd $srcdir
 	s/#4DD0E1/#4fbfa9/Ig" {} \;
 
     _adapta-black
+    _override-xfce-maia-theme
 
 	./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
@@ -300,6 +315,7 @@ cd $srcdir
 	s/#4DB6AC/#2fe2bf/Ig" {} \;
 
     _adapta-black
+    _override-xfce-breath-theme
 
 	./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
