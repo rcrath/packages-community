@@ -13,8 +13,8 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.92.1.43
-pkgrel=3
+pkgver=3.92.1.68
+pkgrel=1
 arch=(any)
 _commit=8fba171c99281f1eeaa8456c7388ff0c3cd0230f
 url="https://github.com/adapta-project/${_pkgname}"
@@ -35,7 +35,7 @@ makedepends=('libxml2'
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
         'XfdesktopIconView.patch')
-sha256sums=('f7ee509761e82ee4370598ef1e0b2b8ab9a4b601d061fd073385184eb7eb8ff9'
+sha256sums=('9ce6feb93ee4d56b6d8858678ef8f5f228b262b28189af0632cd60a27d1620b2'
             'e6ecce9f2437ab639045eacb5c4d43202f3c0551faf294396cc973fe9830cdfa'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da')
             
@@ -62,8 +62,7 @@ build_maia-theme() {
     msg "Apply Maia theme"
 
     find . -type f -name '*.*' -exec sed -i \
-      "s/#00BCD4/#16a085/g;
-      s/#4DD0E1/#4fbfa9/g" {} \;
+      "s/#00BCD4/#16a085/Ig" {} \;
     
     _adapta-var
 
@@ -87,10 +86,9 @@ build_breath-theme() {
             msg "Apply Breath theme"
 
     find . -type f -name '*.*' -exec sed -i \
-    "s/#00BCD4/#1abc9c/g;\
-    s/#009688/#1abc9c/g;\
-    s/#4DD0E1/#2fe2bf/g;\
-    s/#4DB6AC/#2fe2bf/g" {} \;
+    "s/#00BCD4/#1abc9c/Ig;\
+    s/#009688/#1abc9c/Ig;\
+    s/#4DB6AC/#2fe2bf/Ig" {} \;
     
     _adapta-var
     
@@ -273,8 +271,7 @@ build_black-maia-theme() {
     msg "Apply Black Maia theme"
 
     find . -type f -name '*.*' -exec sed -i \
-    "s/#00BCD4/#16a085/Ig;\
-    s/#4DD0E1/#4fbfa9/Ig" {} \;
+    "s/#00BCD4/#16a085/Ig" {} \;
 
     _adapta-black
 
@@ -293,7 +290,6 @@ build_black-breath-theme() {
     find . -type f -name '*.*' -exec sed -i \
       "s/#00BCD4/#1abc9c/Ig;\
       s/#009688/#1abc9c/Ig;\
-      s/#4DD0E1/#2fe2bf/Ig;\
       s/#4DB6AC/#2fe2bf/Ig" {} \;
 
     _adapta-black
