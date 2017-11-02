@@ -16,7 +16,7 @@ _theme=manjaro-gnome-theme
 pkgver=3.92.1.68
 pkgrel=1
 arch=(any)
-_commit=8fba171c99281f1eeaa8456c7388ff0c3cd0230f
+_commit=545de8abb27a13f91647bd3bcacccfd4b4619eb1
 url="https://github.com/adapta-project/${_pkgname}"
 _url="https://github.com/Ste74/$_theme"
 license=('GPL2' 'CCPL')
@@ -36,7 +36,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
         'XfdesktopIconView.patch')
 sha256sums=('9ce6feb93ee4d56b6d8858678ef8f5f228b262b28189af0632cd60a27d1620b2'
-            'e6ecce9f2437ab639045eacb5c4d43202f3c0551faf294396cc973fe9830cdfa'
+            'e5cde279a5750d5515dba8cbc1082132c8b118c00478e4acef1ae50e454638cb'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da')
             
 prepare() {    
@@ -511,21 +511,21 @@ pkgdesc="An adaptive Gtk+ theme based on Material Design Guidelines.Build with M
 
 package_manjaro-gnome-breath-theme() {
 _hook=gdm-theme-breath
-pkgdesc="Manjaro Gnome Breath theme: provides a dash-to-dock and gdm theme based on Adapta Breath theme"
+pkgdesc="Manjaro Gnome Breath theme: provide a GDM theme based on Adapta Breath theme"
 depends=('adapta-breath-theme')
 conflicts=('manjaro-gnome-maia-theme' 'manjaro-gdm-breath-theme-dev')
 replace=('manjaro-gdm-breath-theme-dev')
 optdepends=('adapta-black-breath-theme: black variant of adapta breath theme')
 
     install -dm755 $pkgdir/etc/skel
-    install -dm755 $pkgdir/usr/share/themes/manjaro-gnome-theme
+    #install -dm755 $pkgdir/usr/share/themes/manjaro-gnome-theme
 
     cp $srcdir/$_theme-$_commit/common/.face $pkgdir/etc/skel/.face
 
-    cd $_theme-$_commit/common
-    for i in $(ls *.svg); do
-        cp $i $pkgdir/usr/share/themes/manjaro-gnome-theme
-    done
+    #cd $_theme-$_commit/common
+    #for i in $(ls *.svg); do
+    #    cp $i $pkgdir/usr/share/themes/manjaro-gnome-theme
+    #done
 
     #Hook
     install -Dm644 $srcdir/$_theme-$_commit/$_hook-install.hook $pkgdir/usr/share/libalpm/hooks/$_hook-install.hook
@@ -536,22 +536,21 @@ optdepends=('adapta-black-breath-theme: black variant of adapta breath theme')
 
 package_manjaro-gnome-maia-theme() {
 _hook=gdm-theme-maia
-pkgdesc="Manjaro Gnome Maia theme: provides a dash-to-dock and gdm theme based on Adapta Maia theme"
+pkgdesc="Manjaro Gnome Maia theme: provide a GDM theme based on Adapta Maia theme"
 depends=('adapta-maia-theme')
 conflicts=('manjaro-gnome-breath-theme' 'manjaro-gdm-maia-theme-dev')
 replace=('manjaro-gdm-maia-theme-dev')
 optdepends=('adapta-black-maia-theme: black variant of adapta maia theme')
 
     install -dm755 $pkgdir/etc/skel
-
-    install -dm755 $pkgdir/usr/share/themes/manjaro-gnome-theme
+	#install -dm755 $pkgdir/usr/share/themes/manjaro-gnome-theme
 
     cp $srcdir/$_theme-$_commit/common/.face $pkgdir/etc/skel/.face
 
-    cd $_theme-$_commit/common
-    for i in $(ls *.svg); do
-        cp $i $pkgdir/usr/share/themes/manjaro-gnome-theme
-    done
+    #cd $_theme-$_commit/common
+    #for i in $(ls *.svg); do
+    #    cp $i $pkgdir/usr/share/themes/manjaro-gnome-theme
+    #done
 
     #Hook
     install -Dm644 $srcdir/$_theme-$_commit/$_hook-install.hook $pkgdir/usr/share/libalpm/hooks/$_hook-install.hook
