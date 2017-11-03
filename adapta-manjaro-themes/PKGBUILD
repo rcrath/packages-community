@@ -36,7 +36,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
         'XfdesktopIconView.patch')
 sha256sums=('9ce6feb93ee4d56b6d8858678ef8f5f228b262b28189af0632cd60a27d1620b2'
-            'e5cde279a5750d5515dba8cbc1082132c8b118c00478e4acef1ae50e454638cb'
+            'e62abd2cc572d3d8e194260cefc806fba5ecf9ff8887a89e5613d726e1e49c6d'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da')
             
 prepare() {    
