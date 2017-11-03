@@ -23,7 +23,7 @@ diff -rupN a/overrides/x86/com.deepin.dde.dock.override b/overrides/x86/com.deep
 +++ b/overrides/x86/com.deepin.dde.dock.override	2017-06-29 15:28:42.711304316 +0200
 @@ -1,4 +1,4 @@
  [com.deepin.dde.dock]
--docked-apps=['deepin-toggle-desktop', 'deepin-wm-multitaskingview','dde-file-manager','deepin-appstore','deepin-music','deepin-movie','google-chrome','dde-control-center']
+-docked-apps=['deepin-toggle-desktop', 'deepin-wm-multitaskingview','dde-file-manager','deepin-appstore','com.deepin.Music','deepin-music','com.deepin.Movie','deepin-movie','google-chrome','dde-control-center']
 -hide-mode='keep-showing'
 +docked-apps=['dde-file-manager','firefox','deepin-terminal','deepin-toggle-desktop','deepin-wm-multitaskingview','dde-control-center']
 +hide-mode='smart-hide'
