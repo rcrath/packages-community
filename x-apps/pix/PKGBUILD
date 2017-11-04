@@ -34,7 +34,7 @@ optdepends=('brasero: Burn discs'
     'libopenraw: Support for RAW photos'
     'libtiff: Tiff writing support'    )
 source=("${url}/archive/${pkgver}.tar.gz")
-md5sums=('3beb8d68d1d932988b7958bed73c9fe9')
+md5sums=('26dfd88ab0cd1200ee4c130cb1c90450')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
