@@ -4,7 +4,7 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-pkgver=4.0.17
+pkgver=4.1.0
 pkgrel=1.1
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/dde-session-ui/archive/$pkgver.tar.gz"
     wm-chooser-text.patch::https://github.com/oberon2007/$pkgname-manjaro/commit/3c02f306ee18070757c88e61bd7c8c964bb14a85.patch)
-sha512sums=('6226527293013882fc14efa5e9ec5dc450ff55143f14a478728deaef83ba7d43867f2f50e8b8422ca0fcaaa3a9227734afda72f99f1bb6adff6e616f49e1344b'
+sha512sums=('1921024d237bcbbe7eb760498c8ea6c13aac8d25ae9fcf39aa49d352162cb84d42bda32fa9460362d0651153753a89c895970da739d7152a374b4022ce38988b'
             'd106f23e259f1dc96813eeceeacb90eb69ebac8b675fc30d74c4275303087026eb9f1b9afd6cff0a2745300ce2542b974c1206d4999d7df6bac95c4ae4f6bd71')
 
 prepare() {
