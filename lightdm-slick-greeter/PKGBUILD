@@ -10,8 +10,7 @@ arch=(i686 x86_64)
 url="https://github.com/linuxmint/${_pkgname}"
 license=('GPL3')
 source=("${url}/archive/${pkgver}.tar.gz"
-        "$_pkgname.conf"
-        "add-desktop-session.patch")
+        "$_pkgname.conf")
 depends=('cairo'
     'freetype2'
     'gtk3'
@@ -27,11 +26,6 @@ backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('d92eecbb8ea5f1594d33e5ae49d33bc6cae9a6a2c8be43fbd1bf15b0afc91766'
             '65049a7fe68d8adce0b1f288be4e769ec07cdbef2d8952ec7827f818aa54d839'
             'ff0484bd5c5c96bb5c295a842e04f650d0e94c87f945d33aab19e33a27c613b6')
-            
-prepare() {
-	cd $srcdir/$_pkgname-$pkgver/src/
-	patch -i $srcdir/add-desktop-session.patch
-}
 
 build() {
     cd ${_pkgname}-${pkgver}
