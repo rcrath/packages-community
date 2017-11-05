@@ -2,7 +2,7 @@
 
 _pkgbase=timeshift
 pkgname=$_pkgbase-dev
-pkgver=v17.10.r11.g54b1c22
+pkgver=v17.11.r2.gda64899
 pkgrel=1
 pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
@@ -28,12 +28,12 @@ pkgver() {
 #}
 
 build() {
-  cd $_pkgbase/src
+  cd $_pkgbase
   make
 }
 
 package() {
-  cd $_pkgbase/src
+  cd $_pkgbase
   make DESTDIR=$pkgdir install
 }
 

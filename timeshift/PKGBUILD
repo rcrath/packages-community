@@ -2,21 +2,19 @@
 
 _pkgbase=timeshift
 pkgname=$_pkgbase
-_ver=17.10
+_ver=17.11
 pkgver=v$_ver
-pkgrel=3
+pkgrel=1
 pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
 url="https://github.com/teejee2008/$_pkgbase"
 license=('GPL')
 depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee' 'vte3')
-optdepends=('zensu: Open gui ( Legacy mode )'
-			'gksu: Alternative a zensu')
 makedepends=('vala' 'diffutils' 'coreutils')
 conflicts=("$_pkgbase")
 
 source=("https://github.com/teejee2008/$_pkgbase/archive/$pkgver.tar.gz")
-sha256sums=('854788f5e8163db1c9c663a21d02dc35188f9ccf7d83a8b3735eec39b2207e57')
+sha256sums=('2cdcd3a6c8c0a78240c944423ba49b488144924524d9e7a2e787e29aea5ab38b')
 
 #pkgver() {
 #    cd $_pkgbase
@@ -31,12 +29,12 @@ sha256sums=('854788f5e8163db1c9c663a21d02dc35188f9ccf7d83a8b3735eec39b2207e57')
 #}
 
 build() {
-  cd $_pkgbase-$_ver/src
+  cd $_pkgbase-$_ver
   make
 }
 
 package() {
-  cd $_pkgbase-$_ver/src
+  cd $_pkgbase-$_ver
   make DESTDIR=$pkgdir install
 }
 
