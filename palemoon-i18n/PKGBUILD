@@ -1,7 +1,7 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgbase=palemoon-i18n
-pkgver=27.5.0
+pkgver=27.6.0
 pkgrel=1
 pkgdesc="Language pack for Palemoon"
 arch=('any')
@@ -9,42 +9,24 @@ url="http://www.palemoon.org/langpacks.shtml"
 license=('MPL' 'GPL')
 depends=("palemoon>=27")
 
-_languages=(
-#'ar    "Arabic"'
-'cs    "Czech"'
-#'da    "Danish"'
-'de    "German"'
-#'el    "Greek (Modern)"'
-'en-GB "English (U.K.)"'
-#'eo    "Esperanto"'
-'es-AR "Spanish (Argentina)"'
-'es-ES "Spanish (Spain)"'
-'es-MX "Spanish (Mexico)"'
-#'fi    "Finnish"'
-'fr    "French"'
-#'gl-ES "Galician (Spain)"'
-#'hr    "Croatian"'
-'hu    "Hungarian"'
-#'is    "Icelandic"'
-'it    "Italian"'
-#'ja    "Japanese"'
-#'kn    "Kannada (India)"'
-'ko    "Korean"'
-'nl    "Dutch"'
-'pl    "Polish"'
-'pt-BR "Portuguese (Brazil)"'
-'pt-PT "Portuguese (Portugal)"'
-#'ro    "Romanian/Moldavian"'
-'ru    "Russian"'
-#'sk    "Slovak"'
-#'sl    "Slovenian"'
-#'sr    "Serbian"'
-'sv-SE "Swedish"'
-'tr    "Turkish"'
-#'vi    "Vietnamese"'
-'zh-CN "Chinese (Simplified)"'
-#'zh-TW "Chinese (Traditional)"'
-)
+_languages=('cs    "Czech"'
+  'de    "German"'
+  'en-GB "English (U.K.)"'
+  'es-AR "Spanish (Argentina)"'
+  'es-ES "Spanish (Spain)"'
+  'es-MX "Spanish (Mexico)"'
+  'fr    "French"'
+  'hu    "Hungarian"'
+  'it    "Italian"'
+  'ko    "Korean"'
+  'nl    "Dutch"'
+  'pl    "Polish"'
+  'pt-BR "Portuguese (Brazil)"'
+  'pt-PT "Portuguese (Portugal)"'
+  'ru    "Russian"'
+  'sv-SE "Swedish"'
+  'tr    "Turkish"'
+  'zh-CN "Chinese (Simplified)"')
 
 pkgname=()
 source=()
