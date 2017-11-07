@@ -5,7 +5,7 @@
 
 pkgname=deepin-session-ui
 pkgver=4.1.0
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
 url="https://github.com/linuxdeepin/dde-session-ui"
@@ -18,13 +18,15 @@ provides=('lightdm-deepin-greeter')
 conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/dde-session-ui/archive/$pkgver.tar.gz"
-    wm-chooser-text.patch::https://github.com/oberon2007/$pkgname-manjaro/commit/3c02f306ee18070757c88e61bd7c8c964bb14a85.patch)
+    disable_wm-chooser.patch::https://github.com/oberon2007/deepin-session-ui-manjaro/commit/5a000964ecd0011acd26aaf217c58cfa20f85f83.patch)
+#    wm-chooser-text.patch::https://github.com/oberon2007/$pkgname-manjaro/commit/3c02f306ee18070757c88e61bd7c8c964bb14a85.patch)
 sha512sums=('1921024d237bcbbe7eb760498c8ea6c13aac8d25ae9fcf39aa49d352162cb84d42bda32fa9460362d0651153753a89c895970da739d7152a374b4022ce38988b'
-            'd106f23e259f1dc96813eeceeacb90eb69ebac8b675fc30d74c4275303087026eb9f1b9afd6cff0a2745300ce2542b974c1206d4999d7df6bac95c4ae4f6bd71')
+            'ee4b215fa4af355f31b99eba11edfeeec4f9d2f859bed1aaf7f9f317cf5dd1a199756e8aaef9598982bb5b3c6344ae6843b2e7491145440781466c5eb3896e1d')
 
 prepare() {
   cd dde-session-ui-$pkgver
-  patch -p1 -i $srcdir/wm-chooser-text.patch
+#  patch -p1 -i $srcdir/wm-chooser-text.patch
+  patch -p1 -i $srcdir/disable_wm-chooser.patch
 }
 
 build() {
