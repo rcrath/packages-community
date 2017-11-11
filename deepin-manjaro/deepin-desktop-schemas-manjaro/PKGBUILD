@@ -3,7 +3,7 @@
 
 _pkgname=deepin-desktop-schemas
 pkgname=$_pkgname-manjaro
-pkgver=3.2.0
+pkgver=3.2.1
 pkgrel=1
 pkgdesc='Manjaro Linux Deepin gschemas'
 arch=('any')
@@ -21,7 +21,7 @@ conflicts=('dde-daemon<=2.92.1' "$_pkgname")
 provides=("$_pkgname")
 source=("$url/archive/$pkgver.tar.gz"
     'manjaro.diff')
-sha256sums=('3f6f6c2b0e081a25593aa416fe510db280680886bc462e65bbb0bc6c14e4bfc7'
+sha256sums=('f59fbb1cdb50bf355403ea18f6940d97cb07f365d7f374c06badd99eb84a96e3'
             '95173517867a3fe8c1941ed7140675cbb69486267e7a83819a8ef8166b1958d3')
 
 prepare() {
