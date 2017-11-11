@@ -2,8 +2,8 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-cinnamon-settings
-pkgver=20171029
-pkgrel=2
+pkgver=20171111
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
 license=('GPL')
@@ -36,4 +36,7 @@ package() {
     cp -r community/cinnamon/schemas $pkgdir/usr/share/glib-2.0
     install -d $pkgdir/usr/bin
     cp community/cinnamon/scripts/* $pkgdir/usr/bin
+
+    # temp workaround for https://github.com/linuxmint/Cinnamon/issues/6972
+    mkdir $pkgdir/etc/skel/.themes
 }

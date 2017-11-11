@@ -1,10 +1,8 @@
-cjs
-cinnamon-control-center
-cinnamon-menus
-cinnamon-desktop
+cjs, cinnamon-menus, cinnamon-desktop, cinnamon-translations
 cinnamon-screensaver
 cinnamon-session
 cinnamon-settings-daemon
+cinnamon-control-center
 muffin
 nemo
-cinnamon
++ cinnamon
