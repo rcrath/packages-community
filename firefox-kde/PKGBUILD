@@ -4,7 +4,7 @@
 
 pkgname=firefox-kde
 _pkgname=firefox
-pkgver=56.0
+pkgver=56.0.2
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with OpenSUSE patch, integrate better with KDE"
 arch=(i686 x86_64)
@@ -21,7 +21,7 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
 provides=("firefox=${pkgver}")
 conflicts=('firefox' 'firefox-kde-opensuse')
 options=(!emptydirs !makeflags !strip)
-_patchrev=6c6109948e35
+_patchrev=bfa8722a06ad
 _patchurl=http://www.rosenauer.org/hg/mozilla/raw-file/$_patchrev
 source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz        
         wifi-disentangle.patch wifi-fix-interface.patch
@@ -39,7 +39,7 @@ source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/
         mozilla-nongnome-proxies-$_patchrev.patch::$_patchurl/mozilla-nongnome-proxies.patch
         mozilla-ucontext-$_patchrev.patch::$_patchurl/mozilla-ucontext.patch
         pgo_fix_missing_kdejs.patch)
-sha256sums=('0d8b7e91429f622c25509b7e73530807506ef3ff9f749d962251a35ed2bfed7e'
+sha256sums=('6f7d284c31383a9860d7b52f05f866526d5a7c31e3ef2959d79122ba074f5ca1'
             'f068b84ad31556095145d8fefc012dd3d1458948533ed3fff6cbc7250b6e73ed'
             'e98a3453d803cc7ddcb81a7dc83f883230dd8591bdf936fc5a868428979ed1f1'
             'aba767995ffb1a55345e30aaba667f43d469e23bd9b1b68263cf71b8118acc96'
@@ -52,7 +52,7 @@ sha256sums=('0d8b7e91429f622c25509b7e73530807506ef3ff9f749d962251a35ed2bfed7e'
             'c85a37e71f2bd511fac88d41ca0618ee375c49fc86bc2beddf6dc17c3f17508d'
             'f672e60e22869381e9c4cdd90353a053a0171778eca40d4664bc733822fd535f'
             'b941790009bb9eda46c2d96fb0d1c83b0fe2d1acf74754ab08e6b18c1e0c6b16'
-            'e25b9fa2e4ac279b5e073286b7dc9956822bf508eccb67eb870921013274a709'
+            'c4c0a726115eca89ab82a85b364cef6cc897f58317b2890f214510810a30cfa3'
             '6793ac5899fa946fa3a84628aeba2a70a25147c4717fa282809c559500215fbd'
             'ef0f90c9134ef05b950f06a3ffbd699c2e5a5f99a4cdf9868e799534d68c204f'
             '96d9accb74e19f640e356572b3c0914c6be867cbdf351392b0cb5c00161ee012'
@@ -133,6 +133,7 @@ ac_add_options --enable-jack
 ac_add_options --enable-startup-notification
 ac_add_options --enable-crashreporter
 ac_add_options --disable-updater
+ac_add_options --disable-stylo
 END
 
   msg "Patching for KDE"
