@@ -13,8 +13,8 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.92.1.68
-pkgrel=2
+pkgver=3.92.1.90
+pkgrel=1
 arch=(any)
 _commit=a11faed7913afb4b9893097e948550ce11100559
 url="https://github.com/adapta-project/${_pkgname}"
@@ -35,7 +35,7 @@ makedepends=('libxml2'
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
         'XfdesktopIconView.patch')
-sha256sums=('9ce6feb93ee4d56b6d8858678ef8f5f228b262b28189af0632cd60a27d1620b2'
+sha256sums=('6b77ecab08ec1e9b9a394ef5a43ce6548ec78572ba12e725c1aec95796cdb30d'
             'e62abd2cc572d3d8e194260cefc806fba5ecf9ff8887a89e5613d726e1e49c6d'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da')
             
