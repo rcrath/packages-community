@@ -3,7 +3,7 @@
 
 
 pkgname=nautilus-admin
-pkgver=1.1.0
+pkgver=1.1.1
 pkgrel=1
 pkgdesc="Extension for Nautilus to do administrative operations"
 arch=('any')
@@ -14,7 +14,7 @@ makedepends=('cmake>=2.6' 'gettext')
 optdepends=('gedit: to use the "Edit as Administrator" action'
 	    'gnome-terminal: to use the "Run as Administrator" action')
 source=("https://github.com/brunonova/$pkgname/releases/download/v$pkgver/${pkgname}_$pkgver.tar.xz")
-md5sums=('d0c1bb3237320f228a1bf52d00710f6c')
+md5sums=('405203c69a216b3597340d9bb58401c6')
 
 build() {
 	cd "$srcdir"
