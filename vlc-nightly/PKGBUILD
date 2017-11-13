@@ -3,7 +3,7 @@
 # Contributor: Martchus <martchus@gmx.net>
 
 pkgname=vlc-nightly
-pkgver=3.0.0v20171022
+pkgver=3.0.0v20171111
 pkgrel=1
 pkgdesc="A multi-platform MPEG, VCD/DVD, and DivX player - nightly snapshot"
 arch=('i686' 'x86_64')
@@ -105,7 +105,7 @@ source=("$pkgname-$(date +%Y%m%d)::http://nightlies.videolan.org/build/source/la
     'lua53_compat.patch::https://git.archlinux.org/svntogit/packages.git/plain/trunk/lua53_compat.patch?h=packages/vlc'
     'prevent-including-missing-SVGs.patch')
 
-md5sums=('5f50a103b95c23b1353f0d3fc00828ef'
+md5sums=('SKIP'
          '808356c9a23e4256d9ff071d3498c01a'
          '96d3b346d9149ffb1b430066dfb6249a'
          'e8a97c561b547041e16d660b6c88d2c2')
@@ -118,6 +118,18 @@ prepare() {
     patch -p1 -i "$srcdir/prevent-including-missing-SVGs.patch"
     sed -i -e 's:truetype/ttf-dejavu:TTF:g' modules/visualization/projectm.cpp
     sed -i -e 's:truetype/freefont:TTF:g' modules/text_renderer/freetype/freetype.c
+
+    sed -i -e 's|advprefs_audio.png|advprefs_audio.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_codec.png|advprefs_codec.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_extended.png|advprefs_extended.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_intf.png|advprefs_intf.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_playlist.png|advprefs_playlist.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_sout.png|advprefs_sout.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|advprefs_video.png|advprefs_video.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|win7thumbnail_pause.png|win7thumbnail_pause.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|win7thumbnail_prev.png|win7thumbnail_prev.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|win7thumbnail_play.png|win7thumbnail_play.svg|' modules/gui/qt/vlc.qrc
+    sed -i -e 's|win7thumbnail_next.png|win7thumbnail_next.svg|' modules/gui/qt/vlc.qrc
 }
 
 pkgver() {
@@ -151,6 +163,7 @@ build() {
       --enable-archive \
       --enable-bluray \
       --enable-daala
+
     ./compile
 }
 
