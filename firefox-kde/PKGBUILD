@@ -4,7 +4,7 @@
 
 pkgname=firefox-kde
 _pkgname=firefox
-pkgver=56.0.2
+pkgver=57.0
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with OpenSUSE patch, integrate better with KDE"
 arch=(i686 x86_64)
@@ -21,13 +21,12 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
 provides=("firefox=${pkgver}")
 conflicts=('firefox' 'firefox-kde-opensuse')
 options=(!emptydirs !makeflags !strip)
-_patchrev=bfa8722a06ad
+_patchrev=77c890186192
 _patchurl=http://www.rosenauer.org/hg/mozilla/raw-file/$_patchrev
-source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz        
+source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
+        firefox.desktop firefox-symbolic.svg
         wifi-disentangle.patch wifi-fix-interface.patch
-        0001-Bug-1384062-Make-SystemResourceMonitor.stop-more-res.patch
-        no-plt.diff plugin-crash.diff
-        firefox.desktop firefox-symbolic.svg firefox-install-dir.patch
+        firefox-install-dir.patch no-plt.diff
         kde.js
         # Firefox patchset
         firefox-branded-icons-$_patchrev.patch::$_patchurl/firefox-branded-icons.patch
@@ -35,27 +34,21 @@ source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/
         firefox-no-default-ualocale-$_patchrev.patch::$_patchurl/firefox-no-default-ualocale.patch
         # Gecko/toolkit patchset
         mozilla-kde-$_patchrev.patch::$_patchurl/mozilla-kde.patch
-        mozilla-language-$_patchrev.patch::$_patchurl/mozilla-language.patch
         mozilla-nongnome-proxies-$_patchrev.patch::$_patchurl/mozilla-nongnome-proxies.patch
-        mozilla-ucontext-$_patchrev.patch::$_patchurl/mozilla-ucontext.patch
         pgo_fix_missing_kdejs.patch)
-sha256sums=('6f7d284c31383a9860d7b52f05f866526d5a7c31e3ef2959d79122ba074f5ca1'
+sha256sums=('603af00155be87f2c9c58047dd0072971f1cdab1f632695aae6ad072efefbb8f'
+            '677e1bde4c6b3cff114345c211805c7c43085038ca0505718a11e96432e9811a'
+            'a2474b32b9b2d7e0fb53a4c89715507ad1c194bef77713d798fa39d507def9e9'
             'f068b84ad31556095145d8fefc012dd3d1458948533ed3fff6cbc7250b6e73ed'
             'e98a3453d803cc7ddcb81a7dc83f883230dd8591bdf936fc5a868428979ed1f1'
-            'aba767995ffb1a55345e30aaba667f43d469e23bd9b1b68263cf71b8118acc96'
-            'ea8e1b871c0f1dd29cdea1b1a2e7f47bf4713e2ae7b947ec832dba7dfcc67daa'
-            'a7e5d2430bb562f6367deb07417dad4368317e8e8be5d1cfa842c3356de3cfc0'
-            'ada313750e6fb14558b37c764409a17c1672a351a46c73b350aa1fe4ea9220ef'
-            'a2474b32b9b2d7e0fb53a4c89715507ad1c194bef77713d798fa39d507def9e9'
             'd86e41d87363656ee62e12543e2f5181aadcff448e406ef3218e91865ae775cd'
+            'ea8e1b871c0f1dd29cdea1b1a2e7f47bf4713e2ae7b947ec832dba7dfcc67daa'
             '1ca0debb89d1d2f0becf21bac2d5e87857d58b37b16d9b6cf559607e5a993238'
-            'c85a37e71f2bd511fac88d41ca0618ee375c49fc86bc2beddf6dc17c3f17508d'
-            'f672e60e22869381e9c4cdd90353a053a0171778eca40d4664bc733822fd535f'
-            'b941790009bb9eda46c2d96fb0d1c83b0fe2d1acf74754ab08e6b18c1e0c6b16'
-            'c4c0a726115eca89ab82a85b364cef6cc897f58317b2890f214510810a30cfa3'
-            '6793ac5899fa946fa3a84628aeba2a70a25147c4717fa282809c559500215fbd'
+            'f4f919ae5c0921218d7ef7d4502ac8de3212d66d86accc588de04ea24ceb2f36'
+            'd8cf3221222e97e08dbf704a8b0c9d38e29d7dd1033455404872f04a1df10ccf'
+            '175c61f549b1ea08704d1f051d801d3e566d6ec0b048ca6127eaa922e6ddd266'
+            'fc0358619be3a63683c680b7c59e024030d96e6dc461217fe451d8289b1236bf'
             'ef0f90c9134ef05b950f06a3ffbd699c2e5a5f99a4cdf9868e799534d68c204f'
-            '96d9accb74e19f640e356572b3c0914c6be867cbdf351392b0cb5c00161ee012'
             '55c4d93761ad46326c511246cef05abc09407d8f8f7131c9dad865b35cbcfad2')
 validpgpkeys=('2B90598A745E992F315E22C58AB132963A06537A')
 
@@ -82,19 +75,9 @@ prepare() {
   # https://bugzilla.mozilla.org/show_bug.cgi?id=1314968
   patch -Np1 -i ../wifi-disentangle.patch
   patch -Np1 -i ../wifi-fix-interface.patch
-  
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1384062
-  patch -Np1 -i ../0001-Bug-1384062-Make-SystemResourceMonitor.stop-more-res.patch
 
   # https://bugzilla.mozilla.org/show_bug.cgi?id=1382942
   patch -Np1 -i ../no-plt.diff
-
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1400175
-  patch -Np1 -i ../plugin-crash.diff
-
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1385667
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1394149
-  patch -Np1 -i ../mozilla-ucontext-$_patchrev.patch
 
   echo -n "$_google_api_key" >google-api-key
   echo -n "$_mozilla_api_key" >mozilla-api-key
@@ -107,6 +90,7 @@ ac_add_options --enable-release
 ac_add_options --enable-gold
 ac_add_options --enable-pie
 ac_add_options --enable-optimize="-O2"
+ac_add_options --enable-rust-simd
 
 # Branding
 ac_add_options --enable-official-branding
@@ -133,13 +117,11 @@ ac_add_options --enable-jack
 ac_add_options --enable-startup-notification
 ac_add_options --enable-crashreporter
 ac_add_options --disable-updater
-ac_add_options --disable-stylo
 END
 
   msg "Patching for KDE"
   patch -Np1 -i "$srcdir/mozilla-nongnome-proxies-$_patchrev.patch"
   patch -Np1 -i "$srcdir/mozilla-kde-$_patchrev.patch"
-  patch -Np1 -i "$srcdir/mozilla-language-$_patchrev.patch"
 
   patch -Np1 -i "$srcdir/firefox-kde-$_patchrev.patch"
   patch -Np1 -i "$srcdir/firefox-no-default-ualocale-$_patchrev.patch"
