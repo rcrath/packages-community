@@ -4,8 +4,8 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-pkgver=4.1.2
-pkgrel=1.1
+pkgver=4.1.4
+pkgrel=1
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
 url="https://github.com/linuxdeepin/dde-session-ui"
@@ -20,8 +20,8 @@ replaces=('dde-workspace' 'dde-session-ui')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/dde-session-ui/archive/$pkgver.tar.gz"
     disable_wm-chooser.patch::https://github.com/oberon2007/deepin-session-ui-manjaro/commit/5a000964ecd0011acd26aaf217c58cfa20f85f83.patch)
 #    wm-chooser-text.patch::https://github.com/oberon2007/$pkgname-manjaro/commit/3c02f306ee18070757c88e61bd7c8c964bb14a85.patch)
-sha512sums=('3b04d887d6ae2dab5606333b0eea85634e233c0c7455e16446ab9851999a24359fdc25b7f792719cbf30fe2ecb2de1b189b9c01a9b6740297ecd555434b3e94e'
-            'ee4b215fa4af355f31b99eba11edfeeec4f9d2f859bed1aaf7f9f317cf5dd1a199756e8aaef9598982bb5b3c6344ae6843b2e7491145440781466c5eb3896e1d')
+sha512sums=('1f582cb07f155269f3cca4bbdc48dad81dbb5b9b74f6846085800ad1fafea7f80eb7004ab21fd5dcd55bc1c05b1d46120bbc82a1045f38dd9ca928efca6e9706'
+            '80a9ebf29e45ceaff82524cc2f323b17ea9130af77a6ca11b747d0a4a5c940785b191f17540671e070f7334634f3e611b31c82f3e183b247837dc425957313e0')
 
 prepare() {
   cd dde-session-ui-$pkgver
