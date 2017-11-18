@@ -54,11 +54,6 @@ prepare() {
 }
 
 build_maia-theme() {
-#Change background of GDM
-    cp -f $_theme-$_commit/common/maia.png adapta-maia-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
-#    cd adapta-maia-theme-$pkgver/shell/sass/gnome-shell
-#    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
-#    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
 
     #build
     cd "adapta-maia-theme-${pkgver}"
@@ -78,11 +73,6 @@ build_maia-theme() {
 }
 
 build_breath-theme() {
-    #Change background of GDM
-    cp -f $_theme-$_commit/common/tiled-logo.png adapta-breath-theme-$pkgver/shell/asset/assets-gnome-shell/common/noise-texture.png
-#    cd adapta-breath-theme-$pkgver/shell/sass/gnome-shell
-#    find . -type f -name '_common.scss' -exec sed -i "s|background-repeat|background-size|g" {} \;
-#    find . -type f -name '_common.scss' -exec sed -i "s|repeat|auto|g" {} \;
 
     #build
     cd "adapta-breath-theme-${pkgver}"
