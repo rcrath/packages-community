@@ -2,8 +2,8 @@
 # Maintainer: Alexandre Filgueira <alexfilgueira@cinnarch.com>
 
 pkgname=cinnamon
-pkgver=3.6.2
-pkgrel=4
+pkgver=3.6.3
+pkgrel=1.1
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 #url="https://github.com/linuxmint/Cinnamon"
