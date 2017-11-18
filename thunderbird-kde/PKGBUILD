@@ -7,7 +7,7 @@
 
 pkgname=thunderbird-kde
 pkgver=52.4.0
-pkgrel=1
+pkgrel=2
 provides=(thunderbird=${pkgver})
 pkgdesc="Standalone mail and news reader from mozilla.org"
 arch=(i686 x86_64)
