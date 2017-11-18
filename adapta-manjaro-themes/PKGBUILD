@@ -31,21 +31,12 @@ makedepends=('libxml2'
 validpgpkeys=('2C675EC71CF31D4652AB608616A443152D7A865E')	     
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
-<<<<<<< Updated upstream
-        "$_theme-$pkgver.tar.gz::$_url/archive/$_commit.tar.gz"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('6b77ecab08ec1e9b9a394ef5a43ce6548ec78572ba12e725c1aec95796cdb30d'
-            'SKIP'
-            'e62abd2cc572d3d8e194260cefc806fba5ecf9ff8887a89e5613d726e1e49c6d'
-            '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
-            '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
-=======
-        'XfdesktopIconView.patch')
 sha256sums=('e880481c55689c3433a7e41345372d1d2838a52e7c2707c082ed30f6b109c6e3'
             'SKIP'
-            '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da')
->>>>>>> Stashed changes
+            '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
+            '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
             
 prepare() {    
     cd $_pkgname-$pkgver
