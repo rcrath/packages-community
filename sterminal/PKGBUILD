@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=sterminal
-pkgver=0.3
+pkgver=0.4
 pkgrel=1
 pkgdesc="Wrapper for st-manjaro and tmux"
 arch=(any)
@@ -11,6 +11,7 @@ depends=('terminus-font'
 	'xsel'
 	'tmux'
 	'dash'
+	'st-manjaro'
 	'fzf')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/sterm"
@@ -29,4 +30,5 @@ package () {
     install -Dm755 "$srcdir/sterm/tmuxa" "$pkgdir/usr/bin/tmuxa"
     install -Dm644 "$srcdir/sterm/tmux.conf" "$pkgdir/etc/skel/.tmux.conf"
     install -Dm644 $srcdir/sterminal.desktop "$pkgdir"/usr/share/applications/sterminal.desktop
+    install -Dm644 "$srcdir/sterm/sterminalrc" "$pkgdir/usr/share/sterminal/sterminalrc"
 }
