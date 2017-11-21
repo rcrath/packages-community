@@ -3,7 +3,7 @@
 
 pkgbase=manjaro-architect
 pkgname=('manjaro-architect' 'manjaro-architect-launcher')
-pkgver=0.9.2
+pkgver=0.9.3
 _commit=76e08a770757afe8897969bf6f62de765682818d
 pkgrel=1
 pkgdesc="Manjaro CLI net-installer, forked from the Archlinux Architect"
@@ -16,7 +16,7 @@ depends=('bash'
 optdepends=('maia-console'
             'terminus-font')
 source=("$url/archive/$pkgver.tar.gz")
-md5sums=('6d523a67d3324552f09f48f9808e30d2')
+md5sums=('3ab851967386ebe35fa295f6af86cadd')
 
 prepare() {
     cd $pkgbase-$pkgver
