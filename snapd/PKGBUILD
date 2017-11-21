@@ -20,14 +20,16 @@ source=("https://github.com/snapcore/snapd/releases/download/$pkgver/${pkgname}_
         '0002-snap-snapenv-backport-fixes-for-how-SNAP-is-computed.patch'
         '0003-release-remove-default-from-VERSION_ID.patch'
         '0004-snap-squashfs-use-LANG-C.UTF-8.patch'
-        '0005-treat-manjaro-the-same-as-arch.patch::https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/3917.patch')
+        '0005-treat-manjaro-the-same-as-arch.patch::https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/3917.patch'
+        '0006-fix-core.patch::https://github.com/snapcore/snapd/commit/8c821c13bb62703c5119a1b0b1edbd53ce7f48aa.patch')
 sha256sums=('f5097a17bb8ca4464fe995afc2e1def37823c9f3da8664b4dac2121b65d1a1a8'
-            '2e2c5081fc7b74a6c18845e9a2ac86d191ff5c9eefc5d3ac4b0632b0bb48df03'
+            'a86620433eccb32a35b5a71e1809e3dd1a0399b421d91b4043cb2c1cc02ec24e'
             'ee3c9584426e9ef237ceca94c2ddeb495bf04a5e2a303b05c36b189e0c6a16e9'
             'fa5d03026379aea03748c127ec9d513f12b39cfdeb00a7b79dd4dcffa887273a'
             '21e2804a7b9fed9a8f90a8953805069fb865c1fe2b4481036ac2efcf398580b6'
             'a86c9867ef657d049578ac3226d1690c3f89482ebd9ee527f61e33b573f5e1c8'
-            'b564bcc19a0975f95b59891e021d532d26dff09373187c12da6ae62da0c963ed')
+            'b564bcc19a0975f95b59891e021d532d26dff09373187c12da6ae62da0c963ed'
+            '4391395969fd75df79ae12ed733f1377013b5017724b75c1a001e8792241a74c')
 
 _gourl=github.com/snapcore/snapd
 

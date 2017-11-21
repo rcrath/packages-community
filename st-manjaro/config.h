@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-char font[] = "Terminus:pixelsize=12";
+char font[] = "xos4 Terminus:size=12";
 int borderpx = 2;
 
 /*
@@ -16,7 +16,7 @@ int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char shell[] = "/bin/sh";
+static char shell[] = "/usr/bin/tmux";
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -84,42 +84,46 @@ static unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+  /* 8 normal colors */
+  [0] = "#181818", /* Base 00 - Black   */
+  [1] = "#ab4642", /* Base 08 - Red     */
+  [2] = "#a1b56c", /* Base 0B - Green   */
+  [3] = "#f7ca88", /* Base 0A - Yellow  */
+  [4] = "#7cafc2", /* Base 0D - Blue    */
+  [5] = "#ba8baf", /* Base 0E - Magenta */
+  [6] = "#86c1d9", /* Base 0C - Cyan    */
+  [7] = "#d8d8d8", /* Base 05 - White   */
 
-	[255] = 0,
+  /* 8 bright colors */
+  [8]  = "#585858", /* Base 03 - Black   */
+  [9]  = "#ab4642", /* Base 08 - Red     */
+  [10] = "#a1b56c", /* Base 0B - Green   */
+  [11] = "#f7ca88", /* Base 0A - Yellow  */
+  [12] = "#7cafc2", /* Base 0D - Blue    */
+  [13] = "#ba8baf", /* Base 0E - Magenta */
+  [14] = "#86c1b9", /* Base 0C - Cyan    */
+  [15] = "#f8f8f8", /* Base 07 - white   */
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+  /* special colors */
+  [16] = "#dc9656", /* Base 09 */
+  [17] = "#a26946", /* Base 0F */
+  [18] = "#282828", /* Base 01 */
+  [19] = "#383838", /* Base 02 */
+  [20] = "#b8b8b8", /* Base 04 */
+  [21] = "#e8e8e8", /* Base 06 */
+  [256] = "#2d2d2d", /* Base 00 - Background */
+  [257] = "#d8d8d8", /* Base 05 - Foreground */
 };
-
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-unsigned int defaultcs = 79;
-unsigned int defaultrcs = 79;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+unsigned int defaultcs = 6;
+unsigned int defaultrcs = 256;
 
 /*
  * Default shape of cursor

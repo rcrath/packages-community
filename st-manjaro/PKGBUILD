@@ -1,27 +1,34 @@
-# Maintainer: mar77i <mar77i at mar77i dot ch>
-# Past Maintainer: Gaetan Bisson <bisson@archlinux.org>
-# Contributor: Scytrin dai Kinthra <scytrin@gmail.com>
+# Maintainer: robiha <hallin.rel@gmail.com>
+# Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=st-manjaro
 _pkgname=st
-pkgver=0.7.r24.g5a10aca
+pkgver=0.7.r38.g0ac685f
 pkgrel=1
+epoch=1
 pkgdesc='Simple virtual terminal emulator for X'
-url='http://st.suckless.org/'
+url='https://st.suckless.org/'
 arch=('i686' 'x86_64')
 license=('MIT')
 options=('zipman')
-depends=('libxft'
-		 'sterminal')
+depends=('libxft')
 makedepends=('ncurses' 'libxext' 'git')
-# include config.h and any patches you want to have applied here
-source=('git://git.suckless.org/st'
-        'config.h')
-sha1sums=('SKIP'
-          '9d91176193c5f48b59234e7c2b0fe4c05b9e7185')
-
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
+
+source=("git://git.suckless.org/st"
+        "config.h"
+        "st.desktop"
+	"st-icon-20171120-247073c.diff"
+	"icon.argb"
+	"st.svg")
+
+md5sums=('SKIP'
+         '1d70593b429c7fe5eb7c59ff29bb7dc4'
+         'fb3a8e83f84f18aec09e89a60569f086'
+         'e5b8ad0934be5a8faf49f764510d0366'
+         '4333f3007a526d97cb74c6dbe05e57bc'
+         'ebe50386dbdefbc6fd171fdf3120f90c')
 
 pkgver() {
 	cd "${_pkgname}"
@@ -31,18 +38,10 @@ pkgver() {
 prepare() {
 	local file
 	cd "${_pkgname}"
-	sed \
-		-e '/char font/s/= .*/= "Fixed:pixelsize=13:style=SemiCondensed";/' \
-		-e '/char worddelimiters/s/= .*/= " '"'"'`\\\"()[]{}<>|";/' \
-		-e '/int defaultcs/s/= .*/= 1;/' \
-		-i config.def.h
-	sed \
-		-e 's/CPPFLAGS =/CPPFLAGS +=/g' \
-		-e 's/CFLAGS =/CFLAGS +=/g' \
-		-e 's/LDFLAGS =/LDFLAGS +=/g' \
-		-e 's/_BSD_SOURCE/_DEFAULT_SOURCE/' \
-		-i config.mk
-	sed '/@tic/d' -i Makefile
+	
+	# Skip terminfo which conflicts with ncurses
+	sed -i '/tic /d' Makefile
+
 	for file in "${source[@]}"; do
 		if [[ "$file" == "config.h" ]]; then
 			# add config.h if present in source array
@@ -50,9 +49,14 @@ prepare() {
 			cp "$srcdir/$file" .
 		elif [[ "$file" == *.diff || "$file" == *.patch ]]; then
 			# add all patches present in source array
+			echo "Applying patch $(basename $file)..."
 			patch -Np1 <"$srcdir/$(basename ${file})"
 		fi
 	done
+
+	# Needed for the icon patch
+	cp "${srcdir}/icon.argb" ./
+
 }
 
 build() {
@@ -65,4 +69,6 @@ package() {
 	make PREFIX=/usr DESTDIR="${pkgdir}" install
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 	install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+	install -Dm644 "${srcdir}/st.desktop" "${pkgdir}/usr/share/applications/st.desktop"
+	install -Dm644 "${srcdir}/st.svg"  "${pkgdir}/usr/share/st/st.svg"
 }

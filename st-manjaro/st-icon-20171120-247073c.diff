@@ -1,0 +1,50 @@
+From 247073ce131b2772312504586f22528b58caa72e Mon Sep 17 00:00:00 2001
+From: robiha <hallin.rle@gmail.com>
+Date: Mon, 20 Nov 2017 15:58:20 +0100
+Subject: [PATCH] Simple icon patch
+
+Applies the icon contained in a file icon.argb. The file is formatted
+as an array of 32bit packed CARDINAL ARGB with high byte being A, low
+byte being B. The first two cardinals are width, height. Data is in
+rows, left to right and top to bottom.
+
+(See Extended Window Manager Hints documentaton for _NET_WM_ICON)
+---
+ x.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/x.c b/x.c
+index 191e5dc..3b0c498 100644
+--- a/x.c
++++ b/x.c
+@@ -22,6 +22,7 @@
+ 
+ #include "win.h"
+ #include "st.h"
++#include "icon.argb"
+ 
+ /* XEMBED messages */
+ #define XEMBED_FOCUS_IN  4
+@@ -41,7 +42,7 @@ typedef struct {
+ 	Colormap cmap;
+ 	Window win;
+ 	Drawable buf;
+-	Atom xembed, wmdeletewin, netwmname, netwmpid;
++	Atom xembed, wmdeletewin, netwmname, netwmpid, netwmicon;
+ 	XIM xim;
+ 	XIC xic;
+ 	Draw draw;
+@@ -973,6 +974,10 @@ xinit(void)
+ 	XChangeProperty(xw.dpy, xw.win, xw.netwmpid, XA_CARDINAL, 32,
+ 			PropModeReplace, (uchar *)&thispid, 1);
+ 
++	xw.netwmicon = XInternAtom(xw.dpy, "_NET_WM_ICON", False);
++	XChangeProperty(xw.dpy, xw.win, xw.netwmicon, XA_CARDINAL, 32,
++			PropModeReplace, (uchar *)icon, (icon[0] * icon[1] + 2));
++
+ 	resettitle();
+ 	XMapWindow(xw.dpy, xw.win);
+ 	xhints();
+-- 
+2.15.0
+
