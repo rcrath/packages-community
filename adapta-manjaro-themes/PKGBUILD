@@ -1,6 +1,6 @@
 # Maintainer: Stefano Capitani <stefano_at_manjaro_dot_org>
 # Contributor: ceyhunnabiyev for Breath color and Adapta Black variation <https://github.com/ceyhunnabiyev>
-# This pkgbuild provides adapta theme, gdm theme and app launcher theme for dash to dock extension
+# This pkgbuild provides adapta theme and gdm theme
 # https://github.com/Ste74/manjaro-gnome-theme
 
 pkgname=('adapta-maia-theme'
@@ -11,7 +11,7 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.92.1.108
+pkgver=3.92.2.16
 pkgrel=1
 arch=(any)
 url="https://github.com/adapta-project/${_pkgname}"
@@ -33,7 +33,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('e880481c55689c3433a7e41345372d1d2838a52e7c2707c082ed30f6b109c6e3'
+sha256sums=('d6100f7b4bac2f04a8c65ef9ad7c38e1f01a06911bb1bb3fa41222878b4dc7e9'
             'SKIP'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
             '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
