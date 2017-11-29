@@ -1,6 +1,6 @@
 # Maintainer: Fabian Bornschein <plusfabi@gmail.com>
 pkgname=('mhwd-db-amdgpu-experimental' 'amdgpu-experimental')
-pkgver=20171124 #date +%Y%m%d
+pkgver=20171129 #date +%Y%m%d
 pkgrel=1
 arch=('any')
 license=('GPL3')
@@ -14,11 +14,11 @@ source=('10-amdgpu-experimental.conf'
         'MHWDCONFIG_video-hybrid-intel-amdgpu-experimental-prime')
 sha512sums=('cafa0fbb4f965bf3eef450d0192fd038aefad75c1a6c6ec239088aaec2575eed99b3aad65797ed6c705a427528142cdd7d04cf1f01d3fed839574c800be06a04'
             '5a02d330aec5f6a5aa7876b4d0ce768409284afda996ad310ec3811ebc862f78501fb1e35621b7e216b4e972b772a4f72d1f31c47a791604b7963981feff2ee8'
-            '66cf1c7a7a56af5258add8766f76cf18908b90743a711aff8846d4af8dd27752e1707bbd20cf8b9f5aba349386556882fd80b934d45efd181ad576293b45db90'
+            '27e393f6aadf032b57f483c9f147a1de561e1c56ca1b19f7934d1dc955876ad672dd0e8619372191fe12d979c3afb77a33a7d5e97ebd070fc61eed304e4aeda8'
             'aac76ce4842828fecfa8b78220fe932361d10c94a743deced2fcd4a6558285f4071dd76eee11cc3f3a5a8dfb0c60cc9f4274900c2738dd565658a2a67c3510e0'
             '42106abe5bfedd63f7c2e06e2e362ab75060ced6f1e3a86502870ff0248a40d404fd415742f2a0bbfa1c55c479af9dee4c08c9191793b86bd7a99d06f518abc3'
             '25660c9a2dc6a25d05685732033893f519f10448740f64b43b5e0ca7a701d7c468d2185f425189427118c5db2141a8cd04ce028cf51d45b99f884466f8b89f76'
-            '8366cb5385aabd6554acd9c0bba12a2f46e990203054cacb88ff3def9f9e707d1a493d931620561af1602f57cb6ee2f65c8872be65091e4accda656c3598cd60'
+            'bd59c4d4beb78d4f70900df854d8ad7914bf8c88cc2055525b4c954b418030997cd80aaacf6a659f5cadfbf7ec2e513f901ca3ead931dcae4cbd46b0c5ec8207'
             '81727fd894cbbce650e17ecb20a3e54c06bf38ad56028ad1627c6b774bc925b45d344b2d470e02071570e0dbfb2bfd67a05e5e15fe9b00ce9aac1ec80fce6de2')
 
 package_mhwd-db-amdgpu-experimental()
@@ -48,7 +48,7 @@ package_amdgpu-experimental()
     pkgdesc="Enables experimental features (as CI/SI support; DisplayCore)"
     depends=('linux>=4.14' 'xf86-video-amdgpu')
     install="amdgpu-experimental.install"
-    optdepends=('linux>=4.15' DisplayCore(AMDGPU.DC) Support')
+    optdepends=('linux>=4.15: DisplayCore(AMDGPU.DC) Support')
 
     cd "${srcdir}"
 
