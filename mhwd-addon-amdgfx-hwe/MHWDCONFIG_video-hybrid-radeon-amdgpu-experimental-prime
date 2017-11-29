@@ -1,0 +1,38 @@
+# mhwd Driver Config
+
+NAME="video-hybrid-radeon-amdgpu-experimental-prime"
+INFO="Solution for hybrid Radeon + Experiemtal AMDGPU support for GCN Gen 1 and Gen 2"
+VERSION="2017.11.23"
+FREEDRIVER="true"
+PRIORITY="1"
+
+
+# AMD Radeon cards (Radeon)
+CLASSIDS="0300 0380"
+VENDORIDS="1002"
+DEVICEIDS=">/var/lib/mhwd/ids/pci/ati.ids"
+
+# AMD Radeon cards (AMDGPU)
+CLASSIDS="0300 0380"
+VENDORIDS="1002"
+DEVICEIDS=">/var/lib/mhwd/ids/pci/amdgpu_exp.ids"
+
+
+# Conflicts with other mhwd configs
+MHWDCONFLICTS="video-ati video-amdgpu video-amdgpu-experimental video-catalyst"
+CONFLICTS="opencl-catalyst catalyst-video catalyst-utils-openrc catalyst-utils catalyst-server catalyst-input"
+
+# Dependencies
+DEPENDS="amdgpu-experimental xf86-video-ati  xf86-video-amdgpu vulkan-radeon libva-mesa-driver libva-vdpau-driver mesa-vdpau"
+DEPENDS_64="lib32-vulkan-radeon lib32-libva-vdpau-driver lib32-mesa-vdpau"
+
+
+post_install()
+{
+    mhwd-gpu --check
+}
+
+post_remove()
+{
+    mhwd-gpu --check
+}
