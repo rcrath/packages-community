@@ -69,7 +69,7 @@ _pkgbase=vala-panel-appmenu
 pkgbase=${_pkgbase}-xfce
 _cmakename=cmake-vala
 _dbusmenuname=vala-dbusmenu
-pkgver=0.5.2
+pkgver=0.5.4
 pkgrel=1
 pkgdesc="AppMenu (Global Menu) plugin"
 url="https://github.com/rilian-la-te/vala-panel-appmenu"
@@ -80,7 +80,7 @@ source=("$url/releases/download/$pkgver/$_pkgbase-$pkgver.tar.gz"
         "git://github.com/rilian-la-te/${_cmakename}.git"
         "git://github.com/rilian-la-te/${_dbusmenuname}.git"
 		80appmenu-gtk-module)
-sha256sums=('f11f3ecc6801b2b9e8348cbeff405b5321cc153b76e074c2fff0d8fb42dc9b10'
+sha256sums=('a38e93f3179bee974953d22e2336f36f34ad5059eb31b8f74e03ba267bffeb46'
             'SKIP'
             'SKIP'
             '4c006c4ea7b8556070ad6d35529d3a9e23da8033429e34d1824c25942d969fbc')

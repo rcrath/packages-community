@@ -2,7 +2,7 @@
 #Maintainer: Xyne <ac xunilhcra enyx, backwards>
 
 pkgname=powerpill
-pkgver=2017
+pkgver=2017.11
 pkgrel=1
 _pythonver=python3.6
 pkgdesc='Pacman wrapper for parallel and segmented downloads. ( This version not provide reflector:Manjaro use pacman-mirrors )'
@@ -13,7 +13,7 @@ depends=(aria2 'pm2ml>2012.12.12' pyalpm python3 python3-xcgf python3-xcpf pytho
 optdepends=('rsync: Rsync download support')
 backup=(etc/powerpill/powerpill.json)
 source=(http://xyne.archlinux.ca/projects/$pkgname/src/$pkgname-$pkgver.tar.xz)
-md5sums=('2dd1ff440bf287258e25723a41c20f08')
+md5sums=('fcd48c936c6fbe64cb153b876aa3e2a9')
 conflicts=('powerpill-dev')
 replaces=('powerpill-dev')
 
