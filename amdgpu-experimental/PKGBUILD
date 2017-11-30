@@ -1,6 +1,6 @@
 # Maintainer: Fabian Bornschein <plusfabi@gmail.com>
 pkgname=('mhwd-db-amdgpu-experimental' 'amdgpu-experimental')
-pkgver=20171129 #date +%Y%m%d
+pkgver=20171130 #date +%Y%m%d
 pkgrel=1
 arch=('any')
 license=('GPL3')
