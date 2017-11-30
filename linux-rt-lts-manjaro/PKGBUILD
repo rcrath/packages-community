@@ -13,9 +13,9 @@ _basekernel=4.9
 _basever=49-rt-lts
 #_aufs=20170327
 _bfq=v8r12
-_sub=61
+_sub=65
 _pkgver=${_basekernel}.${_sub}
-_rtpatchver=rt51
+_rtpatchver=rt56
 pkgver=${_pkgver}_${_rtpatchver}
 pkgrel=1
 arch=('x86_64')
@@ -53,7 +53,7 @@ source=("$url/pub/linux/kernel/projects/rt/4.9/patches-4.9.61-rt61.tar.gz"
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('74444535e8eba1c0dce2dca362d1c2b34a1ecda32c6c65814f3b0f91e7e98365'
             '029098dcffab74875e086ae970e3828456838da6e0ba22ce3f64ef764f3d7f1a'
-            '73abd713dfbc954cc3d2eebfd35370629b3e6e09e2a539dba2bd608f03b5947b'
+            '3e1937ad3aeb89ac247e96551059babe3c959c6c8868107adac6f3634e39a4ae'
             'f4391118e4451383fc3a1364013a5011794518ed0df358306545775e3f5d2bc3'
             '99750417273c71b9b03b16c4bef4ba8f68cf18c50994a4fcc21f2d380c66eb6c'
             'ca4712f892ec934e660a0423bd5198f5a02fcb81557f608df8318247cc2f28ba'
@@ -69,7 +69,7 @@ sha256sums=('74444535e8eba1c0dce2dca362d1c2b34a1ecda32c6c65814f3b0f91e7e98365'
             'a1b1c30d53d0a7ffe2b84331f634388807489b807b20cc24041e2591f7da2ec1'
             'df9ff4580281ce431b42490a69f51d0a839471983930044bebe268aaee70c5ad'
             '009da98553e3c9b5d452b7850aac25b9e81fa39de9f2aa33744c012c1a912006'
-            'e65a591e180d3c28097cc243f12362a553f19d66b2d79d74e9c21a5a46ddf428'
+            '79457725a142518dbb84c9444b327021c74eaa60b2602d760f971818c2d2e9b6'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
