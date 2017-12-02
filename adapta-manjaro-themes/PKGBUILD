@@ -11,7 +11,7 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.92.2.16
+pkgver=3.92.2.33
 pkgrel=1
 arch=(any)
 url="https://github.com/adapta-project/${_pkgname}"
@@ -33,7 +33,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('d6100f7b4bac2f04a8c65ef9ad7c38e1f01a06911bb1bb3fa41222878b4dc7e9'
+sha256sums=('3e4f91c4e32c594a2cfccb09f48495dc5c76edab81c3d9fcf55faae2d6d7a897'
             'SKIP'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
             '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
@@ -213,15 +213,20 @@ _adapta-black() {
     's/#5294c4/#3baba2/Ig'  -e \
     's/#546e7a/#118872/Ig'  -e \
     's/#555F64/#156f60/Ig'  -e \
+    's/#55BCEA/#2ae5c2/Ig'  -e \
     's/#566067/#15746c/Ig'  -e \
     's/#56707d/#118d78/Ig'  -e \
     's/#5c9ece/#38bcb1/Ig'  -e \
+    's/#608ab5/#489999/Ig'  -e \
     's/#65aadd/#3ad4ca/Ig'  -e \
     's/#677176/#1c8d7a/Ig'  -e \
     's/#6ec9cb/#47bd9a/Ig'  -e \
     's/#72b1df/#48d5ca/Ig'  -e \
+    's/#779fd3/#52bfc7/Ig'  -e \
     's/#788286/#23a98c/Ig'  -e \
     's/#78909C/#1cc4a8/Ig'  -e \
+    's/#85b4df/#5ed4d2/Ig'  -e \
+    's/#90a4ae/#28e2c3/Ig'  -e \
     's/#979D9F/#32d29f/Ig'  -e \
     's/#B8C1C6/#a6f7ca/Ig'  -e \
     's/#B9C2C7/#a6f7ca/Ig'  -e \
@@ -230,8 +235,10 @@ _adapta-black() {
     's/#C5C9CB/#b1fbd4/Ig'  -e \
     's/#cbd8dc/#c7fadd/Ig'  -e \
     's/#cdd6da/#cdf9e3/Ig'  -e \
+    's/#cddff0/#d0f1f0/Ig'  -e \
     's/#CFE9E8/#e0f1f0/Ig'  -e \
     's/#d4d6d7/#b6fcd6/Ig'  -e \
+    's/#d4e9ee/#c7ffdb/Ig'  -e \
     's/#daddde/#d4fce6/Ig'  -e \
     's/#E1E3E4/#d3fde7/Ig'  -e \
     's/#e5e6e7/#d3fde0/Ig'  -e \
