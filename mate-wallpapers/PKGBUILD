@@ -16,12 +16,24 @@ pkgver() {
 	date +%Y%m%d
 }
 
+prepare() {
+	mv $_repo-$_snapshot $_repo
+}
+
 package() {
 	cd $srcdir
 	install -dm755 $pkgdir/usr/share/backgrounds/manjaro-mate
 	install -dm755 $pkgdir/usr/share/mate-background-properties
-	cd $_repo-$_snapshot
-	rm *.md *.sh
+	
+	cd $_repo
+#Create xml file and clean unused file	
+msg "Creating xml file"
+echo
+	./backgrounds-xml.sh
+echo
+
+	rm *.sh *.md
+
 	mv manjaro-mate.xml $pkgdir/usr/share/mate-background-properties/
 	cp * $pkgdir/usr/share/backgrounds/manjaro-mate/
 }
