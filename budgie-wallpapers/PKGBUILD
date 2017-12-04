@@ -1,16 +1,16 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=budgie-wallpapers
-pkgver=20170614
+pkgver=20171204
 pkgrel=1
-_snapshot=69c927473a1bd804336dbeca6bc3168774f43ad0
+_snapshot=4809bc34c70c147cce0a1b56c48390ee6f8d0868
 _repo=Budgie-Artwork
 pkgdesc='Manjaro Linux Budgie wallpapers'
 arch=('any')
 url="https://github.com/Ste74/$_repo"
 license=('GPL')
 source=("$_repo-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-sha256sums=('367630ed33b0195b214882f2625c0c0e300ca0604a504446a963cb4488b48eb3')
+sha256sums=('ade10d17ad3d01b3460e4978a8c165479df3f3364ee54ba5525e796c1a62b4d3')
 
 pkgver() {
 	date +%Y%m%d
