@@ -2,9 +2,9 @@
 # Maintainer: Scott Furry <scott.wl.furry@gmail.com>
 
 pkgname=guayadeque
-pkgver=0.4.5
-pkgrel=3
-_commit=bea3d2c15d6b63470a61714430a7c2534232df36
+pkgver=0.4.5.r55.g7b6d34db
+pkgrel=1
+_commit=7b6d34db78bc8cd6e36c3815dbac11b321eee115
 pkgdesc='Lightweight music player'
 arch=('i686' 'x86_64')
 url='http://guayadeque.org/'
@@ -22,24 +22,16 @@ depends=('curl'
         'wxsqlite3')
 makedepends=('cmake')
 optdepends=('gvfs: Support for external devices')
-source=(#"https://github.com/anonbeat/${pkgname}/archive/v${pkgver}.tar.gz"
-        "${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/anonbeat/${pkgname}/archive/$_commit.tar.gz")
-sha256sums=('6afa9b30ce7f960c6c829172f60f3e191921ab8292aff2b365786f9aadc1f57a')
-
-prepare() {
-  mv ${pkgname}-${_commit} ${pkgname}-${pkgver}
-  cd ${pkgname}-${pkgver}
-  # add patches here
-}
+source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/anonbeat/${pkgname}/archive/$_commit.tar.gz")
+sha256sums=('8de0e8debb9b5c6bd29209c2424dd138574d11df79579814b33564ffc68884e3')
 
 build() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgname}-${_commit}
   ./buildt
   cmake . \
     -DCMAKE_CXX_STANDARD='11' \
     -DCMAKE_BUILD_TYPE='Release' \
     -DCMAKE_INSTALL_PREFIX='/usr' \
-    -D_GUREVISION_:STRING="${pkgrel}" \
     -DwxWidgets_wxrc_EXECUTABLE='/usr/bin/wxrc-3.0' \
     -DwxWidgets_CONFIG_EXECUTABLE='/usr/bin/wx-config-gtk3' \
     -DwxWidgets_INCLUDE_DIRS='/usr/include/wx-3.0/'
@@ -47,6 +39,6 @@ build() {
 }
 
 package() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgname}-${_commit}
   make DESTDIR="${pkgdir}" install
 }
