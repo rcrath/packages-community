@@ -2,20 +2,21 @@
 # Maintainer: tnaker
 
 pkgname=xcursor-breeze
-pkgver=1.0
-pkgrel=2
+pkgver=5.10.5
+pkgrel=1
 pkgdesc="KDE5 cursor theme"
 url="http://kde-look.org/content/show.php/Breeze?content=165371"
 depends=('libxcursor')
 license=('GPL')
 arch=(any)
-source=("https://dl.opendesktop.org/api/files/download/id/1460735269/165371-Breeze.tar.gz"
+source=('http://download.kde.org/stable/plasma/5.10.5/breeze-5.10.5.tar.xz'
     'thumbnail.png')
-md5sums=('7deef9ac1572296be2050e467830f1bd'
+md5sums=('f78318b14525ed3a56e33f4f24e5cd04'
          '95cdec50172cb19de79ea1a980e9c0fb')
 
 package() {
-  mkdir -p ${pkgdir}/usr/share/icons
-  cp -R ${srcdir}/Breeze ${pkgdir}/usr/share/icons/
-  cp $srcdir/thumbnail.png $pkgdir/usr/share/icons/Breeze/cursors/
+    install -dm755 "$pkgdir"/usr/share/icons/
+    cp -r "$srcdir"/breeze-${pkgver}/cursors/Breeze/Breeze "$pkgdir"/usr/share/icons/
+    cp -r "$srcdir"/breeze-${pkgver}/cursors/Breeze_Snow/Breeze_Snow "$pkgdir"/usr/share/icons/
+    cp $srcdir/thumbnail.png $pkgdir/usr/share/icons/Breeze/cursors
 }
