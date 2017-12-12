@@ -3,11 +3,12 @@
 
 pkgname=cinnamon
 pkgver=3.6.6
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 #url="https://github.com/linuxmint/Cinnamon"
 url="https://github.com/oberon2007/Cinnamon"
+_commit=9aa9b05dff9eb1d2b13f856b2a974dfc1e805b45
 license=('GPL2')
 depends=('accountsservice'
     'caribou'
@@ -54,7 +55,7 @@ optdepends=('blueberry: Bluetooth support'
     'tint2: fallback mode')
 options=('!emptydirs')
 source=( #"$pkgname-$pkgver.tar.gz::https://github.com/linuxmint/Cinnamon/archive/$pkgver.tar.gz"
-    "git+$url#branch=adapta-thumbnails"
+    "git+$url#commit=$_commit"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch')
