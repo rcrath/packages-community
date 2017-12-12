@@ -1,16 +1,16 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=mate-wallpapers
-pkgver=20171204
+pkgver=20171210
 pkgrel=1
-_snapshot=d5dd0854dace5c9990202abeafdbc8ab33ebcfd3
+_snapshot=a1f3e8136ef0771e45d512f1811207ada2c88cbb
 _repo=Mate-Artwork
 pkgdesc='Manjaro Linux Mate wallpapers'
 arch=('any')
 url="https://github.com/Ste74/$_repo"
 license=('GPL')
 source=("$_repo-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-sha256sums=('3b592f8ff5a264cab02cdf82adcc39fcbfa59353a873583cf79e4575749ae91f')
+sha256sums=('57dbc6405e2d4bcc267ec0e2bfae096444c418f2d1c1ed44b6b3fe265f666336')
 
 pkgver() {
 	date +%Y%m%d

@@ -10,7 +10,7 @@ pkgname=('manjaro-bspwm-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
 		)
-pkgver=20171113
+pkgver=20171210
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -141,7 +141,7 @@ package_manjaro-mate-settings() {
 		'mate-wallpapers'
 		'mate-notification-theme-slate'
         'xcursor-breeze'
-        'arc-themes-maia'
+        'adapta-maia-theme'
 		'arc-maia-icon-theme'
         'maia-wallpaper'
 		'gnome-icon-theme'

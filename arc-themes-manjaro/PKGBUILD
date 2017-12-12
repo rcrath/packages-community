@@ -2,6 +2,7 @@
 # Author: horst3180 @ deviantart 
 # Contributor: ceyhunnabiyev for Breath color <https://github.com/ceyhunnabiyev>
 # This pkgbuild provide Maia and Breath variant of Arc Theme 
+# New soft fork at https://github.com/NicoHood/arc-theme
 
 pkgbase=arc-themes
 pkgname=('arc-themes-solid-maia'
@@ -10,18 +11,21 @@ pkgname=('arc-themes-solid-maia'
 		 'arc-themes-solid-breath')
 _pkgname=arc-theme
 _pkgbase=arc-themes-maia
-pkgver=20170302
-pkgrel=3
-_commit=4b75f33ff2cfedb6ba0809cf877deb2d2831e6c3
+pkgver=20171105
+pkgrel=1
+#_commit=4b75f33ff2cfedb6ba0809cf877deb2d2831e6c3
 #_gnomever=3.22
 arch=('any')
-url='https://github.com/horst3180/arc-theme'
+_url='https://github.com/horst3180/arc-theme' #original theme
+url='https://github.com/NicoHood/arc-theme' #soft fork
 license=('GPL3')
 depends=('gtk-engine-murrine' 'gtk3')
 makedepends=('optipng' 'inkscape' 'autoconf' 'automake' 'pkg-config' 'libcanberra')
 #source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/horst3180/${_pkgname}/archive/${pkgver}.tar.gz")
-source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/horst3180/${_pkgname}/archive/${_commit}.tar.gz")
-sha256sums=('09b701a2e5a94a3e6431b8d27ffdacd7ba9eff56e5e4d0d5a56040ca9bfdc1b6')
+#source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/horst3180/${_pkgname}/archive/${_commit}.tar.gz")
+source=("${_pkgname}-${pkgver}.tar.gz::$url/archive/$pkgver.tar.gz")
+
+sha256sums=('00caa52631cee17427d193bda832a429ac42e3d042dae503c41f47b6961beb83')
 
 #ALL arc color
 _blue=5294e2 
@@ -101,17 +105,13 @@ _breath18='26, 188, 156, 0.9'
 
 prepare() {
 cd $srcdir
-	cp -R "$_pkgname-$_commit" "$_pkgname-$pkgver"
+	#cp -R "$_pkgname-$_commit" "$_pkgname-$pkgver"
 	cp -R "$_pkgname-$pkgver" "arc-themes-maia-$pkgver"
 	cp -R "$_pkgname-$pkgver" "arc-themes-breath-$pkgver"
 }	
 
 build_arc-maia() {
-cd $srcdir
 
-#cp -R "$_pkgname-$_commit" "$_pkgname-$pkgver" #add only for git commit
-
-#cp -R "$_pkgname-$pkgver" "$_pkgbase-$pkgver"
 cd $srcdir/arc-themes-maia-$pkgver
 msg "Build arc-themes-maia" 
 echo
@@ -235,19 +235,11 @@ echo
 sh render-assets.sh
 msg "making the assets of gtk-3.0"
 echo
-cd ../gtk-3.0/3.14/
-msg "making the assets of gtk-3.0/3.14"
-echo
-sh render-assets.sh
-cd ../3.16/
-msg "making the assets of gtk-3.0/3.16"
-echo
-sh render-assets.sh
-cd ../3.18/
-msg "making the assets of gtk-3.0/3.18"
-echo
-sh render-assets.sh
-cd ../3.20/
+#cd ../gtk-3.0/3.18/
+#msg "making the assets of gtk-3.0/3.18"
+#echo
+#sh render-assets.sh
+cd ../gtk-3.0/3.20/
 msg "making the assets of gtk-3.0/3.20"
 echo
 sh render-assets.sh
@@ -264,11 +256,7 @@ echo
 }
 
 build_arc-breath() {
-cd $srcdir
 
-#cp -R "$_pkgname-$_commit" "$_pkgname-$pkgver" #add only for git commit
-
-#cp -R "$_pkgname-$pkgver" "$_pkgbase-$pkgver"
 cd $srcdir/arc-themes-breath-$pkgver
 msg "Build arc-themes-breath" 
 echo
@@ -392,19 +380,11 @@ echo
 sh render-assets.sh
 msg "making the assets of gtk-3.0"
 echo
-cd ../gtk-3.0/3.14/
-msg "making the assets of gtk-3.0/3.14"
-echo
-sh render-assets.sh
-cd ../3.16/
-msg "making the assets of gtk-3.0/3.16"
-echo
-sh render-assets.sh
-cd ../3.18/
-msg "making the assets of gtk-3.0/3.18"
-echo
-sh render-assets.sh
-cd ../3.20/
+#cd ../gtk-3.0/3.18/
+#msg "making the assets of gtk-3.0/3.18"
+#echo
+#sh render-assets.sh
+cd ../gtk-3.0/3.20/
 msg "making the assets of gtk-3.0/3.20"
 echo
 sh render-assets.sh
@@ -435,9 +415,9 @@ cd $srcdir/arc-themes-maia-$pkgver
 #Change folder name for solid version 
 
 cd $pkgdir/usr/share/themes
-mv Arc-Maia Arc-Maia-Solid
-mv Arc-Maia-Dark Arc-Dark-Maia-Solid
-mv Arc-Maia-Darker Arc-Darker-Maia-Solid
+#mv Arc-Maia Arc-Maia-Solid
+#mv Arc-Maia-Dark Arc-Dark-Maia-Solid
+#mv Arc-Maia-Darker Arc-Darker-Maia-Solid
 
 #Add Maia-Solid suffix (don't change this order)
 find . -type f -name '*.*' -exec sed -i \
@@ -457,7 +437,6 @@ cd $srcdir/arc-themes-maia-$pkgver
 
 package_arc-themes-solid-breath() {
 pkgdesc="A flat theme without transparent elements Manjaro Breath variant"
-#optdepends=('arc-firefox-theme: Firefox theme to complete arc-theme experience')
 cd $srcdir/arc-themes-breath-$pkgver
   ./configure --prefix=/usr --disable-transparency --disable-unity
   make DESTDIR="${pkgdir}" install
@@ -465,9 +444,9 @@ cd $srcdir/arc-themes-breath-$pkgver
 #Change folder name for solid version
 
 cd $pkgdir/usr/share/themes
-mv Arc-Breath Arc-Breath-Solid
-mv Arc-Breath-Dark Arc-Dark-Breath-Solid
-mv Arc-Breath-Darker Arc-Darker-Breath-Solid
+#mv Arc-Breath Arc-Breath-Solid
+#mv Arc-Breath-Dark Arc-Dark-Breath-Solid
+#mv Arc-Breath-Darker Arc-Darker-Breath-Solid
 
 #Add Breath-Solid suffix (don't change this order)
 find . -type f -name '*.*' -exec sed -i \
@@ -477,9 +456,7 @@ find . -type f -name '*.*' -exec sed -i \
 }
 
 package_arc-themes-breath() {
-pkgdesc="A flat theme with transparent elements Manjaro Breath variant"
-#optdepends=('arc-firefox-theme: Firefox theme to complete arc-theme-breath experience')
-#cd $srcdir  
+pkgdesc="A flat theme with transparent elements Manjaro Breath variant" 
 cd $srcdir/arc-themes-breath-$pkgver
   ./configure --prefix=/usr --disable-unity
   make DESTDIR="${pkgdir}" install
