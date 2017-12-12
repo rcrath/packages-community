@@ -11,7 +11,7 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.92.2.33
+pkgver=3.92.2.40
 pkgrel=1
 arch=(any)
 url="https://github.com/adapta-project/${_pkgname}"
@@ -33,7 +33,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('3e4f91c4e32c594a2cfccb09f48495dc5c76edab81c3d9fcf55faae2d6d7a897'
+sha256sums=('350bb4eee4788ac1643a325d1fbb8da272b0e29c14a7059c2c2a2b0bd7db23f9'
             'SKIP'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
             '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
@@ -42,7 +42,7 @@ prepare() {
     cd $_pkgname-$pkgver
     patch -p1 -i $srcdir/XfdesktopIconView.patch
 
-    # temp do not use thumbnails
+    # do not use thumbnails
     # https://github.com/adapta-project/adapta-gtk-theme/issues/551
     patch -p1 -i $srcdir/no-thumbnails.patch
 
