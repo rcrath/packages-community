@@ -1,3 +1,4 @@
+
 # $Id$
 # Maintainer: Jonathon Fernyhough <jonathon_at_manjaro_dot_org>
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
@@ -6,7 +7,7 @@
 pkgbase=tlp
 pkgname=('tlp' 'tlp-rdw')
 pkgver=1.0
-pkgrel=1.1
+pkgrel=1.2
 arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
@@ -27,16 +28,13 @@ prepare() {
   # Anyone looking for further power savings can easily alter these settings
   # after installation.
 
-  # Be less aggressive with SATA ALPM to prevent poor SSD performance and
-  # potential data corruption.
-  sed -i '126s/=min_power/=medium_power/' default
+  # Be conservative with SATA ALPM to prevent poor SSD performance and
+  # potential data corruption; makes little difference in normal system usage.
+  sed -i '126s/=min_power/=max_performance/' default
 
   # Use hardware defaults for open-source AMD drivers.
   # This allows demand-based power scaling and vastly reduces heat generation.
   sed -i '149s/=high/=default/' default
-
-  # Enable audio power saving on AC power.
-  sed -i '170s/=0/=1/' default
 
   # Enable runtime power management for PCI(e) on AC power.
   sed -i '186s/=on/=auto/' default
@@ -61,7 +59,7 @@ package_tlp() {
   conflicts=('laptop-mode-tools' 'pm-utils')
   backup=('etc/default/tlp')
 
-  cd TLP-${pkgver}
+  cd ${pkgbase^^}-${pkgver}
 
   export TLP_SBIN='/usr/bin'
   export TLP_ULIB='/usr/lib/udev'
@@ -77,7 +75,7 @@ package_tlp-rdw() {
   pkgdesc='Linux Advanced Power Management - Radio Device Wizard'
   depends=('networkmanager' 'tlp')
 
-  cd TLP-${pkgver}
+  cd ${pkgbase^^}-${pkgver}
 
   make DESTDIR="${pkgdir}" install-rdw
 }
