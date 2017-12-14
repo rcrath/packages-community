@@ -3,12 +3,13 @@
 
 pkgname=xcursor-breeze
 pkgver=5.10.5
-pkgrel=1
+pkgrel=2
 pkgdesc="KDE5 cursor theme"
 url="http://kde-look.org/content/show.php/Breeze?content=165371"
 depends=('libxcursor')
 license=('GPL')
 arch=(any)
+provides=('breeze-snow-cursor-theme') 
 source=('http://download.kde.org/stable/plasma/5.10.5/breeze-5.10.5.tar.xz'
     'thumbnail.png')
 md5sums=('f78318b14525ed3a56e33f4f24e5cd04'
