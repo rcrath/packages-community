@@ -4,12 +4,12 @@
 
 pkgname=vlc-nightly
 _pkgname=vlc
-pkgver=3.0.0v20171209
+pkgver=3.0.0v20171214
 pkgrel=1
 _pkgver=3.0.0
-_pkgdate=20171209
-_pkgrel=0222
-_pkgsuffix=rc1
+_pkgdate=20171214
+_pkgrel=1209
+_pkgsuffix=rc2
 pkgdesc="A multi-platform MPEG, VCD/DVD, and DivX player - nightly snapshot"
 arch=('i686' 'x86_64')
 url="http://www.videolan.org/vlc/"
@@ -110,7 +110,7 @@ source=("https://nightlies.videolan.org/build/source/${_pkgname}-${_pkgver}-${_p
         'lua53_compat.patch::https://git.archlinux.org/svntogit/packages.git/plain/trunk/lua53_compat.patch?h=packages/vlc'
         'prevent-including-missing-SVGs.patch')
 
-md5sums=('bc33dc65021c58a1a20871a1ec6e98c8'
+md5sums=('9cb91bc91e1710a754a47273332c6a1a'
          '808356c9a23e4256d9ff071d3498c01a'
          '96d3b346d9149ffb1b430066dfb6249a'
          'e8a97c561b547041e16d660b6c88d2c2')
