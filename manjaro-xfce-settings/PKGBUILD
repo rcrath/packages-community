@@ -3,7 +3,7 @@
 pkgbase=manjaro-xfce-settings
 pkgname=('manjaro-xfce-settings'
          'manjaro-xfce-minimal-settings')
-pkgver=20171118
+pkgver=20171214
 pkgrel=1
 pkgdesc="Manjaro Linux Xfce settings"
 arch=('any')
@@ -34,7 +34,7 @@ package_manjaro-xfce-settings() {
 	         'qt5-styleplugins'
 	         'vertex-maia-icon-theme'
 	         'vertex-maia-themes'
-	         'xcursor-breeze')
+	         'breeze')
 	conflicts=('manjaro-desktop-settings')
 	provides=('manjaro-desktop-settings')
 
@@ -52,7 +52,7 @@ package_manjaro-xfce-minimal-settings() {
 	         'qt5-styleplugins'
 	         'vertex-maia-icon-theme'
 	         'vertex-maia-themes'
-	         'xcursor-breeze')
+	         'breeze')
 	conflicts=('manjaro-desktop-settings')
 	provides=('manjaro-desktop-settings')
 
