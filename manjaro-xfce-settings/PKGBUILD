@@ -34,7 +34,7 @@ package_manjaro-xfce-settings() {
 	         'qt5-styleplugins'
 	         'vertex-maia-icon-theme'
 	         'vertex-maia-themes'
-	         'breeze')
+	         'xcursor-breeze')
 	conflicts=('manjaro-desktop-settings')
 	provides=('manjaro-desktop-settings')
 
@@ -52,7 +52,7 @@ package_manjaro-xfce-minimal-settings() {
 	         'qt5-styleplugins'
 	         'vertex-maia-icon-theme'
 	         'vertex-maia-themes'
-	         'breeze')
+	         'xcursor-breeze')
 	conflicts=('manjaro-desktop-settings')
 	provides=('manjaro-desktop-settings')
 
