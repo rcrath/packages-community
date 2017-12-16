@@ -3,7 +3,7 @@
 
 pkgname=xcursor-breeze
 pkgver=5.11.4
-pkgrel=1
+pkgrel=2
 pkgdesc="KDE5 cursor theme"
 url="http://kde-look.org/content/show.php/Breeze?content=165371"
 depends=('libxcursor')
@@ -21,7 +21,7 @@ package() {
     install -dm755 "$pkgdir"/usr/share/icons/
     cp -r "$srcdir"/breeze-${pkgver}/cursors/Breeze/Breeze "$pkgdir"/usr/share/icons/
     cp -r "$srcdir"/breeze-${pkgver}/cursors/Breeze_Snow/Breeze_Snow "$pkgdir"/usr/share/icons/
-    mv $pkgdir/usr/share/icons/Breeze $pkgdir/usr/share/icons/breeze
-    mv $pkgdir/usr/share/icons/Breeze_Snow $pkgdir/usr/share/icons/breeze_snow
-    cp $srcdir/thumbnail.png $pkgdir/usr/share/icons/breeze/cursors
+    mv $pkgdir/usr/share/icons/Breeze $pkgdir/usr/share/icons/xcursor-breeze
+    mv $pkgdir/usr/share/icons/Breeze_Snow $pkgdir/usr/share/icons/xcursor-breeze-snow
+    cp $srcdir/thumbnail.png $pkgdir/usr/share/icons/xcursor-breeze/cursors
 }
