@@ -43,7 +43,7 @@ depends_x86_64=('lib32-alsa-lib' 'lib32-alsa-plugins' 'lib32-atk' 'lib32-cairo'
                 'lib32-libxxf86vm' 'lib32-nspr' 'lib32-nss' 'lib32-openal' 'lib32-openssl-1.0' 'lib32-pango' 'lib32-sdl' 'lib32-sdl2'
                 'lib32-sdl2_image' 'lib32-sdl2_mixer' 'lib32-sdl2_ttf'
                 'lib32-sdl_image' 'lib32-sdl_mixer' 'lib32-sdl_ttf'
-                'lib32-vdpau')
+                'lib32-libvdpau')
 source=('native_runtime.txt'
         'steam-native.install'
         'LICENSE')
