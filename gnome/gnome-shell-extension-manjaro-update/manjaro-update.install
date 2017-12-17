@@ -1,7 +1,8 @@
 post_install(){
 
-	rm -f $pkgdir/usr/share/gnome-shell/extensions/manjaro-update@Chrysostomus/schemas/gschemas.compiled
+	#rm -f $pkgdir/usr/share/gnome-shell/extensions/manjaro-update@Chrysostomus/schemas/gschemas.compiled
 	glib-compile-schemas $pkgdir/usr/share/gnome-shell/extensions/manjaro-update@Chrysostomus/schemas/
+
 }
 
 post_update(){

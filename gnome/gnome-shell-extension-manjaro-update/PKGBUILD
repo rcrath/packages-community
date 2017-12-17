@@ -4,27 +4,31 @@
 pkgname=gnome-shell-extension-manjaro-update
 _pkgname=manjaro-update
 _notray=no-tray-icon
-pkgver=3.1
+pkgver=3.2
 pkgrel=1
+_commit=e261fd258a18dc762ea41f9fffa8e42b540bf444
 pkgdesc="Convenient indicator for Manjaro updates in GNOME Shell."
 arch=('any')
 url="https://github.com/Ste74/manjaro-update"
 license=('GPL3')
 install="$_pkgname.install"
 depends=('gnome-shell>=3.18' 'update-notifier>=0.6' 'dunstify' 'pamac' 'mhwd')
-source=("$url/archive/v$pkgver.tar.gz"
+source=(#"$url/archive/v$pkgver.tar.gz"
+		"$_pkgname-$_commit.tar.gz::$url/archive/$_commit.tar.gz"
         "$_notray-install.hook"
         "$_notray-install.script"
         "$_notray-remove.hook"
-        "$_notray-remove.script"
-        "10_manjaro-update.gschema.override")
+        "$_notray-remove.script")
         
-md5sums=('ccf6f14a93502feab30871056fe23b8b'
+md5sums=('186ccf724a1632b2c21714124b5983e3'
          'a04f49caef5583ce9b8c581d4630e38f'
          'e833709e7f0dedc737559f116a7861fa'
          'fffd68e0249da86384823b6319727951'
-         '7f4828e35bcf97fc22e238365a5f804f'
-         '84f422b4997edd037e856b7f92a21051')
+         '7f4828e35bcf97fc22e238365a5f804f')
+         
+prepare() {
+mv $_pkgname-$_commit $_pkgname-$pkgver
+}
          
 package() {
 
