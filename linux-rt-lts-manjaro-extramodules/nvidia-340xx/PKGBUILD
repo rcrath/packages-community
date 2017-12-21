@@ -8,7 +8,7 @@ _extramodules=extramodules-4.9-rt-lts-MANJARO
 pkgname=$_linuxprefix-nvidia-340xx
 _pkgname=nvidia
 pkgver=340.104
-pkgrel=4
+pkgrel=5
 provides=("$_pkgname=$pkgver")
 groups=("$_linuxprefix-extramodules")
 pkgdesc="NVIDIA drivers for linux."
