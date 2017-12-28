@@ -3,7 +3,7 @@
 pkgbase=manjaro-xfce-settings
 pkgname=('manjaro-xfce-settings'
          'manjaro-xfce-minimal-settings')
-pkgver=20171214
+pkgver=20171223
 pkgrel=2
 pkgdesc="Manjaro Linux Xfce settings"
 arch=('any')
