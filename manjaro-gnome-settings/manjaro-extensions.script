@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#override dash to dock settings
+
+if [ -f "/usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/gschemas.compiled" ]; then
+	rm -f /usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/gschemas.compiled
+	glib-compile-schemas /usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas
+fi
+
+
