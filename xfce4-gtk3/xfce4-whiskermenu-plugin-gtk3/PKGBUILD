@@ -4,7 +4,7 @@
 
 pkgname=xfce4-whiskermenu-plugin-gtk3
 _pkgname=xfce4-whiskermenu-plugin
-pkgver=2.1.3
+pkgver=2.1.5
 pkgrel=1
 pkgdesc='Alternate menu for Xfce4 (GTK3)'
 arch=('x86_64' 'i686')
@@ -17,7 +17,7 @@ provides=($_pkgname)
 conflicts=($_pkgname)
 #source=("http://gottcode.org/$pkgname/$pkgname-$pkgver.tar.bz2")
 source=("http://mirror.netcologne.de/xfce/src/panel-plugins/xfce4-whiskermenu-plugin/${pkgver%.*}/xfce4-whiskermenu-plugin-$pkgver.tar.bz2")
-sha256sums=('e8918c1255f7ab86b950ebd13555fe87046c01a1a4cb0b5d460024b6efc01769')
+sha256sums=('20684ffe014b84d3d0630bbfcc5f8707582acb67b602ab7ef6317df6782df2b4')
 
 build() {
   mkdir -p build
