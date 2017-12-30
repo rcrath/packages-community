@@ -1,4 +1,3 @@
-
 # $Id$
 # Maintainer: Jonathon Fernyhough <jonathon_at_manjaro_dot_org>
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
@@ -7,7 +6,7 @@
 pkgbase=tlp
 pkgname=('tlp' 'tlp-rdw')
 pkgver=1.0
-pkgrel=1.3
+pkgrel=1.4
 arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
@@ -35,9 +34,6 @@ prepare() {
   # Use hardware defaults for open-source AMD drivers.
   # This allows demand-based power scaling and vastly reduces heat generation.
   sed -i '149s/=high/=default/' default
-
-  # Enable runtime power management for PCI(e) on AC power.
-  sed -i '186s/=on/=auto/' default
 
   # Disable aggressive USB device autosuspend.
   # This prevents "hidden" issues with USB hardware that is incompatible.
