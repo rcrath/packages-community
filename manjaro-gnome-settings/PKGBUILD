@@ -4,7 +4,7 @@
 pkgbase=manjaro-gnome-settings
 pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
 #          'manjaro-gnome-minimal-settings')
-pkgver=20171228
+pkgver=20171230
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
@@ -92,7 +92,7 @@ backup=('etc/gdm/PostLogin/Default')
 package_manjaro-gnome-extension-settings() {
 
 pkgdesc='Manjaro Linux Gnome extensions settings'
-depends=('manjaro-gnome-settings')
+optdepends=('manjaro-gnome-settings')
 
 	_inst_dir-extension	
 	install -Dm644 ${srcdir}/manjaro-extensions.hook ${pkgdir}/usr/share/libalpm/hooks/manjaro-extensions.hook	
