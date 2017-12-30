@@ -12,14 +12,14 @@
 pkgbase=octopi
 pkgname=('octopi' 'octopi-repoeditor' 'octopi-pacmanhelper' 'octopi-cachecleaner'
          'octopi-notifier-qt5' 'octopi-notifier-frameworks')
-pkgver=0.8.9
+pkgver=0.8.10
 pkgrel=1
 # This is the release package so the below _gitcommit variable should (usually) be commented out.
-_gitcommit="8800c47f557b4fb5f7388e56cbfe54349b0ea7c5"
+_gitcommit="82acc74c24f88f14c01a97b6aeeb9731598ef536"
 arch=('i686' 'x86_64')
 url="http://octopiproject.wordpress.com"
 license=('GPL2')
-makedepends=('qt5-declarative' 'knotifications' 'libnotify' 'alpm-octopi-utils' 'clang')
+makedepends=('qt5-declarative' 'knotifications' 'libnotify' 'alpm-octopi-utils' 'clang' 'qtermwidget')
 
 if [ "${_gitcommit}" != "" ]; then
   source=("octopi-${pkgver}-${pkgrel}.tar.gz::https://github.com/aarnt/octopi/archive/${_gitcommit}.tar.gz")
@@ -27,7 +27,9 @@ else
   source=("octopi-${pkgver}.tar.gz::https://github.com/aarnt/octopi/archive/v${pkgver}.tar.gz")
 fi
 
-sha256sums=('dc1f1856e06f2872d802fe501a46ae02eba204914a37e9f429d47fbf84ab6342')
+source+=('disable-aur-by-default.patch')
+sha256sums=('305f3c1a818110cb8fd47bcc3c33b3ee246206b5231fd383a55e1c45ccc85466'
+            'c157b7850c64bf5163619a4266f6d8780701ef00f832bb50a4737cdab5b03392')
 
 
 prepare() {
@@ -44,7 +46,8 @@ prepare() {
   cp -r notifier notifier-frameworks
   sed -i 's|#KSTATUS|KSTATUS|' notifier-frameworks/octopi-notifier/octopi-notifier.pro
 
-  # TODO: https://github.com/aarnt/octopi/issues/238
+  # https://github.com/aarnt/octopi/issues/308
+  patch -p1 -i "${srcdir}/disable-aur-by-default.patch"
 }
 
 build() {
@@ -97,6 +100,7 @@ package_octopi() {
               'gist: for SysInfo report'
               'pacaur: for AUR support'
               'yaourt: for AUR support'
+              'qtermwidget: for embedded terminal'
               'octopi-repoeditor: for editing functions'
               'octopi-cachecleaner: for cleaning functions'
               'octopi-notifier-qt5: for notifications'
