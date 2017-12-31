@@ -2,10 +2,10 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org
 
 pkgname=manjaro-browser-settings
-pkgver=20161221
+pkgver=20171231
 pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
-arch=('any')
+arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
 _gitcommit=19f02dcc9e109fe08abb7b163ec537d0c5cb4fdf
@@ -28,4 +28,5 @@ package() {
   ln -s /usr/lib/firefox/distribution $pkgdir/usr/lib/light/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
+  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox
 }
