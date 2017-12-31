@@ -4,7 +4,7 @@
 pkgbase=manjaro-gnome-settings
 pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
 #          'manjaro-gnome-minimal-settings')
-pkgver=20171230
+pkgver=20171231
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
@@ -19,7 +19,7 @@ source=("git+$url.git"
 makedepends=('git')
 sha256sums=('SKIP'
             '430c34abc34b7016eb649dafb4580223bc48d3131a01dd1b1c017dcb8b9d290c'
-            '1c28a52ef30e4c88508cdd3b878b84a3ec29fe034107c621011b5cc6dc146e98'
+            '9eb6382a356dc6f80fde2dd415ee255acd18255ed7be778f11cf430b8ec9d209'
             '89fce95f80bb8277042d8610850e5c8163696ca94099a0b7442ed74c82cef3fd'
             '6df4edea2bf18c7f7ebf79318c5c0c2f107bc7ccc69b6b9281eb33d5a48b61f8'
             '4e17fac482415309fddf61de1ae67e25e1646f61dc5596bfe760011dcc5c9dbd'
