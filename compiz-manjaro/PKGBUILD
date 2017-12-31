@@ -8,7 +8,7 @@ _revno=r4138
 _upstream='~compiz-team'
 _greybirdver=1.6.2
 pkgver=0.9.13.1.${_revno}
-pkgrel=1
+pkgrel=2
 pkgdesc="OpenGL compositing window manager. Includes friendly defaults, GWD theme selector and autostart for Xfce & MATE."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/${_name}"
@@ -22,7 +22,7 @@ conflicts=('compiz' 'compiz09-manjaro-test' 'compiz-core-bzr' 'compiz-core-devel
            'compiz-core-mate' 'compiz-fusion-plugins-main' 'compiz-fusion-plugins-extra' 'compiz-fusion-plugins-unsupported' 'compiz-fusion-plugins-experimental'
            'compiz-decorator-gtk' 'compiz-decorator-kde' 'libcompizconfig' 'compizconfig-python' 'compizconfig-backend-gconf' 'compiz-bcop' 'ccsm')
 replaces=('compiz09-manjaro-test')
-provides=("compiz-core=${pkgver/.r*/}" "compiz-bcop=${pkgver/.r*/}" "ccsm=${pkgver/.r*/}" "compiz-plugins-main=${pkgver/.r*/}" "compiz-plugins-extra=${pkgver/.r*/}" "compizconfig-python=${pkgver/.r*/}" "libcompizconfig=${pkgver/.r*/}")
+provides=("compiz=${pkgver/.r*/}" "compiz-core=${pkgver/.r*/}" "compiz-bcop=${pkgver/.r*/}" "ccsm=${pkgver/.r*/}" "compiz-plugins-main=${pkgver/.r*/}" "compiz-plugins-extra=${pkgver/.r*/}" "compizconfig-python=${pkgver/.r*/}" "libcompizconfig=${pkgver/.r*/}")
 source=("http://bazaar.launchpad.net/${_upstream}/${_name}/${pkgver:0:6}/tarball/${_revno:1}"
         "focus-prevention-disable.patch"
         "gtk-extents.patch"
