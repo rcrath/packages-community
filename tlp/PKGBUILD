@@ -11,9 +11,9 @@ arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
 source=("tlp-${pkgver}.tar.gz::https://github.com/linrunner/TLP/archive/${pkgver}.tar.gz"
-        "battery-devices.patch::https://github.com/linrunner/TLP/commit/3d97da608890e1986f5d370213512467c129fd25.patch")
+        "battery-devices.patch")
 sha256sums=('642717b27db3a70c2cdef2673fe3229bf314488aa0797515e63d933b93bc78ec'
-            '5c45ece93c997e67ae17e382ed12835246baf8fbb259dec9ded1713d6810d9e4')
+            '9372600f7013f03af155a54057a6e03fe81e58593dd1c19762c6e023d5fc5a1f')
 
 prepare() {
   cd ${pkgbase^^}-${pkgver}
