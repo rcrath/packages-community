@@ -6,12 +6,14 @@
 pkgbase=tlp
 pkgname=('tlp' 'tlp-rdw')
 pkgver=1.0
-pkgrel=1.4
+pkgrel=1.5
 arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
-source=("tlp-${pkgver}.tar.gz::https://github.com/linrunner/TLP/archive/${pkgver}.tar.gz")
-sha256sums=('642717b27db3a70c2cdef2673fe3229bf314488aa0797515e63d933b93bc78ec')
+source=("tlp-${pkgver}.tar.gz::https://github.com/linrunner/TLP/archive/${pkgver}.tar.gz"
+        "battery-devices.patch::https://github.com/linrunner/TLP/commit/3d97da608890e1986f5d370213512467c129fd25.patch")
+sha256sums=('642717b27db3a70c2cdef2673fe3229bf314488aa0797515e63d933b93bc78ec'
+            '5c45ece93c997e67ae17e382ed12835246baf8fbb259dec9ded1713d6810d9e4')
 
 prepare() {
   cd ${pkgbase^^}-${pkgver}
@@ -40,6 +42,7 @@ prepare() {
   sed -i '200s/enable/enable aggressive/; 201s/=1/=0/' default
 
   ###
+  patch -p1 -i ../battery-devices.patch
 }
 
 package_tlp() {
