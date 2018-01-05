@@ -31,7 +31,7 @@ source=("https://dl.suckless.org/tools/$_pkgname-$pkgver.tar.gz"
         'dmenurc')
 sha256sums=('a75635f8dc2cbc280deecb906ad9b7594c5c31620e4a01ba30dc83984881f7b9'
             '084aa281c92bf87103121a031617c3ec10ee63ce40f955aefafc5dbded9489e5'
-            'f4af830cd7ffa3535f970d927fde157e2ef3e2b3016de705645604915eca658c'
+            '779de570f7a0e81c23e522a68aed21c50830b8f39982a7f4af022324c65e1f67'
             '49df8bdb19246b66f61c6dfefe3d1e78300d30808cc215ea6c54a9a641c6cdb2'
             'cfef201547d14bfdb8f192dce369502f015c860e1d84b54fe960f3b9ffbc059c'
             'c0b773af5a1458036d242b19f2e45ed444e6e86d2cf15bedbfb996e8c2fd05b6')
