@@ -2,8 +2,8 @@
 # Contributor: Matthias Maennich <arch@maennich.net>
 
 pkgname=command-not-found
-pkgver=0.6.1
-pkgrel=2
+pkgver=0.6.2
+pkgrel=1
 pkgdesc="In case a command could not be found this utility searches for packages containing this or a similar command (bash,zsh)."
 arch=('i686' 'x86_64')
 url="http://github.com/metti/$pkgname"
@@ -15,7 +15,7 @@ depends=('boost-libs'
 makedepends=('boost'
              'cmake'
              'git')
-md5sums=('d828f5c974f2b3b6009de725ac4fdbc2')
+md5sums=('f281d89923d6369ab1ad4012308d410b')
 install=$pkgname.install
 source=("$url/archive/v$pkgver.zip")
 
