@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=bmenu
-pkgver=0.4.8
+pkgver=0.5
 pkgrel=1
 pkgdesc="Simple system menu for commandline"
 arch=(any)
@@ -10,12 +10,13 @@ license=('MIT')
 depends=('awk'
 	'bash'
 	'elinks'
-	'pacli'
+	'pacui'
 	'sed'
-	'fzf')
-optdepends=(
+	'fzf'
+	'mhwd-tui'
 	'brandr'
-	'mhwd-tui')
+	'mhwd-tui'
+	'xorg-xinput')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/$pkgname")
 md5sums=('SKIP')

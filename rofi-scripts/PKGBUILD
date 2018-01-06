@@ -1,22 +1,16 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
-pkgname=bspwm-scripts
-pkgver=0.32
+pkgname=rofi-scripts
+pkgver=0.1
 pkgrel=1
-pkgdesc="Scripts for controlling bspwm"
+pkgdesc="Scripts for rofi"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
 license=(MIT)
-depends=('dmenu-manjaro'
-	'bspwm'
-	'sxhkd'
-	'xdotool'
-	'wmctrl'
-	'wmutils'
-	'xtitle'
-	'xdo'
-	'rootmenu'
-	'jshon'
+depends=('rofi'
+	'ttf-ionicons'
+	'xdg-utils'
+	'zsh'
 	'dash')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/$pkgname")
@@ -27,5 +21,4 @@ package () {
 	install -dm755 $pkgdir/usr/bin
 	cp -r $srcdir/$pkgname/bin $pkgdir/usr
 	chmod a+x $pkgdir/usr/bin/*
-        install -Dm755 "$srcdir/$pkgname/99-monitor-hotplug-rules" "$pkgdir/etc/udev/rules.d/99-monitor-hotplug-rules"
 }

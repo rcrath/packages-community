@@ -1,0 +1,15 @@
+# Maintainer: Chrysostomus
+
+pkgname=gtk2-compatibility
+pkgver=0.1
+pkgrel=1
+pkgdesc="Symlink for making some notification daemons work without gtk2"
+arch=('any')
+license=('MIT')
+depends=('gtk3')
+conflicts=('gtk2')
+
+package() {
+  install -d "$pkgdir"/usr/lib
+  ln -s /usr/lib/libgdk-3.so.0 "$pkgdir"/usr/lib/libgdk-x11-2.0.so.0
+}

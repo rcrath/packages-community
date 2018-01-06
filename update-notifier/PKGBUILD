@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=update-notifier
-pkgver=0.6.5
+pkgver=0.7.2
 pkgrel=1
 pkgdesc="A simple pacman update notifier"
 arch=(any)

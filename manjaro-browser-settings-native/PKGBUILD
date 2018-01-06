@@ -1,0 +1,32 @@
+# Maintainer: Matti Hyttinen <matti@manjaro.org>
+
+pkgname=manjaro-browser-settings-native
+pkgver=20171231
+pkgrel=1
+pkgdesc="Manjaro Linux settings browser defaults with chromium using system settings"
+arch=('any')
+url="https://github.com/Chrysostomus/manjaro-browser-settings"
+license=('GPL')
+_gitcommit=7bb3f34ab34eeace2fa78466e9842cdabdaa716b
+conflicts=('manjaro-firefox-settings'
+			'manjaro-browser-settings')
+replaces=('manjaro-firefox-settings')
+provides=('manjaro-browser-settings')
+source=("manjaro-browser-settings-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz")
+md5sums=('SKIP')
+
+pkgver() {
+  date +%Y%m%d
+}
+
+package() {
+  cd manjaro-browser-settings-$_gitcommit
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,light,palemoon}/distribution}
+  cp chrome/* $pkgdir/usr/lib/chrome
+  cp chrome/* $pkgdir/usr/lib/chromium
+  cp firefox/* $pkgdir/usr/lib/firefox/distribution
+  cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
+  ln -s /usr/lib/firefox/distribution $pkgdir/usr/lib/light/distribution
+  install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
+  cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
+}

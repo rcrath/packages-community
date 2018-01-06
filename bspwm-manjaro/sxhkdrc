@@ -3,11 +3,6 @@
 # Cleanly quit bspwm
 super + shift + q
 	bspc quit 1 && pkill lemonpanel && pkill lemonbar
-	
-# Toggle panels
-super + shift + space
-	{pkill lemonpanel; pkill lemonbar; pkill cat; pkill stalonetray; bspc config top_padding $((-$gap)) ,\
-	bspc config top_padding $(($PANEL_HEIGHT-$gap)); lemonpanel & }
 
 # Show keybindings
 super + F1
@@ -258,6 +253,9 @@ mod1 + @button1
 super + space
 	dmenu_recent -fn 'xos4 Terminus:size=15' -i -l 14 -w 600 -y $PANEL_HEIGHT
 
+super + shift + space
+	rofi -me-select-entry Mouse2 -me-accept-entry Mouse1 -show
+
 super + p
 	dmenu_recent -h $PANEL_HEIGHT -fn 'xos4 Terminus:size=15' -i
 
@@ -270,7 +268,7 @@ super + shift + z
 	open-terminal-here
 	
 super + r
-	finder
+	rofi-finder.sh
 
 super + shift + b
 	$BROWSER

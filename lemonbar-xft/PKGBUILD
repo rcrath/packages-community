@@ -1,24 +1,22 @@
 # Maintainer: Stephen Smith <stephen304@gmail.com>
-
-pkgname=lemonbar-xft-clicky
+pkgname=lemonbar-xft
 _pkgname=bar
-_ver=0
-pkgver=0.r214.a2fad82
+pkgver=268.043ad47
 pkgrel=1
-pkgdesc="A lightweight xcb based bar with ported xft support. Modified to provide more clickable areas."
+pkgdesc="A lightweight xcb based bar with ported xft support."
 arch=('i686' 'x86_64')
-url="https://github.com/Chrysostomus/bar"
+url="https://github.com/krypt-n/bar"
 license=('MIT')
 depends=('libxcb' 'libxft' 'libx11')
 makedepends=('git')
 provides=('bar-aint-recursive' 'lemonbar')
 conflicts=('bar-aint-recursive' 'lemonbar')
-source=("$_pkgname::git+https://github.com/Chrysostomus/bar.git#branch=xft-port")
+source=("$_pkgname::git+https://github.com/krypt-n/bar.git#branch=xft-port")
 sha256sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  printf "$_ver.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  echo $(git rev-list --count xft-port).$(git rev-parse --short xft-port)
 }
 
 build() {
