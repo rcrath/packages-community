@@ -5,14 +5,13 @@
 
 pkgname=hyper
 pkgver=2.1.1
-pkgrel=1
-epoch=
+pkgrel=2
 pkgdesc="A terminal built on web technologies"
 arch=('any')
 url="https://hyper.is/"
 license=('MIT')
 groups=()
-depends=('nodejs' 'electron' 'gconf')
+depends=('nodejs' 'electron' 'gconf' 'gtk2')
 makedepends=('npm' 'yarn' 'python2')
 
 source=(

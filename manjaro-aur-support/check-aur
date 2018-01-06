@@ -9,7 +9,9 @@ autostart=$HOME/.config/autostart/check-aur.desktop
 if [[ ! -d /run/miso/bootmnt/manjaro ]]; then
 
     # Check if wrapper install hook was triggered
-    if [ ! -f /.check-aur ]; then
+    while [ ! -f /.check-aur ]; do
+		sleep 60
+	done
         # Display warning
         sleep 60
         yad --title="WARNING" --window-icon=$manjaro --on-top --center --image=$warning --width=475 --fixed \
@@ -26,7 +28,6 @@ if [[ ! -d /run/miso/bootmnt/manjaro ]]; then
             fi
         fi
 	rm $autostart
-    fi
 fi
 
 

@@ -4,7 +4,7 @@
 pkgname=cmst
 _pkgver=2017.03.18
 pkgver=20170318
-pkgrel=2
+pkgrel=3
 pkgdesc="A QT based GUI front end for the connman connection manager with systemtray icon"
 arch=('i686' 'x86_64')
 url="https://github.com/andrew-bibb/cmst"

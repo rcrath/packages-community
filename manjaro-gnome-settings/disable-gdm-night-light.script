@@ -6,9 +6,11 @@
 
 light_status=$(sudo -u gdm dbus-launch --exit-with-session gsettings get org.gnome.settings-daemon.plugins.color night-light-enabled)
 
-#Check the key anf inform
+_user=$(id -u gdm)
 
-if [ $light_status == true ] ; then
+check_light() {
+#Check the key and inform
+if [ "$light_status" == true ] ; then
 	echo
 	echo "Night-light feature is enabled also in GDM screen, see"
 	echo "here : https://bugzilla.gnome.org/show_bug.cgi?id=785273"
@@ -18,7 +20,9 @@ if [ $light_status == true ] ; then
 	echo "sudo -u gdm dbus-launch --exit-with-session gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false"
 	echo	
 fi
+}
 
-exit 0
-
+if [ "$_user" == 120 ]; then
+	check_light
+fi
 

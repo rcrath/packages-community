@@ -24,9 +24,10 @@ package() {
 	cd $srcdir
 	install -dm755 $pkgdir/usr/share/backgrounds/manjaro-gnome
 	install -dm755 $pkgdir/usr/share/gnome-background-properties
+	
 	cd $_repo
 #Create xml file and clean unused file	
-msg "create xml file"
+msg "Creating xml file"
 echo
 	./backgrounds-xml.sh
 echo

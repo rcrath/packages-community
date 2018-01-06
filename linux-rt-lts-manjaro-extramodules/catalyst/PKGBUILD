@@ -6,7 +6,7 @@ _extramodules=extramodules-4.9-rt-lts-MANJARO
 pkgname=$_linuxprefix-catalyst
 _pkgname=catalyst
 pkgver=15.201.1151
-pkgrel=27
+pkgrel=31
 epoch=1
 _pkgver=15.201.1151
 _tarball=15.9-linux-installer-$_pkgver
@@ -21,22 +21,24 @@ makedepends=("$_linuxprefix-headers" 'gcc49')
 conflicts=('catalyst-legacy' "$_linuxprefix-catalyst-legacy")
 install=catalyst.install
 
-source=(https://www2.ati.com/drivers/linux/amd-catalyst-15.9-linux-installer-15.201.1151-x86.x86_64.zip
-        #https://launchpad.net/ubuntu/+archive/primary/+files/fglrx-installer_${_tarball}.orig.tar.gz
+source=(http://www2.ati.com/drivers/linux/amd-catalyst-15.9-linux-installer-15.201.1151-x86.x86_64.zip
         ati_make.sh
         lano1106_fglrx_intel_iommu.patch
         lano1106_kcl_agp_13_4.patch
         makefile_compat.patch
         kolasa_fglrx_312.patch
-	cold-fglrx-3.14-current_euid.patch
-	manjaro_fglrx_40.patch
+        cold-fglrx-3.14-current_euid.patch
+        manjaro_fglrx_40.patch
         kolasa_fglrx_4.1.patch
         manjaro_fglrx_4.2.patch
         manjaro_fglrx_4.3.patch
         gentoo_fglrx_4.3_mtrr.patch
         manjaro_fglrx_4.5.patch
         linux-4.9-rc2.patch
-	LICENSE.TXT)
+        LICENSE.TXT)
+
+url_ref="http://support.amd.com/en-us/download/desktop?os=Linux+x86"
+DLAGENTS="http::/usr/bin/curl --referer ${url_ref} -o %o %u"
 
 sha256sums=('bf3e6e7d5c51db3d075410a3f116f865b82823debc1d66698d187249feec6a91'
             '8b2adf804c2691d075bb75fbb626be59f3769a2f4f1418554fc3de91a65451ab'
@@ -55,77 +57,78 @@ sha256sums=('bf3e6e7d5c51db3d075410a3f116f865b82823debc1d66698d187249feec6a91'
             '4f7530540f6e1ea032746e94bd164160abdf93c15509bfb8bdbecd23bcea5c47')
 
 prepare() {
-	#cd ${srcdir}/fglrx-$_pkgver
-	/bin/sh ./AMD-Catalyst-15.9-Linux-installer-${_pkgver}-x86.x86_64.run --extract archive_files
-	#/bin/sh ./amd-catalyst-${_pkgver}-linux-x86.x86_64.run --extract archive_files
+    /bin/sh ./AMD-Catalyst-15.9-Linux-installer-${_pkgver}-x86.x86_64.run --extract archive_files
+    mkdir -p fglrx-$_pkgver
+    mv archive_files fglrx-$_pkgver
 
-	# move files
-	#mkdir common
-	#mv etc lib usr common
-	#mkdir -p fglrx-$_pkgver/archive_files
-	#mv arch common xpic xpic_64a LICENSE.TXT fglrx-$_pkgver/archive_files
-	mkdir -p fglrx-$_pkgver
-	mv archive_files fglrx-$_pkgver
-
-	# page_cache_release() -> put_page(); 09cbfeaf1a5a67bfb3201e0c83c810cecb2efa5a
-	# get_user_pages() to not pass tsk/mm; d4edcf0d56958db0aca0196314ca38a5e730ea92
-	sed -i 's|page_cache_release|put_page|g' ${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod/firegl_public.c
-	sed -i 's|get_user_pages(current, current->mm, |get_user_pages(|g'  ${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod/firegl_public.c
+    # page_cache_release() -> put_page(); 09cbfeaf1a5a67bfb3201e0c83c810cecb2efa5a
+    # get_user_pages() to not pass tsk/mm; d4edcf0d56958db0aca0196314ca38a5e730ea92
+    sed -i 's|page_cache_release|put_page|g' "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod/firegl_public.c"
+    sed -i 's|get_user_pages(current, current->mm, |get_user_pages(|g'  "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod/firegl_public.c"
 }
 
 build() {
-	_kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
+    _kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
 
-	## include ati_make.sh and use _ati_check function from it
-	cd "${srcdir}"
-	. ati_make.sh
-	_ati_check
+    ## include ati_make.sh and use _ati_check function from it
+    cd "${srcdir}"
+        . ati_make.sh
+        _ati_check
 
-	cd "${srcdir}/fglrx-$_pkgver/archive_files"
+    if [ "${CARCH}" = "x86_64" ]; then
+        BUILDARCH=x86_64
+        _archdir=x86_64
+    fi
+    if [ "${CARCH}" = "i686" ]; then
+        BUILDARCH=i386
+        _archdir=x86
+    fi
 
-	## makefile patch to choose arch_compat_alloc_user_space or older compat_alloc_user_space
-	## works only in combination with ati_make.sh script
-	patch -Np1 -i ${srcdir}/makefile_compat.patch
-	patch -Np1 -i ${srcdir}/lano1106_fglrx_intel_iommu.patch
-	patch -Np1 -i ${srcdir}/lano1106_kcl_agp_13_4.patch
-        patch -Np1 -i ${srcdir}/cold-fglrx-3.14-current_euid.patch
+    cd "${srcdir}/fglrx-$_pkgver/archive_files"
 
-	cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
-        patch -Np1 -i ${srcdir}/kolasa_fglrx_312.patch
-        patch -Np5 -i ${srcdir}/manjaro_fglrx_40.patch
-        patch -Np1 -i ${srcdir}/kolasa_fglrx_4.1.patch
-        patch -Np1 -i ${srcdir}/manjaro_fglrx_4.2.patch
-        patch -Np1 -i ${srcdir}/manjaro_fglrx_4.3.patch
-        patch -Np6 -i ${srcdir}/gentoo_fglrx_4.3_mtrr.patch
-        patch -Np1 -i ${srcdir}/manjaro_fglrx_4.5.patch
-        patch -Np7 -i ${srcdir}/linux-4.9-rc2.patch
+    ## makefile patch to choose arch_compat_alloc_user_space or older compat_alloc_user_space
+    ## works only in combination with ati_make.sh script
+    patch -Np1 -i "${srcdir}/makefile_compat.patch"
+    patch -Np1 -i "${srcdir}/lano1106_fglrx_intel_iommu.patch"
+    patch -Np1 -i "${srcdir}/lano1106_kcl_agp_13_4.patch"
+    patch -Np1 -i "${srcdir}/cold-fglrx-3.14-current_euid.patch"
 
-	## fix linux44 build
-	sed -i -e s'|XSTATE_FP|XFEATURE_MASK_FP|g' firegl_public.c
+    cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
+        patch -Np1 -i "${srcdir}/kolasa_fglrx_312.patch"
+        patch -Np5 -i "${srcdir}/manjaro_fglrx_40.patch"
+        patch -Np1 -i "${srcdir}/kolasa_fglrx_4.1.patch"
+        patch -Np1 -i "${srcdir}/manjaro_fglrx_4.2.patch"
+        patch -Np1 -i "${srcdir}/manjaro_fglrx_4.3.patch"
+        patch -Np6 -i "${srcdir}/gentoo_fglrx_4.3_mtrr.patch"
+        patch -Np1 -i "${srcdir}/manjaro_fglrx_4.5.patch"
+        patch -Np7 -i "${srcdir}/linux-4.9-rc2.patch"
 
-	cp "${srcdir}/fglrx-$_pkgver/archive_files/arch/x86_64/lib/modules/fglrx/build_mod/libfglrx_ip.a" .
-	cp 2.6.x/Makefile .
+    ## fix linux44 build
+    sed -i -e s'|XSTATE_FP|XFEATURE_MASK_FP|g' firegl_public.c
 
-	## Compile module using _ati_check variables
-	make CC=gcc-4.9 -C /usr/lib/modules/${_kernver}/build SUBDIRS="`pwd`" ARCH=x86_64 \
-	MODFLAGS="-DMODULE -DATI -DFGL -DPAGE_ATTR_FIX=$PAGE_ATTR_FIX -DCOMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE $def_smp $def_modversions" \
-	PAGE_ATTR_FIX=$PAGE_ATTR_FIX COMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE modules
+    cp "${srcdir}/fglrx-$_pkgver/archive_files/arch/${_archdir}/lib/modules/fglrx/build_mod/libfglrx_ip.a" .
+    cp 2.6.x/Makefile .
+
+    ## Compile module using _ati_check variables
+    make CC=gcc-4.9 -C /usr/lib/modules/${_kernver}/build SUBDIRS="`pwd`" ARCH=${BUILDARCH} \
+    MODFLAGS="-DMODULE -DATI -DFGL -DPAGE_ATTR_FIX=$PAGE_ATTR_FIX -DCOMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE $def_smp $def_modversions" \
+    PAGE_ATTR_FIX=$PAGE_ATTR_FIX COMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE modules
 }
 
 
 package() {
-	_kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
+    _kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
 
-	cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
-	install -m755 -d "${pkgdir}/usr/lib/modules/${_extramodules}/"
-	install -m644 fglrx.ko "${pkgdir}/usr/lib/modules/${_extramodules}/"
-	find "${pkgdir}" -name '*.ko' -exec gzip -9 {} \;
+    cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
+        install -m755 -d "${pkgdir}/usr/lib/modules/${_extramodules}/"
+        install -m644 fglrx.ko "${pkgdir}/usr/lib/modules/${_extramodules}/"
+        find "${pkgdir}" -name '*.ko' -exec gzip -9 {} \;
 
-	## License
-	install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
-	install -m644 "${srcdir}/fglrx-$_pkgver/archive_files/LICENSE.TXT" "${pkgdir}/usr/share/licenses/${pkgname}"
+    ## License
+    install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+    install -m644 "${srcdir}/fglrx-$_pkgver/archive_files/LICENSE.TXT" "${pkgdir}/usr/share/licenses/${pkgname}"
 
-	## Install script
-	sed -i -e "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" $startdir/*.install
-	sed -i -e "s/EXTRAMODULES=.*/EXTRAMODULES=${_extramodules}/" $startdir/*.install
+    ## Install script
+    sed -i -e "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" "$startdir"/*.install
+    sed -i -e "s/EXTRAMODULES=.*/EXTRAMODULES=${_extramodules}/" "$startdir"/*.install
 }

@@ -90,7 +90,7 @@ diff -Naur a/plugins/expo/expo.xml.in b/plugins/expo/expo.xml.in
 diff -Naur a/plugins/grid/grid.xml.in b/plugins/grid/grid.xml.in
 --- a/plugins/grid/grid.xml.in	2016-07-01 21:39:57.000000000 +1000
 +++ b/plugins/grid/grid.xml.in	2016-08-03 16:06:15.480336146 +1000
-@@ -566,16 +566,16 @@
+@@ -566,7 +566,7 @@
  		<option name="animation_duration" type="int">
  			<_short>Preview Animation Duration</_short>
  			<_long>Preview animation duration (in ms).</_long>
@@ -98,7 +98,8 @@ diff -Naur a/plugins/grid/grid.xml.in b/plugins/grid/grid.xml.in
 +			<default>250</default>
  			<min>0</min>
  		</option>
- 		<option name="outline_color" type="color">
+ 		<option name="use_desktop_average_color" type="bool">
+@@ -578,9 +578,9 @@
  			<_short>Preview Outline Color</_short>
  			<_long>Color and opacity of the resize indicator preview outline.</_long>
  			<default>
@@ -111,7 +112,7 @@ diff -Naur a/plugins/grid/grid.xml.in b/plugins/grid/grid.xml.in
  			    <alpha>0x9f9f</alpha>
  			</default>
  		</option>
-@@ -583,9 +583,9 @@
+@@ -588,9 +588,9 @@
  			<_short>Preview Fill Color</_short>
  			<_long>Fill color and opacity of the resize indicator preview.</_long>
  			<default>

@@ -2,7 +2,7 @@
 
 _pkgname=jade-menu-data
 pkgname="$_pkgname-git"
-pkgver=r26.2f69bf5
+pkgver=r30.1847dcf
 pkgrel=1
 pkgdesc="freedesktop.org application menu definition files for JADE"
 arch=('any')
@@ -28,4 +28,3 @@ package() {
     cp -r $srcdir/$_pkgname/jade-desktop-directories/* $pkgdir/usr/share/desktop-directories
     
 }
-

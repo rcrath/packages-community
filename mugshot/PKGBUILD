@@ -3,19 +3,22 @@
 
 pkgname=mugshot
 pkgver=0.3.2
-pkgrel=1
+pkgrel=2
 pkgver_min=${pkgver%.*}
 _git=01cc800f467dd3661bf158fb26820d37042fb0a0
 pkgdesc="Program to update personal user details"
 arch=('any')
 url="https://launchpad.net/mugshot"
 license=('GPLv3')
-depends=('python-cairo'
+depends=('accountsservice'
+    'gtk3'
+    'python-cairo'
 	'python-dbus'
 	'python-distutils-extra'
 	'python-gobject'
 	'python-pexpect')
-optdepends=('gstreamer0.10-good-plugins: webcam support')
+makedepends=('python-distutils-extra' 'intltool')
+optdepends=('cheese: webcam support')
 options=(!emptydirs)
 source=("https://launchpad.net/mugshot/$pkgver_min/$pkgver/+download/mugshot-$pkgver.tar.gz"
 	office-phone.patch

@@ -2,7 +2,7 @@
 # AUR-Maintainer: Nate Simon <aurpkg (at natesimon.net)>
 
 pkgname=xed
-pkgver=1.6.0
+pkgver=1.6.3
 pkgrel=1
 pkgdesc="A small and lightweight text editor. X-Apps Project"
 arch=('i686' 'x86_64')
@@ -12,13 +12,14 @@ depends=('desktop-file-utils'
     'enchant'
     'gtksourceview3'
     'libpeas'
-    'libsm')
+    'libsm'
+    'xapps')
 makedepends=('gnome-common'
     'gobject-introspection'
     'iso-codes')
 url="https://github.com/linuxmint/${pkgname}"
 source=("${url}/archive/${pkgver}.tar.gz")
-md5sums=('bbb6584383b92ffc33d4926fde68ea3d')
+md5sums=('b7aa267ecde3de3753c38e0092811e8b')
 
 prepare() {
     cd ${srcdir}/${pkgname}-${pkgver}
@@ -31,7 +32,7 @@ build() {
     ./autogen.sh --with-gtk=3.0 --prefix="/usr" \
          --localstatedir="/var" \
          --libexecdir="/usr/lib/xed"
-    make
+    make CFLAGS='-w -O2'
 }
 
 package(){

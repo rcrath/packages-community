@@ -5,42 +5,45 @@
 # Contributor: Thorsten Töpper <atsutane-tu@freethoughts.de>
 # Contributor: Thayer Williams <thayer@archlinux.org>
 # Contributor: Jeff 'codemac' Mickey <jeff@archlinux.org>
+# Contributor: Jonathon Fernyhough <jonathon at manjaro_dot_org>
 
 pkgname=dmenu-manjaro
 _pkgname=dmenu
 pkgver=4.7
-pkgrel=1
+pkgrel=2
 pkgdesc="customized recency-aware dmenu for manjaro-i3 with xft- and mouse-support"
 arch=('i686' 'x86_64')
 groups=('i3-manjaro')
 license=('MIT')
 depends=('freetype2'
-    'libxft'
-    'libxinerama'
-    'noto-fonts'
-    'sh')
-conflicts=('dmenu' 'dmenu-xft')
-provides=('dmenu' 'dmenu-xft')
+         'libxft'
+         'libxinerama'
+         'noto-fonts'
+         'sh')
+conflicts=("$_pkgname" "$_pkgname-xft")
+provides=("$_pkgname" "$_pkgname-xft")
 install=$pkgname.install
-source=("http://dl.suckless.org/tools/$_pkgname-$pkgver.tar.gz"
-    http://tools.suckless.org/dmenu/patches/dmenu-mousesupport-4.7.diff
-    #dmenu-4.7-line-height.diff
-    #dmenu-4.6-xyw-manjaro.diff
-	dmenu_recency
-	dmenurc)
-md5sums=('57b5c28f7e3de908f5e5c2a65cd72e16'
-         '274972c3f6de489dd00543a6d653b960'
-         'dbae2dd8b406d0635af7a7037ae81e79'
-         '328cae6ab0094d2c7efb5ea4d77e5597')
+source=("https://dl.suckless.org/tools/$_pkgname-$pkgver.tar.gz"
+        'https://tools.suckless.org/dmenu/patches/dmenu-mousesupport-4.7.diff'
+        'dmenu-4.7-line-height-manjaro.diff'
+        'dmenu-4.7-xyw-manjaro.diff'
+        'dmenu_recency'
+        'dmenurc')
+sha256sums=('a75635f8dc2cbc280deecb906ad9b7594c5c31620e4a01ba30dc83984881f7b9'
+            '084aa281c92bf87103121a031617c3ec10ee63ce40f955aefafc5dbded9489e5'
+            '779de570f7a0e81c23e522a68aed21c50830b8f39982a7f4af022324c65e1f67'
+            '49df8bdb19246b66f61c6dfefe3d1e78300d30808cc215ea6c54a9a641c6cdb2'
+            'cfef201547d14bfdb8f192dce369502f015c860e1d84b54fe960f3b9ffbc059c'
+            'c0b773af5a1458036d242b19f2e45ed444e6e86d2cf15bedbfb996e8c2fd05b6')
 
 prepare() {
-	cd $srcdir/$_pkgname-$pkgver
+	cd $_pkgname-$pkgver
 	msg "mouse"
 	patch -p1 < ../dmenu-mousesupport-4.7.diff
-	#msg "line-height"
-	#patch -p1 < ../dmenu-4.6-line-height-manjaro.diff
-	#msg "xyw"
-	#patch -p1 < ../dmenu-4.6-xyw-manjaro.diff
+	msg "line-height"
+	patch -p1 < ../dmenu-4.7-line-height-manjaro.diff
+	msg "xyw"
+	patch -p1 < ../dmenu-4.7-xyw-manjaro.diff
 }
 build() {
 	cd $_pkgname-$pkgver

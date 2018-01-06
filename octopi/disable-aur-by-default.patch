@@ -1,0 +1,24 @@
+diff --git a/ui/optionsdialog.ui b/ui/optionsdialog.ui
+index 64d2f23..690ad71 100644
+--- a/ui/optionsdialog.ui
++++ b/ui/optionsdialog.ui
+@@ -133,9 +133,6 @@
+             <property name="text">
+              <string notr="true">Pacaur</string>
+             </property>
+-            <property name="checked">
+-             <bool>true</bool>
+-            </property>
+            </widget>
+            <widget class="QRadioButton" name="rbYaourt">
+             <property name="geometry">
+@@ -219,6 +216,9 @@
+             <property name="text">
+              <string>Do not use AUR</string>
+             </property>
++            <property name="checked">
++             <bool>true</bool>
++            </property>
+            </widget>
+            <widget class="QCheckBox" name="cbSearchOutdatedAURPackages">
+             <property name="geometry">
