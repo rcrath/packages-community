@@ -2,14 +2,15 @@
 
 pkgname=update-notifier
 pkgver=0.7.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple pacman update notifier"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
 license=('MIT')
 depends=('awk'
-        'mhwd'
-        'dunstify')
+        'dunstify'
+        'fakeroot'
+        'mhwd')
 optdepends=('yaourt: for AUR support'
         'gnome-terminal: for integration with gnome-update-notifications'
         'pamac: for graphical update actions'
