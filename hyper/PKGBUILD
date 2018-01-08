@@ -6,7 +6,7 @@
 pkgname=hyper
 pkgver=2.0.0.canary.8
 pkgrel=1
-epoch=
+epoch=1
 pkgdesc="A terminal built on web technologies"
 arch=('any')
 url="https://hyper.is/"
