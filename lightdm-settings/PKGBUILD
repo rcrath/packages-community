@@ -3,15 +3,22 @@
 
 pkgname=lightdm-settings
 pkgver=1.1.4
-pkgrel=1
+pkgrel=2
 pkgdesc="A configuration tool for the LightDM display manager "
+_add_group=add-autologin-group
 arch=('any')
 url="https://github.com/linuxmint/${pkgname}"
 license=('GPL3')
 depends=('hicolor-icon-theme' 'lightdm-slick-greeter' 'python-setproctitle' 'python-xapp' 'python-gobject' 'polkit')
 makedepends=('desktop-file-utils' 'gettext')
-source=("${pkgname}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
-sha256sums=('264eee65a2a7d07a3f5a3ea2c02cd1988bf2c285751b3a0aebbf6b0f329a201c')
+source=("${pkgname}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
+		"$_add_group.script"
+		"$_add_group.service")
+install=$_add_group.install
+		
+sha256sums=('264eee65a2a7d07a3f5a3ea2c02cd1988bf2c285751b3a0aebbf6b0f329a201c'
+            '16c92e6350edcbb15492a1613f5249048b1ae12f6691d773b2cb2270edde4297'
+            '26d22f36b82764c82d953f1854e75ad5a4cea63d001a70e3ad0aa6cc945204cd')
 
 build() {
   cd $pkgname-$pkgver
@@ -21,4 +28,9 @@ build() {
 package() {
   cd $pkgname-$pkgver
   cp -r usr $pkgdir
+  
+#install systemd service
+	cd /$srcdir
+	install -Dm755 $_add_group.script $pkgdir/usr/bin/$_add_group
+	install -Dm644 $_add_group.service $pkgdir/etc/systemd/system/$_add_group.service
 }
