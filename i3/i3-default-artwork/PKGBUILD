@@ -2,17 +2,17 @@
 
 pkgname=i3-default-artwork
 _repo=artwork-i3
-pkgver=20170225
+pkgver=20180109
 pkgrel=1
 pkgdesc="icons, avatars, moc-theme and default wallpaper for manjaro-i3"
 arch=(any)
 groups=('i3-manjaro')
 license=(GPL3)
 url="https://github.com/oberon2007/$_repo"
-_snapshot=224077362255cb18ee0ff0d0230604919529e645
+_snapshot=9cb02fd0723376ea6bd09d2b42c742e54129e354
 conflicts=('i3-wallpapers')
-source=("$pkgname-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-md5sums=('8e8b6f99fba3bb9e57441f57e0c6b188')
+source=("$_repo-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
+md5sums=('3458a3e4e2cee4074ce1933e9039a50c')
 
 pkgver() {
 date +%Y%m%d
@@ -24,5 +24,5 @@ package() {
 	cp -r icons $pkgdir/usr/share
 	cp -r moc $pkgdir/usr/share
 	cp -r pixmaps $pkgdir/usr/share
-	install -Dm644 backgrounds/maia_i3.jpg $pkgdir/usr/share/backgrounds/i3_default_background.jpg
+	install -Dm644 backgrounds/adapta_i3.jpg $pkgdir/usr/share/backgrounds/i3_default_background.jpg
 }
