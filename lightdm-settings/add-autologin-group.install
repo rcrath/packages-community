@@ -1,0 +1,30 @@
+post_install() {
+  
+  systemctl is-active add-autologin-group >/dev/null || systemctl enable add-autologin-group
+  
+  echo ""
+  msg "We have enabled autologin for all users."
+  msg "Reboot your system the first time, so changes will take affect."
+  echo ""
+}
+
+post_upgrade() {
+  
+  post_install
+}
+
+post_remove() {
+ 
+  ! systemctl is-active add-autologin-group >/dev/null || systemctl disable add-autologin-group
+  
+  grep autologin /etc/group
+	if [ "$?" -eq 0 ]; then
+		groupdel autologin >/dev/null
+	else echo "" 
+		msg"Autologin group already removed"
+  		echo ""
+  echo ""
+  msg "We have disabled autologin for all users and removed autologin group."
+  msg "Reboot your system, so changes will take affect."
+  echo ""
+}
