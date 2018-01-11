@@ -4,8 +4,13 @@ post_install() {
   
   echo ""
   msg "We have enabled autologin for all users."
-  msg "Reboot your system, so changes will take affect."
+  msg "Reboot your system the first time, so changes will take affect."
   echo ""
+}
+
+post_upgrade() {
+  
+  post_install
 }
 
 post_remove() {

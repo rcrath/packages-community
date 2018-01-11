@@ -21,7 +21,7 @@ grep "autologin" /etc/group
 #Check if a new user is created	
 check-new-user() {
 	for i in $_users ; do
-		if groups $i | grep &>/dev/null '\autologin\b'; then
+		if groups $i | grep &>/dev/null '\bautologin\b'; then
 			: #echo "User $i ok"
 		else gpasswd -a $i autologin
 		fi
