@@ -4,7 +4,7 @@ _pkgname=webdad-speech
 pkgname="$_pkgname-git"
 pkgver=r1.d8d2061
 pkgrel=1
-pkgdesc="provides text to speech for dunst notifications"
+pkgdesc="provides text to speech ( TTS ) for dunst notifications"
 arch=('any')
 url="https://github.com/codesardine/webdad-speech"
 license=('GPL')
@@ -13,7 +13,7 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 conflicts=('webdad-speech')
 provides=('webdad-speech')
-depends=('mimic' 'manjaro-webdad-settings')
+depends=('mimic')
 
 pkgver() {
     cd "$_pkgname"

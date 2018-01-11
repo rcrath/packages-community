@@ -2,7 +2,7 @@
 
 _pkgname=manjaro-webdad-settings
 pkgname="$_pkgname-git"
-pkgver=r1.8392459
+pkgver=r2.67b166f
 pkgrel=1
 pkgdesc="Manjaro WebDad Settings"
 arch=('any')
@@ -13,7 +13,7 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 conflicts=('manjaro-webdad-settings')
 provides=('manjaro-webdad-settings')
-depends=('webdad-theming')
+depends=('webdad-theming' 'webdad-workspaces' )
 
 pkgver() {
     cd "$_pkgname"
@@ -26,4 +26,3 @@ package(){
 	install -d $pkgdir/etc
 	cp -r $srcdir/$_pkgname/etc $pkgdir/
 }
-

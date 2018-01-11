@@ -1,19 +1,18 @@
 # Maintainer: Vitor Lopes <vmnlop@gmail.com>
 
-_pkgname=webdad-theming
+_pkgname=webdad-workspaces
 pkgname="$_pkgname-git"
-pkgver=r2.10c7f12
+pkgver=r1.6ff36cd
 pkgrel=1
-pkgdesc="Theming for Manjaro WebDad"
+pkgdesc="WebDad Workspaces functionality and scripts"
 arch=('any')
-url="https://github.com/codesardine/webdad-theming"
+url="https://github.com/codesardine/webdad-workspaces"
 license=('GPL')
 makedepends=('git')
 source=("git+$url.git")
 sha256sums=('SKIP')
-conflicts=('webdad-theming')
-provides=('webdad-theming')
-depends=('adapta-maia-theme')
+conflicts=('webdad-workspaces')
+provides=('webdad-workspaces')
 
 pkgver() {
     cd "$_pkgname"
@@ -23,7 +22,6 @@ pkgver() {
 }
 
 package(){
-	install -d $pkgdir/usr
-	cp -r $srcdir/$_pkgname/usr $pkgdir/
+	install -d $pkgdir/etc
+	cp -r $srcdir/$_pkgname/etc $pkgdir/
 }
-

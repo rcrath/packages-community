@@ -4,7 +4,7 @@ _pkgname=webdad-webapps
 pkgname="$_pkgname-git"
 pkgver=r1.8bd9748
 pkgrel=1
-pkgdesc="WebDad Web Applications"
+pkgdesc="JAK Web Application wrappers for Manjaro Forum/Wiki"
 arch=('any')
 url="https://github.com/codesardine/webdad-webapps"
 license=('GPL')
@@ -25,10 +25,9 @@ pkgver() {
 package(){
 	cd "$_pkgname"
 	cp -r $srcdir/$_pkgname/usr $pkgdir/
-        cp -r $srcdir/$_pkgname/opt $pkgdir/  
+        cp -r $srcdir/$_pkgname/opt $pkgdir/
         chmod 644 $pkgdir/usr/share/applications/Manjaro-Forum.desktop
         chmod 644 $pkgdir/usr/share/applications/Manjaro-Wiki.desktop
         chmod a+x $pkgdir/opt/webapps/manjaro/forum/manjaro-forum
         chmod a+x $pkgdir/opt/webapps/manjaro/wiki/manjaro-wiki
 }
-
