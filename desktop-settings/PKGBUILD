@@ -11,7 +11,7 @@ pkgname=('manjaro-bspwm-settings'
         #'manjaro-netbook-settings'
 		)
 pkgver=20180111
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -154,6 +154,9 @@ package_manjaro-mate-settings() {
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/mate'
+    
+    #hack to set black color on mate-terminal
+    install -Dm755 $srcdir/$pkgbase/community/mate/scripts/set-terminal-color $pkgdir/usr/bin/set-terminal-color
 }
 
 #package_manjaro-netbook-settings() {
