@@ -2,7 +2,7 @@
 
 _pkgname=manjaro-webdad-settings
 pkgname="$_pkgname-git"
-pkgver=r4.e04efa2
+pkgver=r7.5355d91
 pkgrel=1
 pkgdesc="Manjaro WebDad Settings"
 arch=('any')
