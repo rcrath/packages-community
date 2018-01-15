@@ -2,7 +2,7 @@
 
 _pkgname=webdad-speech
 pkgname="$_pkgname-git"
-pkgver=r2.5a18352
+pkgver=r3.b92ccf4
 pkgrel=1
 pkgdesc="provides text to speech ( TTS ) for dunst notifications"
 arch=('any')
