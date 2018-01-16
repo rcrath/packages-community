@@ -6,7 +6,7 @@
 
 _pkgbase=snapd
 pkgname=snapd-git
-pkgver=2.30.r589.ga5273fe2b
+pkgver=2.30.r637.g88bc36c1e
 pkgrel=1
 arch=('i686' 'x86_64')
 url="https://github.com/snapcore/snapd"
@@ -16,8 +16,10 @@ checkdepends=('python' 'squashfs-tools' 'indent' 'shellcheck')
 
 options=('!strip' 'emptydirs')
 install=snapd.install
-source=("git+https://github.com/snapcore/$_pkgbase.git")
-md5sums=('SKIP')
+source=("git+https://github.com/snapcore/$_pkgbase.git"
+        '0002-Use-Arch-mount-dir-on-Manjaro.patch')
+md5sums=('SKIP'
+         'b3ed20944786098c607bc88f2dfca3ea')
 
 pkgdesc="Service and tools for management of snap packages."
 depends=('squashfs-tools' 'libseccomp' 'libsystemd')
