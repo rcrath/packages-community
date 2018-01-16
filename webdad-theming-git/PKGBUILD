@@ -2,7 +2,7 @@
 
 _pkgname=webdad-theming
 pkgname="$_pkgname-git"
-pkgver=r3.8d967a3
+pkgver=r4.0283e7e
 pkgrel=1
 pkgdesc="Theming for Manjaro WebDad"
 arch=('any')
@@ -24,6 +24,8 @@ pkgver() {
 
 package(){
 	install -d $pkgdir/usr
+        install -d $pkgdir/etc
 	cp -r $srcdir/$_pkgname/usr $pkgdir/
+        cp -r $srcdir/$_pkgname/etc $pkgdir/
 }
 
