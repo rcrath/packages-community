@@ -2,7 +2,7 @@
 
 _pkgname=webdad-workspaces
 pkgname="$_pkgname-git"
-pkgver=r1.6ff36cd
+pkgver=r2.8b87366
 pkgrel=1
 pkgdesc="WebDad Workspaces functionality and scripts"
 arch=('any')
