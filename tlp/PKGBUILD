@@ -6,7 +6,7 @@
 pkgbase=tlp
 pkgname=('tlp' 'tlp-rdw')
 pkgver=1.0
-pkgrel=1.5
+pkgrel=1.6
 arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
@@ -40,6 +40,9 @@ prepare() {
   # Disable aggressive USB device autosuspend.
   # This prevents "hidden" issues with USB hardware that is incompatible.
   sed -i '200s/enable/enable aggressive/; 201s/=1/=0/' default
+
+  # Add other drivers to the runtime PM blacklist
+  sed -i '/#RUNTIME_PM_DRIVER_BLACKLIST/c RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon pcieport"' default
 
   ###
   patch -p1 -i ../battery-devices.patch
