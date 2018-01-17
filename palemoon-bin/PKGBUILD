@@ -1,7 +1,7 @@
-# Maintainer: sumt <sumt at sci dot fi>
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=palemoon-bin
-pkgver=27.6.2
+pkgver=27.7.0
 pkgrel=1
 pkgdesc="Open source web browser based on Firefox focusing on efficiency."
 arch=('i686' 'x86_64')
@@ -17,10 +17,10 @@ conflicts=('palemoon')
 replaces=('palemoon-atom-bin')
 options=('!strip')
 source=(palemoon.desktop)
-#source_i686=("http://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-i686.tar.bz2")
 source_x86_64=("http://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-x86_64.tar.bz2")
+# link to latest tarball: http://linux.palemoon.org/download/mainline/
 sha1sums=('e8d4cbcd51326c337a2c901e7aff7b6c54043dec')
-sha1sums_x86_64=('13797995f3abbe24252408d200778be910f5a606')
+sha1sums_x86_64=('8bafb160db0465882f2281301b9ea64d0b9219bf')
 #sha1sums_i686=('bddfa35b66119c2e180d38404c4bfd35d1a23825')
 
 package() {
