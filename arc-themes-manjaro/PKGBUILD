@@ -11,7 +11,7 @@ pkgname=('arc-themes-solid-maia'
 		 'arc-themes-solid-breath')
 _pkgname=arc-theme
 _pkgbase=arc-themes-maia
-pkgver=20171105
+pkgver=20180114
 pkgrel=1
 #_commit=4b75f33ff2cfedb6ba0809cf877deb2d2831e6c3
 #_gnomever=3.22
@@ -19,13 +19,15 @@ arch=('any')
 _url='https://github.com/horst3180/arc-theme' #original theme
 url='https://github.com/NicoHood/arc-theme' #soft fork
 license=('GPL3')
-depends=('gtk-engine-murrine' 'gtk3')
+depends=('sassc' 'gtk3')
 makedepends=('optipng' 'inkscape' 'autoconf' 'automake' 'pkg-config' 'libcanberra')
 #source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/horst3180/${_pkgname}/archive/${pkgver}.tar.gz")
 #source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/horst3180/${_pkgname}/archive/${_commit}.tar.gz")
-source=("${_pkgname}-${pkgver}.tar.gz::$url/archive/$pkgver.tar.gz")
-
-sha256sums=('00caa52631cee17427d193bda832a429ac42e3d042dae503c41f47b6961beb83')
+source=("${pkgname}-${pkgver}.tar.xz::${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.xz"
+        "${pkgname}-${pkgver}.tar.xz.sig::${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.xz.asc")
+sha256sums=('a804222b7088b5f691f778612aeda89f1c0fe4226c4622aeb87770853903773e'
+            'SKIP')
+validpgpkeys=('97312D5EB9D7AE7D0BD4307351DAE9B7C1AE9161')
 
 #ALL arc color
 _blue=5294e2 
@@ -252,7 +254,7 @@ msg "Building maia-theme"
 echo
 
   cd $srcdir/arc-themes-maia-$pkgver
-  ./autogen.sh --prefix=/usr --disable-unity
+  ./autogen.sh --prefix=/usr --disable-unity --disable-plank
 }
 
 build_arc-breath() {
@@ -397,7 +399,7 @@ msg "Building breath-theme"
 echo
 
   cd $srcdir/arc-themes-breath-$pkgver
-  ./autogen.sh --prefix=/usr --disable-unity
+  ./autogen.sh --prefix=/usr --disable-unity --disable-plank
 }
 
 build() {
@@ -409,7 +411,7 @@ package_arc-themes-solid-maia() {
 pkgdesc="A flat theme without transparent elements Manjaro Maia variant"
 #optdepends=('arc-firefox-theme: Firefox theme to complete arc-theme experience')
 cd $srcdir/arc-themes-maia-$pkgver
-  ./configure --prefix=/usr --disable-transparency --disable-unity
+  ./configure --prefix=/usr --disable-transparency --disable-unity --disable-plank
   make DESTDIR="${pkgdir}" install
 
 #Change folder name for solid version 
@@ -431,14 +433,14 @@ pkgdesc="A flat theme with transparent elements Manjaro Maia variant"
 #optdepends=('arc-firefox-theme: Firefox theme to complete arc-theme-maia experience')
 #cd $srcdir  
 cd $srcdir/arc-themes-maia-$pkgver
-  ./configure --prefix=/usr --disable-unity
+  ./configure --prefix=/usr --disable-unity --disable-plank
   make DESTDIR="${pkgdir}" install
 }
 
 package_arc-themes-solid-breath() {
 pkgdesc="A flat theme without transparent elements Manjaro Breath variant"
 cd $srcdir/arc-themes-breath-$pkgver
-  ./configure --prefix=/usr --disable-transparency --disable-unity
+  ./configure --prefix=/usr --disable-transparency --disable-unity --disable-plank
   make DESTDIR="${pkgdir}" install
 
 #Change folder name for solid version
@@ -458,7 +460,7 @@ find . -type f -name '*.*' -exec sed -i \
 package_arc-themes-breath() {
 pkgdesc="A flat theme with transparent elements Manjaro Breath variant" 
 cd $srcdir/arc-themes-breath-$pkgver
-  ./configure --prefix=/usr --disable-unity
+  ./configure --prefix=/usr --disable-unity --disable-plank
   make DESTDIR="${pkgdir}" install
 }
 
