@@ -2,7 +2,7 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-cinnamon-settings
-pkgver=20171222
+pkgver=20180119
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
