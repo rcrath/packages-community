@@ -7,8 +7,8 @@ _linuxprefix=linux-rt-manjaro
 _extramodules=extramodules-4.11-rt-MANJARO
 pkgname=$_linuxprefix-nvidia-340xx
 _pkgname=nvidia
-pkgver=340.104
-pkgrel=4
+pkgver=340.106
+pkgrel=1
 provides=("$_pkgname=$pkgver")
 groups=("$_linuxprefix-extramodules")
 pkgdesc="NVIDIA drivers for linux."
@@ -23,7 +23,7 @@ options=(!strip !ccache)
 source=('kernel-4.11.patch'
     "http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run")
 md5sums=('cf31ff666e3789cde5307b6ad50cb9fd'
-    'efbd37cde63d50f657d55a6f2b321142')
+         '37c84428b64696be2b104edbc9855f57')
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 

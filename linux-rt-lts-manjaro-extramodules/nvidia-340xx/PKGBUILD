@@ -7,8 +7,8 @@ _linuxprefix=linux-rt-lts-manjaro
 _extramodules=extramodules-4.9-rt-lts-MANJARO
 pkgname=$_linuxprefix-nvidia-340xx
 _pkgname=nvidia
-pkgver=340.104
-pkgrel=6
+pkgver=340.106
+pkgrel=1
 provides=("$_pkgname=$pkgver")
 groups=("$_linuxprefix-extramodules")
 pkgdesc="NVIDIA drivers for linux."
@@ -21,7 +21,7 @@ license=('custom')
 install=nvidia.install
 options=(!strip !ccache)
 source=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run")
-md5sums=('efbd37cde63d50f657d55a6f2b321142')
+md5sums=('37c84428b64696be2b104edbc9855f57')
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
