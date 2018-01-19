@@ -3,7 +3,7 @@
 
 pkgbase=nemo-extensions
 pkgname=nemo-preview
-pkgver=3.6.1
+pkgver=3.6.2
 pkgrel=0.1
 pkgdesc="GtkClutter and Javascript-based quick previewer for Nemo"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ depends=(nemo cjs clutter-gst clutter-gtk libmusicbrainz5 gtksourceview3 webkit2
 makedepends=(gnome-common gtk-doc intltool gobject-introspection libgnome-keyring)
 options=('!emptydirs')
 source=("$url/archive/$pkgname-$pkgver.tar.gz")
-md5sums=('81bae51860fb11fa7cd708779558402c')
+md5sums=('20720ea33d9e3fa4d9611ec24da9e232')
 
 build() {
   cd $pkgbase-$pkgname-$pkgver/$pkgname
