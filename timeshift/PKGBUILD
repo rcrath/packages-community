@@ -2,7 +2,7 @@
 
 _pkgbase=timeshift
 pkgname=$_pkgbase
-_ver=17.11
+_ver=18.1
 pkgver=v$_ver
 pkgrel=1
 pkgdesc="A system restore utility for Linux"
@@ -11,11 +11,9 @@ url="https://github.com/teejee2008/$_pkgbase"
 license=('GPL')
 depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee' 'vte3')
 makedepends=('vala' 'diffutils' 'coreutils')
-conflicts=("$_pkgbase")
-
-source=("https://github.com/teejee2008/$_pkgbase/archive/$pkgver.tar.gz")
-sha256sums=('2cdcd3a6c8c0a78240c944423ba49b488144924524d9e7a2e787e29aea5ab38b')
-
+#conflicts=("$_pkgbase")
+source=("$url/archive/$pkgver.tar.gz")
+sha256sums=('abe58c9fa915ab2fea97222328d6470689ac94a9a69fa480e3cadb4dad020195')
 #pkgver() {
 #    cd $_pkgbase
 #    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
