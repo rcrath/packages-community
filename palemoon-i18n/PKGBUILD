@@ -8,6 +8,7 @@ arch=('any')
 url="http://www.palemoon.org/langpacks.shtml"
 license=('MPL' 'GPL')
 depends=("palemoon>=27")
+makedepends=('git' 'zip')
 
 _languages=('ar    "Arabic AR"'
             'bg    "Bulgarian BG"'
