@@ -16,9 +16,11 @@ provides=("palemoon=$pkgver")
 conflicts=('palemoon')
 replaces=('palemoon-atom-bin')
 options=('!strip')
-source=(palemoon.desktop)
-source=("https://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-$CARCH.tar.bz2")
+source=('palemoon.desktop')
+source_x86_64=("https://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-x86_64.tar.bz2")
+source_i686=("https://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-i686.tar.bz2")
 # link to latest tarball: http://linux.palemoon.org/download/mainline/
+sha256sums=('300b57a9c8d9b6d972fab2f025e1432f25a013833f513fd2032ea44b70da999f')
 sha256sums_x86_64=('6ff08f84121ddd4dd77420de36216caf4c26d0725657878fc9b4481e6a0f120e')
 sha256sums_i686=('6185a8588c6befd4951418165cdca1ca9fa04d0b1544862106b908642a4bbfa6')
 
