@@ -1,7 +1,7 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgbase=palemoon-i18n
-pkgver=27.7.1
+pkgver=27.7.0
 pkgrel=1
 pkgdesc="Language pack for Palemoon"
 arch=('any')
@@ -9,64 +9,65 @@ url="http://www.palemoon.org/langpacks.shtml"
 license=('MPL' 'GPL')
 depends=("palemoon>=27")
 
-_languages=('cs    "Czech"'
-  'de    "German"'
-  'en-GB "English (U.K.)"'
-  'es-AR "Spanish (Argentina)"'
-  'es-ES "Spanish (Spain)"'
-  'es-MX "Spanish (Mexico)"'
-  'fr    "French"'
-  'hu    "Hungarian"'
-  'it    "Italian"'
-  'ko    "Korean"'
-  'nl    "Dutch"'
-  'pl    "Polish"'
-  'pt-BR "Portuguese (Brazil)"'
-  'pt-PT "Portuguese (Portugal)"'
-  'ru    "Russian"'
-  'sv-SE "Swedish"'
-  'tr    "Turkish"'
-  'zh-CN "Chinese (Simplified)"')
+_languages=('ar    "Arabic AR"'
+            'bg    "Bulgarian BG"'
+            'zh-CN "Chinese Simplified"'
+            'zh-TW "Chinese Traditional"'
+            'hr    "Croatian HR"'
+            'cs    "Czech CZ"'
+            'da    "Danish DK"'
+            'nl    "Dutch NL"'
+            'en-GB "English GB"'
+            'fi    "Finnish FI"'
+            'fr    "French FR"'
+            'gl    "Galician GL"'
+            'de    "German DE"'
+            'el    "Greek EL"'
+            'hu    "Hungarian HU"'
+			'id    "Indonesian ID"'
+            'is    "Icelandic IS"'
+            'it    "Italian IT"'
+            'ja    "Japanese JP"'
+            'kn    "Kannada IN"'
+            'ko    "Korean KR"'
+            'pl    "Polish PL"'
+            'pt-PT "Portuguese PT"'
+            'pt-BR "Portuguese Brazilian"'
+            'ro    "Romanian RO"'
+            'ru    "Russian RU"'
+            'sr    "Serbian RS"'
+            'sk    "Slovak SK"'
+            'sl    "Slovenian SI"'
+            'tl    "Tagalog TL"'
+            'es-ES "Spanish Spain"'
+            'es-AR "Spanish Argentina"'
+            'es-MX "Spanish Mexico"'
+            'sv-SE "Swedish SE"'
+            'tr    "Turkish TR"'
+            'uk    "Ukrainian UA"'
+            'vi    "Vietnamese VI"')
 
+source=("git+https://github.com/MoonchildProductions/pale-moon-localization.git#commit=69b5613150601959c4e35d0978e2a8c7b5782df4")
+sha256sums=('SKIP')
 pkgname=()
-source=()
-_url="http://relmirror.palemoon.org/langpacks/${pkgver%.*.*}.x"
 
 for _lang in "${_languages[@]}"; do
   _locale=${_lang%% *}
   _pkgname=palemoon-i18n-${_locale,,}
 
-  pkgname+=($_pkgname)
-  source+=("palemoon-i18n-$pkgver-$_locale.xpi::$_url/$_locale.xpi")
+  pkgname+=("$_pkgname")
   eval "package_$_pkgname() {
     _package $_lang
   }"
 done
 
-# Don't extract anything
-noextract=(${source[@]%%::*})
-
 _package() {
   pkgdesc="$2 language pack for Palemoon"
-  install -Dm644 palemoon-i18n-$pkgver-$1.xpi \
+
+  cd "$srcdir"/pale-moon-localization/"$1"
+  zip -9 "$srcdir"/langpack-"$1"@palemoon.org.xpi -r .
+
+  cd "$srcdir"
+  install -Dm644 langpack-"$1"@palemoon.org.xpi \
     "$pkgdir/usr/lib/palemoon/browser/extensions/langpack-$1@palemoon.org.xpi"
 }
-
-md5sums=('dbc2666c87b2662704b98c5b3dc476d4'
-         '37bcf8b9eb19b5cbc82703c8be3215c9'
-         '2b161156619817a0a472f9677877a6c5'
-         '1ab80b8f717c1a3535632213ef5d62e4'
-         '58ab0c4eec8ac31e6d834c6ab4786da1'
-         '6305da70600abf89411fa429fd06cdb1'
-         '411f32d3e31851ba193a412b0c5e68ba'
-         '0b84e7e95079ec546b6be74a6ae0c41a'
-         '51817e453e150b94eec5215b6a0afa4e'
-         'a4c2e26746e2e6c91091b8bfa57e890b'
-         'b69b0a45ac4f005a151c4e7831e83eac'
-         '112dd14955a50d66b86892dcd37236c6'
-         '1a03b914df31baf6812f5c9d234c3406'
-         'b741038c06026575d0cdf3d7b8fcd73e'
-         'd77720e32db93fa1711b9448b92624c5'
-         '345b8ab563c5ef26b06213b5275a5ee1'
-         '7802238b911e7828e8015c303a66b726'
-         '67f12f8f9a32ee4bbc86c9c76e4dc021')
