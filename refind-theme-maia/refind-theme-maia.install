@@ -1,19 +1,34 @@
 post_install() {
 	# get refind location
 	refindconf=$(find /boot -name refind.conf)
-	# copy the theme to the right location
+	if ! [[ -z "$refindconf" ]]; then
+		# copy the theme to the right location
+		refindir=$(find /boot -name refind.conf |sed 's/\/refind.conf//')
+		cp -r /usr/share/refind/refind-theme-maia "$refindir"
+		# enable the theme
+		grep -q "include refind-theme-maia/theme.conf" "$refindconf" || \
+		echo "include refind-theme-maia/theme.conf" >> "$refindconf"
+	else
+		echo -e "Refind is not installed.
+Install is with refind-install and enable the theme by writing
+include refind-theme-maia/theme.conf to refind.conf"
+	fi
+}
+
+post_upgrade() {
+	# Update the theme files
 	refindir=$(find /boot -name refind.conf |sed 's/\/refind.conf//')
+	[[ -e "$refindir/refind-theme-maia" ]] && rm -rf "$refindir/refind-theme-maia"
 	cp -r /usr/share/refind/refind-theme-maia "$refindir"
-	echo "copy /usr/share/refind/refind-theme-maia $refindir"
-	# enable the theme
-	grep -q "include refind-theme-maia/theme.conf" "$refindconf" || \
-	echo "include refind-theme-maia/theme.conf" >> "$refindconf"
 }
 
 post_remove() {
 	# get refind location
 	refindconf=$(find /boot -name refind.conf)
-	# disable the theme
-	grep -q "include refind-theme-maia/theme.conf" "$refindconf" && \
-	sed -i '/include refind-theme-maia/d' "$refindconf"
+	if ! [[ -z "$refindconf" ]]; then
+		# disable the theme
+		grep -q "include refind-theme-maia/theme.conf" "$refindconf" && \
+		sed -i '/include refind-theme-maia/d' "$refindconf"
+	fi
+	
 }

@@ -1,7 +1,7 @@
 # Maintainer: Matti Hyttinen
 
 pkgname='refind-theme-maia'
-pkgver=r28.f748475
+pkgver=r30.2ca0087
 pkgrel=1
 pkgdesc="A simplistic clean and minimal theme for rEFInd"
 arch=('any')
@@ -25,5 +25,7 @@ package() {
   mkdir -p "${refind_home}"
   cp -r "${srcdir}/${_name}" "${refind_home}"
   chmod -R 644 "${refind_home}/${_name}"
+  rm -rf "${refind_home}/${_name}"/src
+  rm -rf "${refind_home}/${_name}"/{LICENSE,.git}
   mv "${refind_home}/${_name}" "${refind_home}/${pkgname}"
 }
