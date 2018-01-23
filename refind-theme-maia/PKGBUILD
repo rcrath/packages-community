@@ -1,0 +1,29 @@
+# Maintainer: Matti Hyttinen
+
+pkgname='refind-theme-maia'
+pkgver=r28.f748475
+pkgrel=1
+pkgdesc="A simplistic clean and minimal theme for rEFInd"
+arch=('any')
+url="https://github.com/Chrysostomus/refind-theme-regular"
+license=('AGPL3' 'custom:OFL' 'custom:Ubuntu Font License 1.0')
+depends=('refind-efi')
+makedepends=('git')
+source=('git+https://github.com/Chrysostomus/refind-theme-regular')
+md5sums=('SKIP')
+install=$pkgname.install
+_name="refind-theme-regular"
+
+pkgver() {
+  cd "${srcdir}/${_name}"
+  printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  local refind_home="${pkgdir}/usr/share/refind/"
+
+  mkdir -p "${refind_home}"
+  cp -r "${srcdir}/${_name}" "${refind_home}"
+  chmod -R 644 "${refind_home}/${_name}"
+  mv "${refind_home}/${_name}" "${refind_home}/${pkgname}"
+}
