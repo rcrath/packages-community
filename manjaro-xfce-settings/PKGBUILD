@@ -3,15 +3,17 @@
 pkgbase=manjaro-xfce-settings
 pkgname=('manjaro-xfce-settings'
          'manjaro-xfce-minimal-settings')
-pkgver=20180103
+pkgver=20180124
 pkgrel=1
 pkgdesc="Manjaro Linux Xfce settings"
 arch=('any')
 url="https://github.com/manjaro/manjaro-xfce-settings"
 license=('GPL')
 makedepends=('git')
-source=("git+$url.git")
-sha256sums=('SKIP')
+source=("git+$url.git" 'manjaro-xfce-settings.hook' 'mxs-bgd-sym')
+sha256sums=('SKIP'
+            '712be2c2c621bdf1420a78188af49420bf31d28638283f29107c5274bed3ddfe'
+            '03770c4735b588bdee49f7e1e5d73d8500524d875603c473bdf0f4ffb862c152')
 
 pkgver() {
 	date +%Y%m%d
@@ -39,6 +41,12 @@ package_manjaro-xfce-settings() {
 	provides=('manjaro-desktop-settings')
 
 	_inst_dir
+	local _subst="
+		s|%BIN%|mxs-bgd-sym|g
+	"
+	sed "${_subst}" "${srcdir}/manjaro-xfce-settings.hook" |
+		install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/manjaro-xfce-settings.hook"
+	install -Dm755 "${srcdir}/mxs-bgd-sym" "${pkgdir}/usr/bin/mxs-bgd-sym"
 }
 
 #############minimal######################
@@ -57,4 +65,10 @@ package_manjaro-xfce-minimal-settings() {
 	provides=('manjaro-desktop-settings')
 
 	_inst_dir '/minimal'
+	local _subst="
+		s|%BIN%|mxms-bgd-sym|g
+	"
+	sed "${_subst}" "${srcdir}/manjaro-xfce-settings.hook" |
+		install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/manjaro-xfce-minimal-settings.hook"
+	install -Dm755 "${srcdir}/mxs-bgd-sym" "${pkgdir}/usr/bin/mxms-bgd-sym"
 }
