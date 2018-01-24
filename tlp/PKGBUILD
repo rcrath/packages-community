@@ -5,15 +5,13 @@
 
 pkgbase=tlp
 pkgname=('tlp' 'tlp-rdw')
-pkgver=1.0
-pkgrel=1.5
+pkgver=1.1
+pkgrel=1.0
 arch=('any')
 url='http://linrunner.de/en/tlp/tlp.html'
 license=('GPL2' 'GPL3')
-source=("tlp-${pkgver}.tar.gz::https://github.com/linrunner/TLP/archive/${pkgver}.tar.gz"
-        "battery-devices.patch")
-sha256sums=('642717b27db3a70c2cdef2673fe3229bf314488aa0797515e63d933b93bc78ec'
-            '9372600f7013f03af155a54057a6e03fe81e58593dd1c19762c6e023d5fc5a1f')
+source=("tlp-${pkgver}.tar.gz::https://github.com/linrunner/TLP/archive/${pkgver}.tar.gz")
+sha256sums=('76e1a091eed1055f7af75f49621be51ed41b1e8f872eeb9506c0749060fd1019')
 
 prepare() {
   cd ${pkgbase^^}-${pkgver}
@@ -31,18 +29,21 @@ prepare() {
 
   # Be conservative with SATA ALPM to prevent poor SSD performance and
   # potential data corruption; makes little difference in normal system usage.
-  sed -i '126s/=min_power/=max_performance/' default
+  sed -i '132s/ min_power/ max_performance/' default
 
   # Use hardware defaults for open-source AMD drivers.
   # This allows demand-based power scaling and vastly reduces heat generation.
-  sed -i '149s/=high/=default/' default
+  sed -i '154s/=high/=default/' default
+
+  # Blacklist devices on pcieport connections from runtime PM
+  # This works around a class of bugs with newer hardware (suspend, tearing)
+  sed -i '/#RUNTIME_PM_DRIVER_BLACKLIST/c RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon pcieport"' default
 
   # Disable aggressive USB device autosuspend.
   # This prevents "hidden" issues with USB hardware that is incompatible.
-  sed -i '200s/enable/enable aggressive/; 201s/=1/=0/' default
+  sed -i '204s/enable/enable aggressive/; 205s/=1/=0/' default
 
   ###
-  patch -p1 -i ../battery-devices.patch
 }
 
 package_tlp() {
