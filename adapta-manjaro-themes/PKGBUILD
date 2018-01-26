@@ -5,13 +5,13 @@
 
 pkgname=('adapta-maia-theme'
          'adapta-breath-theme'
-         'adapta-gtk-theme'
          'adapta-black-maia-theme'
          'adapta-black-breath-theme'
+         #'adapta-gtk-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.93.0.43
+pkgver=3.93.0.72
 pkgrel=1
 arch=(any)
 url="https://github.com/adapta-project/${_pkgname}"
@@ -33,7 +33,7 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('fbc51e5d25af5838a534fcedf13214112b274bd75eeb6d2905560a37d7845251'
+sha256sums=('0e081bbb780633b616ae67c7050224e7593a1f46021b1d62607c2b3f32f81117'
             'SKIP'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
             '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
@@ -67,7 +67,6 @@ build_maia-theme() {
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
-      --disable-unity \
       --enable-parallel #--enable-gtk_next --with-selection_color=#16A085 --with-second_selection_color=#16A085
     make
 }
@@ -88,31 +87,29 @@ build_breath-theme() {
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
-      --disable-unity \
       --enable-parallel #--enable-gtk_next --with-selection_color=#1abc9c --with-second_selection_color=#2fe2bf --with-accent_color=#2fe2bf --with-suggestion_color=#1abc9c
     make
 }
 
-build_adapta-gtk-theme() {
-  cd $_pkgname-$pkgver
+#build_adapta-gtk-theme() {
+#  cd $_pkgname-$pkgver
 
-  ./autogen.sh \
-    --prefix='/usr' \
-    --enable-parallel \
-    --enable-plank \
-    --enable-telegram \
-    --disable-unity
-  make
-}
+#  ./autogen.sh \
+#    --prefix='/usr' \
+#    --enable-parallel \
+#    --enable-plank \
+#    --enable-telegram
+#  make
+#}
 
 _adapta-var() {
+#    ./gtk/asset/assets-clone/bar-blue.svg \
    find ./extra/gedit/adapta.xml \
     ./extra/plank/dock.theme \
     ./extra/telegram/dark/colors.tdesktop-theme \
     ./extra/telegram/light/colors.tdesktop-theme \
     ./gtk/asset/assets-gtk2.svg.in \
     ./gtk/asset/assets-gtk3.svg.in \
-    ./gtk/asset/assets-clone/bar-blue.svg \
     ./gtk/asset/assets-clone/z-depth-1.svg \
     ./gtk/asset/assets-clone/z-depth-2.svg \
     ./gtk/gtk-2.0/colors.rc.in \
@@ -140,13 +137,13 @@ _adapta-var() {
 }
 
 _adapta-black() {
+#    ./gtk/asset/assets-clone/bar-blue.svg \
    find ./extra/gedit/adapta.xml \
     ./extra/plank/dock.theme \
     ./extra/telegram/dark/colors.tdesktop-theme \
     ./extra/telegram/light/colors.tdesktop-theme \
     ./gtk/asset/assets-gtk2.svg.in \
     ./gtk/asset/assets-gtk3.svg.in \
-    ./gtk/asset/assets-clone/bar-blue.svg \
     ./gtk/asset/assets-clone/z-depth-1.svg \
     ./gtk/asset/assets-clone/z-depth-2.svg \
     ./gtk/gtk-2.0/colors.rc.in \
@@ -278,7 +275,6 @@ build_black-maia-theme() {
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
-      --disable-unity \
       --enable-parallel #--enable-gtk_next
     make
 }
@@ -297,7 +293,6 @@ build_black-breath-theme() {
     ./autogen.sh --prefix "${pkgdir}/usr" \
       --enable-plank \
       --enable-telegram \
-      --disable-unity \
       --enable-parallel #--enable-gtk_next
     make
 }
@@ -401,18 +396,18 @@ replaces=('adapta-breath-theme-dev')
     ln -sf /usr/share/themes/Adapta-Breath/xfce-notify-4.0 xfce-notify-4.0
 }
 
-package_adapta-gtk-theme() {
-pkgdesc='An adaptive Gtk+ theme based on Material Design Guidelines'
+#package_adapta-gtk-theme() {
+#pkgdesc='An adaptive Gtk+ theme based on Material Design Guidelines'
 
-    build_adapta-gtk-theme
+#    build_adapta-gtk-theme
     #cd $_pkgname-$pkgver
-    make DESTDIR="${pkgdir}" install
+#    make DESTDIR="${pkgdir}" install
 
-    install -dm 755 "${pkgdir}"/usr/share/plank/themes
-    ln -s /usr/share/themes/Adapta/plank "${pkgdir}"/usr/share/plank/themes/Adapta
+#    install -dm 755 "${pkgdir}"/usr/share/plank/themes
+#    ln -s /usr/share/themes/Adapta/plank "${pkgdir}"/usr/share/plank/themes/Adapta
 
-    install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-gtk-theme/                                                                                                                                                                                                                                                                                                                                                                                                                 
-}
+#    install -Dm 644 LICENSE_CC_BY_SA4 -t "${pkgdir}"/usr/share/licenses/adapta-gtk-theme/                                                                                                                                                                                                                                                                                                                                                                                                                 
+#}
 
 package_adapta-black-maia-theme() {
 pkgdesc="An adaptive Gtk+ theme based on Material Design Guidelines.Build with Manjaro Maia color Black version"
