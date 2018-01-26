@@ -95,11 +95,14 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '76e6628c22b80ea7e6aaea028bd91847eb2e7819e1887ea3a6a5f19dd661e261'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
+validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
+            '4FE5E3262872E4CC')
+
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
-  patch -p1 -i "${srcdir}/patch-${pkgver}"
+  patch -p1 -i "${srcdir}/patch-${_pkgver}"
   chmod +x tools/objtool/sync-check.sh # GNU patch doesn
 
   # Add RT patch
