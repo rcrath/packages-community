@@ -1,18 +1,18 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=artwork-i3
-pkgver=20180109
+pkgver=20180123
 pkgrel=1
 pkgdesc="Wallpapers for manjaro-i3"
 arch=(any)
 groups=('i3-manjaro')
 license=(GPL3)
 url="https://github.com/oberon2007/$pkgname"
-_snapshot=9cb02fd0723376ea6bd09d2b42c742e54129e354
+_snapshot=ceb8de1f9df2d7326a20b9fa08bdba16ac72e122
 depends=('i3-default-artwork')
 conflicts=('i3-wallpapers')
 source=("$pkgname-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-md5sums=('3458a3e4e2cee4074ce1933e9039a50c')
+md5sums=('6189bd167270ac4e09403a384e93aadb')
 
 pkgver() {
 date +%Y%m%d
