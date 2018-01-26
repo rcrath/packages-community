@@ -66,9 +66,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '54a6359ed333e619db8c5c88020ff20f1e25635337f01f50a7488ec2fc0fe030'
-            'e867588bf8015bd716105aded05652b2889af7086ca6e45e85997015be980784'
-            'cb9b8b9c774aeca030f7fe956af999a20358b0bfeb9cb8c55fe94f9620c944a1'
-            'ca4712f892ec934e660a0423bd5198f5a02fcb81557f608df8318247cc2f28ba'
+            '37a7e578eeda553c2a0ce0a6454b857962783fad96723e920f6ae314ae22775d'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
