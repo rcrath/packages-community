@@ -195,13 +195,13 @@ package_linux414-rt() {
 
   mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
   make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
-  cp arch/x86/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}${_kernelname}-x86_64"
+  cp arch/x86/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}-rt-x86_64"
 
   # add kernel version
   echo "${_pkgver}-${pkgrel}-${_rtpatchver}-MANJARO x64" > "${pkgdir}/boot/linux-${_basever}-x86_64.kver"
 
   # make room for external modules
-  local _extramodules="extramodules-${_basekernel}${_kernelname:--MANJARO}-MANJARO"
+  local _extramodules="extramodules-${_basekernel}-rt${_kernelname:--MANJARO}"
   ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
 
   # add real version for building modules and running depmod from hook
