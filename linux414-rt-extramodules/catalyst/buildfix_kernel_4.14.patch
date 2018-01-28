@@ -1,0 +1,10 @@
+--- a/kcl_ioctl.c	2017-09-07 20:09:05.133294444 +0100
++++ b/kcl_ioctl.c	2017-09-07 20:17:39.721360505 +0100
+@@ -32,6 +32,7 @@
+ 
+ #include <linux/cache.h>
+ #include <linux/version.h>
++#include <linux/syscalls.h>
+ #include <asm/uaccess.h>
+ 
+ #ifdef __x86_64__

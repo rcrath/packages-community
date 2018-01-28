@@ -1,0 +1,20 @@
+EXTRAMODULES='extramodules-4.14-rt-MANJARO'
+VERSION='linux414-rt'
+
+run_depmode() {
+    depmod $(cat /usr/lib/modules/$EXTRAMODULES/version)
+}
+
+post_install() {
+    run_depmode
+    echo "nvidiabl" > /etc/modules-load.d/$VERSION-nvidiabl.conf
+}
+
+post_upgrade() {
+    post_install
+}
+
+post_remove() {
+    run_depmode
+    rm /etc/modules-load.d/$VERSION-nvidiabl.conf
+}

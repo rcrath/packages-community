@@ -1,360 +1,109 @@
-# Based on the file created for Arch Linux by:
-# Tobias Powalowski <tpowa@archlinux.org>
-# Thomas Baechler <thomas@archlinux.org>
-
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 # Maintainer: Philip Müller <philm@manjaro.org>
-# Contributer: Budiman JoJo <budimanjojo@gmail.com>
 
-pkgbase=linux-rt-lts
-pkgname=('linux-rt-lts-manjaro' 'linux-rt-lts-manjaro-headers')
-_kernelname=-MANJARO
-_basekernel=4.9
-_basever=49-rt-lts
-#_aufs=20170327
-_bfq=v8r12
-_sub=76
-_pkgver=${_basekernel}.${_sub}
-_rtpatchver=rt61
-pkgver=${_pkgver}_${_rtpatchver}
+pkgbase=linux-rt-lts-manjaro
+pkgver=4.14
+pkgname=(
+    $pkgbase
+    $pkgbase-headers
+    $pkgbase-acpi_call
+    $pkgbase-bbswitch
+    $pkgbase-broadcom-wl
+    $pkgbase-catalyst
+    $pkgbase-nvidia
+    $pkgbase-nvidia-304xx
+    $pkgbase-nvidia-340xx
+    $pkgbase-nvidiabl
+    $pkgbase-r8168
+    $pkgbase-rt3562sta
+    $pkgbase-tp_smapi
+    $pkgbase-vhba-module
+    $pkgbase-virtualbox-guest-modules
+    $pkgbase-virtualbox-host-modules
+)
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils')
-options=('!strip')
-source=("$url/pub/linux/kernel/projects/rt/4.9/patches-4.9.61-rt61.tar.gz"
-"$url/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
-        # upstream patch
-        "http://www.kernel.org/pub/linux/kernel/v4.x/patch-${_pkgver}.xz"
-        # the main kernel config files
-        'config.x86_64'
-        'config.rt'
-        'config.no_hz'
-        # standard config files for mkinitcpio ramdisk
-        "${pkgname}.preset"
-        "${pkgname}.hook"
-        "0001-BFQ-${_bfq}-v${_pkgver}.patch::https://github.com/linusw/linux-bfq/compare/69973b8...67c883e.patch"
-        # ARCH Patches
-        'change-default-console-loglevel.patch'
-        # Manjaro Patches
-        '0001-HID-microsoft-Add-Surface-4-type-cover-pro-4-not-JP-versions.patch::https://github.com/torvalds/linux/commit/2ae3986b84e9d325bc92a1efbcf0c6b0f5016b35.patch'
-        '0002-HID-multitouch-enable-the-Surface-4-Type-Cover-Pro-JP-to-report-multitouch-data.patch::https://github.com/torvalds/linux/commit/4fed0231994b27b3896bc63885ac66d02fff625b.patch'
-        '0003-HID-multitouch-enable-Surface-4-Type-Cover-Pro-non-JP-to-report-multitouch-data.patch::https://github.com/torvalds/linux/commit/66e5c5ffc7a5e4d36d136ce4fd8bdb4e92ecec7b.patch'
-        '0004-HID-multitouch-enable-Surface-3-Type-Cover-Pro-to-report-multitouch-data.patch::https://github.com/torvalds/linux/commit/0a76ac80e84d0be0aba24ab60ac3bc14bc49bbc9.patch'
-        # Zen temperature
-        '0001-zen-temp.patch::https://github.com/torvalds/linux/commit/0c36d72e57dfdc7bb7a3c39411a675d85f8e672c.patch'
-        '0002-zen-temp.patch::https://lkml.org/lkml/diff/2017/9/6/682/1'
-        '0003-zen-temp.patch::https://lkml.org/lkml/diff/2017/9/6/683/1'
-        '0004-zen-temp.patch::https://lkml.org/lkml/diff/2017/9/6/684/1'
-        # RT Patch
-        "https://www.kernel.org/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.xz"
-        "https://www.kernel.org/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.sign"
-        'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
-sha256sums=('74444535e8eba1c0dce2dca362d1c2b34a1ecda32c6c65814f3b0f91e7e98365'
-            '029098dcffab74875e086ae970e3828456838da6e0ba22ce3f64ef764f3d7f1a'
-            '9bc56c158c42d682fc631c2ed98da54bac26c7f0796d75999e48dd4a09b7ad64'
-            '34ff7ba87b59f9b7ba932333f9a45104ed0e0c8baea4a8e17aa29b75f1034c64'
-            '99750417273c71b9b03b16c4bef4ba8f68cf18c50994a4fcc21f2d380c66eb6c'
-            'ca4712f892ec934e660a0423bd5198f5a02fcb81557f608df8318247cc2f28ba'
-            '6e9abeac955d9136d7aceb64a813f9c7aa3720fb4d76d5656b6ca9c284029360'
-            'b83cf8b611d18a0f59a3081da7077d5040936a46040e522557c29aec9337a6ad'
-            '1ff51208068a4ff836bb8cf90ede45f8d4e07ffb2e069cddae98a3f19a52807e'
-            '44e7e15c95af9676f715569e72688fd64304a70d2854b0f804c156d4961c72c0'
-            'c317b35c5661b96445b05ea7a1a7564c10650f94fb273a2cbf6d21eaa41e7a06'
-            '3aaca014f7e4768965dfe5e9740f2007d49f2319db6b6cf566ac7b8b869a6506'
-            'dc464866c4b773644b729803ec3e99c0cdd9781727db35337ac6b06ccd3f458b'
-            '555b6a27b3a34a81e422f0ac935ee72ae8bfd798799aea443f8036518bdaea00'
-            '4d55d497f1c3ebc7afa82909c3fc63a37855d1753b4cd7dfdbaac21d91fe6968'
-            'a1b1c30d53d0a7ffe2b84331f634388807489b807b20cc24041e2591f7da2ec1'
-            'df9ff4580281ce431b42490a69f51d0a839471983930044bebe268aaee70c5ad'
-            '009da98553e3c9b5d452b7850aac25b9e81fa39de9f2aa33744c012c1a912006'
-            '836e2d9f9507957eae69e74f383497370c446386e9c5a31e54fd8d50c2828d3a'
-            'SKIP'
-            '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
-validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
-            '4FE5E3262872E4CC'
-            '5ED9A48FC54C0A22D1D0804CEBC26CDB5A56DE73'
-            '2B82682463E46862339A88A90A120DD923EEDD5F' # Julia Cartwright
-)
-
-_kernelname=${pkgbase#linux}
-
-prepare() {
-  cd "${srcdir}/linux-${_basekernel}"
-
-  # add upstream patch
-  msg "applying patch-${_pkgver}"
-  patch -p1 -i "${srcdir}/patch-${_pkgver}"
-
-  # Add RT patch
-  msg "applying patch-${_pkgver}-${_rtpatchver}.patch"
-  patch -p1 -i "${srcdir}/patch-${_pkgver}-${_rtpatchver}.patch"
-
-  # add latest fixes from stable queue, if needed
-  # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
-  # enable only if you have "gen-stable-queue-patch.sh" executed before
-  #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
-
-  # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
-  # remove this when a Kconfig knob is made available by upstream
-  # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  msg "change-default-console-loglevel.patch"
-  patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
-  # Add support for temperature sensors on Family 17h (Ryzen) processors.
-  patch -Np1 -i "${srcdir}/0001-zen-temp.patch"
-  patch -Np1 -i "${srcdir}/0002-zen-temp.patch"
-  patch -Np1 -i "${srcdir}/0003-zen-temp.patch"
-  patch -Np1 -i "${srcdir}/0004-zen-temp.patch"
-  # extend Microsoft Surface support
-  patch -p1 -i "${srcdir}/0001-HID-microsoft-Add-Surface-4-type-cover-pro-4-not-JP-versions.patch"
-  patch -p1 -i "${srcdir}/0002-HID-multitouch-enable-the-Surface-4-Type-Cover-Pro-JP-to-report-multitouch-data.patch"
-  patch -p1 -i "${srcdir}/0003-HID-multitouch-enable-Surface-4-Type-Cover-Pro-non-JP-to-report-multitouch-data.patch"
-  patch -p1 -i "${srcdir}/0004-HID-multitouch-enable-Surface-3-Type-Cover-Pro-to-report-multitouch-data.patch"
-
-  # A patch to fix a problem that ought to be fixed in the NVIDIA source code.
-  # Stops X from hanging on certain NVIDIA cards
-  msg "fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch"
-  patch -p1 -i "${srcdir}/fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch"
-  
-  # add BFQ scheduler
-  # fix patch
-  sed -i "s|SUBLEVEL = 0|SUBLEVEL = ${_sub}|" $srcdir/0001-BFQ-${_bfq}-v${_pkgver}.patch
-  msg "BFQ scheduler patch"
-  patch -Np1 -i "$srcdir/0001-BFQ-${_bfq}-v${_pkgver}.patch"
-
-  msg "All patches have successfully been applied"
-  
-  cat "${srcdir}/config.x86_64" > ./.config
-  cat "${srcdir}/config.rt" >> ./.config
-
-  # Set processor interupt frequency to 1000Hz
-  sed -i "s|CONFIG_HZ_300=y|# CONFIG_HZ_300 is not set|g" ./.config
-  sed -i "s|# CONFIG_HZ_1000 is not set|CONFIG_HZ_1000=y|g" ./.config
-  sed -i "s|CONFIG_HZ=300|CONFIG_HZ=1000|g" ./.config
-
-  # Add support for latencytop to test latency
-  sed -i "s|# CONFIG_LATENCYTOP is not set|CONFIG_LATENCYTOP=y|g" ./.config
-
-  # Match linux-rt config
-  sed -i "/CONFIG_UNINLINE_SPIN_UNLOCK=y/d" ./.config
-  sed -i "/CONFIG_MUTEX_SPIN_ON_OWNER=y/d" ./.config
-  sed -i "/CONFIG_RWSEM_SPIN_ON_OWNER=y/d" ./.config
-  sed -i "/CONFIG_LOCK_SPIN_ON_OWNER=y/d" ./.config
-  
-  # Reducing Scheduling-Clock Ticks, configure NO_HZ
-  sed -i "s|CONFIG_NO_HZ_IDLE=y|# CONFIG_NO_HZ_IDLE is not set|g" ./.config
-  sed -i "s|# CONFIG_NO_HZ_FULL is not set|CONFIG_NO_HZ_FULL=y|g" ./.config
-  sed -i "/CONFIG_TICK_CPU_ACCOUNTING=y/d" ./.config
-  sed -i "s|# CONFIG_VIRT_CPU_ACCOUNTING_GEN is not set|CONFIG_VIRT_CPU_ACCOUNTING_GEN=y|g" ./.config
-  sed -i "s|# CONFIG_IRQ_TIME_ACCOUNTING is not set|CONFIG_VIRT_CPU_ACCOUNTING=y|g" ./.config
-
-  cat "${srcdir}/config.no_hz" >> ./.config
-  
-  # set extraversion to pkgrel
-  sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
-
-  # don't run depmod on 'make install'. We'll do this ourselves in packaging
-  sed -i '2iexit 0' scripts/depmod.sh
-
-  # normally not needed
-  make clean
-
-  # get kernel version
-  make prepare
-
-  # load configuration
-  # Configure the kernel. Replace the line below with one of your choice.
-  #make menuconfig # CLI menu for configuration
-  #make nconfig # new CLI menu for configuration
-  #make xconfig # X-based configuration
-  #make oldconfig # using old config from previous kernel version
-  # ... or manually edit .config
-
-  # rewrite configuration
-  yes "" | make config >/dev/null
-}
-
-build() {
-  cd "${srcdir}/linux-${_basekernel}"
-
-  # build!
-  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
-}
+groups=("$pkgbase-extramodules")
+_depver=linux${pkgver//.}-rt
 
 package_linux-rt-lts-manjaro() {
-  pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
-  depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
-  optdepends=('crda: to set the correct wireless channels of your country')
-  provides=("linux=${pkgver}")
-  install=${pkgname}.install
-
-  cd "${srcdir}/linux-${_basekernel}"
-
-  KARCH=x86
-
-  # get kernel version
-  _kernver="$(make LOCALVERSION= kernelrelease)"
-
-  mkdir -p "${pkgdir}"/{lib/modules,lib/firmware,boot}
-  make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}" modules_install
-  cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}${_kernelname}-${CARCH}"
-
-  # add kernel version
-  echo "${_pkgver}-${pkgrel}-${_rtpatchver}-MANJARO x64" > "${pkgdir}/boot/linux-${_basever}-${CARCH}.kver"
-
-  # set correct depmod command for install
-  sed -e "s|%BASEKERNEL%|${_basekernel}|g;s|%KERNELNAME%|${_kernelname}|g;s|%KERNVER%|${_kernver}|g;s|%ARCH%|${CARCH}|g" \
-  "${startdir}/${install}" > "${startdir}/${install}.pkg"
-  true && install=${install}.pkg
-
-
-  # install mkinitcpio preset file for kernel
-  sed "s|%PKGNAME%|${pkgname}|g;s|%BASEKERNEL%|${_basekernel}|g;s|%KERNELNAME%|${_kernelname}|g;s|%ARCH%|${CARCH}|g" "${srcdir}/${pkgname}.preset" |
-  install -D -m644 /dev/stdin "${pkgdir}/etc/mkinitcpio.d/${pkgname}.preset"
-
-  # install pacman hook for initramfs regeneration
-  sed "s|%PKGNAME%|${pkgname}|g;s|%BASEKERNEL%|${_basekernel}|g;s|%KERNELNAME%|${_kernelname}|g;s|%ARCH%|${CARCH}|g" "${srcdir}/${pkgname}.hook" |
-  install -D -m644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgname}.hook"
-
-  # remove build and source links
-  rm -f "${pkgdir}"/lib/modules/${_kernver}/{source,build}
-  # remove the firmware
-  rm -rf "${pkgdir}/lib/firmware"
-  # gzip -9 all modules to save 100MB of space
-  find "${pkgdir}" -name '*.ko' -exec gzip -9 {} \;
-  # make room for external modules
-  ln -s "../extramodules-${_basekernel}${_kernelname:--MANJARO}-MANJARO" "${pkgdir}/lib/modules/${_kernver}/extramodules"
-  # add real version for building modules and running depmod from post_install/upgrade
-  mkdir -p "${pkgdir}/lib/modules/extramodules-${_basekernel}${_kernelname:--MANJARO}-MANJARO"
-  echo "${_kernver}" > "${pkgdir}/lib/modules/extramodules-${_basekernel}${_kernelname:--MANJARO}-MANJARO/version"
-
-  # Now we call depmod...
-  depmod -b "${pkgdir}" -F System.map "${_kernver}"
-
-  # move module tree /lib -> /usr/lib
-  mkdir -p "${pkgdir}/usr"
-  mv "${pkgdir}/lib" "${pkgdir}/usr/"
-
-  # add vmlinux
-  install -D -m644 vmlinux "${pkgdir}/usr/lib/modules/${_kernver}/build/vmlinux" 
+    pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
+    depends=("$_depver")
 }
 
 package_linux-rt-lts-manjaro-headers() {
-  pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
-  provides=("linux-headers=${pkgver}")
+    pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
+    depends=("$_depver-headers")
+}
 
-  install -dm755 "${pkgdir}/usr/lib/modules/${_kernver}"
+package_linux-rt-lts-manjaro-acpi_call() {
+    pkgdesc='A linux kernel module that enables calls to ACPI methods through /proc/acpi/call'
+    depends=("$_depver-acpi_call")
+}
 
-  cd "${srcdir}/linux-${_basekernel}"
-  install -D -m644 Makefile \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/Makefile"
-  install -D -m644 kernel/Makefile \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/kernel/Makefile"
-  install -D -m644 .config \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/.config"
+package_linux-rt-lts-manjaro-bbswitch() {
+    pkgdesc='Kernel module allowing to switch dedicated graphics card on Optimus laptops'
+    depends=("$_depver-bbswitch")
+}
 
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include"
+package_linux-rt-lts-manjaro-broadcom-wl() {
+    pkgdesc='Broadcom 802.11 Linux STA wireless driver BCM43142.'
+    depends=("$_depver-broadcom-wl")
+}
 
-  for i in acpi asm-generic config crypto drm generated keys linux math-emu \
-    media net pcmcia scsi sound trace uapi video xen; do
-    cp -a include/${i} "${pkgdir}/usr/lib/modules/${_kernver}/build/include/"
-  done
+package_linux-rt-lts-manjaro-catalyst() {
+    pkgdesc='AMD/ATI Catalyst drivers for linux. fglrx kernel module only.'
+    depends=("$_depver-catalyst")
+}
 
-  # copy arch includes for external modules
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/x86"
-  cp -a arch/x86/include "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/x86/"
+package_linux-rt-lts-manjaro-nvidia() {
+    pkgdesc='NVIDIA drivers for linux.'
+    depends=("$_depver-nvidia")
+}
 
-  # copy files necessary for later builds, like nvidia and vmware
-  cp Module.symvers "${pkgdir}/usr/lib/modules/${_kernver}/build"
-  cp -a scripts "${pkgdir}/usr/lib/modules/${_kernver}/build"
+package_linux-rt-lts-manjaro-nvidia-304xx() {
+    pkgdesc='NVIDIA drivers for linux.'
+    depends=("$_depver-nvidia-304xx")
+}
 
-  # fix permissions on scripts dir
-  chmod og-w -R "${pkgdir}/usr/lib/modules/${_kernver}/build/scripts"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/.tmp_versions"
+package_linux-rt-lts-manjaro-nvidia-340xx() {
+    pkgdesc='NVIDIA drivers for linux.'
+    depends=("$_depver-nvidia-340xx")
+}
 
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel"
+package_linux-rt-lts-manjaro-nvidiabl() {
+    pkgdesc='Driver to adjust display backlight on modern mobile NVidia graphics adapters.'
+    depends=("$_depver-nvidiabl")
+}
 
-  cp arch/${KARCH}/Makefile "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/"
+package_linux-rt-lts-manjaro-r8168() {
+    pkgdesc='A kernel module for Realtek 8168 network cards'
+    depends=("$_depver-r8168")
+}
 
-  cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel/"
+package_linux-rt-lts-manjaro-rt3562sta() {
+    pkgdesc='Ralink RT3562 PCI WLAN adaptors kernel module'
+    depends=("$_depver-rt3562sta")
+}
 
-  # add docbook makefile
-  install -D -m644 Documentation/DocBook/Makefile \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
+package_linux-rt-lts-manjaro-tp_smapi() {
+    pkgdesc="Modules for ThinkPad's SMAPI functionality"
+    depends=("$_depver-tp_smapi")
+}
 
-  # add dm headers
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/md"
-  cp drivers/md/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/md"
+package_linux-rt-lts-manjaro-vhba-module() {
+    pkgdesc='Kernel module that emulates SCSI devices'
+    depends=("$_depver-vhba-module")
+}
 
-  # add inotify.h
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/linux"
-  cp include/linux/inotify.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/linux/"
+package_linux-rt-lts-manjaro-virtualbox-guest-modules() {
+    pkgdesc='Guest kernel modules for VirtualBox'
+    depends=("$_depver-virtualbox-guest-modules")
+}
 
-  # add wireless headers
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/net/mac80211/"
-  cp net/mac80211/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/net/mac80211/"
-
-  # add dvb headers for external modules
-  # in reference to:
-  # http://bugs.archlinux.org/task/9912
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core"
-  cp drivers/media/dvb-core/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core/"
-  # and...
-  # http://bugs.archlinux.org/task/11194
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
-  cp include/config/dvb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
-
-  # add dvb headers for http://mcentral.de/hg/~mrec/em28xx-new
-  # in reference to:
-  # http://bugs.archlinux.org/task/13146
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  cp drivers/media/dvb-frontends/lgdt330x.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
-  cp drivers/media/i2c/msp3400-driver.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
-
-  # add dvb headers
-  # in reference to:
-  # http://bugs.archlinux.org/task/20402
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb"
-  cp drivers/media/usb/dvb-usb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends"
-  cp drivers/media/dvb-frontends/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners"
-  cp drivers/media/tuners/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners/"
-
-  # copy in Kconfig files
-  for i in $(find . -name "Kconfig*"); do
-    mkdir -p "${pkgdir}"/usr/lib/modules/${_kernver}/build/`echo ${i} | sed 's|/Kconfig.*||'`
-    cp ${i} "${pkgdir}/usr/lib/modules/${_kernver}/build/${i}"
-  done
-
-  # add objtool for external module building and enabled VALIDATION_STACK option
-  if [ -f tools/objtool/objtool ]; then
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/tools/objtool"
-    cp -a tools/objtool/objtool ${pkgdir}/usr/lib/modules/${_kernver}/build/tools/objtool/
-  fi
-
-  chown -R root.root "${pkgdir}/usr/lib/modules/${_kernver}/build"
-  find "${pkgdir}/usr/lib/modules/${_kernver}/build" -type d -exec chmod 755 {} \;
-
-  # strip scripts directory
-  find "${pkgdir}/usr/lib/modules/${_kernver}/build/scripts" -type f -perm -u+w 2>/dev/null | while read binary ; do
-    case "$(file -bi "${binary}")" in
-      *application/x-sharedlib*) # Libraries (.so)
-        /usr/bin/strip ${STRIP_SHARED} "${binary}";;
-      *application/x-archive*) # Libraries (.a)
-        /usr/bin/strip ${STRIP_STATIC} "${binary}";;
-      *application/x-executable*) # Binaries
-        /usr/bin/strip ${STRIP_BINARIES} "${binary}";;
-    esac
-  done
-
-  # remove unneeded architectures
-  rm -rf "${pkgdir}"/usr/lib/modules/${_kernver}/build/arch/{alpha,arc,arm,arm26,arm64,avr32,blackfin,c6x,cris,frv,h8300,hexagon,ia64,m32r,m68k,m68knommu,metag,mips,microblaze,mn10300,openrisc,parisc,powerpc,ppc,s390,score,sh,sh64,sparc,sparc64,tile,unicore32,um,v850,xtensa}
-
-  # remove a files already in linux-docs package
-  rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/kbuild/Kconfig.recursion-issue-01"
-  rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/kbuild/Kconfig.recursion-issue-02"
-  rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/kbuild/Kconfig.select-break"
+package_linux-rt-lts-manjaro-virtualbox-host-modules() {
+    pkgdesc='Host kernel modules for VirtualBox'
+    depends=("$_depver-virtualbox-host-modules")
 }
