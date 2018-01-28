@@ -7,15 +7,15 @@
 
 pkgbase=linux414-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
-_kernelname=-MANJARO
 _basekernel=4.14
-_basever=414-rt
+_sub=15
+_rtpatchver=rt12
 _bfq=v8r12
 _bfqdate=20171108
 _bfqdate2=20171228
-_sub=15
+_basever=${pkgbase//linux}
+_kernelname=-MANJARO
 _pkgver=${_basekernel}.${_sub}
-_rtpatchver=rt12
 pkgver=${_pkgver}_${_rtpatchver}
 pkgrel=1
 arch=('x86_64')
