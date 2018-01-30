@@ -8,7 +8,9 @@ except Exception as err:
 
 from gi.repository import Gtk, WebKit2
 
-URL = "_URL_"
+WEB_APP = "_URL_"
+
+allowedDomains = (WEB_APP, "https://www.onenote.com", "https://outlook.live.com", "https://office.live.com", "https://www.office.com")
 
 class applicationWindow(AppWindow):
     """
@@ -25,40 +27,26 @@ class applicationWindow(AppWindow):
             :param webview:
             :param decision:
             :param decision_type:
-            :return: if is not a predicted action do nothing.
+            :return: if is not a predicted url open in browser.
             """
 
-            def checkLink(url):
+            def check_Link(url):
                 print("checking URL - " + url)
-                allowedDomains = ("https://www.onenote.com", "https://outlook.live.com", "https://office.live.com/", URL)
-                
-                for domain in allowedDomains:
-                  if url.startswith(domain):
-                      print("Domain Allowed - loading")
+
+                if url.startswith(allowedDomains):
+                      print("Domain Allowed - loading - " + url)
                       self.webview.load_uri(url)
-                      
-                  else:
-                    print("Domain Not Allowed - " + url)
+
+                else:
+                    print("Not Allowed - Open In Browser - " + url)
+                    GLib.spawn_command_line_async("xdg-open " + url)
 
             if decision_type == WebKit2.PolicyDecisionType.NEW_WINDOW_ACTION:
-                print("New Browser Tab Request")
                 url = decision.get_navigation_action().get_request().get_uri()
-                checkLink(url)
+                check_Link(url)
 
-            
-            return False
 
-        def on_title_changed(webview, title):
-
-            """
-            :param webview:
-            :param title:
-            """
-            title = self.webview.get_title()
-            Gtk.Window.set_title(self, title)
-                    
-        self.webview.load_uri(URL)
-        self.webview.connect("notify::title", on_title_changed)
+        self.webview.load_uri(WEB_APP)
         self.webview.connect("decide-policy", on_decide_policy)
 
 
