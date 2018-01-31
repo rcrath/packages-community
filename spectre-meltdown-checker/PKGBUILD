@@ -3,13 +3,13 @@
 
 pkgbase=spectre-meltdown-checker
 pkgname=('spectre-meltdown-checker')
-pkgver=0.31
+pkgver=0.34
 pkgrel=1
 arch=('any')
 url="https://github.com/speed47/spectre-meltdown-checker"
 license=('GPL')
 source=("smc-$pkgver-$pkgrel.tar.gz::$url/archive/v$pkgver.tar.gz")
-sha256sums=('8687e9b908a0fb6e996682323793e815137b18bce80816424cf29717aa304ef0')
+sha256sums=('a2a4f2086a42ac7d187ed484d7851189c679497748eec19f795b42f9a5875a35')
 
 package_spectre-meltdown-checker() {
   pkgdesc="Spectre & Meltdown Checker"
