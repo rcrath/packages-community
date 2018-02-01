@@ -1,9 +1,9 @@
 # Maintainer: Matti Hyttinen
 
 pkgname='refind-theme-maia'
-pkgver=r30.2ca0087
+pkgver=r31.70de37b
 pkgrel=1
-pkgdesc="A simplistic clean and minimal theme for rEFInd"
+pkgdesc="Manjaro theme for rEFInd"
 arch=('any')
 url="https://github.com/Chrysostomus/refind-theme-regular"
 license=('AGPL3' 'custom:OFL' 'custom:Ubuntu Font License 1.0')

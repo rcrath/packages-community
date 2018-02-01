@@ -1,0 +1,26 @@
+# Maintainer: P Sherbet <psherbet at psherbet dot com>
+pkgname=nerd-fonts-terminus
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Patched font Terminus from nerd-fonts library"
+arch=('any')
+url='https://github.com/ryanoasis/nerd-fonts'
+license=('MIT')
+depends=('fontconfig' 'xorg-font-utils' 'wget')
+install=$pkgname.install
+source=("$pkgname.links"
+    "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v1.1.0/LICENSE")
+sha256sums=('2ca5e559178f1920b010c642669b49f9f6040defd6952f9db040e32ff056a2bf'
+            'd2a29823384e9194a87936ccad495c764c2ef733b29bfa6f72a1d65803ce02e5')
+
+prepare() {
+    # Just download font file (complete version) from github repo because the whole repo is too big
+    cd "${srcdir}"
+    echo "Downloading fonts ...."
+    wget -c --show-progress -i "${pkgname}.links"
+}
+
+package() {
+    install -d ${pkgdir}/usr/share/fonts/TTF
+    install -Dm644 ${srcdir}/*.ttf ${pkgdir}/usr/share/fonts/TTF
+}
