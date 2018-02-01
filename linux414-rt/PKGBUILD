@@ -9,7 +9,7 @@ pkgbase=linux414-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
 _basekernel=4.14
 _sub=15
-_rtpatchver=rt12
+_rtpatchver=rt13
 _bfq=v8r12
 _bfqdate=20171108
 _bfqdate2=20171228
@@ -92,7 +92,7 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
-            '76e6628c22b80ea7e6aaea028bd91847eb2e7819e1887ea3a6a5f19dd661e261'
+            '5b8dbdebc9034b2aa26250e630cad31cfe32044ce2e8b9e81a53fcfae069dfeb'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
