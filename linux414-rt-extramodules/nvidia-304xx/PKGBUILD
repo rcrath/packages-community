@@ -1,0 +1,58 @@
+# Based on the file created for Arch Linux by:
+# Maintainer : Thomas Baechler <thomas@archlinux.org>
+
+# Maintainer: Philip Müller <philm@manjaro.org>
+# Maintainer: Roland Singer <roland@manjaro.org>
+
+_linuxprefix=linux414-rt
+_extramodules=extramodules-4.14-rt-MANJARO
+pkgname=$_linuxprefix-nvidia-304xx
+_pkgname=nvidia
+pkgver=304.137
+pkgrel=2
+epoch=1
+pkgdesc="NVIDIA drivers for linux."
+arch=('i686' 'x86_64')
+url="http://www.nvidia.com/"
+depends=("$_linuxprefix" "nvidia-304xx-utils=${epoch}:${pkgver}")
+makedepends=("$_linuxprefix-headers")
+provides=("$_pkgname=$pkgver" "$_linuxprefix-nvidia-legacy")
+replaces=("$_linuxprefix-nvidia-legacy")
+groups=("$_linuxprefix-extramodules")
+conflicts=('nvidia-96xx' 'nvidia-173xx' "$_linuxprefix-nvidia")
+license=('custom')
+install=nvidia.install
+options=(!strip)
+source=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
+    'linux-4.14.patch')
+md5sums=('485506ee6a7c54780488dacddf1d56b1'
+    'cf9259b845e53903586c29a27de29ddb')
+
+_pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
+
+prepare() {
+  cd "$srcdir"
+  sh "$_pkg.run" --extract-only
+  cd "${_pkg}"
+  # patches here
+
+  # Fix compile problem with 4.14
+  patch -p1 --no-backup-if-mismatch -i "$srcdir"/linux-4.14.patch
+
+  export DISTCC_DISABLE=1
+  export CCACHE_DISABLE=1
+}
+
+build() {
+    _kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
+
+    cd "${_pkg}/kernel"
+    make SYSSRC=/usr/lib/modules/"${_kernver}/build" module
+}
+
+package() {
+    install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia.ko" \
+        "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia.ko"
+    sed -i -e "s/EXTRAMODULES='.*'/EXTRAMODULES='${_extramodules}'/" "${startdir}/nvidia.install"
+    gzip "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia.ko"
+}

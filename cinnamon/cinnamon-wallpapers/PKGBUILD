@@ -1,22 +1,51 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=cinnamon-wallpapers
-pkgver=20180123
-pkgrel=1
+_grepo=gnome-backgrounds
+pkgver=20180201
+pkgrel=2
 pkgdesc="Wallpapers for Manjaro Cinnamon"
 arch=('any')
 license=('GPL3')
-url="https://github.com/oberon2007/$pkgname"
-_snapshot=56c22394b2988a3a755b0f6da7217683476ba210
-source=("$pkgname-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-md5sums=('f2b0fd92f384ae37552c78ba58e74d3d')
+makedepends=('git'
+    'glib2'
+    'meson')
+provides=("$_grepo")
+conflicts=("$_grepo")
+_gurl="https://git.gnome.org/browse/$_grepo"
+_gcommit=ebb69030864690831b431a95dcea02dcd143815f
+_murl="https://github.com/oberon2007/$pkgname"
+_mcommit=078cd97c81f3f6a58ed76becb8f84ad8d43995ab
+source=("git+https://git.gnome.org/browse/gnome-backgrounds#commit=$_gcommit"
+        "$pkgname-$_mcommit.tar.gz::$_murl/archive/$_mcommit.tar.gz")
+sha256sums=('SKIP'
+            '81f0d70c89d0f98d97e6bf92a60f53bd0df5cc28006fb6d654b7635050e3111e')
 
 pkgver() {
     date +%Y%m%d
 }
 
+prepare() {
+    mkdir build
+}
+
+build() {
+    cd build
+    meson --prefix=/usr --buildtype=release ../$_grepo
+    ninja
+}
+
 package() {
-	cd $srcdir/$pkgname-$_snapshot
-	install -dm755 $pkgdir/usr/share
-	cp -r * $pkgdir/usr/share
+    cd build
+    DESTDIR="$pkgdir" ninja install
+
+    # fix default dir listing
+    cd $pkgdir/usr/share/gnome-background-properties
+    rm adwaita.xml
+    mv gnome-backgrounds.xml gnome.xml
+
+    # add manjaro-cinnamon
+    cd $srcdir/$pkgname-$_mcommit
+    cp -r * $pkgdir/usr/share
+    install -m644 manjaro.xml $pkgdir/usr/share/gnome-background-properties/manjaro-backgrounds.xml
 }

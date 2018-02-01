@@ -3,7 +3,7 @@
 pkgbase=('python-jade-application-kit')
 pkgname=('python-jade-application-kit')
 _module='Jade-Application-Kit'
-pkgver=0.a33
+pkgver=0.a34
 pkgrel=1
 pkgdesc="Build desktop applications using web technologies on Linux, with Python, JavaScript, HTML5, and CSS3 and webkit."
 url="https://codesardine.github.io/Jade-Application-Kit"
@@ -12,7 +12,7 @@ makedepends=('python-setuptools')
 license=('GPL')
 arch=('any')
 source=("https://github.com/codesardine/Jade-Application-Kit/archive/master.zip")
-md5sums=('317880858a689ce90e1d47978df331f0')
+md5sums=('6f24c2cf3112444a8f15b112315d8030')
 
 pkgver() {
 	cd "${srcdir}/Jade-Application-Kit-master"

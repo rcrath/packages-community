@@ -1,9 +1,0 @@
-# Maintainer: Bernhard Landauer <oberon@manjaro.org>
-
-pkgname=deepin-artwork-themes-manjaro
-pkgver=20170122
-pkgrel=1
-pkgdesc='Deepin artwork themes'
-arch=('any')
-url="https://gitcafe.com/Deepin/deepin-artwork-themes"
-depends=('deepin-artwork-themes')

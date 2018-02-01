@@ -2,8 +2,8 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-cinnamon-settings
-pkgver=20180119
-pkgrel=1
+pkgver=20180201
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
 license=('GPL')
@@ -12,7 +12,6 @@ depends=('artwork-cinnamon-minimal'
         'cantarell-fonts'
         'cinnamon'
         'ttf-comfortaa'
-        'vertex-maia-themes'
         'vibrancy-colors'
         'xcursor-breeze'
         'manjaro-base-skel')
