@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=bspwm-scripts
-pkgver=0.32
+pkgver=0.33
 pkgrel=1
 pkgdesc="Scripts for controlling bspwm"
 arch=(any)
@@ -17,7 +17,8 @@ depends=('dmenu-manjaro'
 	'xdo'
 	'rootmenu'
 	'jshon'
-	'dash')
+	'dash'
+	'spacefm')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/$pkgname")
 md5sums=('SKIP')
