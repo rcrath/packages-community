@@ -1,0 +1,17 @@
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
+
+pkgname=cinnamon-live
+pkgver=1.0
+pkgrel=2
+pkgdesc="Scripts for Cinnamon live session"
+arch=('any')
+depends=('cinnamon-screensaver')
+source=('cinnamon-live'
+    'cinnamon-live.desktop')
+sha256sums=('c5f9640bafd6d350e5a0deab26e216af2ffb33bcfde81c79ff6f351a5861db89'
+            '9f36269169fd8fad430498c55521299909d046f6a23f449e040412e28699e010')
+
+package() {
+    install -Dm755 $pkgname $pkgdir/usr/bin/$pkgname
+    install -Dm644 $pkgname.desktop $pkgdir/etc/skel/.config/autostart/$pkgname.desktop
+}
