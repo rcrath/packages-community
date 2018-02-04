@@ -1,8 +1,8 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=manjaro-deepin-settings
-pkgver=20171029
-pkgrel=2
+pkgver=20180204
+pkgrel=1
 pkgdesc='Manjaro Linux deepin settings'
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"

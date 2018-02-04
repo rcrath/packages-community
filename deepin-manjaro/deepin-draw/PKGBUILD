@@ -15,7 +15,6 @@ depends=('deepin-notifications'
     'libraw'
     'qt5-svg'
     'libxcb')
-# makedepends=('qt5-tools')
 source=("$pkgname-$pkgver.tar.gz::http://github.com/linuxdeepin/$pkgname/archive/$pkgver.tar.gz")
 md5sums=('2888fff35365513999d7fde10f5d6a8d')
 
