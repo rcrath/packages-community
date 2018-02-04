@@ -4,30 +4,25 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-desktop-base
-_pkgver=2017.11.1
-pkgver=20180117
+pkgver=2017.11.1
 pkgrel=1
-epoch=1
+epoch=2
 pkgdesc='Base component for Deepin'
 arch=('any')
 url="https://github.com/linuxdeepin/$pkgname"
 license=('GPL3')
 depends=('deepin-wallpapers')
 groups=('deepin')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/$_pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::$url/archive/$pkgver.tar.gz")
 sha512sums=('2d1081e415f240371499c398154bd458f8e23bf0dfe09be3b4a3a681f1e64340fd568a0fcfd8a6dc973f7013d29aa9d76ca99c58cb099b02dd99ffa3f85b446c')
 
-#pkgver() {
-#    date +%Y%m%d
-#}
-
 build() {
-  cd $pkgname-$_pkgver
+  cd $pkgname-$pkgver
   make
 }
 
 package() {
-  cd $pkgname-$_pkgver
+  cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
 
   # Remove Deepin distro's lsb-release
