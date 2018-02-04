@@ -254,7 +254,7 @@ super + space
 	dmenu_recent -fn 'xos4 Terminus:size=15' -i -l 14 -w 600 -y $PANEL_HEIGHT
 
 super + shift + space
-	rofi -me-select-entry Mouse2 -me-accept-entry Mouse1 -show
+	rofi -show
 
 super + p
 	dmenu_recent -h $PANEL_HEIGHT -fn 'xos4 Terminus:size=15' -i
