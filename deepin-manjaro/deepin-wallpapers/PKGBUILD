@@ -13,9 +13,9 @@ makedepends=('deepin-api' 'git')
 source=("git+$url.git")
 md5sums=('SKIP')
 
-pkgver() {
-    date +%Y%m%d
-}
+#pkgver() {
+#    date +%Y%m%d
+#}
 
 build() {
   cd $pkgname
