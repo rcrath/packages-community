@@ -1,0 +1,66 @@
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
+
+pkgbase=artwork-manjaro-cinnamon
+pkgname=('artwork-cinnamon-minimal' 'cinnamon-wallpapers')
+_grepo=gnome-backgrounds
+pkgver=20180204
+pkgrel=1
+pkgdesc="Wallpapers for Manjaro Cinnamon"
+arch=('any')
+license=('GPL3')
+makedepends=('git'
+    'glib2'
+    'meson')
+default="backgrounds/adapta-maia.jpg" # default wallpaper to be packaged in artwork-minimal
+_gurl="https://git.gnome.org/browse/$_grepo"
+_gcommit=ebb69030864690831b431a95dcea02dcd143815f
+_murl="https://github.com/oberon2007/$pkgbase"
+source=("git+https://git.gnome.org/browse/gnome-backgrounds#commit=$_gcommit"
+        "git+$_murl.git")
+sha256sums=('SKIP'
+            'SKIP')
+
+pkgver() {
+    date +%Y%m%d
+}
+
+prepare() {
+    mkdir build
+}
+
+build() {
+    cd build
+    meson --prefix=/usr --buildtype=release ../$_grepo
+    ninja
+}
+
+package_artwork-cinnamon-minimal() {
+    depends=('manjaro-icons')
+    optdepends=('cinnamon-wallpapers: more wallpapers for Manjaro Cinnamon')
+    provides=("$_grepo")
+    conflicts=("$_grepo")
+
+    ext=$(echo $default | cut -d'.' -f2)
+
+    cd build
+    DESTDIR="$pkgdir" ninja install
+
+    # fix default dir listing
+    cd $pkgdir/usr/share/gnome-background-properties
+    rm adwaita.xml
+    mv gnome-backgrounds.xml gnome.xml
+
+	cd $srcdir/$pkgbase
+	install -Dm644 $default $pkgdir/usr/share/$default
+    ln -s /usr/share/$default $pkgdir/usr/share/backgrounds/cinnamon_default.$ext
+
+	cp -r icons $pkgdir/usr/share/
+	ln -s /usr/share/icons/manjaro/maia/48x48.png $pkgdir/usr/share/icons/manjaro-maia.png
+}
+
+package_cinnamon-wallpapers() {
+    cd $srcdir/$pkgbase
+    install -Dm644 manjaro.xml $pkgdir/usr/share/gnome-background-properties/manjaro-backgrounds.xml
+    cp -r backgrounds $pkgdir/usr/share/
+    rm $pkgdir/usr/share/$default
+}
