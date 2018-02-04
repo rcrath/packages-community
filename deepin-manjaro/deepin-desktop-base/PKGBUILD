@@ -17,9 +17,9 @@ groups=('deepin')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/$_pkgver.tar.gz")
 sha512sums=('2d1081e415f240371499c398154bd458f8e23bf0dfe09be3b4a3a681f1e64340fd568a0fcfd8a6dc973f7013d29aa9d76ca99c58cb099b02dd99ffa3f85b446c')
 
-pkgver() {
-    date +%Y%m%d
-}
+#pkgver() {
+#    date +%Y%m%d
+#}
 
 build() {
   cd $pkgname-$_pkgver
