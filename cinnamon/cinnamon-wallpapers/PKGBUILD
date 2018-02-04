@@ -2,8 +2,8 @@
 
 pkgname=cinnamon-wallpapers
 _grepo=gnome-backgrounds
-pkgver=20180201
-pkgrel=2
+pkgver=20180203
+pkgrel=1
 pkgdesc="Wallpapers for Manjaro Cinnamon"
 arch=('any')
 license=('GPL3')
@@ -15,11 +15,11 @@ conflicts=("$_grepo")
 _gurl="https://git.gnome.org/browse/$_grepo"
 _gcommit=ebb69030864690831b431a95dcea02dcd143815f
 _murl="https://github.com/oberon2007/$pkgname"
-_mcommit=078cd97c81f3f6a58ed76becb8f84ad8d43995ab
+_mcommit=0d27993878c27a1ead3de7e57ed7e61b9b12298a
 source=("git+https://git.gnome.org/browse/gnome-backgrounds#commit=$_gcommit"
         "$pkgname-$_mcommit.tar.gz::$_murl/archive/$_mcommit.tar.gz")
 sha256sums=('SKIP'
-            '81f0d70c89d0f98d97e6bf92a60f53bd0df5cc28006fb6d654b7635050e3111e')
+            '26477624a1584b74ca96f752e2f0384764bd824bc025faa9ce157e8d7caed081')
 
 pkgver() {
     date +%Y%m%d
