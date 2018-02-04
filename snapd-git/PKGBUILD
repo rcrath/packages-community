@@ -6,20 +6,20 @@
 
 _pkgbase=snapd
 pkgname=snapd-git
-pkgver=2.30.r637.g88bc36c1e
+pkgver=2.30.r1160.gf06e16695
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=('i686' 'x86_64' 'armv7h' 'aarch64')
 url="https://github.com/snapcore/snapd"
 license=('GPL3')
-makedepends=('git' 'go' 'go-tools' 'libseccomp' 'libcap' 'python-docutils' 'systemd' 'xfsprogs' 'libseccomp')
-checkdepends=('python' 'squashfs-tools' 'indent' 'shellcheck')
+makedepends=('git' 'go-pie' 'go-tools' 'libseccomp' 'libcap' 'python-docutils' 'systemd' 'xfsprogs' 'libseccomp')
+# the following checkdepends are only required for static checks and unit tests,
+# both are currently disabled
+# checkdepends=('python' 'squashfs-tools' 'indent' 'shellcheck')
 
 options=('!strip' 'emptydirs')
 install=snapd.install
-source=("git+https://github.com/snapcore/$_pkgbase.git"
-        '0002-Use-Arch-mount-dir-on-Manjaro.patch')
-md5sums=('SKIP'
-         'b3ed20944786098c607bc88f2dfca3ea')
+source=("git+https://github.com/snapcore/$_pkgbase.git")
+md5sums=('SKIP')
 
 pkgdesc="Service and tools for management of snap packages."
 depends=('squashfs-tools' 'libseccomp' 'libsystemd')
@@ -130,12 +130,6 @@ check() {
 package_snapd-git() {
   export GOPATH="$srcdir/go"
 
-  # Ensure that we have /var/lib/snapd/{hostfs,lib/gl}/ as they are required by
-  # snap-confine for constructing some bind mounts around.
-  install -d -m 755 \
-            "$pkgdir/var/lib/snapd/hostfs/" \
-            "$pkgdir/var/lib/snapd/lib/gl/"
-
   # Install snap, snapctl, snap-update-ns, snap-seccomp, snap-exec and snapd
   # executables
   install -d -m 755 "$pkgdir/usr/bin/"
@@ -166,6 +160,7 @@ package_snapd-git() {
   make -C "$srcdir/$_pkgbase/data/systemd" install \
        BINDIR=/bin \
        SYSTEMDSYSTEMUNITDIR=/usr/lib/systemd/system \
+       SNAP_MOUNT_DIR=/var/lib/snapd/snap \
        DESTDIR="$pkgdir"
 
   # Install polkit policy
@@ -209,6 +204,8 @@ package_snapd-git() {
   install -d -m 755 "$pkgdir/var/lib/snapd/snap/bin"
   install -d -m 755 "$pkgdir/var/lib/snapd/snaps"
   install -d -m 755 "$pkgdir/var/lib/snapd/lib/gl"
+  install -d -m 755 "$pkgdir/var/lib/snapd/lib/gl32"
+  install -d -m 755 "$pkgdir/var/lib/snapd/lib/vulkan"
   # these dirs have special permissions
   install -d -m 000 "$pkgdir/var/lib/snapd/void"
   install -d -m 700 "$pkgdir/var/lib/snapd/cookie"
