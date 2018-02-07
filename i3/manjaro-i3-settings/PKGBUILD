@@ -2,7 +2,7 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-i3-settings
-pkgver=20180201
+pkgver=20180207
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
@@ -23,6 +23,7 @@ depends=('adapta-maia-theme'
         'i3-help'
         'i3status-manjaro'
         'manjaro-base-skel'
+        'nerd-fonts-terminus'
         'nitrogen'
         'urxvt-perls'
         'xcursor-breeze'
