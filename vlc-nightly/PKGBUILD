@@ -5,9 +5,9 @@
 pkgname=vlc-nightly
 _pkgname=vlc
 _pkgver=3.0.0
-_pkgdate=20180202
-_pkgtime=0233
-_pkgsuffix=rc9   
+_pkgdate=20180207
+_pkgtime=0226
+_pkgsuffix=   
 
 pkgver=${_pkgver}v${_pkgdate}
 pkgrel=1
@@ -107,12 +107,12 @@ conflicts=("vlc-plugin" "vlc")
 provides=("vlc")
 replaces=("vlc-plugin")
 options=('!libtool' '!emptydirs' 'debug')
-source=("https://nightlies.videolan.org/build/source/${_pkgname}-${_pkgver}-${_pkgdate}-${_pkgtime}-${_pkgsuffix}.tar.xz"
+source=("https://nightlies.videolan.org/build/source/${_pkgname}-${_pkgver}-${_pkgdate}-${_pkgtime}${_pkgsuffix}.tar.xz"
         'update-vlc-plugin-cache.hook'
         'lua53_compat.patch::https://git.archlinux.org/svntogit/packages.git/plain/trunk/lua53_compat.patch?h=packages/vlc'
         'prevent-including-missing-SVGs.patch')
 
-sha256sums=('93883b1a00a7cea3276f5823662a6691cad79ed73ac10efbfa4b3df109732c85'
+sha256sums=('17c3cda8b875d961cbbc9c8de333684bef2f9102d33628afd6b57b73ad1f9f52'
             'c6f60c50375ae688755557dbfc5bd4a90a8998f8cf4d356c10d872a1a0b44f3a'
             'd1cb88a1037120ea83ef75b2a13039a16825516b776d71597d0e2eae5df2d8fa'
             '599ce4bf0db5fc74f54bc03136b662606c22b8435b81440b02fc73f52d09bd7f')
@@ -122,7 +122,7 @@ pkgver() {
 }
 
 prepare() {
-    cd ${_pkgname}-${_pkgver}-${_pkgsuffix}
+    cd ${_pkgname}-${_pkgver}${_pkgsuffix}
     ./bootstrap
 
     patch -Np1 -i $srcdir/lua53_compat.patch
@@ -144,7 +144,7 @@ prepare() {
 }
 
 build() {
-    cd ${_pkgname}-${_pkgver}-${_pkgsuffix}
+    cd ${_pkgname}-${_pkgver}${_pkgsuffix}
     export CFLAGS+=" -I/usr/include/samba-4.0"
     export CPPFLAGS+=" -I/usr/include/samba-4.0" 
     export CXXFLAGS+=" -std=gnu++11"
@@ -174,7 +174,7 @@ build() {
 }
 
 package() {
-    cd ${_pkgname}-${_pkgver}-${_pkgsuffix}
+    cd ${_pkgname}-${_pkgver}${_pkgsuffix}
     make -i DESTDIR="$pkgdir" install
 
     for res in 16 32 48 128; do
