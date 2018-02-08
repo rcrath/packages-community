@@ -1,0 +1,40 @@
+# Maintainer: Ramon Buldó <rbuldo@gmail.com>
+# Maintainer: Bernhard Landauer <oberon@manjaro.org
+
+pkgname=manjaro-browser-settings
+pkgver=20180208
+pkgrel=1
+pkgdesc="Manjaro Linux settings browser defaults"
+arch=('i686' 'x86_64')
+url="https://github.com/manjaro/$pkgname"
+license=('GPL')
+_gitcommit=19f02dcc9e109fe08abb7b163ec537d0c5cb4fdf
+_hook=manjaro-browser-settings
+conflicts=('manjaro-firefox-settings')
+replaces=('manjaro-firefox-settings')
+source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
+		"$_hook.script"
+		"$_hook.hook")
+md5sums=('b91de27020a6faf58a0c720ef972e847'
+         '1e0ad6dee89368c1bf26ee7b5d572a4f'
+         '05a97a49faf7c856a0f76dec22c955e0')
+
+pkgver() {
+  date +%Y%m%d
+}
+
+package() {
+  cd $pkgname-$_gitcommit
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,palemoon}/distribution}
+  cp chrome/* $pkgdir/usr/lib/chrome
+  cp chrome/* $pkgdir/usr/lib/chromium
+  cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/distribution.mjo
+  cp palemoon/distribution.ini $pkgdir/usr/lib/palemoon/distribution/distribution.mjo
+  install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
+  cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
+  #[[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox
+  
+#Hook
+  install -Dm644 $srcdir/$_hook.hook $pkgdir/usr/share/libalpm/hooks/$_hook.hook
+  install -Dm755 $srcdir/$_hook.script $pkgdir/usr/share/libalpm/scripts/$_hook
+}
