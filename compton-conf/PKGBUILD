@@ -4,7 +4,7 @@
 
 pkgname=compton-conf
 pkgver=0.3.0
-pkgrel=3
+pkgrel=1
 pkgdesc='A graphical configuration tool for Compton X composite manager'
 arch=('i686' 'x86_64')
 url='https://github.com/lxde/compton-conf'
@@ -21,20 +21,20 @@ source=("https://downloads.lxqt.org/downloads/${pkgname}/${pkgver}/${pkgname}-${
 sha256sums=('7cd239d7542816ee002e6ab2b7e1211102e5ddc6588cc8eaf3d7c0462ff1e6f7')
 
 prepare() {
-	# Build directory
-	mkdir -p "${srcdir}"/build
+    # Build directory
+    mkdir -p "${srcdir}"/build
 }
 
 build() {
-	# Building package
-	cd "${srcdir}"/build
-	cmake ../${pkgname}-${pkgver} \
-		-DCMAKE_INSTALL_PREFIX=/usr
-	make
+    # Building package
+    cd "${srcdir}"/build
+    cmake ../${pkgname}-${pkgver} \
+        -DCMAKE_INSTALL_PREFIX=/usr
+    make
 }
 
 package() {
-	# Installing package
-	cd "${srcdir}"/build
-	make DESTDIR="${pkgdir}" install
+    # Installing package
+    cd "${srcdir}"/build
+    make DESTDIR="${pkgdir}" install
 }
