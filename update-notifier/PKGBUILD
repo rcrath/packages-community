@@ -2,7 +2,7 @@
 
 pkgname=update-notifier
 pkgver=0.7.2
-pkgrel=2
+pkgrel=3
 pkgdesc="A simple pacman update notifier"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"

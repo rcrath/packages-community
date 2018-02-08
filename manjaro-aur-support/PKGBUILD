@@ -2,7 +2,7 @@
 
 pkgname=manjaro-aur-support
 pkgver=0.6
-pkgrel=2
+pkgrel=3
 pkgdesc="Manjaro AUR support packages"
 _check=check-aur
 arch=(any)
@@ -13,7 +13,7 @@ source=("$pkgname.hook"
     "$_check"
     "$_check.desktop"
     'aur-warning.png')
-md5sums=('60f0c1fdd75b452573f13fe70b9a3e56'
+md5sums=('070a8a590e2c64b1272c264b5919d919'
          '67c814ff1d3c10a1358e24bef9043ba8'
          '4e6a4151016ff326f2b073e22b1ebc08'
          'b06f747debd88e456e63ae0b1f4a046b'
