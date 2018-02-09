@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#Used directory
+
+firefox_dir=/usr/lib/firefox/distribution
+
+#check changes for firefox
+if [[ ! -f "$firefox_dir"/distribution.ini ]]; then
+		cp -f $firefox_dir/distribution.mjo $firefox_dir/distribution.ini
+	else
+		cmp --silent $firefox_dir/distribution.ini $firefox_dir/distribution.mjo
+		if [[ $? == 1 ]]; then
+			cp -f $firefox_dir/distribution.mjo $firefox_dir/distribution.ini
+		fi
+fi

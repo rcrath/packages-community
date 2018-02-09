@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#Used directory
+
+firefox_dir=/usr/lib/firefox/distribution
+
+#check changes for firefox
+if [[ -f "$firefox_dir"/distribution.ini ]]; then
+	rm -f "$firefox_dir"/distribution.ini
+fi
+

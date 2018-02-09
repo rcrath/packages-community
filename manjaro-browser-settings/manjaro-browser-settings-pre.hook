@@ -3,10 +3,8 @@ Operation = Install
 Operation = Upgrade
 Type = Package
 Target = firefox
-Target = palemoon
-Target = manjaro-browser-settings
 
 [Action]
 Description = Manjaro Firefox Distribution Settings
-When = PostTransaction
-Exec = /usr/share/libalpm/scripts/manjaro-browser-settings
+When = PreTransaction
+Exec = /usr/share/libalpm/scripts/manjaro-browser-settings-pre

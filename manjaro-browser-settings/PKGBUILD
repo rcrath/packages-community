@@ -1,18 +1,28 @@
 # Maintainer: Ramon Buldó <rbuldo@gmail.com>
 # Maintainer: Bernhard Landauer <oberon@manjaro.org
+# Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20171231
+pkgver=20180209
 pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
 _gitcommit=19f02dcc9e109fe08abb7b163ec537d0c5cb4fdf
+_hook=manjaro-browser-settings
 conflicts=('manjaro-firefox-settings')
 replaces=('manjaro-firefox-settings')
-source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz")
-md5sums=('b91de27020a6faf58a0c720ef972e847')
+source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
+		"$_hook-post.script"
+		"$_hook-pre.script"
+		"$_hook-pre.hook"
+		"$_hook-post.hook")
+md5sums=('b91de27020a6faf58a0c720ef972e847'
+         'fade7b74d56c47b8f858b5b323ba7c49'
+         '1a7727abbd9bfd0c78a900c15537c260'
+         'd57c231c4e153f2d9d0ddda90ed5d91d'
+         '706326337eae38553eeca27b8c673154')
 
 pkgver() {
   date +%Y%m%d
@@ -20,13 +30,18 @@ pkgver() {
 
 package() {
   cd $pkgname-$_gitcommit
-  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,light,palemoon}/distribution}
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,palemoon}/distribution}
   cp chrome/* $pkgdir/usr/lib/chrome
   cp chrome/* $pkgdir/usr/lib/chromium
-  cp firefox/* $pkgdir/usr/lib/firefox/distribution
+  cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/distribution.mjo
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
-  ln -s /usr/lib/firefox/distribution $pkgdir/usr/lib/light/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
   [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox
+  
+#Hook
+  install -Dm644 $srcdir/$_hook-pre.hook $pkgdir/usr/share/libalpm/hooks/$_hook-pre.hook
+  install -Dm644 $srcdir/$_hook-post.hook $pkgdir/usr/share/libalpm/hooks/$_hook-post.hook
+  install -Dm755 $srcdir/$_hook-pre.script $pkgdir/usr/share/libalpm/scripts/$_hook-pre
+  install -Dm755 $srcdir/$_hook-post.script $pkgdir/usr/share/libalpm/scripts/$_hook-post
 }
