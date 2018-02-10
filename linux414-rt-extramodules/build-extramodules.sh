@@ -1,7 +1,7 @@
 #!/bin/bash
 
 pwd=`pwd`
-cmd='makepkg -sf --noconfirm --sign'
+cmd='makepkg -sf --noconfirm'
 
 if [ "`sudo cat /etc/sudoers | grep pacman`" == "" ] ; then
    echo "please add '`whoami` ALL=NOPASSWD: /usr/bin/pacman' to your /etc/sudoers file"
@@ -15,11 +15,11 @@ echo '  -> building extramodules ...'
 cd ${pwd}/*acpi_call && $cmd
 cd ${pwd}/*bbswitch && $cmd
 cd ${pwd}/*broadcom-wl && $cmd
-cd ${pwd}/*catalyst && makepkg -df --noconfirm --sign
+cd ${pwd}/*catalyst && makepkg -df --noconfirm
 cd ${pwd}/*ndiswrapper && $cmd
 cd ${pwd}/*nvidia && $cmd
-cd ${pwd}/*nvidia-304xx && makepkg -d --noconfirm --sign
-cd ${pwd}/*nvidia-340xx && makepkg -d --noconfirm --sign
+cd ${pwd}/*nvidia-304xx && makepkg -d --noconfirm
+cd ${pwd}/*nvidia-340xx && makepkg -d --noconfirm
 cd ${pwd}/*nvidiabl && $cmd
 cd ${pwd}/*r8168 && $cmd
 cd ${pwd}/*rt3562sta && $cmd
