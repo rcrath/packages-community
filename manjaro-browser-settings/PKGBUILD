@@ -3,13 +3,13 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20180209
+pkgver=20180215
 pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
-_gitcommit=19f02dcc9e109fe08abb7b163ec537d0c5cb4fdf
+_gitcommit=446c12cf698207b82819098eab02711ae7a4ce27
 _hook=manjaro-browser-settings
 conflicts=('manjaro-firefox-settings')
 replaces=('manjaro-firefox-settings')
@@ -18,11 +18,11 @@ source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
 		"$_hook-pre.script"
 		"$_hook-pre.hook"
 		"$_hook-post.hook")
-md5sums=('b91de27020a6faf58a0c720ef972e847'
-         'fade7b74d56c47b8f858b5b323ba7c49'
-         '1a7727abbd9bfd0c78a900c15537c260'
-         'd57c231c4e153f2d9d0ddda90ed5d91d'
-         '706326337eae38553eeca27b8c673154')
+md5sums=('e3408fe1652fd83fc1b98f47241e715f'
+         '7506c7a896bd2cde6eab8f89b8fb7cf8'
+         'ca41fd4df50ce50fb3c3d6c1d3680015'
+         'c2bcec696264656389bf363a0aa3ffec'
+         'd05295352f702b5421eedd18b511887f')
 
 pkgver() {
   date +%Y%m%d
@@ -30,10 +30,11 @@ pkgver() {
 
 package() {
   cd $pkgname-$_gitcommit
-  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,palemoon}/distribution}
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,firefox-developer-edition,palemoon}/distribution}
   cp chrome/* $pkgdir/usr/lib/chrome
   cp chrome/* $pkgdir/usr/lib/chromium
-  cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/distribution.mjo
+  cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/.distribution.mjo
+  cp firefox-developer-edition/distribution.ini $pkgdir/usr/lib/firefox-developer-edition/distribution/.distribution.mjo
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles

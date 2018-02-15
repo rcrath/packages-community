@@ -3,8 +3,9 @@ Operation = Install
 Operation = Upgrade
 Type = Package
 Target = firefox
+Target = firefox-developer-edition
 
 [Action]
-Description = Manjaro Firefox Distribution Settings
+Description = Replace Manjaro Firefox Distribution Settings
 When = PostTransaction
 Exec = /usr/share/libalpm/scripts/manjaro-browser-settings-post
