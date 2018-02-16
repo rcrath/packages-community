@@ -19,10 +19,10 @@ source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
 		"$_hook-pre.hook"
 		"$_hook-post.hook")
 md5sums=('e3408fe1652fd83fc1b98f47241e715f'
-         '7506c7a896bd2cde6eab8f89b8fb7cf8'
+         '21e467d25db5e220aeeddff97e8a8261'
          'ca41fd4df50ce50fb3c3d6c1d3680015'
-         'c2bcec696264656389bf363a0aa3ffec'
-         'd05295352f702b5421eedd18b511887f')
+         'b902316c2fc1097484ffaa300504e962'
+         'c4d3861c6a84e7c6b65b20fe38b8c087')
 
 pkgver() {
   date +%Y%m%d
