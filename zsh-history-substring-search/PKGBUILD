@@ -3,20 +3,20 @@
 # Contributor: veox <veox at wre dot ath dot cx>
 
 pkgname=zsh-history-substring-search
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="A ZSH plugin to search history, a clean-room implementation of the Fish shell feature"
 arch=('any')
 url="https://github.com/zsh-users/zsh-history-substring-search"
-snapshot=1e7680405239a835aa403a7457cad23750f98e72
 license=('BSD')
 depends=('zsh')
-install=$pkgname.install
-source="https://github.com/zsh-users/zsh-history-substring-search/archive/v1.0.0.tar.gz"
-md5sums=('77ca86193687188d0f4d47dbaabd2386')
+conflicts=($pkgname-git)
+install=zsh-history-substring-search.install
+source=("https://github.com/zsh-users/$pkgname/archive/v$pkgver.tar.gz")
+sha1sums=(2fd008a0b6b83ba5a75ce1886555f577d3dfbac0)
 
 package() {
   cd "$srcdir/$pkgname-$pkgver"
-  install -dm755 "$pkgdir/usr/share/zsh/plugins/$pkgname"
-  install -m644 README.md "$pkgname".{zsh,plugin.zsh} "$pkgdir/usr/share/zsh/plugins/$pkgname"
+  install -d -m755 "$pkgdir/usr/share/zsh/plugins/$pkgname"
+  install -m644 README.md "$pkgname".zsh "$pkgdir/usr/share/zsh/plugins/$pkgname"
 }

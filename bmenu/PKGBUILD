@@ -2,14 +2,14 @@
 
 pkgname=bmenu
 pkgver=0.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple system menu for commandline"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
 license=('MIT')
 depends=('awk'
 	'bash'
-	'elinks'
+	'links'
 	'pacui'
 	'sed'
 	'fzf'

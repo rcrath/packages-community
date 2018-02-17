@@ -3,6 +3,7 @@
 
 pkgbase=desktop-settings
 pkgname=('manjaro-bspwm-settings'
+		'manjaro-bspwm-settings-minimal'
         'manjaro-budgie-settings'
         #'manjaro-awesome-settings'
         'manjaro-jwm-settings'
@@ -10,7 +11,7 @@ pkgname=('manjaro-bspwm-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
 		)
-pkgver=20180201
+pkgver=20180206
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -55,6 +56,22 @@ package_manjaro-bspwm-settings() {
         'sxhkd'
         'manjaro-base-skel')
     _inst_dir 'community/bspwm'
+}
+
+package_manjaro-bspwm-settings() {
+    pkgdesc='Manjaro Linux minimal bspwm settings'
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+    depends=('bspwm-wallpapers'
+        'xcursor-breeze'
+        'feh'
+        'rootmenu'
+        'limepanel'
+        'bspwm-manjaro'
+        'bspwm-scripts'
+        'sxhkd'
+        'manjaro-base-skel')
+    _inst_dir 'community/bspwm-minimal'
 }
 
 #package_manjaro-awesome-settings() {

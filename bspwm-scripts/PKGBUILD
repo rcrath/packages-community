@@ -2,7 +2,7 @@
 
 pkgname=bspwm-scripts
 pkgver=0.33
-pkgrel=1
+pkgrel=2
 pkgdesc="Scripts for controlling bspwm"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
@@ -17,8 +17,8 @@ depends=('dmenu-manjaro'
 	'xdo'
 	'rootmenu'
 	'jshon'
-	'dash'
-	'spacefm')
+	'dash')
+optdepends=('spacefm' For graphical dialogs)
 makedepends=('git')
 source=("git://github.com/Chrysostomus/$pkgname")
 md5sums=('SKIP')
