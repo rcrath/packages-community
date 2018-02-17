@@ -4,7 +4,7 @@
 
 pkgname=manjaro-browser-settings
 pkgver=20180217
-pkgrel=1
+pkgrel=2
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
@@ -19,7 +19,7 @@ source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
 		"$_hook-pre.hook"
 		"$_hook-post.hook")
 md5sums=('e3408fe1652fd83fc1b98f47241e715f'
-         'b040093503c030a9c6827034b2eee525'
+         '27d98d30fe920533b55efd0a6d3dc6f0'
          'ca41fd4df50ce50fb3c3d6c1d3680015'
          'b902316c2fc1097484ffaa300504e962'
          'c4d3861c6a84e7c6b65b20fe38b8c087')
@@ -30,11 +30,12 @@ pkgver() {
 
 package() {
   cd $pkgname-$_gitcommit
-  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,firefox-developer-edition,palemoon}/distribution}
+  #mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,firefox-developer-edition,palemoon}/distribution}
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,palemoon/distribution}
   cp chrome/* $pkgdir/usr/lib/chrome
   cp chrome/* $pkgdir/usr/lib/chromium
-  cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/.distribution.mjo
-  cp firefox-developer-edition/distribution.ini $pkgdir/usr/lib/firefox-developer-edition/distribution/.distribution.mjo
+  #cp firefox/distribution.ini $pkgdir/usr/lib/firefox/distribution/.distribution.mjo
+  #cp firefox-developer-edition/distribution.ini $pkgdir/usr/lib/firefox-developer-edition/distribution/.distribution.mjo
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
