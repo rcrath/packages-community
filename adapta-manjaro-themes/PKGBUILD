@@ -1,7 +1,5 @@
 # Maintainer: Stefano Capitani <stefano_at_manjaro_dot_org>
 # Contributor: ceyhunnabiyev for Breath color and Adapta Black variation <https://github.com/ceyhunnabiyev>
-# This pkgbuild provides adapta theme and gdm theme
-# https://github.com/Ste74/manjaro-gnome-theme
 
 pkgname=('adapta-maia-theme'
          'adapta-breath-theme'

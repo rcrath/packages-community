@@ -7,7 +7,7 @@ firefox_dev_dir=/usr/lib/firefox-developer-edition/distribution
 
 
 #check firefox changes
-if pacman -Qi firefox > /dev/null; then
+if [[ $(pacman -Qi firefox > /dev/null 2>&1) ]]; then
 
 	if [[ ! -f "$firefox_dir"/distribution.ini ]]; then
 		cp -f $firefox_dir/.distribution.mjo $firefox_dir/distribution.ini
@@ -20,7 +20,7 @@ if pacman -Qi firefox > /dev/null; then
 fi
 
 #check fiferox developer changes
-if pacman -Qi firefox-developer-edition > /dev/null; then
+if [[ $(pacman -Qi firefox-developer-edition > /dev/null 2>&1) ]]; then
 
 	if [[ ! -f "$firefox_dev_dir"/distribution.ini ]]; then
 		cp -f $firefox_dev_dir/.distribution.mjo $firefox_dev_dir/distribution.ini
