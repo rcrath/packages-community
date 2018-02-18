@@ -1,30 +1,5 @@
 #!/bin/bash
 
-#Used folder
-
-firefox_dir=/usr/lib/firefox/distribution
-firefox_dev_dir=/usr/lib/firefox-developer-edition/distribution
-
-#check firefox changes
-if pacman -Qi firefox > /dev/null 2>&1; then
-
-	if [[ ! -e "$firefox_dir" ]]; then
-		mkdir -p $firefox_dir
-		cd $firefox_dir
-		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox/distribution.ini"
-	else cd $firefox_dir
-		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox/distribution.ini"
-	fi
-fi
-
-#check fiferox developer changes
-if pacman -Qi firefox-developer-edition > /dev/null 2>&1; then
-
-	if [[ ! -e "$firefox_dev_dir" ]]; then
-		mkdir -p $firefox_dev_dir
-		cd $firefox_dev_dir
-		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox-developer-edition/distribution.ini"
-	else cd $firefox_dev_dir
-		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox-developer-edition/distribution.ini"
-	fi
-fi
+install -Dm644 /etc/manjaro-firefox.ini /usr/lib/firefox/distribution/distribution.ini
+install -Dm644 /etc/manjaro-firefox.ini /usr/lib/firefox-developer-edition/distribution/distribution.ini
+sed -i 's/Firefox/Firefox Developer Edition/;s/firefox/firefox-developer-edition/' /usr/lib/firefox-developer-edition/distribution/distribution.ini

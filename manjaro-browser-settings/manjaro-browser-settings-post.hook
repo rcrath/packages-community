@@ -1,11 +1,12 @@
 [Trigger]
+Type = Package
 Operation = Install
 Operation = Upgrade
-Type = Package
 Target = firefox
 Target = firefox-developer-edition
+Target = manjaro-browser-settings
 
 [Action]
-Description = Replace Manjaro Firefox Distribution Settings
+Description = Copy Firefox Distribution Settings
 When = PostTransaction
 Exec = /usr/share/libalpm/scripts/manjaro-browser-settings-post

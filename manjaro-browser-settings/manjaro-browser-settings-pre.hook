@@ -1,11 +1,12 @@
 [Trigger]
+Type = Package
 Operation = Install
 Operation = Upgrade
-Type = Package
 Target = firefox
 Target = firefox-developer-edition
+Target = manjaro-browser-settings
 
 [Action]
-Description =Clean Firefox Preferences
+Description = Remove Firefox Distribution Settings
 When = PreTransaction
 Exec = /usr/share/libalpm/scripts/manjaro-browser-settings-pre
