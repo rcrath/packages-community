@@ -5,29 +5,26 @@
 firefox_dir=/usr/lib/firefox/distribution
 firefox_dev_dir=/usr/lib/firefox-developer-edition/distribution
 
-
 #check firefox changes
-if [[ $(pacman -Qi firefox > /dev/null 2>&1) ]]; then
+if pacman -Qi firefox > /dev/null 2>&1; then
 
-	if [[ ! -f "$firefox_dir"/distribution.ini ]]; then
-		cp -f $firefox_dir/.distribution.mjo $firefox_dir/distribution.ini
-	else
-		cmp --silent $firefox_dir/distribution.ini $firefox_dir/.distribution.mjo
-		if [[ $? == 1 ]]; then
-			cp -f $firefox_dir/.distribution.mjo $firefox_dir/distribution.ini
-		fi
+	if [[ ! -e "$firefox_dir" ]]; then
+		mkdir -p $firefox_dir
+		cd $firefox_dir
+		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox/distribution.ini"
+	else cd $firefox_dir
+		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox/distribution.ini"
 	fi
 fi
 
 #check fiferox developer changes
-if [[ $(pacman -Qi firefox-developer-edition > /dev/null 2>&1) ]]; then
+if pacman -Qi firefox-developer-edition > /dev/null 2>&1; then
 
-	if [[ ! -f "$firefox_dev_dir"/distribution.ini ]]; then
-		cp -f $firefox_dev_dir/.distribution.mjo $firefox_dev_dir/distribution.ini
-	else
-		cmp --silent $firefox_dev_dir/distribution.ini $firefox_dev_dir/.distribution.mjo
-		if [[ $? == 1 ]]; then
-			cp -f $firefox_dev_dir/.distribution.mjo $firefox_dev_dir/distribution.ini
-		fi
+	if [[ ! -e "$firefox_dev_dir" ]]; then
+		mkdir -p $firefox_dev_dir
+		cd $firefox_dev_dir
+		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox-developer-edition/distribution.ini"
+	else cd $firefox_dev_dir
+		curl -Os "https://raw.githubusercontent.com/manjaro/manjaro-browser-settings/master/firefox-developer-edition/distribution.ini"
 	fi
 fi
