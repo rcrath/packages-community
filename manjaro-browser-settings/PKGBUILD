@@ -9,20 +9,12 @@ pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
-_gitcommit=2011f9ab04043ec6b9248a7cd9d1fe0634a453f3
+_gitcommit=7f33da9b465e734be295946ba906043c7e70a793
 _hook=manjaro-browser-settings
 conflicts=('manjaro-firefox-settings')
 replaces=('manjaro-firefox-settings')
-source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
-		"$_hook-post.script"
-		"$_hook-pre.script"
-		"$_hook-pre.hook"
-		"$_hook-post.hook")
-md5sums=('025b2e9ea501f92ee080f3d1eb8bb79b'
-         '1b2e4f3c31e72412609cb72e88b950e8'
-         '037e92692f8debbc723511e539a5091b'
-         '8006ea3b4e02c2a0b1793515d7d0c2b3'
-         '6f3b02c96549d02eae05524eb609ea12')
+source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz")
+md5sums=('71475785409cbbebb40c5f6d8c343b3b')
 
 pkgver() {
   date +%Y%m%d
@@ -36,12 +28,12 @@ package() {
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
-  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox
+  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/{firefox,-developer-edition}
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox.ini
 
 #Hook
-  install -Dm644 $srcdir/$_hook-pre.hook $pkgdir/usr/share/libalpm/hooks/$_hook-pre.hook
-  install -Dm644 $srcdir/$_hook-post.hook $pkgdir/usr/share/libalpm/hooks/$_hook-post.hook
-  install -Dm755 $srcdir/$_hook-pre.script $pkgdir/usr/share/libalpm/scripts/$_hook-pre
-  install -Dm755 $srcdir/$_hook-post.script $pkgdir/usr/share/libalpm/scripts/$_hook-post
+  install -Dm644 $_hook-pre.hook $pkgdir/usr/share/libalpm/hooks/$_hook-pre.hook
+  install -Dm644 $_hook-post.hook $pkgdir/usr/share/libalpm/hooks/$_hook-post.hook
+  install -Dm755 $_hook-pre.script $pkgdir/usr/share/libalpm/scripts/$_hook-pre
+  install -Dm755 $_hook-post.script $pkgdir/usr/share/libalpm/scripts/$_hook-post
 }
