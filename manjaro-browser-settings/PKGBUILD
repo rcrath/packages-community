@@ -3,8 +3,8 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20180217
-pkgrel=2
+pkgver=20180218
+pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
@@ -19,7 +19,7 @@ source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz"
 		"$_hook-pre.hook"
 		"$_hook-post.hook")
 md5sums=('e3408fe1652fd83fc1b98f47241e715f'
-         '27d98d30fe920533b55efd0a6d3dc6f0'
+         '6fdcca845daa6712cbf01f2d2b3b8c91'
          'ca41fd4df50ce50fb3c3d6c1d3680015'
          'b902316c2fc1097484ffaa300504e962'
          'c4d3861c6a84e7c6b65b20fe38b8c087')
