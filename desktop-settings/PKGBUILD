@@ -10,8 +10,9 @@ pkgname=('manjaro-bspwm-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
+        'manjaro-bspwm-mate-settings'
 		)
-pkgver=20180217
+pkgver=20180218
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -76,6 +77,44 @@ package_manjaro-bspwm-settings-minimal() {
         'micro-manjaro'
         'links')
     _inst_dir 'community/bspwm-minimal'
+}
+
+package_manjaro-bspwm-mate-settings() {
+    pkgdesc='Manjaro Linux bspwm-mate settings'
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+    depends=('bspwm-wallpapers'
+        'xcursor-breeze'
+        'feh'
+        'rootmenu'
+        'mygtkmenui'
+        'limepanel'
+        'bspwm-manjaro'
+        'bspwm-scripts'
+        'rofi-scripts'
+        'sxhkd'
+        'manjaro-base-skel'
+        'thunar-gtk3'
+        'mousepad'
+        'breeze-maia-icon-themes'
+        'gtk-theme-breath'
+        'qt5ct'
+        'kvantum-manjaro'
+        'mate-session-manager'
+        'mate-tweak'
+        'mate-applets'
+        'mate-control-center'
+        'mate-polkit'
+        'xcape'
+        'mozo'
+        'mate-menus'
+        'mate-notification-daemon'
+        'mate-power-manager'
+        'manjaro-browser-settings-native'
+        'mate-netbook'
+        'networkmanager-applet'
+        'bspwm-wallpapers')
+    _inst_dir 'community/bspwm-mate'
 }
 
 #package_manjaro-awesome-settings() {

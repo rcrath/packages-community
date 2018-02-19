@@ -236,8 +236,8 @@ mod5 + @button1
 
 # Spawn window manipulation menu
 # Mod1 is alt
-mod1 + @button1
 #    BspwmWindowMenu
+mod1 + @button1
     mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
 
 
@@ -280,7 +280,7 @@ super + shift + e
 	$TERMINAL -e ranger
 
 Print
-	scrot -q 100
+	scrot
 
 	
 #
@@ -297,10 +297,10 @@ XF86AudioMute
 	volume mute
 	
 XF86MonBrightnessDown
- xbacklight -dec 10 
+ light -U 5 
 
 XF86MonBrightnessUp
- xbacklight -inc 10
+ light -A 5
  
 
 XF86Sleep

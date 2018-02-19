@@ -75,6 +75,8 @@ bspc rule -a midori private=on
 bspc rule -a gnome-pie border=off manage=off
 bspc rule -a wpa_gui state=pseudo_tiled
 bspc rule -a libreoffice state=tiled
+bspc rule -a '*:libreofficedev' state=tiled
+bspc rule -a '*:soffice' state=tiled
 #bspc rule -a firefox desktop=I
 #bspc rule -a calibre desktop=II
 #bspc rule -a geany desktop=II

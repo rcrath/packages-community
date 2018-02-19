@@ -23,7 +23,7 @@ source=("https://github.com/zyedidia/micro/releases/download/v${pkgver}/micro-${
 md5sums=('d8565521f49be3fc3d6629b7434c95dc'
          '8899078181a73c711c61294e61276e3e'
          'eea763227d4e427f8a409bb30b62afd2'
-         'aaae99e795fd175a116830f9ce612984'
+         'a6f5f7257fe9dc0bb6792365c3148529'
          'f64bcb81d10fc5e80ad9c63e3721a8d7')
 package(){
  install -Dm755 "${srcdir}/micro-${pkgver}/micro" "${pkgdir}/usr/bin/micro"
