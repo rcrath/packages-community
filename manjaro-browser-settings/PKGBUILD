@@ -28,7 +28,7 @@ package() {
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
-  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/{firefox,-developer-edition}
+  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox{,-developer-edition}
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox.ini
 
 #Hook
