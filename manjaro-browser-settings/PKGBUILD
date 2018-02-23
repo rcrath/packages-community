@@ -3,18 +3,18 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20180218
-pkgrel=4
+pkgver=20180220
+pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('i686' 'x86_64')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
-_gitcommit=7f33da9b465e734be295946ba906043c7e70a793
+_gitcommit=f5c4c5d06b5256a92342c73c9069f659e02152cb
 _hook=manjaro-browser-settings
 conflicts=('manjaro-firefox-settings')
 replaces=('manjaro-firefox-settings')
 source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz")
-md5sums=('71475785409cbbebb40c5f6d8c343b3b')
+md5sums=('d6c0c31fa92511e0f6d4ac40b2080cb3')
 
 pkgver() {
   date +%Y%m%d
@@ -28,7 +28,7 @@ package() {
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
-  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/{firefox,-developer-edition}
+  [[ "$CARCH" = "i686" ]] && rm -r $pkgdir/usr/lib/firefox{,-developer-edition}
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox.ini
 
 #Hook

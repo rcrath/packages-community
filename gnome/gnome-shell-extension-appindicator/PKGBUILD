@@ -1,0 +1,38 @@
+# Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
+
+pkgname=gnome-shell-extension-appindicator
+pkgver=17.10.2
+pkgrel=1
+pkgdesc="Integrates AppIndicators into GNOME Shell."
+arch=('any')
+url="https://github.com/ubuntu/$pkgname"
+_commit=7863517511427747175bb2a28a7d4aa5320a22f4
+license=('GPL')
+depends=('gnome-shell')
+optdepends=(
+  'libappindicator-gtk2: support GTK+2 applications'
+  'libappindicator-gtk3: support GTK+3 applications'
+  'libappindicator-sharp: support .net applications')
+source=("$pkgname-$_commit.tar.gz::$url/archive/$_commit.tar.gz"
+		'6091a31f4cb8732252279e802c8ec9f1c3891b38.patch')
+		
+sha512sums=('02ce4cf137b3731ba62125957456039610ef5f81ae97e080a245d9a0a353ad7257ba84c8a3686d077dce3285f1ddd16475ccd74be3cdf728a276ef82256a170f'
+            'fb3375e505b030b9264cf5636468c20248cdfc967746b1f8b284b9769a678ffbad9f5e52b5481961d4dc142517c5b709a500781f50763d15d882f66ac4c9f7b8')
+
+prepare() {
+	mv $pkgname-$_commit $pkgname
+	cd $pkgname
+    patch -Np1 -i $srcdir/6091a31f4cb8732252279e802c8ec9f1c3891b38.patch
+}
+
+package() {
+  cd $pkgname
+  # Locate the extension.
+  local _extname="$(grep -Po '(?<="uuid": ")[^"]*' metadata.json)"
+  local _destdir=$pkgdir/usr/share/gnome-shell/extensions/$_extname
+
+  # Copy extension files into place.
+  install -Dm644 -t $_destdir                          ./*.js metadata.json
+  install -Dm644 -t $_destdir/interfaces-xml           ./interfaces-xml/*.xml
+  install -Dm644 -t $pkgdir/usr/share/glib-2.0/schemas ./interfaces-xml/*.xml
+}
