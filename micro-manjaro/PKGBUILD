@@ -7,24 +7,38 @@ pkgname=micro-manjaro
 pkgver=1.4.0
 pkgrel=3
 pkgdesc="A modern and intuitive terminal-based text editor"
-arch=('x86_64')
+arch=('x86_64' 'i686')
 url="https://github.com/zyedidia/micro"
 license=('MIT')
 depends=('st-manjaro' 'xclip')
 conflicts=('micro-git' 'micro' 'micro-nightly-bin')
 provides=('micro')
 
-source=("https://github.com/zyedidia/micro/releases/download/v${pkgver}/micro-${pkgver}-linux64.tar.gz"
+
+source_x86_64=("https://github.com/zyedidia/micro/releases/download/v${pkgver}/micro-${pkgver}-linux64.tar.gz"
 "micro.desktop"
 "bindings.json"
 "micro-st"
 "tcelldb")
-#sha256sums=('SKIP')
-md5sums=('d8565521f49be3fc3d6629b7434c95dc'
-         '8899078181a73c711c61294e61276e3e'
-         'eea763227d4e427f8a409bb30b62afd2'
-         'a6f5f7257fe9dc0bb6792365c3148529'
-         'f64bcb81d10fc5e80ad9c63e3721a8d7')
+
+source_i686=("https://github.com/zyedidia/micro/releases/download/v${pkgver}/micro-${pkgver}-linux32.tar.gz"
+"micro.desktop"
+"bindings.json"
+"micro-st"
+"tcelldb")
+
+md5sums_x86_64=('d8565521f49be3fc3d6629b7434c95dc'
+                '8899078181a73c711c61294e61276e3e'
+                'eea763227d4e427f8a409bb30b62afd2'
+                'a6f5f7257fe9dc0bb6792365c3148529'
+                'f64bcb81d10fc5e80ad9c63e3721a8d7')
+md5sums_i686=('0fb373dc8489dfa7bbdf41fd718f3d18'
+              '8899078181a73c711c61294e61276e3e'
+              'eea763227d4e427f8a409bb30b62afd2'
+              'a6f5f7257fe9dc0bb6792365c3148529'
+              'f64bcb81d10fc5e80ad9c63e3721a8d7')
+
+         
 package(){
  install -Dm755 "${srcdir}/micro-${pkgver}/micro" "${pkgdir}/usr/bin/micro"
  install -Dm755 "$startdir/micro-st" "${pkgdir}/usr/bin/micro-st" 
