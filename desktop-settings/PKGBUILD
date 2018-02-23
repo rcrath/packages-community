@@ -12,8 +12,8 @@ pkgname=('manjaro-bspwm-settings'
         #'manjaro-netbook-settings'
         'manjaro-bspwm-mate-settings'
 		)
-pkgver=20180218
-pkgrel=1
+pkgver=20180221
+pkgrel=3
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -94,8 +94,6 @@ package_manjaro-bspwm-mate-settings() {
         'rofi-scripts'
         'sxhkd'
         'manjaro-base-skel'
-        'thunar-gtk3'
-        'mousepad'
         'breeze-maia-icon-themes'
         'gtk-theme-breath'
         'qt5ct'
@@ -112,7 +110,8 @@ package_manjaro-bspwm-mate-settings() {
         'mate-power-manager'
         'manjaro-browser-settings-native'
         'mate-netbook'
-        'networkmanager-applet'
+        'network-manager-applet'
+        'manjaro-wallpapers-17.0'
         'bspwm-wallpapers')
     _inst_dir 'community/bspwm-mate'
 }
