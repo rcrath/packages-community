@@ -4,8 +4,8 @@
 pkgbase=manjaro-gnome-settings
 pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
 #          'manjaro-gnome-minimal-settings')
-pkgver=20171231
-pkgrel=2
+pkgver=20180224
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
 license=('GPL')
@@ -21,7 +21,7 @@ sha256sums=('SKIP'
             '430c34abc34b7016eb649dafb4580223bc48d3131a01dd1b1c017dcb8b9d290c'
             'b88f69aafc874428d2638c342f3532c7570aa9979f43354bdb66accdfb3b0986'
             '89fce95f80bb8277042d8610850e5c8163696ca94099a0b7442ed74c82cef3fd'
-            '6df4edea2bf18c7f7ebf79318c5c0c2f107bc7ccc69b6b9281eb33d5a48b61f8'
+            '5e27249cfe4bdd655b63ee6b3cc82e0fc272c5cba00a8a09266cde05a0fe9d99'
             '4e17fac482415309fddf61de1ae67e25e1646f61dc5596bfe760011dcc5c9dbd'
             '9c717b32aa9a34b17532f037bd0367a71b5e6dbf7372c774b38052d4e43384c8')
 
@@ -54,7 +54,7 @@ depends=('gnome-shell'
 	     'gnome-shell-extension-openweather'
 	     'gnome-shell-extension-gnomenu'
 		 'gnome-shell-extension-dash-to-dock'
-		 'gnome-shell-extension-topicons-plus'
+		 'gnome-shell-extension-appindicator'
 		 'manjaro-gnome-extension-settings'
 		 'chrome-gnome-shell'
          'gnome-wallpapers'
