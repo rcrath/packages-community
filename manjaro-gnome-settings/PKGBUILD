@@ -4,7 +4,7 @@
 pkgbase=manjaro-gnome-settings
 pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
 #          'manjaro-gnome-minimal-settings')
-pkgver=20180224
+pkgver=20180225
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
@@ -59,7 +59,6 @@ depends=('gnome-shell'
 		 'chrome-gnome-shell'
          'gnome-wallpapers'
          'adapta-maia-theme'
-		 'arc-maia-icon-theme'
          'xcursor-breeze'
          'manjaro-base-skel'
          'qt5-styleplugins'
@@ -68,7 +67,8 @@ depends=('gnome-shell'
          'noto-fonts')
 optdepends=('plymouth-theme-manjaro-gnome-17.0: Plymouth theme'
 			'manjaro-gnome-maia-theme: Branding theme for Gdm and Dash to Dock'
-			'lighter-gnome: some gnome-settings-daemon components')
+			'lighter-gnome: some gnome-settings-daemon components'
+			'papirus-maia-icon-theme: default icons set')
 conflicts=('manjaro-desktop-settings')
 provides=('manjaro-desktop-settings')
 backup=('etc/gdm/PostLogin/Default')

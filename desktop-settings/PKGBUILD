@@ -12,7 +12,7 @@ pkgname=('manjaro-bspwm-settings'
         #'manjaro-netbook-settings'
         'manjaro-bspwm-mate-settings'
 		)
-pkgver=20180224
+pkgver=20180225
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -138,13 +138,12 @@ package_manjaro-budgie-settings() {
     pkgdesc='Manjaro Linux budgie settings'
     depends=('budgie-desktop'
         'adapta-maia-theme'
-        'papirus-maia-icon-theme'
         'budgie-wallpapers'
         'xcursor-breeze'
 		'qt5-styleplugins'
         'qt5ct'
         'manjaro-base-skel')
-    optdepends=('plymouth-theme-manjaro-fancy-budgie' 					'firefox-arc-maia-settings')
+    optdepends=('papirus-maia-icon-theme: default icons set')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
@@ -208,7 +207,8 @@ package_manjaro-mate-settings() {
 		'gnome-icon-theme-symbolic'
         'qt5-styleplugins'
         'qt5ct')
-    optdepends=('mate-icon-theme' 'mate-themes' 'mate-user-guide')
+    optdepends=('mate-icon-theme' 'mate-themes' 'mate-user-guide'
+    			'papirus-maia-icon-theme: default icons theme')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
