@@ -4,16 +4,13 @@
 _name=volnoti-brightness
 pkgname=volnoti
 pkgver=0.1.r3.gc5a94af
-pkgrel=2
+pkgrel=3
 pkgdesc="Lightweight volume and brightness notification for Linux using volnoti"
 url="https://github.com/hcchu/volnoti"
 arch=('i686' 'x86_64')
 license=('GPL3')
 depends=('dbus' 'dbus-glib' 'gtk2' 'gdk-pixbuf2' 'librsvg')
 makedepends=('git' 'pkg-config')
-conflicts=('volnoti')
-replaces=('volnoti')
-provides=('volnoti')
 source=("$_name::git+$url.git")
 md5sums=(SKIP)
 
