@@ -1,0 +1,19 @@
+# Maintainer: Chrysostomus
+
+_snapshot=2b4986673c7a3926b9f644b59559e86bb46e3e2a
+pkgname=awesome-wallpapers
+pkgver=20180301
+pkgrel=1
+pkgdesc="Wallpapers for awesome wm"
+arch=('any')
+license=('GPL3')
+url="https://github.com/Chrysostomus/$pkgname"
+source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_snapshot.tar.gz")
+
+md5sums=('33dd3b45850208a6de4eaf6b86b6aee4')
+
+package() {
+	cd $srcdir/$pkgname-$_snapshot
+	install -dm755 $pkgdir/usr/share
+	cp -r backgrounds $pkgdir/usr/share
+}

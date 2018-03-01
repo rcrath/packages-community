@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=cesious-theme
-pkgver=0.3
+pkgver=0.7
 pkgrel=1
 pkgdesc="Cesious theme for awesome wm"
 arch=(any)
@@ -19,6 +19,6 @@ md5sums=('SKIP')
 
 package () {
 	cd "$srcdir"
-	install -dm755 $pkgdir/usr/share/awesome
-	cp -r $srcdir/$pkgname/cesious $pkgdir/usr/share/awesome
+	install -dm755 $pkgdir/usr/share/awesome/themes/
+	cp -r $srcdir/$pkgname/cesious $pkgdir/usr/share/awesome/themes/
 }

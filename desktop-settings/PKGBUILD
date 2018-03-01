@@ -5,14 +5,14 @@ pkgbase=desktop-settings
 pkgname=('manjaro-bspwm-settings'
 		'manjaro-bspwm-settings-minimal'
         'manjaro-budgie-settings'
-        #'manjaro-awesome-settings'
+        'manjaro-awesome-settings'
         'manjaro-jwm-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-bspwm-mate-settings'
 		)
-pkgver=20180221
+pkgver=20180301
 pkgrel=3
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -116,23 +116,25 @@ package_manjaro-bspwm-mate-settings() {
     _inst_dir 'community/bspwm-mate'
 }
 
-#package_manjaro-awesome-settings() {
-#    pkgdesc='Manjaro Linux awesome settings'
-#    conflicts=('manjaro-desktop-settings')
-#    provides=('manjaro-desktop-settings')
-#    depends=('bspwm-wallpapers'
-#        'xcursor-breeze'
-#        'awesome'
-#        'lain'
-#        'awesome-freedesktop'
-#       'cesious-theme'
-#        'dmenu-manjaro'
-#        'st-manjaro'
-#        'arc-maia-icon-theme'
-#        'arc-themes-maia'
-#        'manjaro-base-skel')
-#    _inst_dir 'community/awesome'
-#}
+package_manjaro-awesome-settings() {
+   pkgdesc='Manjaro Linux awesome settings'
+   conflicts=('manjaro-desktop-settings')
+   provides=('manjaro-desktop-settings')
+   depends=('bspwm-wallpapers'
+       'xcursor-breeze'
+       'awesome'
+       'lain'
+       'awesome-freedesktop'
+       'cesious-theme'
+       'dmenu-manjaro'
+       'st-manjaro'
+       'arc-maia-icon-theme'
+       'rofi-scripts'
+       'arc-themes-maia'
+       'manjaro-base-skel'
+       'awesome-wallpapers')
+   _inst_dir 'community/awesome'
+}
 
 package_manjaro-budgie-settings() {
     pkgdesc='Manjaro Linux budgie settings'

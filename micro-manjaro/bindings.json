@@ -24,7 +24,7 @@
     "CtrlShiftUp":    "SelectToStart",
     "CtrlShiftDown":  "SelectToEnd",
     "Enter":          "InsertNewline",
-    "CtrlH":          "Backspace",
+    "CtrlH":          "DeleteWordLeft",
     "Backspace":      "Backspace",
     "Alt-CtrlH":      "DeleteWordLeft",
     "Alt-Backspace":  "DeleteWordLeft",

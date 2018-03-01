@@ -1,7 +1,7 @@
 # Maintainer: Matti Hyttinen
 
 pkgname='refind-theme-maia'
-pkgver=r31.70de37b
+pkgver=r32.8e5f434
 pkgrel=1
 pkgdesc="Manjaro theme for rEFInd"
 arch=('any')

@@ -2,8 +2,8 @@
 # Maintainer: Chrysostomus
 
 pkgname=limepanel
-_ver=0.32
-pkgver=0.32.r112.ge70ae52
+_ver=0.33
+pkgver=0.33.r114.gca1e566
 pkgrel=1
 pkgdesc="Panel script for bspwm using patched dmenu and lemonbar"
 arch=('any')
@@ -11,7 +11,10 @@ url="https://github.com/Chrysostomus/$pkgname"
 license=('MIT')
 depends=('lemonpanel'
 	 'dash'
-	 'wireless_tools')
+	 'wireless_tools'
+	 'stalonetray'
+	 'terminus-font'
+	 'nerd-fonts-terminus')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/limepanel")
 md5sums=('SKIP')
@@ -24,6 +27,8 @@ pkgver() {
 package () {
 	cd $srcdir/$pkgname
 	install -dm755 $pkgdir/usr
+	install -dm755 $pkgdir/usr/share/limepanel/
+	cp stalonetrayrc $pkgdir/usr/share/limepanel/
 	cp -r bin $pkgdir/usr
 	chmod a+x $pkgdir/usr/bin/*
 }

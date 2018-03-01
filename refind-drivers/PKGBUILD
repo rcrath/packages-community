@@ -1,0 +1,19 @@
+# Maintainer: Chrysostomus @forum.manjaro.org
+
+pkgname=refind-drivers
+pkgver=0.1
+pkgrel=1
+pkgdesc="Extra file system drivers for refind"
+arch=(x86_64)
+url="https://github.com/Chrysostomus/$pkgname"
+license=(MIT)
+depends=('refind-efi')
+makedepends=('git')
+source=("git://github.com/Chrysostomus/$pkgname")
+md5sums=('SKIP')
+
+package () {
+	cd "$srcdir"
+	install -dm755 $pkgdir/usr/share/refind/drivers_x64
+	cp  $srcdir/$pkgname/drivers/* $pkgdir/usr/share/refind/drivers_x64
+}

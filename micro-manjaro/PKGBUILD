@@ -5,7 +5,7 @@
 # Previous Contributor: blainester <theblainestory at gmail com>
 pkgname=micro-manjaro
 pkgver=1.4.0
-pkgrel=3
+pkgrel=4
 pkgdesc="A modern and intuitive terminal-based text editor"
 arch=('x86_64' 'i686')
 url="https://github.com/zyedidia/micro"
@@ -29,12 +29,12 @@ source_i686=("https://github.com/zyedidia/micro/releases/download/v${pkgver}/mic
 
 md5sums_x86_64=('d8565521f49be3fc3d6629b7434c95dc'
                 '8899078181a73c711c61294e61276e3e'
-                'eea763227d4e427f8a409bb30b62afd2'
+                'e2ef756051a7b4ff0cc2104d75a5840b'
                 'a6f5f7257fe9dc0bb6792365c3148529'
                 'f64bcb81d10fc5e80ad9c63e3721a8d7')
 md5sums_i686=('0fb373dc8489dfa7bbdf41fd718f3d18'
               '8899078181a73c711c61294e61276e3e'
-              'eea763227d4e427f8a409bb30b62afd2'
+              'e2ef756051a7b4ff0cc2104d75a5840b'
               'a6f5f7257fe9dc0bb6792365c3148529'
               'f64bcb81d10fc5e80ad9c63e3721a8d7')
 
