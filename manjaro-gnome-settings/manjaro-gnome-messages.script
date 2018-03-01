@@ -4,7 +4,7 @@
 
 #temporary workaround waiting next release
 
-if pacman -Qi cups > /dev/null; then
+if pacman -Qi cups > /dev/null 2>&1; then
    echo
    echo "Printing support installed"
    echo
