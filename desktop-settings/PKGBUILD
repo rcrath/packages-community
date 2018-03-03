@@ -12,8 +12,8 @@ pkgname=('manjaro-bspwm-settings'
         #'manjaro-netbook-settings'
         'manjaro-bspwm-mate-settings'
 		)
-pkgver=20180301
-pkgrel=3
+pkgver=20180303
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -144,7 +144,8 @@ package_manjaro-budgie-settings() {
         'xcursor-breeze'
 		'qt5-styleplugins'
         'qt5ct'
-        'manjaro-base-skel')
+        'manjaro-base-skel'
+        'kvantum-manjaro')
     optdepends=('papirus-maia-icon-theme: default icons set')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
@@ -208,7 +209,8 @@ package_manjaro-mate-settings() {
 		'gnome-icon-theme-extras'
 		'gnome-icon-theme-symbolic'
         'qt5-styleplugins'
-        'qt5ct')
+        'qt5ct'
+        'kvantum-manjaro')
     optdepends=('mate-icon-theme' 'mate-themes' 'mate-user-guide'
     			'papirus-maia-icon-theme: default icons theme')
     conflicts=('manjaro-desktop-settings')
