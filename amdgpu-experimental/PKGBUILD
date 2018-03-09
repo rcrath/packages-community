@@ -5,10 +5,11 @@ pkgrel=1
 arch=('any')
 license=('GPL3')
 source=('10-amdgpu-experimental.conf'
-        'amdgpu.conf'
-        'amdgpu-exp_hw_support.conf'
-	'amdgpu-display_core.conf'
-        'amdgpu-experimental.hook'
+        'x-amdgpu.exp_hw_support.conf'
+        'x-amdgpu-radeon.cik_support.conf'
+	    'x-amdgpu-radeon.si_support.conf'
+        'x-amdgpu.deep_color.conf'
+        'x-amdgpu.dc.conf'
         'MHWDCONFIG_video-amdgpu-experimental'
 	'MHWDCONFIG_video-hybrid-radeon-amdgpu-experimental-prime'
         'MHWDCONFIG_video-hybrid-intel-amdgpu-experimental-prime')
@@ -54,20 +55,24 @@ package_amdgpu-experimental()
 
     ##################################################
     ##
-    ## install module-load file,
-    ## exp_hw_support,
-    ## display_core,
-    ## pacman hook,
-    ## amdgpu-experimental xorg.config
+    ## mod: exp_hw_support,cik_support,si_support,
+    ## mod: deep_color, dc
+    ## libalpm: hook
+    ## xorg: xorg.config
     ##
     ##################################################
-    install -D -m644 "${srcdir}/amdgpu.conf" \
-    "${pkgdir}/usr/lib/modules-load.d/amdgpu.conf"
-    install -D -m644 "${srcdir}/amdgpu-exp_hw_support.conf" \
-    "${pkgdir}/usr/lib/modprobe.d/amdgpu-exp_hw_support.conf"
-    install -D -m644 "${srcdir}/amdgpu-display_core.conf" \
-    "${pkgdir}/usr/lib/modprobe.d/amdgpu-display_core.conf"
-    install -D -m644 "${srcdir}/amdgpu-experimental.hook" \
+
+    install -D -m644 "${srcdir}/x-amdgpu.exp_hw_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.exp_hw_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu-radeon.cik_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu-radeon.cik_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu-radeon.si_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu-radeon.si_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu.deep_color.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.deep_color.conf"
+    install -D -m644 "${srcdir}/x-amdgpu.dc.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.dc.conf"    
+    install -D -m644 "${srcdir}/98-amdgpu-experimental.hook" \
     "${pkgdir}/usr/share/libalpm/hooks/98-amdgpu-experimental.hook"
     install -D -m644 "${srcdir}/10-amdgpu-experimental.conf" \
     "${pkgdir}/usr/share/X11/xorg.conf.d/10-amdgpu-experimental.conf"
