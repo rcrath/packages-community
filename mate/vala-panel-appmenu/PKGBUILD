@@ -18,7 +18,7 @@ pkgname=(
 'vala-panel-appmenu-registrar' 
 )
 
-makedepends=('cmake' 'vala' 'gtk3' 'libwnck3' 'bamf>=0.5.0')
+makedepends=('cmake' 'vala' 'gtk3' 'libwnck3' 'bamf>=0.5.0' 'git')
 
 if (("${_disable_mate}" == 0));then
 	_opts+=(-DENABLE_MATE=ON)
@@ -180,7 +180,7 @@ package_vala-panel-appmenu-translations() {
               'vala-panel-appmenu-valapanel'
               'vala-panel-appmenu-mate'
               'vala-panel-appmenu-budgie')
-  arch=('any')
+  #arch=('any')
   cd "${srcdir}/${_pkgbase}-$pkgver"
   make -C "po" DESTDIR="${pkgdir}" install
   make -C "data" DESTDIR="${pkgdir}" install
