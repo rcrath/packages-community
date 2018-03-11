@@ -4,8 +4,7 @@
 _pkgname=vala-panel
 pkgname=${_pkgname}
 _cmakename=cmake-vala
-_dbusmenuname=vala-dbusmenu
-pkgver=0.3.70
+pkgver=0.3.74
 pkgrel=1
 pkgdesc="Gtk3 panel for compositing window managers"
 url="https://github.com/rilian-la-te/vala-panel"
@@ -17,10 +16,8 @@ provides=('vala-panel=${pkgver}')
 install=vala-panel.install
 optdepends=('vala-panel-appmenu-valapanel: Global Menu')
 source=("$url/releases/download/$pkgver/$pkgname-$pkgver.tar.gz"
-        "git://github.com/rilian-la-te/${_cmakename}.git"
-        "git://github.com/rilian-la-te/${_dbusmenuname}.git")
-sha256sums=('e75ff4701590dfc921c57a9ba3bdee3bf5f4f624d1655ab13c75d623dd6fdd2b'
-            'SKIP'
+        "git://github.com/rilian-la-te/${_cmakename}.git")
+sha256sums=('7b3d870dfe83605faf96e302da5ab96e1f1d7b3f1c16b9fb40f402976601bc21'
             'SKIP')
 
 #pkgver() {
@@ -34,8 +31,6 @@ sha256sums=('e75ff4701590dfc921c57a9ba3bdee3bf5f4f624d1655ab13c75d623dd6fdd2b'
 prepare() {
   cd "${srcdir}/${_cmakename}"
   cp -r . "${srcdir}/${_pkgname}-$pkgver/cmake"
-  cd "${srcdir}/${_dbusmenuname}"
-  cp -r . "${srcdir}/${_pkgname}-$pkgver/lib/dbusmenu"
 }
 
 build() {
