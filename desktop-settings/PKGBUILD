@@ -171,19 +171,25 @@ package_manjaro-jwm-settings() {
 package_manjaro-lxde-settings() {
     pkgdesc='Manjaro Linux lxde settings'
     depends=('manjaro-base-skel'
-    	 'arc-maia-icon-theme'
-	     'adapta-maia-theme'
 	     'lxde-wallpapers'
-	     'qt5ct'
-	     'qt5-styleplugins'
-	     'manjaro-lxde-logout-banner'
 	     'i3-scrot'
-	     'manjaro-lxde-xfce4-volumed-pulse'
 	     'xcursor-breeze')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/lxde'
+}
+
+package_manjaro-openbox-settings() {
+    pkgdesc='Manjaro Linux Openbox Settings'
+    depends=('manjaro-base-skel'
+	     'lxde-wallpapers'
+	     'i3-scrot'
+	     'xcursor-breeze')
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox'
 }
 
 package_manjaro-mate-settings() {
@@ -217,7 +223,7 @@ package_manjaro-mate-settings() {
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/mate'
-    
+
     #hack to set black color on mate-terminal
     install -Dm755 $srcdir/$pkgbase/community/mate/scripts/set-terminal-color $pkgdir/usr/bin/set-terminal-color
 }
