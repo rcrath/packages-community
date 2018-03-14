@@ -3,7 +3,7 @@
 
 pkgbase=desktop-settings
 pkgname=('manjaro-bspwm-settings'
-		'manjaro-bspwm-settings-minimal'
+        'manjaro-bspwm-settings-minimal'
         'manjaro-budgie-settings'
         'manjaro-awesome-settings'
         'manjaro-jwm-settings'
@@ -171,9 +171,9 @@ package_manjaro-jwm-settings() {
 package_manjaro-lxde-settings() {
     pkgdesc='Manjaro Linux lxde settings'
     depends=('manjaro-base-skel'
-	     'lxde-wallpapers'
-	     'i3-scrot'
-	     'xcursor-breeze')
+        'lxde-wallpapers'
+        'i3-scrot'
+        'xcursor-breeze')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
