@@ -4,7 +4,7 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-pkgver=4.2.0.20180313
+pkgver=4.3.0
 pkgrel=1
 _commit=aecb143c528d7fe151ceb7886bb6f342cf126025
 pkgdesc='Deepin desktop-environment - Session UI module'
@@ -18,22 +18,22 @@ makedepends=('qt5-tools' 'deepin-gettext-tools')
 provides=('lightdm-deepin-greeter')
 conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
-source=("$pkgname-$_commit.tar.gz::https://github.com/felixonmars/dde-session-ui/archive/$_commit.tar.gz"
+source=("https://github.com/felixonmars/dde-session-ui/archive/$pkgver.tar.gz"
         'rm_unneeded.patch')
-sha256sums=('2ae5181ea5b4f511b4cb95065b2627e2d2d175b0e83d1f5e40399212e39b9128'
+sha256sums=('ab273d1743b17a122ad40e6bef2288392fd72b64ef30d663c8ec4e9be2b0213d'
             '2c15090dee295efa5a9666eee87ea2ab8e3360e8b2272fb86182ad3d9a718bb5')
 prepare() {
-  cd dde-session-ui-$_commit
+  cd dde-session-ui-$pkgver
   patch -p1 -i $srcdir/rm_unneeded.patch
 }
 
 build() {
-  cd dde-session-ui-$_commit
+  cd dde-session-ui-$pkgver
   qmake-qt5 PREFIX=/usr
   make
 }
 
 package() {
-  cd dde-session-ui-$_commit
+  cd dde-session-ui-$pkgver
   make INSTALL_ROOT="$pkgdir" install
 }
