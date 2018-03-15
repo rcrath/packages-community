@@ -239,6 +239,8 @@ package_manjaro-mate-settings() {
 package_manjaro-openbox-settings() {
     pkgdesc='Manjaro Linux Openbox Settings'
     depends=('adapta-breath-theme'
+            'i3lock-color'
+            'i3lock-fancy'
             'manjaro-base-skel'
             'manjaro-openbox-fonts'
             'manjaro-openbox-common'
