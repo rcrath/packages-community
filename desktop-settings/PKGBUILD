@@ -177,9 +177,11 @@ package_manjaro-jwm-settings() {
 
 package_manjaro-lxde-settings() {
     pkgdesc='Manjaro Linux lxde settings'
-    depends=('manjaro-base-skel'
-            'lxde-wallpapers'
+    depends=('adapta-maia-theme'
             'i3-scrot'
+            'lxde-wallpapers'
+            'manjaro-base-skel'
+            'vibrancy-colors'
             'xcursor-breeze'
             )
     conflicts=('manjaro-desktop-settings')
