@@ -241,7 +241,7 @@ package_manjaro-openbox-settings() {
     depends=('adapta-breath-theme'
             'manjaro-base-skel'
             'manjaro-openbox-fonts'
-            'manjaro-openbox-scripts'
+            'manjaro-openbox-common'
             'manjaro-wallpapers-17.0'
             'openbox'
             'ttf-font-awesome'
