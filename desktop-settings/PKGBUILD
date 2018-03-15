@@ -2,17 +2,18 @@
 # Contributor: artoo <artoo@manjaro.org>
 
 pkgbase=desktop-settings
-pkgname=('manjaro-bspwm-settings'
+pkgname=('manjaro-awesome-settings'
+        'manjaro-bspwm-mate-settings'
+        'manjaro-bspwm-settings'
         'manjaro-bspwm-settings-minimal'
         'manjaro-budgie-settings'
-        'manjaro-awesome-settings'
         'manjaro-jwm-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
-        'manjaro-bspwm-mate-settings'
+        'manjaro-openbox-settings'
 		)
-pkgver=20180312
+pkgver=20180315
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -47,17 +48,18 @@ package_manjaro-bspwm-settings() {
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
     depends=('bspwm-wallpapers'
-        'xcursor-breeze'
-        'feh'
-        'rootmenu'
-        'mygtkmenui'
-        'limepanel'
-        'bspwm-manjaro'
-        'bspwm-scripts'
-        'sxhkd'
-        'manjaro-base-skel'
-        'spacefm'
-        'gedit')
+            'xcursor-breeze'
+            'feh'
+            'rootmenu'
+            'mygtkmenui'
+            'limepanel'
+            'bspwm-manjaro'
+            'bspwm-scripts'
+            'sxhkd'
+            'manjaro-base-skel'
+            'spacefm'
+            'gedit'
+            )
     _inst_dir 'community/bspwm'
 }
 
@@ -66,16 +68,17 @@ package_manjaro-bspwm-settings-minimal() {
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
     depends=('bspwm-wallpapers'
-        'xcursor-breeze'
-        'feh'
-        'rootmenu'
-        'limepanel'
-        'bspwm-manjaro'
-        'bspwm-scripts'
-        'sxhkd'
-        'manjaro-base-skel'
-        'micro-manjaro'
-        'links')
+            'xcursor-breeze'
+            'feh'
+            'rootmenu'
+            'limepanel'
+            'bspwm-manjaro'
+            'bspwm-scripts'
+            'sxhkd'
+            'manjaro-base-skel'
+            'micro-manjaro'
+            'links'
+            )
     _inst_dir 'community/bspwm-minimal'
 }
 
@@ -84,35 +87,36 @@ package_manjaro-bspwm-mate-settings() {
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
     depends=('bspwm-wallpapers'
-        'xcursor-breeze'
-        'feh'
-        'rootmenu'
-        'mygtkmenui'
-        'limepanel'
-        'bspwm-manjaro'
-        'bspwm-scripts'
-        'rofi-scripts'
-        'sxhkd'
-        'manjaro-base-skel'
-        'breeze-maia-icon-themes'
-        'gtk-theme-breath'
-        'qt5ct'
-        'kvantum-manjaro'
-        'mate-session-manager'
-        'mate-tweak'
-        'mate-applets'
-        'mate-control-center'
-        'mate-polkit'
-        'xcape'
-        'mozo'
-        'mate-menus'
-        'mate-notification-daemon'
-        'mate-power-manager'
-        'manjaro-browser-settings-native'
-        'mate-netbook'
-        'network-manager-applet'
-        'manjaro-wallpapers-17.0'
-        'bspwm-wallpapers')
+            'xcursor-breeze'
+            'feh'
+            'rootmenu'
+            'mygtkmenui'
+            'limepanel'
+            'bspwm-manjaro'
+            'bspwm-scripts'
+            'rofi-scripts'
+            'sxhkd'
+            'manjaro-base-skel'
+            'breeze-maia-icon-themes'
+            'gtk-theme-breath'
+            'qt5ct'
+            'kvantum-manjaro'
+            'mate-session-manager'
+            'mate-tweak'
+            'mate-applets'
+            'mate-control-center'
+            'mate-polkit'
+            'xcape'
+            'mozo'
+            'mate-menus'
+            'mate-notification-daemon'
+            'mate-power-manager'
+            'manjaro-browser-settings-native'
+            'mate-netbook'
+            'network-manager-applet'
+            'manjaro-wallpapers-17.0'
+            'bspwm-wallpapers'
+            )
     _inst_dir 'community/bspwm-mate'
 }
 
@@ -121,31 +125,33 @@ package_manjaro-awesome-settings() {
    conflicts=('manjaro-desktop-settings')
    provides=('manjaro-desktop-settings')
    depends=('bspwm-wallpapers'
-       'xcursor-breeze'
-       'awesome'
-       'lain'
-       'awesome-freedesktop'
-       'cesious-theme'
-       'dmenu-manjaro'
-       'st-manjaro'
-       'arc-maia-icon-theme'
-       'rofi-scripts'
-       'arc-themes-maia'
-       'manjaro-base-skel'
-       'awesome-wallpapers')
+           'xcursor-breeze'
+           'awesome'
+           'lain'
+           'awesome-freedesktop'
+           'cesious-theme'
+           'dmenu-manjaro'
+           'st-manjaro'
+           'arc-maia-icon-theme'
+           'rofi-scripts'
+           'arc-themes-maia'
+           'manjaro-base-skel'
+           'awesome-wallpapers'
+           )
    _inst_dir 'community/awesome'
 }
 
 package_manjaro-budgie-settings() {
     pkgdesc='Manjaro Linux budgie settings'
     depends=('budgie-desktop'
-        'adapta-maia-theme'
-        'budgie-wallpapers'
-        'xcursor-breeze'
-		'qt5-styleplugins'
-        'qt5ct'
-        'manjaro-base-skel'
-        'kvantum-manjaro')
+            'adapta-maia-theme'
+            'budgie-wallpapers'
+            'xcursor-breeze'
+            'qt5-styleplugins'
+            'qt5ct'
+            'manjaro-base-skel'
+            'kvantum-manjaro'
+            )
     optdepends=('papirus-maia-icon-theme: default icons set')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
@@ -156,12 +162,13 @@ package_manjaro-budgie-settings() {
 package_manjaro-jwm-settings() {
     pkgdesc='Manjaro Linux jwm settings'
     depends=('cantarell-fonts'
-        'gtk-theme-stylishdark'
-        'jwm-artwork'
-        'jwm-wallpapers'
-        'ultraflatorange-icon-theme'
-        'xcursor-rezowhite'
-        'manjaro-base-skel')
+            'gtk-theme-stylishdark'
+            'jwm-artwork'
+            'jwm-wallpapers'
+            'ultraflatorange-icon-theme'
+            'xcursor-rezowhite'
+            'manjaro-base-skel'
+            )
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
@@ -171,52 +178,42 @@ package_manjaro-jwm-settings() {
 package_manjaro-lxde-settings() {
     pkgdesc='Manjaro Linux lxde settings'
     depends=('manjaro-base-skel'
-        'lxde-wallpapers'
-        'i3-scrot'
-        'xcursor-breeze')
+            'lxde-wallpapers'
+            'i3-scrot'
+            'xcursor-breeze'
+            )
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/lxde'
 }
 
-package_manjaro-openbox-settings() {
-    pkgdesc='Manjaro Linux Openbox Settings'
-    depends=('manjaro-base-skel'
-	     'lxde-wallpapers'
-	     'i3-scrot'
-	     'xcursor-breeze')
-    conflicts=('manjaro-desktop-settings')
-    provides=('manjaro-desktop-settings')
-
-    _inst_dir 'community/openbox'
-}
-
 package_manjaro-mate-settings() {
     pkgdesc='Manjaro Linux mate settings'
     depends=('manjaro-base-skel'
-		'mate-desktop'
-		'mate-menus'
-		'caja'
-		'marco'
-		'mate-control-center'
-		'mate-polkit'
-		'mate-session-manager'
-		'mate-settings-daemon'
-		'brisk-menu'
-		'manjaro-mate-panel-layout'
-		'mate-wallpapers'
-		'mate-notification-theme-slate'
-        'xcursor-breeze'
-        'adapta-maia-theme'
-		'papirus-maia-icon-theme'
-        'maia-wallpaper'
-		'gnome-icon-theme'
-		'gnome-icon-theme-extras'
-		'gnome-icon-theme-symbolic'
-        'qt5-styleplugins'
-        'qt5ct'
-        'kvantum-manjaro')
+            'mate-desktop'
+            'mate-menus'
+            'caja'
+            'marco'
+            'mate-control-center'
+            'mate-polkit'
+            'mate-session-manager'
+            'mate-settings-daemon'
+            'brisk-menu'
+            'manjaro-mate-panel-layout'
+            'mate-wallpapers'
+            'mate-notification-theme-slate'
+            'xcursor-breeze'
+            'adapta-maia-theme'
+            'papirus-maia-icon-theme'
+            'maia-wallpaper'
+            'gnome-icon-theme'
+            'gnome-icon-theme-extras'
+            'gnome-icon-theme-symbolic'
+            'qt5-styleplugins'
+            'qt5ct'
+            'kvantum-manjaro'
+            )
     optdepends=('mate-icon-theme' 'mate-themes' 'mate-user-guide'
     			'papirus-maia-icon-theme: default icons theme')
     conflicts=('manjaro-desktop-settings')
@@ -236,6 +233,26 @@ package_manjaro-mate-settings() {
 
 #    _inst_dir 'community/netbook'
 #}
+
+package_manjaro-openbox-settings() {
+    pkgdesc='Manjaro Linux Openbox Settings'
+    depends=('adapta-breath-theme'
+            'manjaro-base-skel'
+            'manjaro-wallpapers-17.0'
+            'manjaro-zsh-config'
+            'openbox'
+            'openbox-scripts'
+            'ttf-font-awesome'
+            'ttf-ionicons'
+            'ttf-ubuntu-font-family'
+            'vibrancy-colors'
+            'xcursor-breeze'
+            )
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox'
+}
 
 #package_manjaro-pantheon-settings() {
 #    pkgdesc='Manjaro Linux pantheon settings'
