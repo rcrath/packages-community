@@ -1,0 +1,21 @@
+# Maintainer: FadeMind <fademind@gmail.com>
+
+_commit=ff2d417a8ae38dcc15e4049cb21ec1f573916bd9
+pkgname=yakuake-skin-maia
+pkgver=20180315
+pkgrel=1
+pkgdesc="Maia skin for Yakuake"
+arch=('any')
+url="https://github.com/Ste74/yakuake-skin-maia"
+license=('GPL')
+depends=('yakuake')
+source=("${pkgname}.zip::${url}/archive/${_commit}.zip")
+sha256sums=('afc22cd5b069d01d8687e9132ac00e3623c27cdad40e2f37d302ffd4d69f1992')
+
+package() {
+    cd ${srcdir}/${pkgname}-${_commit}
+    find * -type f -exec install -Dm644 '{}' "${pkgdir}/usr/share/yakuake/skins/maia/{}" \;
+    cd ${pkgdir}/usr/share/yakuake/skins/maia
+    rm *.md LICENSE
+}
+
