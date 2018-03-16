@@ -3,7 +3,7 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20180315
+pkgver=20180316
 pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('any')
@@ -21,7 +21,7 @@ pkgver() {
 
 package() {
   cd $pkgname-$_gitcommit
-  mkdir -p $pkgdir/usr/lib/{chrome,chromium,palemoon}/distribution}
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,firefox,palemoon}/distribution
   cp chrome/* $pkgdir/usr/lib/chrome
   cp chrome/* $pkgdir/usr/lib/chromium
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
