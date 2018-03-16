@@ -9,8 +9,8 @@
 
 pkgname=dmenu-manjaro
 _pkgname=dmenu
-pkgver=4.7
-pkgrel=2
+pkgver=4.8
+pkgrel=1
 pkgdesc="customized recency-aware dmenu for manjaro-i3 with xft- and mouse-support"
 arch=('i686' 'x86_64')
 groups=('i3-manjaro')
@@ -24,26 +24,26 @@ conflicts=("$_pkgname" "$_pkgname-xft")
 provides=("$_pkgname" "$_pkgname-xft")
 install=$pkgname.install
 source=("https://dl.suckless.org/tools/$_pkgname-$pkgver.tar.gz"
-        'https://tools.suckless.org/dmenu/patches/dmenu-mousesupport-4.7.diff'
-        'dmenu-4.7-line-height-manjaro.diff'
-        'dmenu-4.7-xyw-manjaro.diff'
+        '001-dmenu-4.8-mousesupport-manjaro.diff'
+        '002-dmenu-4.8-line-height-manjaro.diff'
+        '003-dmenu-4.8-xyw-manjaro.diff'
         'dmenu_recency'
         'dmenurc')
-sha256sums=('a75635f8dc2cbc280deecb906ad9b7594c5c31620e4a01ba30dc83984881f7b9'
-            '084aa281c92bf87103121a031617c3ec10ee63ce40f955aefafc5dbded9489e5'
-            '779de570f7a0e81c23e522a68aed21c50830b8f39982a7f4af022324c65e1f67'
-            '49df8bdb19246b66f61c6dfefe3d1e78300d30808cc215ea6c54a9a641c6cdb2'
+sha256sums=('fe615a5c3607061e2106700862e82ac62a9fa1e6a7ac3d616a9c76106476db61'
+            '2f4038ab07432dec57556d847c3e0104528234fe07f0ada21972d8f610408d95'
+            '2eb6f4f206017e26b21b909be8070e49f44613a8178c5c21314cc15fcf03be31'
+            '63cb0925f0984c62fa4e0943f5d1463c740a14e58a7596cc326e8c51b4b6592b'
             'cfef201547d14bfdb8f192dce369502f015c860e1d84b54fe960f3b9ffbc059c'
             'c0b773af5a1458036d242b19f2e45ed444e6e86d2cf15bedbfb996e8c2fd05b6')
 
 prepare() {
 	cd $_pkgname-$pkgver
 	msg "mouse"
-	patch -p1 < ../dmenu-mousesupport-4.7.diff
+	patch -p1 < ../001-dmenu-4.8-mousesupport-manjaro.diff
 	msg "line-height"
-	patch -p1 < ../dmenu-4.7-line-height-manjaro.diff
+	patch -p1 < ../002-dmenu-4.8-line-height-manjaro.diff
 	msg "xyw"
-	patch -p1 < ../dmenu-4.7-xyw-manjaro.diff
+	patch -p1 < ../003-dmenu-4.8-xyw-manjaro.diff
 }
 build() {
 	cd $_pkgname-$pkgver

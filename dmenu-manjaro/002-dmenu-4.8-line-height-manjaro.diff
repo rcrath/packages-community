@@ -1,18 +1,18 @@
-diff --git a/config.def.h b/config.def.h
-index a9122f7..6d936b7 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -16,4 +16,5 @@
+diff -rupN a/config.def.h b/config.def.h
+--- a/config.def.h	2018-03-14 20:26:40.000000000 +0100
++++ b/config.def.h	2018-03-16 22:02:42.645873845 +0100
+@@ -15,6 +15,7 @@ static const char *colors[SchemeLast][2]
+ };
  /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
  static unsigned int lines      = 0;
 +static unsigned int lineheight = 0;         /* -h option; minimum height of a menu line     */
  
  /*
-diff --git a/dmenu.1 b/dmenu.1
-index d3ab805..9fe4434 100644
---- a/dmenu.1
-+++ b/dmenu.1
-@@ -50,6 +50,9 @@ dmenu matches menu items case insensitively.
+  * Characters not considered part of a word while deleting words
+diff -rupN a/dmenu.1 b/dmenu.1
+--- a/dmenu.1	2018-03-14 20:26:40.000000000 +0100
++++ b/dmenu.1	2018-03-16 22:02:42.645873845 +0100
+@@ -50,6 +50,9 @@ dmenu matches menu items case insensitiv
  .BI \-l " lines"
  dmenu lists items vertically, with the given number of lines.
  .TP
@@ -22,10 +22,9 @@ index d3ab805..9fe4434 100644
  .BI \-m " monitor"
  dmenu is displayed on the monitor number supplied. Monitor numbers are starting
  from 0.
-diff --git a/dmenu.c b/dmenu.c
-index a07f8e3..25832a7 100644
---- a/dmenu.c
-+++ b/dmenu.c
+diff -rupN a/dmenu.c b/dmenu.c
+--- a/dmenu.c	2018-03-14 20:26:40.000000000 +0100
++++ b/dmenu.c	2018-03-16 22:02:42.645873845 +0100
 @@ -130,7 +130,7 @@ drawmenu(void)
  {
  	unsigned int curpos;
@@ -35,9 +34,7 @@ index a07f8e3..25832a7 100644
  
  	drw_setscheme(drw, scheme[SchemeNorm]);
  	drw_rect(drw, 0, 0, mw, mh, 1, 1);
-@@ -145,9 +145,9 @@ drawmenu(void)
- 	drw_text(drw, x, 0, w, bh, lrpad / 2, text, 0);
- 
+@@ -147,7 +147,7 @@ drawmenu(void)
  	drw_font_getexts(drw->fonts, text, cursor, &curpos, NULL);
  	if ((curpos += lrpad / 2 - 1) < w) {
  		drw_setscheme(drw, scheme[SchemeNorm]);
@@ -46,8 +43,7 @@ index a07f8e3..25832a7 100644
  	}
  
  	if (lines > 0) {
-@@ -676,7 +676,8 @@ setup(void)
- 	utf8 = XInternAtom(dpy, "UTF8_STRING", False);
+@@ -712,6 +712,7 @@ setup(void)
  
  	/* calculate menu geometry */
  	bh = drw->fonts->h + 2;
@@ -55,7 +51,7 @@ index a07f8e3..25832a7 100644
  	lines = MAX(lines, 0);
  	mh = (lines + 1) * bh;
  #ifdef XINERAMA
-@@ -754,6 +755,7 @@ setup(void)
+@@ -791,6 +792,7 @@ static void
  usage(void)
  {
  	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
@@ -63,7 +59,7 @@ index a07f8e3..25832a7 100644
  	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
  	exit(1);
  }
-@@ -787,6 +789,10 @@ main(int argc, char *argv[])
+@@ -824,6 +826,10 @@ main(int argc, char *argv[])
  			prompt = argv[++i];
  		else if (!strcmp(argv[i], "-fn"))  /* font or font set */
  			fonts[0] = argv[++i];
@@ -72,5 +68,5 @@ index a07f8e3..25832a7 100644
 +			lineheight = MAX(lineheight,8); /* reasonable default in case of value too small/negative */
 +		}
  		else if (!strcmp(argv[i], "-nb"))  /* normal background color */
- 			normbgcolor = argv[++i];
+ 			colors[SchemeNorm][ColBg] = argv[++i];
  		else if (!strcmp(argv[i], "-nf"))  /* normal foreground color */
