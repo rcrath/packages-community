@@ -8,8 +8,8 @@
 pkgbase=linux414-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
 _basekernel=4.14
-_sub=24
-_rtpatchver=rt19
+_sub=27
+_rtpatchver=rt21
 _bfq=v8r12
 _bfqdate=20171108
 _bfqdate2=20171228
@@ -71,7 +71,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         https://www.kernel.org/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.{xz,sign}
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
-            '6183a67253cf4792431e541fe41e5054665396294cd7e41b94122db195a01357'
+            '74211925a4f15245001836eb8f89568c5b76591cc65d3c006d9198780c51850e'
             'd40d4650d243311bfd3c45b1157c1f226405a5678887c41622e0f67c1ceb1c75'
             '0fb6d51e5d8cd1dc737104c2d1487a38ff7cb50b1f8cce74e1776caa2d51490b'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -98,7 +98,7 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
-            '25a97ea6a090d1453ef504ea6d6e79a1840b9409717f31f85a07fb730438ca46'
+            '776c99dc20613448dbf80504d4388e5de3e1cf3cfebdec0daf72b65b593ef080'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
