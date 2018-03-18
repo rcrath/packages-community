@@ -14,7 +14,7 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-openbox-settings'
 		)
 pkgver=20180316
-pkgrel=2
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
