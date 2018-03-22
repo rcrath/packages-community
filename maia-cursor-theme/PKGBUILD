@@ -2,7 +2,7 @@
 
  _commit=f91d84384cb80833fadec688f245531c8ab30510
 pkgname=maia-cursor-theme
-pkgver=20180317
+pkgver=20180322
 pkgrel=1
 pkgdesc='Maia cursor theme for Plasma'
 arch=('any')
