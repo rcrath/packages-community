@@ -1,6 +1,6 @@
 # Maintainer: FadeMind <fademind@gmail.com>
 
- _commit=5911ffb4cdf7c6da03e8d09b584f5357635f6f3c
+ _commit=f91d84384cb80833fadec688f245531c8ab30510
 pkgname=maia-cursor-theme
 pkgver=20180317
 pkgrel=1
@@ -10,7 +10,7 @@ url='https://github.com/FadeMind/maia-cursor-theme'
 license=('GPL')
 makedepends=('cmake' 'inkscape' 'libcanberra' 'xorg-xcursorgen')
 source=("${pkgname}.zip::${url}/archive/${_commit}.zip")
-sha256sums=('634de4e08b96d56816424e81c0e13de659f45a234337dec1df45fa45095f1480')
+sha256sums=('e413b3d3c488eccb4fbaf46fd6d29f0f8846163ee8bb0dc998ca319937ce04a6')
 
 pkgver() {
 	date +%Y%m%d
