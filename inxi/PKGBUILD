@@ -2,12 +2,12 @@
 
 pkgname=inxi
 pkgver=2.9.02
-pkgrel=1
-pkgdesc="script to get system information (git version)"
+pkgrel=2
+pkgdesc="script to get system information"
 arch=('any')
 url="https://github.com/smxi/inxi"
 license=('GPL')
-depends=('coreutils' 'gawk' 'grep' 'pciutils' 'procps-ng' 'sed')
+depends=('coreutils' 'gawk' 'grep' 'pciutils' 'perl' 'procps-ng' 'sed')
 _commit=c248b812ddb6d1b06b5bc8a816850f29592f0510
 optdepends=(
   "dmidecode: inxi -M if no sys machine data"
