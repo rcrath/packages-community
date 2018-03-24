@@ -4,7 +4,7 @@ diff -rupN os-prober.old/linux-boot-probes/mounted/common/40grub2 os-prober/linu
 @@ -78,10 +78,10 @@ parse_grub_menu () {
  				fi
  			;;
- 			initrd)
+ 			initrd*)
 -				initrd="$(echo "$2" | sed 's/(.*)//')"
 -				# Initrd same.
  				if [ "$partition" != "$bootpart" ]; then
