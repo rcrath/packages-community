@@ -2,7 +2,7 @@
 
 pkgname=inxi
 pkgver=2.9.05
-pkgrel=1
+pkgrel=2
 pkgdesc="script to get system information"
 arch=('any')
 url="https://github.com/smxi/inxi"
@@ -26,12 +26,29 @@ optdepends=(
   "xorg-xrandr: inxi -G single screen resolution"
 )
 options=('zipman')
-source=("$pkgname.tar.gz::$url/archive/$_commit.tar.gz")
-sha256sums=('79c9860d3736a870b72403705063f492ade64fc2c3092713208e3cf2adb78c32')
+source=("$pkgname.tar.gz::$url/archive/$_commit.tar.gz"
+        https://github.com/smxi/inxi/commit/ff0ed7314102b889d4e8a7d0d60b018a3e469971.patch)
+sha256sums=('79c9860d3736a870b72403705063f492ade64fc2c3092713208e3cf2adb78c32'
+            '0fe7e65ec1d6a24ecd43017ce3290918c4fd5a959d6f4f99fe6f7a332612484a')
 
 pkgver() {
     cd $pkgname-$_commit
-     awk '/self_version=/ {print $2}' inxi | cut -c 16-21
+
+    # change version
+    awk '/self_version=/ {print $2}' inxi | cut -c 16-21
+}
+
+prepare() {
+    cd $pkgname-$_commit
+    
+    # temp move inxi to pinxi
+    mv inxi pinxi
+
+    # patches here
+    patch -p1 -i $srcdir/ff0ed7314102b889d4e8a7d0d60b018a3e469971.patch
+
+    # temp move pinxi back to inxi
+    mv pinxi inxi
 }
 
 package() {
