@@ -1,14 +1,14 @@
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
 pkgname=inxi
-pkgver=2.9.06
+pkgver=2.9.07
 pkgrel=1
 pkgdesc="script to get system information"
 arch=('any')
 url="https://github.com/smxi/inxi"
 license=('GPL')
 depends=('coreutils' 'gawk' 'grep' 'pciutils' 'perl' 'procps-ng' 'sed')
-_commit=89333ff370e037c511f5bcba4ca5aca71dceb065
+_commit=0f0433dc9ae2bf5250d6939e207bb3e94d9b7ae9
 optdepends=(
   "dmidecode: inxi -M if no sys machine data"
   "file: inxi -o unmounted file system"
@@ -26,10 +26,8 @@ optdepends=(
   "xorg-xrandr: inxi -G single screen resolution"
 )
 options=('zipman')
-source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_commit.tar.gz"
-        https://github.com/smxi/inxi/commit/manjaro.patch)
-sha256sums=('9ad40eb1845be446a79216da7319f7c2557e6ee9d93f36c017685e8ef5307196'
-            'd67652c87416265919ca18fe9d5a831bc9a89942c05a87d18d87846c85fdb94a')
+source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_commit.tar.gz")
+sha256sums=('04b2011a0ea9b0e0ac1a4d099ca115c65c1bbc3bbe3dcedc30a99e00df0d9ee2')
 
 pkgver() {
     cd $pkgname-$_commit
@@ -45,7 +43,6 @@ prepare() {
     mv inxi pinxi
 
     # patches here
-    patch -p1 -i $srcdir/manjaro.patch
 
     # temp move pinxi back to inxi
     mv pinxi inxi

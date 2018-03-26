@@ -40,6 +40,7 @@ source=("http://www2.ati.com/drivers/linux/amd-catalyst-15.9-linux-installer-$pk
         4.12-npfeiler-movsl_mask.patch
         4.13-npfeiler-wait_queue_t.patch
         4.14-npfeiler-task_struct-mm_segment_t.patch
+	4.16-manjaro.patch
         LICENSE.TXT)
 
 url_ref="http://support.amd.com/en-us/download/desktop?os=Linux+x86"
@@ -107,6 +108,7 @@ build() {
         patch -Np1 -i  ${srcdir}/4.12-npfeiler-movsl_mask.patch
         patch -Np1 -i  ${srcdir}/4.13-npfeiler-wait_queue_t.patch
         patch -Np1 -i  ${srcdir}/4.14-npfeiler-task_struct-mm_segment_t.patch
+        patch -Np1 -i  ${srcdir}/4.16-manjaro.patch
 
         cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
 	cp "${srcdir}/fglrx-$_pkgver/archive_files/arch/x86_64/lib/modules/fglrx/build_mod/libfglrx_ip.a" .
