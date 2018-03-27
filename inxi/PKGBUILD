@@ -1,14 +1,14 @@
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
 pkgname=inxi
-pkgver=2.9.07
+pkgver=2.9.08
 pkgrel=1
 pkgdesc="script to get system information"
 arch=('any')
 url="https://github.com/smxi/inxi"
 license=('GPL')
 depends=('coreutils' 'gawk' 'grep' 'pciutils' 'perl' 'procps-ng' 'sed')
-_commit=0f0433dc9ae2bf5250d6939e207bb3e94d9b7ae9
+_commit=9e9a67168d8e53afd54d4f68142d76b001833bfc
 optdepends=(
   "dmidecode: inxi -M if no sys machine data"
   "file: inxi -o unmounted file system"
@@ -27,7 +27,7 @@ optdepends=(
 )
 options=('zipman')
 source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_commit.tar.gz")
-sha256sums=('04b2011a0ea9b0e0ac1a4d099ca115c65c1bbc3bbe3dcedc30a99e00df0d9ee2')
+sha256sums=('8ef6e924c5a4a5fa01a2ad270eaadb96ef87fddd2a80513cc5c97e8286ab8c21')
 
 pkgver() {
     cd $pkgname-$_commit
