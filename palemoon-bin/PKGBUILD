@@ -1,7 +1,7 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=palemoon-bin
-pkgver=27.8.1
+pkgver=27.8.3
 pkgrel=1
 pkgdesc="Open source web browser based on Firefox focusing on efficiency."
 arch=('i686' 'x86_64')
@@ -21,8 +21,8 @@ source_x86_64=("https://linux.palemoon.org/datastore/release/palemoon-$pkgver.en
 source_i686=("https://linux.palemoon.org/datastore/release/palemoon-$pkgver.en-US.linux-i686.tar.bz2")
 # link to latest tarball: http://linux.palemoon.org/download/mainline/
 sha256sums=('300b57a9c8d9b6d972fab2f025e1432f25a013833f513fd2032ea44b70da999f')
-sha256sums_i686=('d4c518cffc362e361b3ddf930a8f542fade24b1578b6a73b997bbf783061decd')
-sha256sums_x86_64=('a33dcdf4d03d05ec3d634e94411c72ad300cf1c16d69247ce831071b378a7938')
+sha256sums_i686=('14e3db60819845c5003a1b5fd74fa05e175dd41f3a78d71503ae130407d41713')
+sha256sums_x86_64=('3842d84bf551a04f42651581d9011d55e4889c8cacc4e4d8e4c11ae5892bc5e6')
 
 package() {
   install -d "$pkgdir"/usr/{bin,lib}
