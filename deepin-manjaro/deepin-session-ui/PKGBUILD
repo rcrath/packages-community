@@ -4,7 +4,7 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-pkgver=4.3.6
+pkgver=4.3.7
 pkgrel=1
 _commit=aecb143c528d7fe151ceb7886bb6f342cf126025
 pkgdesc='Deepin desktop-environment - Session UI module'
@@ -20,7 +20,7 @@ conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
 source=("https://github.com/felixonmars/dde-session-ui/archive/$pkgver.tar.gz"
         'rm_unneeded.patch')
-sha256sums=('ec96e3b13c1a9edbbf979bb70bec55f46192d631d4ee5379819cf452b13ee8a4'
+sha256sums=('5af522baa4af268878ea04db5ac81e039bb9e8af365185ffb0673e56640b612d'
             '2c15090dee295efa5a9666eee87ea2ab8e3360e8b2272fb86182ad3d9a718bb5')
 prepare() {
   cd dde-session-ui-$pkgver
