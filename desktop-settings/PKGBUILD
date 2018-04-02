@@ -245,6 +245,7 @@ package_manjaro-openbox-settings() {
             'manjaro-wallpapers-17.0'
             'openbox'
             'ttf-font-awesome'
+            'ttf-font-logos'
             'ttf-icomoon-icons'
             'ttf-ionicons'
             'ttf-material-icons'
