@@ -13,8 +13,8 @@ pkgname=('manjaro-awesome-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
 		)
-pkgver=20180316
-pkgrel=1
+pkgver=20180402
+pkgrel=3
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -274,7 +274,7 @@ package_manjaro-openbox-settings() {
             'ttf-polybar-icons'
             'ttf-roboto'
             'vibrancy-colors'
-            'wireless-tools'
+            'wireless_tools'
             'wmctrl'
             'xcape'
             'xcursor-breeze'
