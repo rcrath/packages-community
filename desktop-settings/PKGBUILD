@@ -12,9 +12,9 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
-		)
+        )
 pkgver=20180402
-pkgrel=3
+pkgrel=5
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -249,9 +249,9 @@ package_manjaro-openbox-settings() {
             'kickshaw'
             'libmpdclient'
             'manjaro-base-skel'
-            'manjaro-openbox-fonts'
             'manjaro-openbox-common'
-            'manjaro-wallpapers-17.0'
+            'manjaro-openbox-fonts'
+            'manjaro-openbox-walls'
             'manjaro-zsh-config'
             'nitrogen'
             'ob-autostart'
