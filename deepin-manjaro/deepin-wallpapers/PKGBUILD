@@ -1,7 +1,7 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname="deepin-wallpapers"
-pkgver=20171107
+pkgver=20180404
 pkgrel=1
 epoch=1
 pkgdesc="Wallpapers for manjaro-deepin"
