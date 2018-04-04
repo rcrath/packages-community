@@ -4,8 +4,8 @@
 # Contributor: Dr.Egg <rwhite@archlinux.us>
 
 pkgname=musescore
-pkgver=2.1.0
-pkgrel=1
+pkgver=2.2
+pkgrel=2.1
 pkgdesc='Create, play and print beautiful sheet music'
 arch=('x86_64')
 url='http://musescore.org/'
@@ -17,8 +17,8 @@ makedepends=('cmake' 'doxygen' 'lame' 'qt5-script' 'texlive-core')
 optdepends=('lame: MP3 export')
 source=("musescore-${pkgver}.tar.gz::https://github.com/musescore/MuseScore/archive/v${pkgver}.tar.gz"
     'metronomeVolume.patch')
-sha256sums=('0581b8dd4e9bef51f863baf5b7f03b518f9784c79c0d92d6f0e33b180dd63c47'
-            '9f4894141c7c3ac796009647a11bdec2200b1e998d9e98f4b66027c8378f2dad')
+sha256sums=('5e9a95b984650476f8d9e4f3bbcbddff3ca47be6beb58d14677f865f00acd5e2'
+            '7da8c92ad43410a8f66c6a6986395f56eda18187251855d762b464d9eb9a5b93')
 
 prepare() {
   cd MuseScore-${pkgver}
