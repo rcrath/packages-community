@@ -1,0 +1,43 @@
+# Maintainer: FadeMind <fademind@gmail.com>
+
+pkgname=copyq
+pkgver=3.3.0.r24.gfc93fc8a
+pkgrel=1
+epoch=1
+pkgdesc="Clipboard manager with searchable and editable history."
+url="https://github.com/hluk/CopyQ"
+arch=('x86_64')
+license=('GPL3')
+depends=('libxtst' 'qt5-script' 'hicolor-icon-theme' 'desktop-file-utils')
+makedepends=('cmake' 'git' 'qt5-tools' 'qt5-svg')
+replaces=('copyq-git' 'copyq-plugin-itemweb-git' 'copyq-plugin-itemweb')
+conflicts=('copyq-git' 'copyq-plugin-itemweb-git' 'copyq-plugin-itemweb')
+source=("copyq::git+${url}.git#commit=fc93fc8")
+sha256sums=('SKIP')
+
+prepare() {
+    cd ${pkgname}
+    if [[ -d build ]]; then
+        rm -Rf build
+    fi
+    mkdir -p build
+}
+
+pkgver() {
+    cd ${pkgname}
+    git describe --tags --long | sed -r -e 's,^[^0-9]*,,;s,([^-]*-g),r\1,;s,[-_],.,g'
+}
+
+build() {
+    cd ${pkgname}/build
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DWITH_QT5=TRUE \
+        ${srcdir}/${pkgname}
+    make
+}
+
+package() {
+    cd ${pkgname}/build
+    make DESTDIR="${pkgdir}" install
+}
