@@ -2,7 +2,7 @@
 
 pkgname=manjaro-openbox-walls
 pkgver=1.0
-pkgrel=2
+pkgrel=5
 pkgdesc="Manjaro Openbox Wallpapers"
 arch=('any')
 license=('MIT')
