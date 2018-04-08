@@ -15,7 +15,7 @@ depends=('bash'
 optdepends=('maia-console'
             'terminus-font')
 source=("$url/archive/$pkgver.tar.gz")
-md5sums=('d6a2149929cf1d37ae8a7b65d964f033')
+md5sums=('97f9ecffccc37b91675a84ac30087220')
 
 prepare() {
     cd $pkgbase-$pkgver
