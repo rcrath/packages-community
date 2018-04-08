@@ -1,23 +1,26 @@
+# Maintainer: FadeMind <fademind@gmail.com>
 # Author: esclapion <esclapion[at]gmail[dot]com>
-# Maintainer: esclapion <esclapion[at]gmail[dot]com>
+# Contributor: esclapion <esclapion[at]gmail[dot]com>
 
+_commit=51f96a1850a02a933fd7402d7ffcafe4df010593
 pkgname=mhwd-chroot
-pkgver=1.4
+pkgver=20180408
 pkgrel=1
 pkgdesc="Tool to easily chroot into an installed Linux installation from a live boot"
-url="https://forum.manjaro.org/index.php?topic=21472.0"
+url="https://github.com/FadeMind/mhwd-chroot"
 arch=('any')
 license=('GPL')
 depends=('bash')
 optdepends=('gksu: gnome gui for su'
             'kdesu: kde gui for su')
-source=("http://esclapion.free.fr/AUR/${pkgname}-$pkgver.tar.gz")
-md5sums=('af28f5adaebd9cdce00ce35547528084')
+source=("${url}/archive/${_commit}.tar.gz")
+sha256sums=('5a32a35e4d42c8746f0f5a45ed0bb1d2217db4fc1a86ba9b8c865c892389978c')
+
+
+prepare() {
+    mv ${pkgname}-${_commit} ${pkgname}
+}
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-  install -Dm755 "${pkgname}-shell" "${pkgdir}/usr/bin/${pkgname}-shell"
-  install -Dm644 "${pkgname}-gksu.desktop" "${pkgdir}/usr/share/applications/${pkgname}-gksu.desktop"
-  install -Dm644 "${pkgname}-kdesu.desktop" "${pkgdir}/usr/share/applications/${pkgname}-kdesu.desktop"
+    make -C "${pkgname}" DESTDIR="${pkgdir}" install
 }
