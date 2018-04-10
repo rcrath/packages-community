@@ -1,9 +1,8 @@
 # Maintainer: FadeMind <fademind@gmail.com>
 
 pkgname=copyq
-pkgver=3.3.0
-pkgrel=4
-_commit=37e664ca595f5bf4328b72de793960bc00a6ec0a
+pkgver=3.3.1
+pkgrel=1
 pkgdesc="Clipboard manager with searchable and editable history."
 url="https://github.com/hluk/CopyQ"
 arch=('x86_64')
@@ -12,11 +11,11 @@ depends=('libxtst' 'qt5-script' 'hicolor-icon-theme' 'desktop-file-utils')
 makedepends=('cmake' 'qt5-tools' 'qt5-svg')
 replaces=('copyq-git' 'copyq-plugin-itemweb-git' 'copyq-plugin-itemweb')
 conflicts=('copyq-git' 'copyq-plugin-itemweb-git' 'copyq-plugin-itemweb')
-source=("$url/archive/$_commit.tar.gz")
-sha256sums=('173afa3dfe13e930d3258ff641ea092d761adfa3baca47a349e6a3adad45f465')
+source=("${url}/archive/v${pkgver}.tar.gz")
+sha256sums=('504ca31e8da47c67463d779348c46ff97369138694bc4fbe5adf08b9b38b68bd')
 
 prepare() {
-	mv CopyQ-$_commit $pkgname
+	mv CopyQ-${pkgver} ${pkgname}
 	cd ${pkgname}
     if [[ -d build ]]; then
         rm -Rf build
