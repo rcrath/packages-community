@@ -2,8 +2,8 @@
 
 _pkgbase=manjaro-gdm-18.0-theme
 pkgname=$_pkgbase-dev
-pkgver=20180407
-_commit=bd6ee0091cf41b81533cab59d99e84cc44f73528
+pkgver=20180409
+_commit=af0a6e135b4433cc91ff7502bc58ac1473ddd9eb
 _branch=18.0-Illyria
 _theme=manjaro-gnome-theme
 _hook=gdm-theme-maia
@@ -13,10 +13,9 @@ arch=(any)
 url="https://github.com/Ste74/$_theme"
 license=('GPL3')
 depends=(gnome-shell)
-makedepends=(git)
 source=("$_theme-$_commit.tar.gz::$url/archive/$_branch/_$commit.tar.gz")
 conflicts=('$_pkgbase' 'manjaro-gnome-maia-theme')
-md5sums=('6121ba498f15329ef2817188ba05fabc')
+md5sums=('365cb4d03d32e1950c3ce5f1f930a8ac')
 
 pkgver() {
 	date +%Y%m%d
@@ -26,7 +25,7 @@ package() {
     
     install -Dm644 $srcdir/$_theme-$_branch/.face $pkgdir/etc/skel/.face
     install -dm644 $pkgdir/usr/share/themes/$_pkgbase
-    cp $srcdir/$_theme-$_branch/theme/* $pkgdir/usr/share/themes/$_pkgbase/
+    cp -R $srcdir/$_theme-$_branch/theme/* $pkgdir/usr/share/themes/$_pkgbase/
     
     #Hook
     install -Dm644 $srcdir/$_theme-$_branch/$_hook-install.hook $pkgdir/usr/share/libalpm/hooks/$_hook-install.hook
