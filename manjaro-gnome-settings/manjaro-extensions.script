@@ -1,10 +1,12 @@
 #!/bin/sh
 
-#override dash to dock settings
+#override extensions settings
 
-if [ -f "/usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/gschemas.compiled" ]; then
-	rm -f /usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/gschemas.compiled
-	glib-compile-schemas /usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas
-fi
-
+for i in dash-to-dock@micxgx.gmail.com arc-menu@linxgen33.com; do
+	if [[ -f "/usr/share/gnome-shell/extensions/$i/schemas/gschemas.compiled" ]]; then
+	rm -f /usr/share/gnome-shell/extensions/$i/schemas/gschemas.compiled
+	glib-compile-schemas /usr/share/gnome-shell/extensions/$i/schemas
+	else glib-compile-schemas /usr/share/gnome-shell/extensions/$i/schemas	
+	fi
+done
 

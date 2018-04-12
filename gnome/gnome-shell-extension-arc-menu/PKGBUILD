@@ -1,0 +1,17 @@
+# Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
+
+pkgname=gnome-shell-extension-arc-menu
+pkgver=17
+pkgrel=1
+pkgdesc='A GNOME shell extension designed to replace the standard menu found in GNOME 3.'
+arch=(any)
+url="https://github.com/LinxGem33/Arc-Menu"
+license=('GPL2')
+depends=('gnome-shell')
+source=("$url/archive/v$pkgver.tar.gz")
+sha256sums=('2f45870eb0d8b928c93467f05be88097aeb639c7e970be5af5ded3fb16c1654d')
+
+package() {
+  cd Arc-Menu-$pkgver
+  make DESTDIR="$pkgdir" INSTALL="system" install
+}
