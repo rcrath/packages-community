@@ -4,7 +4,7 @@
 _pkgname=deepin-desktop-schemas
 pkgname=$_pkgname-manjaro
 pkgver=3.2.10
-pkgrel=1
+pkgrel=2
 pkgdesc='Manjaro Linux Deepin gschemas'
 arch=('any')
 url="https://github.com/linuxdeepin/$_pkgname"
@@ -14,7 +14,8 @@ depends=('dconf'
     'deepin-iconthemes-manjaro'
     'deepin-sound-theme'
     'deepin-wallpapers'
-    'noto-fonts')
+    'noto-fonts'
+    'noto-fonts-compat')
 makedepends=('git')
 conflicts=("$_pkgname"
     'deepin-artwork-themes')
