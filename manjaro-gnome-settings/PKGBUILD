@@ -4,8 +4,8 @@
 pkgbase=manjaro-gnome-settings
 pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
 #          'manjaro-gnome-minimal-settings')
-pkgver=20180405
-pkgrel=1
+pkgver=20180413
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
 license=('GPL')
@@ -23,7 +23,7 @@ sha256sums=('SKIP'
             '89fce95f80bb8277042d8610850e5c8163696ca94099a0b7442ed74c82cef3fd'
             '5e27249cfe4bdd655b63ee6b3cc82e0fc272c5cba00a8a09266cde05a0fe9d99'
             '4e17fac482415309fddf61de1ae67e25e1646f61dc5596bfe760011dcc5c9dbd'
-            '9c717b32aa9a34b17532f037bd0367a71b5e6dbf7372c774b38052d4e43384c8')
+            'c497c9bae5aca6b62b741a56b51f35232fb33d90eb08a5a6b44e2cbd80c8ae24')
 
 pkgver() {
 	date +%Y%m%d
@@ -44,6 +44,8 @@ _inst_dir-extension(){
 	install -d $pkgdir/usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas
 	cp $srcdir/$pkgbase/schemas/10_dash-to-dock.gschema.override $pkgdir/usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas
 		
+	install -d $pkgdir/usr/share/gnome-shell/extensions/arc-menu@linxgen33.com/schemas
+	cp $srcdir/$pkgbase/schemas/10_arc-menu.gschema.override $pkgdir/usr/share/gnome-shell/extensions/arc-menu@linxgen33.com/schemas
 }
 
 package_manjaro-gnome-settings() {
@@ -52,7 +54,7 @@ depends=('gnome-shell'
      	 'gnome-shell-extension-taskbar'
        	 'gnome-shell-extensions'
 	     'gnome-shell-extension-openweather'
-	     'gnome-shell-extension-gnomenu'
+	     'gnome-shell-extension-arc-menu'
 		 'gnome-shell-extension-dash-to-dock'
 		 'gnome-shell-extension-appindicator'
 		 'manjaro-gnome-extension-settings'
