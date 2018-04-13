@@ -1,13 +1,14 @@
 # Maintainer: Philip Müller <philm@manjaro.org>
 
 pkgname=('ms-office-online')
-pkgver=18.01.0
+pkgver=18.04.0
 pkgrel=1
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
-depends=('python-jade-application-kit>=0.a26')
+depends=('python-jade-application-kit>=0.a35')
 license=('custom')
 arch=('any')
+provides=('microsoft-office-online' 'microsoft-office')
 source=('ms-office-online'
         'Office.png'
         'PowerPoint.png'
@@ -15,26 +16,30 @@ source=('ms-office-online'
         'Word.png'
         'Outlook.png'
         'OneNote.png'
+        'Skype.png'
         'MSOffice.desktop'
         'PowerPoint.desktop'
         'Excel.desktop'
         'Word.desktop'
         'Outlook.desktop'
         'OneNote.desktop'
+        'WebSkype.desktop'
         'application-settings.json')
-sha256sums=('e9f0d18204a4bb5a86c46f02d72f489177787caf18dd8b01fbb65c3647905eff'
-            'f60711baf4e761493e20895fd48c1715f40cd3aae13c3a31281ac66a681f4b4f'
-            '2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
-            'e58d848d97212c0faa4c4c854931422c714f603636f41f1ab69798f50322a62f'
-            '30054dc858159919b71fb92c047a596696717c1a744bba9388320b354f1a50fa'
-            '067b43cfe2c1f2a6298a39509992525e03e95d8ffb0140b887e4e68706925efd'
-            'dfa2b513a8a27b52ae1e441f745e01e85929b4bbfe393a347428d2eec27be2c9'
+sha256sums=('e2cdbcd8a824975008f7fff42679403b3d61d2eb78c585364ce177fcc6dc6295'
+            '4b56e30b503bf76dd2887677d0ddf892d928655b968ce484253c879525805e3b'
+            'ef09c317a685559698a8da72bd455f55a4db7e8a62b3fe0a18caedf5ceba9b83'
+            'f2134e5c8cfd26e0a014d12467d4cb0ee3575f37ffa4ae3fc2422e8ba3093258'
+            '2404ed5e60101f71d287c7f91fc39e4c2e0845af8fea9ad2685a62e7bd4240db'
+            '62903d36d3a13b6504c3ca1e321b556c3eb4940c54ecad76963efdc6239876cc'
+            '60d08c7012ec328e18d24ab1a5bc64370ba8f4b3d13ec9042b0af5f3ac75e29f'
+            'c0b6032b30191f22ab8cd461e697d93c5008a485f33401c4e9b74d3984a29ecb'
             '1ca746fbffffd27197a3cc706549ec70def84d6841fd85886373f9d990572b4f'
             '9d06d13dcb717505b6dad8f8a571d46ca5ff77b7df54d8d3801ecc5d03097d94'
             '5eb8fa731876811fa57079f7a7a28ee7b803b1b95cc836637361be5728c8b1a6'
             '5ae79390d43e82273c5acd76b65bcc610ac37420faae4ce9c8e74d71e1e08355'
             '439143c1fa418a2aa460bb2b181b575975dc2eda0acacfd6601bd427a4d0e7fa'
             '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29'
+            '14c8daf3b9e3deb38e56b0cf029466299f1bd9f32082b678358349d7912d0a65'
             'deb7bd726ea78db904b7c96327ba679b904ec2f0cb14da9b0bdb72cc2378e83f')
 package() {
     # Install ms-office-online launcher
@@ -44,6 +49,7 @@ package() {
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/word/ms-office-online
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/outlook/ms-office-online
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
+    install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/webskype/ms-office-online
 
     # Create binaries
     mkdir -p "${pkgdir}"/usr/bin
@@ -78,6 +84,11 @@ package() {
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/onenote
     sed -i -e "s|_URL_|https://www.onenote.com/notebooks|" "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
 
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/webskype
+    echo "cd /usr/share/ms-office/webskype" >> "${pkgdir}"/usr/bin/webskype
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/webskype
+    sed -i -e "s|_URL_|https://web.skype.com|" "${pkgdir}"/usr/share/ms-office/webskype/ms-office-online
+
     chmod a+x "${pkgdir}"/usr/bin/*
 
     # Install json settings
@@ -87,6 +98,7 @@ package() {
     install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/word/application-settings.json
     install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
     install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/webskype/application-settings.json
 
     # Configure json settings
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Office.png|" "${pkgdir}"/usr/share/ms-office/msoffice/application-settings.json
@@ -95,6 +107,7 @@ package() {
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Skype.png|" "${pkgdir}"/usr/share/ms-office/webskype/application-settings.json
 
     # Install icons
     install -Dm644 "${srcdir}"/Office.png "${pkgdir}"/usr/share/icons/ms-office/Office.png
@@ -103,6 +116,7 @@ package() {
     install -Dm644 "${srcdir}"/Word.png "${pkgdir}"/usr/share/icons/ms-office/Word.png
     install -Dm644 "${srcdir}"/Outlook.png "${pkgdir}"/usr/share/icons/ms-office/Outlook.png
     install -Dm644 "${srcdir}"/OneNote.png "${pkgdir}"/usr/share/icons/ms-office/OneNote.png
+    install -Dm644 "${srcdir}"/Skype.png "${pkgdir}"/usr/share/icons/ms-office/Skype.png
 
     # Install desktop files
     install -Dm644 "${srcdir}"/MSOffice.desktop "${pkgdir}"/usr/share/applications/MSOffice.desktop
@@ -110,5 +124,6 @@ package() {
     install -Dm644 "${srcdir}"/Excel.desktop "${pkgdir}"/usr/share/applications/Excel.desktop
     install -Dm644 "${srcdir}"/Word.desktop "${pkgdir}"/usr/share/applications/Word.desktop
     install -Dm644 "${srcdir}"/Outlook.desktop "${pkgdir}"/usr/share/applications/Outlook.desktop
-    install -Dm644 "${srcdir}"/OneNote.desktop "${pkgdir}"/usr/share/applications/OneNote.desktop 
+    install -Dm644 "${srcdir}"/OneNote.desktop "${pkgdir}"/usr/share/applications/OneNote.desktop
+    install -Dm644 "${srcdir}"/WebSkype.desktop "${pkgdir}"/usr/share/applications/WebSkype.desktop
 }

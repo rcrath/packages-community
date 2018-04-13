@@ -10,7 +10,11 @@ from gi.repository import Gtk, WebKit2
 
 WEB_APP = "_URL_"
 
-allowedDomains = (WEB_APP, "https://www.onenote.com", "https://outlook.live.com", "https://office.live.com", "https://www.office.com")
+allowedDomains = (WEB_APP, "https://www.onenote.com", "https://outlook.live.com",
+                  "https://office.live.com", "https://www.office.com", "https://office365.com",
+                  "https://r4.res.office365.com", "https://secure.aadcdn.microsoftonline-p.com",
+                  "https://d.docs.live.net", "https://web.skype.com", "https://flow.microsoft.com",
+                  "https://www.sway.com", "https://calendar.live.com", "https://people.live.com")
 
 class applicationWindow(AppWindow):
     """
