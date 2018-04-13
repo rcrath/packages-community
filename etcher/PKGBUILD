@@ -20,4 +20,6 @@ sha256sums_x86_64=('366a083b6009ae75830fd920a947812ab9c7ec3a2039dc1b8524d28640b8
 package() {
     cd "$pkgdir"
     tar xf "$srcdir/data.tar.xz"
+    mkdir -p usr/bin
+    ln -s /opt/Etcher/etcher-electron usr/bin
 }
