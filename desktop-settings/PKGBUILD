@@ -13,8 +13,8 @@ pkgname=('manjaro-awesome-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
         )
-pkgver=20180402
-pkgrel=5
+pkgver=20180412
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -207,7 +207,6 @@ package_manjaro-mate-settings() {
             'mate-notification-theme-slate'
             'xcursor-breeze'
             'adapta-maia-theme'
-            'papirus-maia-icon-theme'
             'maia-wallpaper'
             'gnome-icon-theme'
             'gnome-icon-theme-extras'
