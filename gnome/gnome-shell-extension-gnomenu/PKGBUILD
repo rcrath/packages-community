@@ -4,28 +4,32 @@
 pkgname=gnome-shell-extension-gnomenu
 _pkgname=gno-menu
 pkgver=23
-pkgrel=1
+pkgrel=2
 _git=no
 pkgdesc="GnoMenu is a traditional styled full featured Gnome-Shell apps-menu, that aims to offer all the essentials in a simple uncluttered intuitive interface."
 arch=(any)
 url="https://github.com/The-Panacea-Projects/Gnomenu"
 license=(GPL3)
-depends=('gnome-shell' 'gnome-tweak-tool')
+depends=('gnome-shell' 'gnome-tweak-tool' 'gnome-menus')
 makedepends=(git)
 md5sums=('ad998dabeb658436a060db61c07852ce'
-         'e3e8538d7c57eb723fb92388f0f4a5f1')
+         'e3e8538d7c57eb723fb92388f0f4a5f1'
+         'a0a3b183601fc93138bd9107170cd758')
 
 if [ "$_git" == "yes" ]; then
 _snapshot=$(git log --pretty=format:'%h' -n 1)
    source=("$_pkgname.v$pkgver::git+$url"
-	   "manjaro.patch")
+	   "manjaro.patch"
+           "gnome-328-compat.patch")
 
 prepare() {
 
 # Override the shortcut to call gnomenu (default is F2 now <Shift>F3)
 
-cd ${_pkgname}.v${pkgver}/schemas
+  cd ${_pkgname}.v${pkgver}/schemas
   patch -N -i ${srcdir}/manjaro.patch
+  cd ..
+  patch -Np1 -i ${srcdir}/gnome-328-compat.patch
 }
 
 package(){
@@ -44,16 +48,17 @@ package(){
 else
 
    source=("https://github.com/The-Panacea-Projects/Gnomenu/archive/$_pkgname.v$pkgver.tar.gz"
-	   "manjaro.patch")
+	   "manjaro.patch"
+           "gnome-328-compat.patch")
 
 prepare() {
 
 # Override the shortcut to call gnomenu: default is F2 now <Shift>F3
 
   cd Gnomenu-${_pkgname}.v${pkgver}/schemas
-
-
   patch -N -i ${srcdir}/manjaro.patch
+  cd ..
+  patch -Np1 -i ${srcdir}/gnome-328-compat.patch
 }
 
 
