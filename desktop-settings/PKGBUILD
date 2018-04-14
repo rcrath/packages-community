@@ -253,6 +253,7 @@ package_manjaro-openbox-settings() {
             'lxmenu-data'
             'manjaro-base-skel'
             'manjaro-openbox-common'
+            'manjaro-openbox-grub-theme'
             'manjaro-openbox-fonts'
             'manjaro-openbox-walls'
             'manjaro-zsh-config'
