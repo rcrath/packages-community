@@ -2,14 +2,24 @@
 
 pkgname=gnome-shell-extension-arc-menu
 pkgver=17
-pkgrel=1
+pkgrel=3
 pkgdesc='A GNOME shell extension designed to replace the standard menu found in GNOME 3.'
 arch=(any)
 url="https://github.com/LinxGem33/Arc-Menu"
 license=('GPL2')
-depends=('gnome-shell')
-source=("$url/archive/v$pkgver.tar.gz")
-sha256sums=('2f45870eb0d8b928c93467f05be88097aeb639c7e970be5af5ded3fb16c1654d')
+depends=('gnome-shell' 'gnome-menus')
+source=("$url/archive/v$pkgver.tar.gz"
+        '01-sybolic-correction.patch::https://github.com/LinxGem33/Arc-Menu/commit/042d719ea5a55e69a71bb2bbcc9cb8423b7a134b.patch'
+        '02-sybolic-correction.patch::https://github.com/LinxGem33/Arc-Menu/commit/61945623dd29611ea098cb03e9bda762844fc42b.patch')
+sha256sums=('2f45870eb0d8b928c93467f05be88097aeb639c7e970be5af5ded3fb16c1654d'
+            '38b1d7aba4d563f5d06bdb847f4dc23572d967bd9fff67d7f1a9dedafde23005'
+            'ebe782e52a7adbdba03bfc07375fb613d4fee0a12a1721a9df4c3566c937f253')
+
+prepare() {
+  cd Arc-Menu-$pkgver
+  patch -p1 -i "$srcdir/01-sybolic-correction.patch"
+  patch -p1 -i "$srcdir/02-sybolic-correction.patch"
+}
 
 package() {
   cd Arc-Menu-$pkgver
