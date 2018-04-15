@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.6.7
-pkgrel=2
+pkgrel=3
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 url="https://github.com/linuxmint/Cinnamon"
@@ -59,11 +59,13 @@ source=( #"$pkgname-$pkgver.tar.gz::$url/archive/$pkgver.tar.gz"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch'
+    "user-applet.patch::$url/commit/12ac916942e9fb15d6e94bbff73d7a645818a70f.patch"
 )
 sha256sums=('SKIP'
             '5890a3723c28a6679db92cbd87d7e06ea5e5ecf6b7be3494b38decbe814c1f0e'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
-            '6bd365915fc400be2e245104659744a038c61fe618c47d96977d750ba3e4e3d7')
+            '6bd365915fc400be2e245104659744a038c61fe618c47d96977d750ba3e4e3d7'
+            'cbac2c3ae5a5180464b6bd50bd2a360b2351a3af309074d5ef9386119470abe5')
             
 prepare() {
   cd ${srcdir}/Cinnamon*
@@ -76,6 +78,9 @@ prepare() {
   
   # add MSM to cinnamon-settings
   patch -Np1 -i ../add-msm.patch
+
+  # user-applet: fix loading with newer accountsservice
+  patch -Np1 -i ../user-applet.patch
 
   # Add polkit agent to required components
   sed -i 's/RequiredComponents=\(.*\)$/RequiredComponents=\1polkit-gnome-authentication-agent-1;/' \
