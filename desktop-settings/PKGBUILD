@@ -14,7 +14,7 @@ pkgname=('manjaro-awesome-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
         )
-pkgver=20180412
+pkgver=20180415
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -238,53 +238,8 @@ package_manjaro-mate-settings() {
 
 package_manjaro-openbox-settings() {
     pkgdesc='Manjaro Linux Openbox Settings'
-    depends=('adapta-breath-theme'
-            'adobe-source-code-pro-fonts'
-            'adwaita-icon-theme'
-            'compton'
-            'conky'
-            'dunst'
-            'gnome-icon-theme'
-            'i3lock'
-            'imagemagick'
-            'jsoncpp'
-            'kickshaw'
-            'libmpdclient'
-            'lxmenu-data'
-            'manjaro-base-skel'
+    depends=('manjaro-base-skel'
             'manjaro-openbox-common'
-            'manjaro-openbox-grub-theme'
-            'manjaro-openbox-fonts'
-            'manjaro-openbox-walls'
-            'manjaro-zsh-config'
-            'nitrogen'
-            'ob-autostart'
-            'obkey-gtk3'
-            'obmenu-generator'
-            'openbox'
-            'openbox-menu'
-            'opensnap'
-            'polybar'
-            'rofi'
-            'skippy-xd'
-            'scrot'
-            'tint2'
-            'trayer-srg'
-            'ttf-dejavu'
-            'ttf-font-awesome'
-            'ttf-font-logos'
-            'ttf-icomoon-icons'
-            'ttf-ionicons'
-            'ttf-material-icons'
-            'ttf-polybar-icons'
-            'ttf-roboto'
-            'vibrancy-colors'
-            'wireless_tools'
-            'wmctrl'
-            'xcape'
-            'xcursor-breeze'
-            'xdotool'
-            'zenity'
             )
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
