@@ -4,7 +4,7 @@
 # Contributor: Balló György <ballogyor+arch at gmail dot com>
 
 pkgname=mate-tweak
-pkgver=18.04.14
+pkgver=18.04.16
 #_umsver=18.04.4
 #_commit=4e5a4cc76970b98b3f14f11bc3495fd104568b10
 pkgrel=1
@@ -25,7 +25,7 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/ubuntu-mate/$pkgname/archiv
 		 #"ubuntu-mate-settings-$_umsver.tar.gz::https://github.com/ubuntu-mate/ubuntu-mate-settings/archive/$_umsver.tar.gz"
 		 #"$pkgname-$pkgver.tar.gz::$url/archive/$_commit.tar.gz"
 		 )
-sha256sums=('c820818f2f67c1b6b5dfc0bb8c452c93f428b3f1b6ba6a1f752d4d772624a04e')
+sha256sums=('67593f9f6cc0040a2bef2828146d69e6f8ce4ec25bd4ff87c907fa954681ede9')
 
 #prepare() {
 #  cd "$pkgname-$pkgver"

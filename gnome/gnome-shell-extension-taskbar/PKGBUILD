@@ -1,7 +1,7 @@
 #Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
 pkgname=gnome-shell-extension-taskbar
-pkgver=56.0
+pkgver=57.0
 pkgrel=1
 _author=zpydr
 pkgdesc="GNOME Shell Extension TaskBar"
@@ -11,8 +11,8 @@ license=('GPL')
 depends=('gnome-shell')
 source=("https://github.com/${_author}/${pkgname}/archive/${pkgver}.tar.gz"
 	'manjaro.patch')
-md5sums=('d90cb8ad5de0a0ce4b1a1f73dadc9e04'
-         'e373aed861a0fca00edb143298b1d9f1')
+md5sums=('8eca819695db34ae612b03a33054f49c'
+         '0a2df06177dc26f62cb2432534999b35')
 
 prepare() {
 
@@ -29,6 +29,4 @@ package() {
   cp -a * "$pkgdir/usr/share/gnome-shell/extensions/TaskBar@zpydr/"
   rm $pkgdir/usr/share/gnome-shell/extensions/TaskBar@zpydr/schemas/gschemas.compiled
   glib-compile-schemas $pkgdir/usr/share/gnome-shell/extensions/TaskBar@zpydr/schemas
-
-
 }
