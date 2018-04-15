@@ -2,7 +2,7 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-cinnamon-settings
-pkgver=20180405
+pkgver=20180415
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
@@ -11,7 +11,7 @@ pkgdesc='Manjaro Linux Cinnamon settings'
 depends=('artwork-cinnamon-minimal'
         'cantarell-fonts'
         'cinnamon'
-        'papirus-maia-icon-theme'
+#        'papirus-maia-icon-theme' # for 18.0.x
         'ttf-comfortaa'
         'xcursor-breeze'
         'manjaro-base-skel')
