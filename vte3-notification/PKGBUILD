@@ -13,7 +13,7 @@ arch=('i686' 'x86_64')
 url='https://wiki.gnome.org/Apps/Terminal/VTE'
 license=('LGPL')
 depends=('gtk3' 'pcre2' 'gnutls')
-makedepends=('intltool' 'gobject-introspection' 'gtk-doc' 'vala' 'gperf' 'glade')
+makedepends=('intltool' 'git' 'glade' 'gobject-introspection' 'gperf' 'gtk-doc' 'vala')
 options=('!emptydirs')
 
 # Fedora patches: https://pkgs.fedoraproject.org/cgit/rpms/vte291.git/tree/
