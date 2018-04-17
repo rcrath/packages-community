@@ -21,7 +21,7 @@ source=('ms-office-online'
         'Word.desktop'
         'Outlook.desktop'
         'OneNote.desktop'
-        'application-settings.json')
+        'settings.json')
 sha256sums=('e9f0d18204a4bb5a86c46f02d72f489177787caf18dd8b01fbb65c3647905eff'
             'f60711baf4e761493e20895fd48c1715f40cd3aae13c3a31281ac66a681f4b4f'
             '2d2e4aaf4eb7fe3bc486a33d5d5916223554cad0a4b30be14407e45cc169b517'
@@ -51,50 +51,50 @@ package() {
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/msoffice
     echo "cd /usr/share/ms-office/msoffice" >> "${pkgdir}"/usr/bin/msoffice
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/msoffice
-    sed -i -e "s|_URL_|https://www.office.com/login?es=Click&ru=%2F|" "${pkgdir}"/usr/share/ms-office/msoffice/ms-office-online
+    sed -i -e "s|_URL_MS_OFFICE_|https://www.office.com/login?es=Click&ru=%2F|" "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/powerpoint
     echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/powerpoint
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/powerpoint
-    sed -i -e "s|_URL_|https://office.live.com/start/PowerPoint.aspx|" "${pkgdir}"/usr/share/ms-office/powerpoint/ms-office-online
+    sed -i -e "s|_URL_POWERPOINT_|https://office.live.com/start/PowerPoint.aspx|" "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/excel
     echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/excel
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/excel
-    sed -i -e "s|_URL_|https://office.live.com/start/Excel.aspx|" "${pkgdir}"/usr/share/ms-office/excel/ms-office-online
+    sed -i -e "s|_URL_EXCEL_|https://office.live.com/start/Excel.aspx|" "${pkgdir}"/usr/share/ms-office/excel/settings.json
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/word
     echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/word
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/word
-    sed -i -e "s|_URL_|https://office.live.com/start/Word.aspx|" "${pkgdir}"/usr/share/ms-office/word/ms-office-online
+    sed -i -e "s|_URL_WORD_|https://office.live.com/start/Word.aspx|" "${pkgdir}"/usr/share/ms-office/word/settings.json
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/outlook
     echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/outlook
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/outlook
-    sed -i -e "s|_URL_|https://outlook.live.com/owa|" "${pkgdir}"/usr/share/ms-office/outlook/ms-office-online
+    sed -i -e "s|_URL_OUTLOOK_|https://outlook.live.com/owa|" "${pkgdir}"/usr/share/ms-office/outlook/settings.json
 
     echo "#!/bin/sh" > "${pkgdir}"/usr/bin/onenote
     echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/onenote
     echo "./ms-office-online" >> "${pkgdir}"/usr/bin/onenote
-    sed -i -e "s|_URL_|https://www.onenote.com/notebooks|" "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
+    sed -i -e "s|_URL_ONENOTE_|https://www.onenote.com/notebooks|" "${pkgdir}"/usr/share/ms-office/onenote/settings.json
 
     chmod a+x "${pkgdir}"/usr/bin/*
 
     # Install json settings
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/msoffice/application-settings.json
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/word/application-settings.json
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
-    install -Dm644 "${srcdir}"/application-settings.json "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/excel/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/word/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/outlook/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/onenote/settings.json
 
     # Configure json settings
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Office.png|" "${pkgdir}"/usr/share/ms-office/msoffice/application-settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/PowerPoint.png|" "${pkgdir}"/usr/share/ms-office/powerpoint/application-settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Excel.png|" "${pkgdir}"/usr/share/ms-office/excel/application-settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" "${pkgdir}"/usr/share/ms-office/word/application-settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" "${pkgdir}"/usr/share/ms-office/outlook/application-settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" "${pkgdir}"/usr/share/ms-office/onenote/application-settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Office.png|" "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/PowerPoint.png|" "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Excel.png|" "${pkgdir}"/usr/share/ms-office/excel/settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" "${pkgdir}"/usr/share/ms-office/word/settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" "${pkgdir}"/usr/share/ms-office/outlook/settings.json
+    sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" "${pkgdir}"/usr/share/ms-office/onenote/settings.json
 
     # Install icons
     install -Dm644 "${srcdir}"/Office.png "${pkgdir}"/usr/share/icons/ms-office/Office.png
@@ -110,5 +110,5 @@ package() {
     install -Dm644 "${srcdir}"/Excel.desktop "${pkgdir}"/usr/share/applications/Excel.desktop
     install -Dm644 "${srcdir}"/Word.desktop "${pkgdir}"/usr/share/applications/Word.desktop
     install -Dm644 "${srcdir}"/Outlook.desktop "${pkgdir}"/usr/share/applications/Outlook.desktop
-    install -Dm644 "${srcdir}"/OneNote.desktop "${pkgdir}"/usr/share/applications/OneNote.desktop 
+    install -Dm644 "${srcdir}"/OneNote.desktop "${pkgdir}"/usr/share/applications/OneNote.desktop
 }
