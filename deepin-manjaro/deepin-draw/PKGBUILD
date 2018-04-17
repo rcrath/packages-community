@@ -1,26 +1,26 @@
-# Maintainer: Bernhard Landauer
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
 
 pkgname=deepin-draw
-pkgver=1.0.0
-pkgrel=1
+pkgver=1.0.0  # to be dropped with next upstream update
+pkgrel=1.1
 pkgdesc='Lightweight drawing tool for Linux Deepin.'
 arch=('x86_64')
 url="https://github.com/linuxdeepin/$pkgname"
 license=('GPL3')
+groups=('deepin-extra')
 depends=('deepin-notifications'
-    'dtkwidget'
+    'deepin-qt5integration'
     'dtkwm'
     'freeimage'
-    'libexif'
-    'libraw'
-    'qt5-svg'
-    'libxcb')
+    'libexif')
+makedepends=('qt5-tools')
 source=("$pkgname-$pkgver.tar.gz::http://github.com/linuxdeepin/$pkgname/archive/$pkgver.tar.gz")
-md5sums=('2888fff35365513999d7fde10f5d6a8d')
+sha512sums=('3d0a946756ab377d13b5e4b5adb2c5791e84ab4aea13b94df8bf860313b3d58138d5fbf447aae447608d2ac617ebb98add7249c2d6cd22a41cf7cad59696d685')
 
 build() {
-  cd $pkgname-$pkgver
-  qmake-qt5 QMAKE_CFLAGS_ISYSTEM= PREFIX=/usr
+  cd deepin-draw-$pkgver
+
+  qmake-qt5
   make
 }
 
@@ -28,4 +28,3 @@ package() {
   cd $pkgname-$pkgver
   make INSTALL_ROOT="$pkgdir" install
 }
-
