@@ -14,6 +14,10 @@
         "context_menu": true,
         "user_agent": "",
         "site_quirks": true,
-        "same_frame": ["https://www.onenote.com", "https://outlook.live.com", "https://office.live.com", "https://www.office.com"]
+        "same_frame": ["https://www.onenote.com", "https://outlook.live.com",
+                       "https://office.live.com", "https://www.office.com", "https://office365.com",
+                       "https://r4.res.office365.com", "https://secure.aadcdn.microsoftonline-p.com",
+                       "https://d.docs.live.net", "https://web.skype.com", "https://flow.microsoft.com",
+                       "https://www.sway.com", "https://calendar.live.com", "https://people.live.com"]
     }
 }

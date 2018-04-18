@@ -1,7 +1,7 @@
 # Maintainer: Philip Müller <philm@manjaro.org>
 
 pkgname=('ms-office-online')
-pkgver=18.04.0
+pkgver=18.04.1
 pkgrel=1
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
@@ -39,8 +39,8 @@ sha256sums=('675608ff3510a5b3ae840fe0b680c77a1ef7cecdb33ba6e2c914d844f02d7bba'
             '5ae79390d43e82273c5acd76b65bcc610ac37420faae4ce9c8e74d71e1e08355'
             '439143c1fa418a2aa460bb2b181b575975dc2eda0acacfd6601bd427a4d0e7fa'
             '11c7701466a62cb5369e686a2ba37f63d4c92d073562c26656a4f35046648e29'
-            '22ff1d1cb0c8f614082e56857d55ebcdd4392498464ce9e7bf717ebb42a177ac'
-            '14c8daf3b9e3deb38e56b0cf029466299f1bd9f32082b678358349d7912d0a65')
+            '9dfc8b3508171ede142c0a347795819839ad0654a0b6b4df378c0d12ee115a39'
+            '52a1ed208789762edcb772e732dd880c35f166241d900113d82ee043bbaeefd5')
 package() {
     # Install ms-office-online launcher
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/msoffice/ms-office-online
