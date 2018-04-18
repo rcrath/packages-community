@@ -1,9 +1,10 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname=manjaro-openbox-grub-theme
+_gitname=openbox-grub-theme
 pkgver=1.0
-pkgrel=1
-pkgdesc="Grub theme for Manjaro Openbox"
+pkgrel=2
+pkgdesc="Slick grub theme for Manjaro Openbox"
 arch=('any')
 license=('MIT')
 makedepends=('git')
@@ -11,10 +12,8 @@ source=('git+https://github.com/fhdk/openbox-grub-theme.git')
 install=openbox-grub-theme.install
 sha256sums=('SKIP')
 
-_install_from=openbox-grub-theme
-
 package() {
-    cd $srcdir/$_install_from
+    cd $srcdir/$_gitname
     install -d $pkgdir/boot/grub/themes/openbox
     install -m644 theme/* $pkgdir/boot/grub/themes/openbox/
 }
