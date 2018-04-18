@@ -50,7 +50,16 @@ package() {
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/outlook/ms-office-online
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
     install -Dm755 "${srcdir}"/ms-office-online "${pkgdir}"/usr/share/ms-office/webskype/ms-office-online
-
+    
+    # Install json settings
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/excel/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/word/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/outlook/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/onenote/settings.json
+    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/webskype/settings.json
+    
     # Create binaries
     mkdir -p "${pkgdir}"/usr/bin
 
@@ -90,15 +99,6 @@ package() {
     sed -i -e "s|_URL_|https://web.skype.com|" "${pkgdir}"/usr/share/ms-office/webskype/settings.json
 
     chmod a+x "${pkgdir}"/usr/bin/*
-
-    # Install json settings
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/excel/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/word/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/outlook/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/onenote/settings.json
-    install -Dm644 "${srcdir}"/settings.json "${pkgdir}"/usr/share/ms-office/webskype/settings.json
 
     # Configure json settings
     sed -i -e "s|_icon_|/usr/share/icons/ms-office/Office.png|" "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
