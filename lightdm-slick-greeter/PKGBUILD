@@ -4,7 +4,7 @@
 pkgname='lightdm-slick-greeter'
 _pkgname='slick-greeter'
 pkgver=1.1.4
-pkgrel=4
+pkgrel=5
 pkgdesc='A slick-looking LightDM greeter'
 arch=(i686 x86_64)
 url="https://github.com/linuxmint/${_pkgname}"
@@ -13,16 +13,15 @@ source=("${url}/archive/${pkgver}.tar.gz"
         "$_pkgname.conf"
         "$_pkgname.png")
 depends=('cairo'
-    'freetype2'
-    'gtk3'
-    'libcanberra'
-    'libxext'
-    'lightdm'
-    'manjaro-wallpapers-17.0'
-    'pixman')
+	    'freetype2'
+	    'gtk3'
+	    'libcanberra'
+	    'libxext'
+	    'lightdm'
+	    'pixman')
 makedepends=('intltool'
-    'gnome-common'
-    'vala')
+	    'gnome-common'
+	    'vala')
 backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('a73e5f8a448731b6497fbf6a6599a38892ea316f6c075e3b63a14911ffdf565d'
             '3ec834c879ea1f1da2600cdb59f037ce9668cbaa5a8dc2d8cf63c002c129a3b5'
