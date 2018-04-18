@@ -7,7 +7,7 @@
     "window": {
         "width": 1150,
         "height": 650,
-        "icon": "/usr/share/icons/ms-office/Office.png"
+        "icon": "_icon_"
     },
     "webkit": {
         "cache": "online",
