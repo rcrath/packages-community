@@ -26,7 +26,7 @@ makedepends=('intltool'
 backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('a73e5f8a448731b6497fbf6a6599a38892ea316f6c075e3b63a14911ffdf565d'
             '5cb1f87954c0f0749296d6431347b2bf4ae0a5d8cc4ede481dd40d257d7e67c2'
-            '4009e8dcee20a46273f4af28604618f4210c366d0be2fc647c4eed58fb590493')
+            '1295fc79a111af0834ab95ea2a3a9d2684c42a062b21d88a1a0c88da9ed5ca16')
 
 build() {
     cd ${_pkgname}-${pkgver}
