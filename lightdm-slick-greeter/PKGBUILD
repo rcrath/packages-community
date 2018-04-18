@@ -25,7 +25,7 @@ makedepends=('intltool'
     'vala')
 backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('a73e5f8a448731b6497fbf6a6599a38892ea316f6c075e3b63a14911ffdf565d'
-            '65049a7fe68d8adce0b1f288be4e769ec07cdbef2d8952ec7827f818aa54d839'
+            '5cb1f87954c0f0749296d6431347b2bf4ae0a5d8cc4ede481dd40d257d7e67c2'
             '4009e8dcee20a46273f4af28604618f4210c366d0be2fc647c4eed58fb590493')
 
 build() {
