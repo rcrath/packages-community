@@ -25,7 +25,7 @@ makedepends=('intltool'
     'vala')
 backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('a73e5f8a448731b6497fbf6a6599a38892ea316f6c075e3b63a14911ffdf565d'
-            '5cb1f87954c0f0749296d6431347b2bf4ae0a5d8cc4ede481dd40d257d7e67c2'
+            '3ec834c879ea1f1da2600cdb59f037ce9668cbaa5a8dc2d8cf63c002c129a3b5'
             '1295fc79a111af0834ab95ea2a3a9d2684c42a062b21d88a1a0c88da9ed5ca16')
 
 build() {
@@ -49,5 +49,5 @@ package() {
       $pkgdir/usr/share/xgreeters/lightdm-slick-greeter.desktop
     # Install default conf 
     install -Dm644 $srcdir/$_pkgname.conf $pkgdir/etc/lightdm/$_pkgname.conf
-    install -Dm644 $srcdir/$_pkgname.png $pkgdir/usr/share/backgrounds/$_pkgname.png
+    install -Dm644 $srcdir/$_pkgname.png $pkgdir/usr/share/slick-greeter/$_pkgname.png
 }
