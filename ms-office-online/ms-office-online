@@ -19,11 +19,8 @@ class applicationWindow(AppWindow):
     """
 
     def __init__(self):
-
         super(applicationWindow, self).__init__()
-
         def on_decide_policy(webview, decision, decision_type):
-
             """
             :param webview:
             :param decision:
