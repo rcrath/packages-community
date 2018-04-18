@@ -14,8 +14,8 @@ pkgname=('manjaro-awesome-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
         )
-pkgver=20180415
-pkgrel=1
+pkgver=20180418
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
@@ -238,9 +238,7 @@ package_manjaro-mate-settings() {
 
 package_manjaro-openbox-settings() {
     pkgdesc='Manjaro Linux Openbox Settings'
-    depends=('manjaro-base-skel'
-            'manjaro-openbox-common'
-            )
+    depends=('manjaro-base-skel' 'manjaro-openbox-common')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
