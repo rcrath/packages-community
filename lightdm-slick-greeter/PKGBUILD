@@ -4,7 +4,7 @@
 pkgname='lightdm-slick-greeter'
 _pkgname='slick-greeter'
 pkgver=1.1.4
-pkgrel=2
+pkgrel=4
 pkgdesc='A slick-looking LightDM greeter'
 arch=(i686 x86_64)
 url="https://github.com/linuxmint/${_pkgname}"
@@ -25,7 +25,7 @@ makedepends=('intltool'
     'vala')
 backup=('etc/lightdm/slick-greeter.conf')
 sha256sums=('a73e5f8a448731b6497fbf6a6599a38892ea316f6c075e3b63a14911ffdf565d'
-            '0eba53c7fed56a654aed90f37e09bca3a3d43593ffc51a3eca1cbe14a50e2b09'
+            '3ec834c879ea1f1da2600cdb59f037ce9668cbaa5a8dc2d8cf63c002c129a3b5'
             '1295fc79a111af0834ab95ea2a3a9d2684c42a062b21d88a1a0c88da9ed5ca16')
 
 build() {
