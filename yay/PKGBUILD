@@ -1,22 +1,30 @@
-# Maintainer: Jguer <joaogg3 at gmail dot com>
+# Maintainer: Jguer <joaogg3@gmail.com>
 pkgname=yay
-pkgver=2.350
-pkgrel=1
-pkgdesc="Yet another yogurt. Pacman wrapper and AUR helper written in go. Pre-compiled."
-arch=('x86_64')
+pkgver=5.675
+pkgrel=2
+pkgdesc="Yet another yogurt. Pacman wrapper and AUR helper written in go."
+arch=('i686' 'x86_64' 'armv7h' 'armv6h' 'aarch64')
 url="https://github.com/Jguer/yay"
 license=('GPL')
+options=('!strip' '!emptydirs')
+depends=(
+  'sudo'
+)
+makedepends=(
+  'git'
+  'go'
+)
+conflicts=('yay-bin' 'yay-git')
+source=("https://github.com/Jguer/yay/archive/v${pkgver}.tar.gz")
+sha1sums=('b31326cd033a3d10a45e9e58826548d5ddd302ee')
 
-source=("$url/releases/download/v$pkgver/yay_${pkgver}_$CARCH.tar.gz")
-sha1sums=('d41a764f511e87d10f99ba3c1b2f97dd3110567b')
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make VERSION=$pkgver
+}
 
 package() {
-  cd yay_${pkgver}_$CARCH
-  install -Dm755 yay $pkgdir/usr/bin/yay
-  install -Dm644 yay.8 $pkgdir/usr/share/man/man8/yay.8
-
-  # Shell autocompletion script
-  install -Dm644 bash-completion $pkgdir/usr/share/bash-completion/completions/yay
-  install -Dm644 zsh-completion $pkgdir/usr/share/zsh/site-functions/_yay
-  install -Dm644 yay.fish $pkgdir/usr/share/fish/vendor_completions.d/yay.fish
+  cd "$srcdir/$pkgname-$pkgver"
+  make VERSION=$pkgver DESTDIR="$pkgdir" install
 }
+

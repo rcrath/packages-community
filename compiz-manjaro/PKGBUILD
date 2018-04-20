@@ -8,7 +8,7 @@ _revno=r4138
 _upstream='~compiz-team'
 _greybirdver=1.6.2
 pkgver=0.9.13.1.${_revno}
-pkgrel=4
+pkgrel=5
 pkgdesc="OpenGL compositing window manager. Includes friendly defaults, GWD theme selector and autostart for Xfce & MATE."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/${_name}"
@@ -16,6 +16,7 @@ license=('GPL' 'LGPL' 'MIT')
 depends=('boost' 'xorg-server' 'libxcomposite' 'startup-notification' 'librsvg' 'dbus' 'mesa' 'libxslt' 'fuse' 'glibmm' 'libxrender' 'libwnck3' 'pygtk' 'desktop-file-utils' 'pyrex' 'protobuf' 'metacity' 'glu' 'libsm' 'dconf' 'zenity')
 makedepends=('cmake' 'intltool')
 optdepends=(
+  'xfce4-panel-compiz: Xfce4-panel with fixes for Compiz'
   'xorg-xprop: grab various window properties for use in window matching rules'
 )
 conflicts=('compiz' 'compiz09-manjaro-test' 'compiz-core-bzr' 'compiz-core-devel' 'compiz-core' 'compiz-gtk-standalone' 'compiz-xfce' 'compiz-mate'
@@ -23,7 +24,7 @@ conflicts=('compiz' 'compiz09-manjaro-test' 'compiz-core-bzr' 'compiz-core-devel
            'compiz-decorator-gtk' 'compiz-decorator-kde' 'libcompizconfig' 'compizconfig-python' 'compizconfig-backend-gconf' 'compiz-bcop' 'ccsm')
 replaces=('compiz09-manjaro-test')
 provides=("compiz=${pkgver/.r*/}" "compiz-core=${pkgver/.r*/}" "compiz-bcop=${pkgver/.r*/}" "ccsm=${pkgver/.r*/}" "compiz-plugins-main=${pkgver/.r*/}" "compiz-plugins-extra=${pkgver/.r*/}" "compizconfig-python=${pkgver/.r*/}" "libcompizconfig=${pkgver/.r*/}")
-source=("http://bazaar.launchpad.net/${_upstream}/${_name}/${pkgver:0:6}/tarball/${_revno:1}"
+source=("${pkgname}-${pkgver}.tar.gz::http://bazaar.launchpad.net/${_upstream}/${_name}/${pkgver:0:6}/tarball/${_revno:1}"
         "focus-prevention-disable.patch"
         "gtk-extents.patch"
         "screenshot-launch-fix.patch"
@@ -37,7 +38,7 @@ source=("http://bazaar.launchpad.net/${_upstream}/${_name}/${pkgver:0:6}/tarball
         "compiz-xfce-uninstall-helper"
         "compiz-xfce-uninstall-helper.desktop"
         "greybird-${_greybirdver}.tar.gz::https://github.com/shimmerproject/Greybird/archive/v${_greybirdver}.tar.gz")
-sha256sums=('eaa641ebd0dcb451d5d080fee48277186fe9768c39ec33bca69847a5d6921a8c'
+sha256sums=('d3dca4215d2727d0075c7bf6d659dade46207e3192cdf62ae42cbf4d0f302ddf'
             'f4897590b0f677ba34767a29822f8f922a750daf66e8adf47be89f7c2550cf4b'
             '16ddb6311ce42d958505e21ca28faae5deeddce02cb558d55e648380274ba4d9'
             '89ee91a8ea6b1424ef76661ea9a2db43412366aacddc12d24a7adf5e04bfbc61'

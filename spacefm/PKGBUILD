@@ -5,12 +5,11 @@
 # Contributor: ridikulus_rat <the.ridikulus.rat@gmail.com>
 
 pkgname=spacefm
-_pkgname=$pkgname-ng
 pkgver=1.0.6
-pkgrel=1
+pkgrel=2
 pkgdesc='Multi-panel tabbed file manager'
 arch=('i686' 'x86_64')
-url="https://github.com/Teklad/$_pkgname"
+url="https://github.com/IgnorantGuru/$pkgname"
 license=('GPL3')
 depends=('desktop-file-utils'
          'gtk3'
@@ -31,16 +30,16 @@ optdepends=('dbus: dbus integration'
             'ifuse: mount your iPhone/iPod Touch'
             'fuseiso: mount ISO files')
 source=("$url/archive/$pkgver.tar.gz")
-sha512sums=('1f88c1451a0d6b257bfc1f9214b06eb8fa5706a4f33cfdbfad0907813da5c4bea35632fbfa6fa5b41e8c0da86a028b5a55c3776a90cce3c3ec086adf55b2776b')
+sha512sums=('37fc0dd31f02158502f592415b4c375ee49560af6f03d75b035d7c6c45bdc47064bba1ae8987b4cc8be2e02b3dfcdc17ec760411975e7b5f74343a2293fb2c8c')
 
 build() {
-    cd $_pkgname-$pkgver
+    cd $pkgname-$pkgver
     ./autogen.sh --with-gtk3 --prefix=/usr
     make
 }
 
 package() {
-    cd $_pkgname-$pkgver
+    cd $pkgname-$pkgver
     make DESTDIR=$pkgdir install
     rm $pkgdir/usr/bin/spacefm-installer
 }

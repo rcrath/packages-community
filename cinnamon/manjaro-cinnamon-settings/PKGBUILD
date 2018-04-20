@@ -2,17 +2,18 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-cinnamon-settings
-pkgver=20180203
-pkgrel=1
+pkgver=20180415
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
+_branch=17.1.x
 license=('GPL')
 pkgdesc='Manjaro Linux Cinnamon settings'
 depends=('artwork-cinnamon-minimal'
         'cantarell-fonts'
         'cinnamon'
+#        'papirus-maia-icon-theme' # for 18.0.x
         'ttf-comfortaa'
-        'vibrancy-colors'
         'xcursor-breeze'
         'manjaro-base-skel')
 makedepends=('git')
@@ -20,7 +21,7 @@ optdepends=('plymouth-theme-manjaro-cinnamon'
             'cinnamon-sounds')
 conflicts=('manjaro-desktop-settings')
 provides=('manjaro-desktop-settings')
-source=("git+$url.git")
+source=("git+$url.git#branch=$_branch")
 sha256sums=('SKIP')
 
 pkgver() {

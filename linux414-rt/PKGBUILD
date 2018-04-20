@@ -8,11 +8,11 @@
 pkgbase=linux414-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
 _basekernel=4.14
-_sub=20
-_rtpatchver=rt17
+_sub=34
+_rtpatchver=rt27
 _bfq=v8r12
 _bfqdate=20171108
-_bfqdate2=20171228
+_bfqdate2=20180404
 _basever=${pkgbase//linux}
 _kernelname=-MANJARO
 _pkgver=${_basekernel}.${_sub}
@@ -21,7 +21,13 @@ pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils')
+makedepends=('bc'
+    'docbook-xsl'
+    'elfutils'
+    'git'
+    'inetutils'
+    'kmod'
+    'xmlto')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         # upstream patch
@@ -30,7 +36,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         'config.rt'
         # config for mkinitcpio ramdisk
         "${pkgbase}.preset"
-        # depmod hook
+        # depmod hooktcp
         '60-linux.hook'
         # initramfs regeneration hook
         '90-linux.hook'
@@ -39,7 +45,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         0002-BFQ-${_bfq}-${_bfqdate2}.patch
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
-        0002-xfrm-Fix-stack-out-of-bounds-read-on-socket-policy-l.patch
         # MANJARO Patches
         '0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch::https://bugs.freedesktop.org/attachment.cgi?id=135277'
         '0001-synaptics-lenovo-t460p.patch::https://github.com/torvalds/linux/commit/48282969826b3d3c76e908182f69724d86d995fe.patch'
@@ -66,15 +71,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         https://www.kernel.org/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.{xz,sign}
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
-            'ec38313c7ff463f781fb36502d4b49811a903462f031c5392b95231cc371190f'
+            'd5981abb1f9f73cc64843eefe1501166b6135ca41f73bb4c5dbe960f739edf6c'
             'd40d4650d243311bfd3c45b1157c1f226405a5678887c41622e0f67c1ceb1c75'
             '0fb6d51e5d8cd1dc737104c2d1487a38ff7cb50b1f8cce74e1776caa2d51490b'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '057ef44a8f5a7ef10efbc7d96bf72f651e87a0c1d063b07d922c74232e5e7941'
             '5ac0d9fb774ed038c5537c59836b389bb64bdb50a01f32d0ee8ae03159ca9198'
-            'db5b73136b361c7073d5c16615a4befa1a571127397ae160ef435f8330015c1d'
+            'f51c1b8709bf9f0e642ebd12d48ee1ac41047902a87cf6a783ca794cfa5142dc'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
-            '64a014f7e1b4588728b3ea9538beee67ec63fb792d890c7be9cc13ddc2121b00'
             'c08d12c699398ef88b764be1837b9ee11f2efd3188bd1bf4e8f85dfbeee58148'
             '2fc534377b4059faa3291a93f193f77f44e7a20237d8c4528d8828f48fc94c7f'
             '7618a876eccbd928b39d90bf4f910cb00d216230c4bcd793d48c611ea8d957aa'
@@ -94,7 +98,7 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
-            'e513beee302919078c213d4f4f5bfdc8ccbdd777042a4bd87ae06aaa03704efb'
+            '41fd279473c6d43c7edcec3cc9fd5b524d8c3b74c26974ff30d4f728c2f98e82'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
@@ -128,10 +132,6 @@ prepare() {
   # disable USER_NS for non-root users by default
   msg "disallow-unprivileged-CLONE_NEWUSER patch..."
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
-
-  # https://bugs.archlinux.org/task/56605
-  msg "xfrm patch..."
-  patch -Np1 -i ../0002-xfrm-Fix-stack-out-of-bounds-read-on-socket-policy-l.patch
 
   # Add support for temperature sensors on Family 17h (Ryzen) processors.
   msg "zen temp patches..."

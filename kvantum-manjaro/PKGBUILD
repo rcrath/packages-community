@@ -2,8 +2,8 @@
 # Contributor: ceyhunnabiyev
 
 pkgname=kvantum-manjaro
-pkgver=0.10.5
-pkgrel=3
+pkgver=0.10.6
+pkgrel=1
 pkgdesc="Maia and Breath themes for kvantum-qt5"
 arch=('any')
 url="https://github.com/manjaro/$pkgname"
@@ -15,10 +15,10 @@ optdepends=('adapta-black-breath-theme'
     'adapta-gtk-theme'
     'adapta-maia-theme')
 source=("$pkgname-$pkgver::$url/archive/$pkgver.tar.gz")
-md5sums=('57dd6d66399d62e16e1c9b2b8c0b6957')
+md5sums=('80094277b2cf7ff35602f37bb00be9f5')
 
 package() {
-    cd $pkgname
+    cd $pkgname-$pkgver
     install -dm755 $pkgdir/usr/share
     install -dm755 $pkgdir/usr/share/kde4/apps
     cp -r color-schemes $pkgdir/usr/share

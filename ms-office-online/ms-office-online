@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # coding: utf-8
 try:
-    from j.AK import Api, AppWindow
+    from j.AK import Api, AppWindow, settings
 
 except Exception as err:
     print("Ops something went wrong: " + str(err))
 
+import os, subprocess 
 from gi.repository import Gtk, WebKit2
 
-WEB_APP = "_URL_"
-
-allowedDomains = (WEB_APP, "https://www.onenote.com", "https://outlook.live.com", "https://office.live.com", "https://www.office.com")
+def same_frame():
+    # open url in same window
+    return tuple(settings("webkit", "same_frame"))
 
 class applicationWindow(AppWindow):
     """
@@ -18,35 +19,32 @@ class applicationWindow(AppWindow):
     """
 
     def __init__(self):
-
         super(applicationWindow, self).__init__()
-
         def on_decide_policy(webview, decision, decision_type):
-
             """
             :param webview:
             :param decision:
             :param decision_type:
-            :return: if is not a predicted url open in browser.
+            :return: if is not a predicted url open in separate window.
             """
 
             def check_Link(url):
-                print("checking URL - " + url)
-
-                if url.startswith(allowedDomains):
-                      print("Domain Allowed - loading - " + url)
+                
+                if url.startswith(same_frame()):
                       self.webview.load_uri(url)
 
                 else:
-                    print("Not Allowed - Open In Browser - " + url)
-                    GLib.spawn_command_line_async("xdg-open " + url)
+                    # use existing office settings.json
+                    os.chdir("/usr/share/ms-office/msoffice/")
+                    # open url in a new window
+                    subprocess.call(["jak", url])
 
             if decision_type == WebKit2.PolicyDecisionType.NEW_WINDOW_ACTION:
                 url = decision.get_navigation_action().get_request().get_uri()
                 check_Link(url)
 
 
-        self.webview.load_uri(WEB_APP)
+        self.webview.load_uri(settings("app", "route"))
         self.webview.connect("decide-policy", on_decide_policy)
 
 

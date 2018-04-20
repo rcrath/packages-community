@@ -1,64 +1,34 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
-pkgbase=papirus-icon-theme
 pkgname=papirus-maia-icon-theme
-pkgver=20180214
-pkgrel=1
+pkgver=20180401
+pkgrel=2
+_commit=cad7b4e412e8da7bf8fca372a66739e9bcac4a88
 pkgdesc="Manjaro variation of Papirus icon theme"
 arch=('any')
-url="https://github.com/PapirusDevelopmentTeam/papirus-icon-theme"
+url="https://github.com/Ste74/papirus-maia-icon-theme"
 license=("LGPL3")
-depends=('gtk-update-icon-cache')
-conflicts=("$pkgbase" "$pkgbase-git")
-source=("$pkgbase-$pkgver.tar.gz::https://github.com/PapirusDevelopmentTeam/$pkgbase/archive/$pkgver.tar.gz")
-sha512sums=('e3cff11cb4e0ad71ff5c44da9ef5135ce7fc2f4bea5e95f4c42963868ef7fce19daf45bc7f5649186bbedeb683d8a56a48f859cda17acacad7c3fbf35fdcd291')
+depends=('gtk-update-icon-cache' 'papirus-icon-theme')
+conflicts=( 
+	"$pkgname-git"
+	"papirus-gtk-icon-theme"
+    "papirus-gtk-icon-theme-git"
+    "papirus-icon-theme-gtk"
+    "papirus-icon-theme-gtk-git"
+    "papirus-icon-theme-kde"
+    "papirus-icon-theme-kde-git")
+options=('!strip')
+source=("$pkgname-$_commit::$url/archive/$_commit.tar.gz")
+sha512sums=('8bbbab88bc1917c1f9c7d1f0ff877d0a9776cb760c0b292f1f5dee4fdf353cff6c4268e6aa15ab9d14d6a27cd24f809c6f3c703579e685c84a40320bd13036ae')
 
 prepare() {
-	cd $pkgbase-$pkgver
-
-#Change color for Manjaro
-
-msg "Create Papirus-Maia: this next bit might take a little while..."
-
-	find . -type f -name '*.*' -exec sed -i "s|#4877b1|#3c8d7d|Ig;\
-											s|#5294e2|#16a085|Ig;\
-											s|#1d344f|#266357|Ig;\
-											s|#0096aa|#188694|Ig;\
-											s|#00bcd4|#16a085|Ig" {} \;
-msg "Done Manjarifications"
-
-#Change Icons folders name											
-	sed -i -e 's/ePapirus Papirus Papirus-Adapta Papirus-Adapta-Nokto Papirus-Dark Papirus-Light/Papirus-Maia Papirus-Adapta-Maia Papirus-Adapta-Nokto-Maia Papirus-Dark-Maia Papirus-Light-Maia/g' Makefile
-
-#Remove unused icon theme
-	rm -R ePapirus
-
-#Change Folders name
-	mv Papirus Papirus-Maia
-	mv Papirus-Light Papirus-Light-Maia
-	mv Papirus-Dark Papirus-Dark-Maia
-	mv Papirus-Adapta Papirus-Adapta-Maia
-	mv Papirus-Adapta-Nokto Papirus-Adapta-Nokto-Maia
-
-#Change Theme name	
-	find . -type f -name '*.theme' -exec sed -i '2s/$/-Maia/g' {} \;
-	find . -type f -name '*.theme' -exec sed -i '3s/$/ Maia/g' {} \;
-	
-	
+	mv $pkgname-$_commit $pkgname-$pkgver
+	cd $pkgname-$pkgver
+	rm LICENSE README.md recolor.sh
 }
 
 package() {
-	cd $pkgbase-$pkgver
-	make DESTDIR="$pkgdir" install
-  
-#Recreate all symlinks to match with Papirus tree
-	cd $pkgdir/usr/share/icons
-	mkdir -p Papirus
-	mkdir -p Papirus-Adapta
-	
-	for i in symbolic 64x64 48x48 32x32 24x24 22x22 16x16; do
-		ln -sr $pkgdir/usr/share/icons/Papirus-Maia/$i $pkgdir/usr/share/icons/Papirus/$i
-		ln -sr $pkgdir/usr/share/icons/Papirus-Adapta-Maia/$i $pkgdir/usr/share/icons/Papirus-Adapta/$i
-	done
-
+	cd $pkgname-$pkgver
+	mkdir -p $pkgdir/usr/share/icons
+	cp -R * $pkgdir/usr/share/icons/
 }

@@ -1,19 +1,19 @@
-diff -rupN gnome-shell-extension-taskbar-53.0/extension.js gnome-shell-extension-taskbar-53.0-new/extension.js
---- gnome-shell-extension-taskbar-53.0/extension.js	2016-11-14 11:55:53.000000000 +0100
-+++ gnome-shell-extension-taskbar-53.0-new/extension.js	2016-12-25 22:14:26.082166604 +0100
-@@ -771,7 +771,7 @@ TaskBar.prototype =
-         if ((this.settings.get_boolean("first-start")) && (Main.sessionMode.currentMode === 'user'))
-         {
-             //Comment out the next line to disable the preferences window from opening at the first start
--            Main.Util.trySpawnCommandLine('gnome-shell-extension-prefs ' + Extension.metadata.uuid);
-+            //Main.Util.trySpawnCommandLine('gnome-shell-extension-prefs ' + Extension.metadata.uuid);
-             this.settings.set_boolean("first-start", false);
-         }
-         //Find out if the bottom panel extension is enabled
-diff -rupN gnome-shell-extension-taskbar-53.0/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml gnome-shell-extension-taskbar-53.0-new/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml
---- gnome-shell-extension-taskbar-53.0/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml	2016-11-14 11:55:53.000000000 +0100
-+++ gnome-shell-extension-taskbar-53.0-new/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml	2016-12-25 22:13:00.861570676 +0100
-@@ -90,7 +90,7 @@
+diff -rupN gnome-shell-extension-taskbar-old/extension.js gnome-shell-extension-taskbar-new/extension.js
+--- gnome-shell-extension-taskbar-old/extension.js	2018-04-10 20:25:28.000000000 +0200
++++ gnome-shell-extension-taskbar-new/extension.js	2018-04-15 20:03:55.261383191 +0200
+@@ -751,7 +751,7 @@ TaskBar.prototype = {
+ 		}
+ 		if ((this.settings.get_boolean("first-start")) && (Main.sessionMode.currentMode === 'user')) {
+ 			//Comment out the next line to disable the preferences window from opening at the first start
+-			Main.Util.trySpawnCommandLine('gnome-shell-extension-prefs ' + Extension.metadata.uuid);
++			//Main.Util.trySpawnCommandLine('gnome-shell-extension-prefs ' + Extension.metadata.uuid);
+ 			this.settings.set_boolean("first-start", false);
+ 		}
+ 	},
+diff -rupN gnome-shell-extension-taskbar-old/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml gnome-shell-extension-taskbar-new/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml
+--- gnome-shell-extension-taskbar-old/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml	2018-04-10 20:25:28.000000000 +0200
++++ gnome-shell-extension-taskbar-new/schemas/org.gnome.shell.extensions.TaskBar.gschema.xml	2018-04-15 20:05:30.528091935 +0200
+@@ -89,7 +89,7 @@
      </enum>
      <schema path="/org/gnome/shell/extensions/TaskBar/" id="org.gnome.shell.extensions.TaskBar">
          <key name="first-start" type="b">
@@ -22,7 +22,7 @@ diff -rupN gnome-shell-extension-taskbar-53.0/schemas/org.gnome.shell.extensions
              <summary>Display Preferences on the first start of TaskBar</summary>
              <description/>
          </key>
-@@ -115,7 +115,7 @@
+@@ -114,7 +114,7 @@
              <description/>
          </key>
          <key name="display-showapps-button" type="b">

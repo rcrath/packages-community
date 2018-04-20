@@ -1,13 +1,13 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgbase=palemoon-i18n
-pkgver=27.7.0
+pkgver=27.9.0
 pkgrel=1
 pkgdesc="Language pack for Palemoon"
 arch=('any')
 url="http://www.palemoon.org/langpacks.shtml"
 license=('MPL' 'GPL')
-depends=("palemoon>=27")
+depends=("palemoon>=$pkgver")
 makedepends=('git' 'zip')
 
 _languages=('ar    "Arabic AR"'
@@ -25,7 +25,7 @@ _languages=('ar    "Arabic AR"'
             'de    "German DE"'
             'el    "Greek EL"'
             'hu    "Hungarian HU"'
-			'id    "Indonesian ID"'
+            'id    "Indonesian ID"'
             'is    "Icelandic IS"'
             'it    "Italian IT"'
             'ja    "Japanese JP"'
@@ -48,7 +48,7 @@ _languages=('ar    "Arabic AR"'
             'uk    "Ukrainian UA"'
             'vi    "Vietnamese VI"')
 
-source=("git+https://github.com/MoonchildProductions/pale-moon-localization.git#commit=69b5613150601959c4e35d0978e2a8c7b5782df4")
+source=("git+https://github.com/MoonchildProductions/pale-moon-localization.git")
 sha256sums=('SKIP')
 pkgname=()
 

@@ -1,0 +1,37 @@
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
+# Contributor: Stefan Husmann <stefan-husmann@t-online.de>
+# Contributor: Cristian Maureira <saint@archlinux.cl>
+# Contributor: Dr.Egg <rwhite@archlinux.us>
+
+pkgname=musescore
+pkgver=2.2.1
+pkgrel=1.1
+pkgdesc='Create, play and print beautiful sheet music'
+arch=('x86_64')
+url='http://musescore.org/'
+license=('GPL')
+depends=('desktop-file-utils' 'gtk-update-icon-cache' 'libpulse' 'portaudio' 'portmidi'
+         'qt5-quickcontrols' 'qt5-svg' 'qt5-tools' 'qt5-webkit'
+         'shared-mime-info')
+makedepends=('cmake' 'doxygen' 'lame' 'qt5-script' 'texlive-core')
+optdepends=('lame: MP3 export')
+source=("musescore-${pkgver}.tar.gz::https://github.com/musescore/MuseScore/archive/v${pkgver}.tar.gz"
+    'metronomeVolume.patch')
+sha256sums=('261a39e34ee314780f75259ec2971acf69b5f4a2e0b2eb190acdb7fbbd4a89d6'
+            '7da8c92ad43410a8f66c6a6986395f56eda18187251855d762b464d9eb9a5b93')
+
+prepare() {
+  cd MuseScore-${pkgver}
+    patch -p1 -i $srcdir/metronomeVolume.patch
+}
+
+build() {
+  cd MuseScore-${pkgver}
+  make PREFIX='/usr' release
+}
+
+package() {
+  cd MuseScore-${pkgver}/build.release
+  make DESTDIR="${pkgdir}" install
+}

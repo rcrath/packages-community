@@ -16,7 +16,6 @@ cd ${pwd}/*acpi_call && $cmd
 cd ${pwd}/*bbswitch && $cmd
 cd ${pwd}/*broadcom-wl && $cmd
 cd ${pwd}/*catalyst && makepkg -df --noconfirm
-cd ${pwd}/*ndiswrapper && $cmd
 cd ${pwd}/*nvidia && $cmd
 cd ${pwd}/*nvidia-304xx && makepkg -d --noconfirm
 cd ${pwd}/*nvidia-340xx && makepkg -d --noconfirm

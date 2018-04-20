@@ -4,7 +4,7 @@
 # Contributor: Yegorius <yegorius@domic.us>
 
 pkgname=kmozillahelper
-pkgver=5.0.1
+pkgver=5.0.2
 pkgrel=1
 pkgdesc="Mozilla KDE Integration"
 url="https://github.com/openSUSE/$pkgname"

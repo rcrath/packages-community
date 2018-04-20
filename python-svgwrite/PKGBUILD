@@ -1,0 +1,24 @@
+#Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
+
+_pkgname=svgwrite
+pkgname=python-svgwrite
+pkgver=1.1.12
+pkgrel=1
+pkgdesc="A Python library to create SVG drawings."
+arch=('any')
+url="https://github.com/mozman/svgwrite"
+license=('MIT')
+depends=('python' 'python-pyparsing' 'python-setuptools')
+source=("$url/archive/v$pkgver.tar.gz")
+md5sums=('03333ca39d484c04db76eaa60994055e')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+  LANG=en_US.UTF-8 python3 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+  LANG=en_US.UTF-8 python3 setup.py install --root=$pkgdir --optimize=1 --skip-build
+}
+

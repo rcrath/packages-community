@@ -1,51 +1,25 @@
 # Maintainer: Fabian Bornschein <plusfabi@gmail.com>
-pkgname=('mhwd-db-amdgpu-experimental' 'amdgpu-experimental')
-pkgver=20171130 #date +%Y%m%d
+pkgname='amdgpu-experimental'
+pkgver=20180301 #date +%Y%m%d
 pkgrel=1
 arch=('any')
 license=('GPL3')
-source=('10-amdgpu-experimental.conf'
-        'amdgpu.conf'
-        'amdgpu-exp_hw_support.conf'
-	'amdgpu-display_core.conf'
-        'amdgpu-experimental.hook'
-        'MHWDCONFIG_video-amdgpu-experimental'
-	'MHWDCONFIG_video-hybrid-radeon-amdgpu-experimental-prime'
-        'MHWDCONFIG_video-hybrid-intel-amdgpu-experimental-prime')
-sha512sums=('cafa0fbb4f965bf3eef450d0192fd038aefad75c1a6c6ec239088aaec2575eed99b3aad65797ed6c705a427528142cdd7d04cf1f01d3fed839574c800be06a04'
-            '5a02d330aec5f6a5aa7876b4d0ce768409284afda996ad310ec3811ebc862f78501fb1e35621b7e216b4e972b772a4f72d1f31c47a791604b7963981feff2ee8'
-            '27e393f6aadf032b57f483c9f147a1de561e1c56ca1b19f7934d1dc955876ad672dd0e8619372191fe12d979c3afb77a33a7d5e97ebd070fc61eed304e4aeda8'
-            'f3f7af7ba11a57e23a248e51d41461971623a8604842412fdb0ee762a7d01321544a140b3dbca3a799229c5de6e9c9065ea5f739ef5d33a9edce92ae35ad87f9'
-            '0ef69b256497647f3dab4f48ab2fa22b39bcc68b19d3319a61188651290495bce4df6ef21264cfb5e928ccbb601329cb2faa3fe596278c9224b04ec7907b70af'
-            '25660c9a2dc6a25d05685732033893f519f10448740f64b43b5e0ca7a701d7c468d2185f425189427118c5db2141a8cd04ce028cf51d45b99f884466f8b89f76'
-            'bd59c4d4beb78d4f70900df854d8ad7914bf8c88cc2055525b4c954b418030997cd80aaacf6a659f5cadfbf7ec2e513f901ca3ead931dcae4cbd46b0c5ec8207'
-            '81727fd894cbbce650e17ecb20a3e54c06bf38ad56028ad1627c6b774bc925b45d344b2d470e02071570e0dbfb2bfd67a05e5e15fe9b00ce9aac1ec80fce6de2')
+source=('98-amdgpu-experimental.hook'
+        'x-amdgpu.exp_hw_support.conf'
+        'x-amdgpu-radeon.cik_support.conf'
+	    'x-amdgpu-radeon.si_support.conf'
+        'x-amdgpu.deep_color.conf'
+        'x-amdgpu.dc.conf')
+        
+sha512sums=('ab6430c9d789ff7587ee47a699159d3929d6e19eac2a0683b7cdaafe6bf39fe7e1821773da30c465484bee30b529c70ca4ee89fdc1ad321f03796f4a4b0334ac'
+            '559de3c42c093b7954f184789d17795f27e1840fc204959b97e8642f2a0485d1355dc5e4bfe69f4d59dca665bb437e447fb60b391ad07f5faa97f8da76c68413'
+            '8d216d0026be04acff561b7b51792294090b067c37a81776764a6e6c1c38a775a435614cb3c05ff1bc56cab5ec5d26e76fed63883ae801369a7c9f713b37a927'
+            '6542081c16db589694326e48cd84b8acdbbbe6963f352acaee5628230187c39c2798d2cfd90ae502ce22f733d1dd294b96ad60f66944ce85f0f279594892e3c9'
+            '903c1c91c81003e81b57c272ca21bbf5a58acb84bcd8ad5d280322ed8ed238bae0e413e242ce5ce2ab8b33061986561b432c667befe58bf55736af3962c794ee'
+            'f3f7af7ba11a57e23a248e51d41461971623a8604842412fdb0ee762a7d01321544a140b3dbca3a799229c5de6e9c9065ea5f739ef5d33a9edce92ae35ad87f9')
 
-package_mhwd-db-amdgpu-experimental()
-{
-    pkgdesc="Adds experimental configurations to mhwd"
-    depends=('bash' 'mhwd-amdgpu')
-    replaces=("mhwd-addon-amdgpu-hwe")
-    conflicts=("mhwd-addon-amdgpu-hwe")
-
-    cd "${srcdir}"
-
-    # Install AMDGPU-experimental config file
-    install -D -m644 "${srcdir}/MHWDCONFIG_video-amdgpu-experimental" \
-    "${pkgdir}/var/lib/mhwd/db/pci/graphic_drivers/video-amdgpu-experimental/MHWDCONFIG"
-
-    # Install intel-AMDGPU-experimental Prime config file
-    install -D -m644 "${srcdir}/MHWDCONFIG_video-hybrid-intel-amdgpu-experimental-prime" \
-    "${pkgdir}/var/lib/mhwd/db/pci/graphic_drivers/video-hybrid-intel-amdgpu-experimental-prime/MHWDCONFIG"
-
-    # Install intel-AMDGPU-experimental Prime config file
-    install -D -m644 "${srcdir}/MHWDCONFIG_video-hybrid-radeon-amdgpu-experimental-prime" \
-    "${pkgdir}/var/lib/mhwd/db/pci/graphic_drivers/video-hybrid-radeon-amdgpu-experimental-prime/MHWDCONFIG"
-}
-
-package_amdgpu-experimental()
-{
-    pkgdesc="Enables experimental features (as CI/SI support; DisplayCore)"
+package_amdgpu-experimental() {
+    pkgdesc="Enables experimental features (exp_hw_support, cik_support, si_support, deep_color, dc)"
     depends=('linux>=4.14' 'xf86-video-amdgpu')
     install="amdgpu-experimental.install"
     optdepends=('linux>=4.15: DisplayCore(AMDGPU.DC) Support')
@@ -54,21 +28,22 @@ package_amdgpu-experimental()
 
     ##################################################
     ##
-    ## install module-load file,
-    ## exp_hw_support,
-    ## display_core,
-    ## pacman hook,
-    ## amdgpu-experimental xorg.config
+    ## mod: exp_hw_support, cik_support, si_support
+    ## mod: deep_color, dc
+    ## libalpm: hook
     ##
     ##################################################
-    install -D -m644 "${srcdir}/amdgpu.conf" \
-    "${pkgdir}/usr/lib/modules-load.d/amdgpu.conf"
-    install -D -m644 "${srcdir}/amdgpu-exp_hw_support.conf" \
-    "${pkgdir}/usr/lib/modprobe.d/amdgpu-exp_hw_support.conf"
-    install -D -m644 "${srcdir}/amdgpu-display_core.conf" \
-    "${pkgdir}/usr/lib/modprobe.d/amdgpu-display_core.conf"
-    install -D -m644 "${srcdir}/amdgpu-experimental.hook" \
+
+    install -D -m644 "${srcdir}/x-amdgpu.exp_hw_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.exp_hw_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu-radeon.cik_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu-radeon.cik_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu-radeon.si_support.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu-radeon.si_support.conf"
+    install -D -m644 "${srcdir}/x-amdgpu.deep_color.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.deep_color.conf"
+    install -D -m644 "${srcdir}/x-amdgpu.dc.conf" \
+    "${pkgdir}/usr/lib/modprobe.d/x-amdgpu.dc.conf"    
+    install -D -m644 "${srcdir}/98-amdgpu-experimental.hook" \
     "${pkgdir}/usr/share/libalpm/hooks/98-amdgpu-experimental.hook"
-    install -D -m644 "${srcdir}/10-amdgpu-experimental.conf" \
-    "${pkgdir}/usr/share/X11/xorg.conf.d/10-amdgpu-experimental.conf"
 }

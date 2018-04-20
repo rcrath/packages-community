@@ -1,10 +1,10 @@
 # Maintainer: Stefano Capitani <stefano_at_manjaro_dot_org>
 
 pkgname=manjaro-gnome-maia-theme
-pkgver=20180118
+pkgver=20180323
 _theme=manjaro-gnome-theme
 _hook=gdm-theme-maia
-_commit=1727cf3f6da38daff5abbe94eae4e05d4e31d447
+_commit=a1f1eada35b5842eddfee5613a1ab3b0995b6d8b
 pkgrel=1
 pkgdesc="Manjaro Gnome Maia theme"
 arch=(any)
@@ -13,7 +13,7 @@ license=('GPL3')
 depends=(gnome-shell)
 makedepends=(git)
 source=("$_theme-$pkgver.tar.gz::$url/archive/$_commit.tar.gz")
-md5sums=('ec64af0af49fbe3cc7a09fe32ba0190f')
+md5sums=('8fc29043e950e8136b5ab6c8f90f88b1')
 
 pkgver() {
 	date +%Y%m%d

@@ -2,7 +2,7 @@
 
 _pkgbase=timeshift
 pkgname=$_pkgbase
-_ver=18.1.1
+_ver=18.4
 pkgver=v$_ver
 pkgrel=1
 pkgdesc="A system restore utility for Linux"
@@ -12,28 +12,28 @@ license=('GPL')
 depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee' 'vte3')
 makedepends=('vala' 'diffutils' 'coreutils')
 #conflicts=("$_pkgbase")
-source=("$url/archive/$pkgver.tar.gz")
-sha256sums=('1e4f8eb3cba4b166b969e47920a9e25b65e63848d8dfd5d9e982419f37dedc85')
+source=("$url/archive/$pkgver.tar.gz"
+		'vte3.patch')
+sha256sums=('5f180ba2ed66531b10e6cc9b1966e60be1c646ebe304dd0a29b4215318892feb'
+            '9a6fa9a20122e275f8f13cbd35d151c8f5a76c1c2d16ae99fb676a0c06a7f420')
 
 #pkgver() {
 #    cd $_pkgbase
 #    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 #}
 
-#prepare() {
-#workaround for wayland session otherwise no GUI 
-#  cd $_pkgbase/src
-#  sed -i '4d' timeshift-gtk.desktop
-#  echo "Exec=sh -c 'xhost +SI:localuser:root && timeshift-launcher'" >> timeshift-gtk.desktop
-#}
+prepare() { 
+  cd $_pkgbase-$_ver
+  patch -Nbup0 -i "${srcdir}/vte3.patch"
+}
 
 build() {
   cd $_pkgbase-$_ver
-  make
+  make -s -j1
 }
 
 package() {
   cd $_pkgbase-$_ver
-  make DESTDIR=$pkgdir install
+  make -j1 DESTDIR="${pkgdir}" install
 }
 

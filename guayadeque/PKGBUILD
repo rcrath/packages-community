@@ -3,7 +3,7 @@
 
 pkgname=guayadeque
 pkgver=0.4.5.r55.g7b6d34db
-pkgrel=1
+pkgrel=1.0
 _commit=7b6d34db78bc8cd6e36c3815dbac11b321eee115
 pkgdesc='Lightweight music player'
 arch=('i686' 'x86_64')

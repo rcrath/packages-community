@@ -3,7 +3,8 @@
 
 pkgname=xviewer
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
+_commit=61a2da998bf447c0e9aea9d5d0c1a7472715b1df
 pkgdesc="A simple and easy to use image viewer. X-Apps Project"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -11,17 +12,21 @@ groups=('x-apps')
 url="https://github.com/linuxmint/${pkgname}"
 depends=('exempi'
     'glib2'
-    'gnome-desktop'
+    'cinnamon-desktop'
     'gtk3'
     'libpeas')
-makedepends=('gnome-common'
+makedepends=('git'
+    'gnome-common'
     'gobject-introspection'
     'libglade')
-source=("${url}/archive/${pkgver}.tar.gz")
-md5sums=('583cba9c604f3f48b4bf36c18bdc885b')
+
+source=(
+#    "${url}/archive/${pkgver}.tar.gz")
+    "$url/archive/$_commit.tar.gz")
+md5sums=('0c6093e7a49a900e096ddfc8db36ffa2')
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd $pkgname-$_commit
     gnome-autogen.sh --prefix="/usr" \
         --localstatedir="/var" \
          --libexecdir="/usr/lib/${pkgname}"
@@ -29,6 +34,6 @@ build() {
 }
 
 package(){
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd $pkgname-$_commit
     make DESTDIR="$pkgdir/" install
 }

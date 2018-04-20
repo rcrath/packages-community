@@ -2,16 +2,16 @@
 
 pkgbase=artwork-breath
 pkgname=('breath-icon-theme' 'breath-dark-icon-theme' 'plasma5-themes-breath' 'sddm-breath-theme' 'breath-wallpaper')
-pkgver=0.3.0
-pkgrel=2
-_gitcommit=f560447260bd26d38812cbef8134de68b25224e0
+pkgver=0.3.1
+pkgrel=1
+_gitcommit=a8bb4c6f3a55ad685d09987b14daa51f5bf22a98
 url=https://github.com/manjaro/artwork-breath/
 arch=('any')
 license=('LGPL')
 makedepends=('extra-cmake-modules' 'plasma-framework')
 
 source=("breath-$pkgver-$pkgrel.tar.gz::$url/archive/$_gitcommit.tar.gz")
-md5sums=('813055eb7690106afa3efa45baa7e234')
+md5sums=('07ad2e5cb70bc9eb3d6825cf1156eacd')
 
 prepare() {
   mv $srcdir/artwork-breath-$_gitcommit $srcdir/breath

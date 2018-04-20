@@ -3,7 +3,7 @@
 pkgbase=manjaro-kde-settings
 pkgname=('manjaro-kde-settings'
          'manjaro-kde-minimal-settings')
-pkgver=20171103
+pkgver=20180413
 pkgrel=1
 pkgdesc="Manjaro Linux KDE settings"
 arch=('any')
@@ -21,7 +21,7 @@ package_manjaro-kde-settings() {
   pkgdesc="Manjaro Linux KDE settings"
   conflicts=('manjaro-desktop-settings')
   provides=('manjaro-desktop-settings')
-  depends=('manjaro-base-skel' 'breath-icon-theme' 'gtk-theme-breath' 'plasma5-themes-breath')
+  depends=('manjaro-base-skel' 'breath-icon-theme' 'gtk-theme-breath' 'plasma5-themes-breath' 'noto-fonts-compat')
 
   cp -r ${srcdir}/${pkgbase}-${_gitcommit}/etc ${pkgdir}/etc
   cp -r ${srcdir}/${pkgbase}-${_gitcommit}/usr ${pkgdir}/usr
@@ -31,7 +31,7 @@ package_manjaro-kde-minimal-settings() {
   pkgdesc="Manjaro Linux KDE minimal settings"
   conflicts=('manjaro-desktop-settings')
   provides=('manjaro-desktop-settings')
-  depends=('manjaro-base-skel' 'breath-icon-theme' 'gtk-theme-breath' 'plasma5-themes-breath')
+  depends=('manjaro-base-skel' 'breath-icon-theme' 'gtk-theme-breath' 'plasma5-themes-breath' 'noto-fonts-compat')
 
   cp -r "${srcdir}/${pkgbase}-${_gitcommit}/etc" "${pkgdir}/etc"
   cp -r "${srcdir}/${pkgbase}-${_gitcommit}/usr" "${pkgdir}/usr"
