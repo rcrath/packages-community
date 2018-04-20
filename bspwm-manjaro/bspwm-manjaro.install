@@ -34,3 +34,7 @@ post_upgrade() {
 		[[ -f /home/$user/.config/bspwm/bspwmrc ]] && bspwmrc=/home/$user/.config/bspwm/bspwmrc && bspwm_fixer
 	done
 }
+
+post_install() {
+	[ -e /usr/bin/mygtkmenui ] || cp /etc/skel/.config/sxhkdrc/sxhkdrc-minimal /etc/skel/.config/sxhkdrc/sxhkdrc
+}

@@ -2,8 +2,8 @@
 # Maintainer: Chrysostomus
 
 pkgname=limepanel
-_ver=0.33
-pkgver=0.33.r114.gca1e566
+_ver=0.41
+pkgver=0.41.r123.g4a4023f
 pkgrel=1
 pkgdesc="Panel script for bspwm using patched dmenu and lemonbar"
 arch=('any')
@@ -14,7 +14,8 @@ depends=('lemonpanel'
 	 'wireless_tools'
 	 'stalonetray'
 	 'terminus-font'
-	 'nerd-fonts-terminus')
+	 'nerd-fonts-terminus'
+	 'ttf-font-logos')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/limepanel")
 md5sums=('SKIP')

@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=bspwm-scripts
-pkgver=0.34
+pkgver=0.37
 pkgrel=1
 pkgdesc="Scripts for controlling bspwm"
 arch=(any)
@@ -28,5 +28,4 @@ package () {
 	install -dm755 $pkgdir/usr/bin
 	cp -r $srcdir/$pkgname/bin $pkgdir/usr
 	chmod a+x $pkgdir/usr/bin/*
-        install -Dm755 "$srcdir/$pkgname/99-monitor-hotplug-rules" "$pkgdir/etc/udev/rules.d/99-monitor-hotplug-rules"
 }

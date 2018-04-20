@@ -2,8 +2,8 @@
 # Maintainer: Chrysostomus
 
 pkgname=lemonpanel
-_ver=0.27
-pkgver=0.27.r188.b89a3c3
+_ver=0.39
+pkgver=0.39.r203.e6ad27f
 pkgrel=1
 pkgdesc="Panel script for bspwm using patched dmenu and lemonbar"
 arch=('any')
@@ -41,4 +41,7 @@ package () {
 	install -dm755 $pkgdir/usr
 	cp -r bin $pkgdir/usr
 	chmod a+x $pkgdir/usr/bin/*
+	install -Dm755 "$srcdir/$pkgname/config-extended.rasi" "$pkgdir/etc/skel/.config/rofi/config-extended.rasi"
+	install -Dm755 "$srcdir/$pkgname/config-monocle.rasi" "$pkgdir/etc/skel/.config/rofi/config-monocle.rasi"
+	install -Dm755 "$srcdir/$pkgname/rofimenu.rasi" "$pkgdir/etc/skel/.config/rofi/rofimenu.rasi"
 }

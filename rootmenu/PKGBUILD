@@ -1,7 +1,7 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
 pkgname=rootmenu
-pkgver=0.8
+pkgver=0.15
 pkgrel=1
 pkgdesc="A wm independent desktop menu"
 arch=(any)
@@ -9,7 +9,9 @@ url="https://github.com/Chrysostomus/$pkgname"
 license=(MIT)
 depends=('xorg-xev'
 	'awk'
-	'dash')
+	'dash'
+	'xorg-xinput'
+	'rofi')
 optdepends=('dmenu-manjaro: used for the example menus'
 	'xdotool: used for the example menus'
 	'wmutils: used for the example menus'

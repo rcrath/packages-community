@@ -1,20 +1,13 @@
 # Maintainer: Chrysostomus @forum.manjaro.org
 
-pkgname=rofi-scripts
-pkgver=0.7
-pkgrel=1
-pkgdesc="Scripts for rofi"
+pkgname=py-corners
+pkgver=0.1
+pkgrel=2
+pkgdesc="Scripts for controlling bspwm"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
 license=(MIT)
-depends=('rofi'
-	'ttf-ionicons'
-	'xdg-utils'
-	'zsh'
-	'dash'
-	'xdotool'
-	'wmutils'
-	'nerd-fonts-terminus')
+depends=('python2-xlib')
 makedepends=('git')
 source=("git://github.com/Chrysostomus/$pkgname")
 md5sums=('SKIP')

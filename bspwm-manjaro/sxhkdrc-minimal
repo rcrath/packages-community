@@ -208,11 +208,13 @@ super + button{4,5}
 	DidIClickDesktop.sh && gapgrab	
 
 ~button2
-	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
-#DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
+	DidIClickDesktop.sh && BspwmDesktopMenu
+#	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
+#	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
 		
 ~button3
-	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
+	DidIClickDesktop.sh && rofimenu -desktop
+#DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
 
 # Switch workspace by scrolling on the desktop. Causes scrolling issues on some systems.
 #~button4
@@ -232,14 +234,15 @@ super + ctrl + button4
 # biggest dimension of the window, MouseLaunch only cares which edge is closer.
 # mod5 is alt_gr (first key right from space) on most keyboards. 
 mod5 + @button1
-    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
+	smartsplit ; rofimenu -desktop
 #	smartsplit ; dboxmenu
+#    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
 
 # Spawn window manipulation menu
 # Mod1 is alt
-#    BspwmWindowMenu
 mod1 + @button1
-    mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
+	BspwmWindowMenu
+# mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
 
 
 #
@@ -275,7 +278,8 @@ super + shift + b
 	$BROWSER
     		
 super + e
-	spacefm -n
+	st -f "Terminus:size=14:style=regular" ranger
+#spacefm -n
 
 # Use slightly bigger font for ranger
 super + shift + e
