@@ -1,11 +1,12 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname=manjaro-openbox-common
-pkgver=1.0
-pkgrel=2
+_gitname=openbox-common
+pkgver=1.1
+pkgrel=1
 pkgdesc="Common files needed by Manjaro Openbox"
 arch=('any')
-url="https://github.com/fhdk/openbox-common.git"
+url="https://github.com/fhdk/${_gitname}.git"
 license=('GPL3')
 makedepends=('git')
 provides=('manjaro-openbox-common')
@@ -14,18 +15,21 @@ source=(git+$url)
 makedepends=('git')
 md5sums=('SKIP')
 
-_install_dir=openbox-common
-
 package() {
-        _sharedir=${pkgdir}/usr/share
-        _libdir=${pkgdir}/usr/lib/manjaro
-	
-	cd ${srcdir}/$_install_dir
-	
-	install -dm755 ${_libdir}
-	cp -r common   ${_libdir}
-	
-	install -dm755 ${_sharedir}
-	cp -r doc      ${_sharedir}
-	cp -r licenses ${_sharedir}
+	cd ${srcdir}/$_gitname
+	# common files
+	install -dm755   ${pkgdir}/usr/lib/manjaro
+	cp -r common     ${pkgdir}/usr/lib/manjaro
+	# docs
+	install -dm755   ${pkgdir}/usr/share/doc
+	cp -r doc/*      ${pkgdir}/usr/share/doc
+	# licences
+	install -dm755   ${pkgdir}/usr/share/licences
+	cp -r licenses/* ${pkgdir}/usr/share/licenses
+    # scripts
+	install -dm755   ${pkgdir}/usr/bin
+	cp scripts/*     ${pkgdir}/usr/bin
+    # skel
+	install -dm755   ${pkgdir}/etc/skel
+	cp -r skel/*     ${pkgdir}/etc/skel
 }
