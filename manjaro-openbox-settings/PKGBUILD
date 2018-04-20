@@ -8,11 +8,9 @@ pkgdesc='Manjaro Linux openbox settings'
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
 license=('GPL')
-depends=('manjaro-base-skel' 'obmenu-generator' 'tint2' 'feh' 'openbox-themes'
-        'vertex-maia-themes' 'andromeda-icon-theme' 'andromeda-wallpaper')
+depends=('manjaro-base-skel' 'obmenu-generator')
 makedepends=('git')
-optdepends=('pcmanfm-qt: Lightweight file manager'
-            'network-manager-applet: Applet for managing network connections')
+optdepends=()
 conflicts=('manjaro-bspwm-settings' 'manjaro-fluxbox-settings'
             'manjaro-i3-settings' 'manjaro-jwm-settings')
 source=("git+$url.git")

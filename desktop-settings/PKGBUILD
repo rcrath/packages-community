@@ -1,6 +1,5 @@
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
 # Contributor: artoo <artoo@manjaro.org>
-# Contributor: fhdk <fh at manjaro org>
 
 pkgbase=desktop-settings
 pkgname=('manjaro-awesome-settings'
@@ -13,9 +12,8 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-bspwm-mate-settings'
-        'manjaro-openbox-settings'
 		)
-pkgver=20180418
+pkgver=20180420
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -236,15 +234,6 @@ package_manjaro-mate-settings() {
 
 #    _inst_dir 'community/netbook'
 #}
-
-package_manjaro-openbox-settings() {
-    pkgdesc='Manjaro Linux Openbox Settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-common')
-    conflicts=('manjaro-desktop-settings')
-    provides=('manjaro-desktop-settings')
-
-    _inst_dir 'community/openbox'
-}
 
 #package_manjaro-pantheon-settings() {
 #    pkgdesc='Manjaro Linux pantheon settings'
