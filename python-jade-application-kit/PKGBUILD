@@ -1,31 +1,25 @@
-# Author: Vitor Lopes <vmnlop@gmail.com>
+# Maintainer: Jonathon Fernyhough <jonathon_at manjaro_dot org>
+# Original author: Vitor Lopes <vmnlop@gmail.com>
 
-pkgbase=('python-jade-application-kit')
 pkgname=('python-jade-application-kit')
-_module='Jade-Application-Kit'
 pkgver=0.36
-pkgrel=1
+_shortcommit=8140271
+pkgrel=2
 pkgdesc="Build desktop applications using web technologies on Linux, with Python, JavaScript, HTML5, and CSS3 and webkit."
-url="https://codesardine.github.io/Jade-Application-Kit"
+url="https://github.com/codesardine/Jade-Application-Kit"
 depends=('python' 'python-gobject' 'webkit2gtk')
 makedepends=('python-setuptools')
 license=('GPL')
 arch=('any')
-source=("$pkgname-$pkgver-$pkgrel.tar.gz::https://github.com/codesardine/Jade-Application-Kit/archive/master.tar.gz")
-md5sums=('c0d02ab5b2f6b1ceb739ce61d8c25ed7')
-
-pkgver() {
-	cd "${srcdir}/Jade-Application-Kit-master"
-	grep "version" setup.py | cut -d '"' -f2
-}
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/codesardine/Jade-Application-Kit/tarball/${_shortcommit}")
+sha256sums=('005a565a43015caf244fddc3f35538663b0124041b17c2a21e45288b0db7c549')
 
 build() {
-    cd "${srcdir}/Jade-Application-Kit-master"
-    python setup.py build
+	cd "${srcdir}/codesardine-Jade-Application-Kit-${_shortcommit}"
+	python setup.py build
 }
 
 package() {
-    depends+=()
-    cd "${srcdir}/Jade-Application-Kit-master"
-    python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+	cd "${srcdir}/codesardine-Jade-Application-Kit-${_shortcommit}"
+	python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
 }
