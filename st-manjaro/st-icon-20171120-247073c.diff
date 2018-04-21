@@ -19,16 +19,16 @@ index 191e5dc..3b0c498 100644
 +++ b/x.c
 @@ -22,6 +22,7 @@
  
- #include "win.h"
  #include "st.h"
+ #include "win.h"
 +#include "icon.argb"
  
  /* XEMBED messages */
  #define XEMBED_FOCUS_IN  4
 @@ -41,7 +42,7 @@ typedef struct {
- 	Colormap cmap;
  	Window win;
  	Drawable buf;
+ 	GlyphFontSpec *specbuf; /* font spec buffer used for rendering */
 -	Atom xembed, wmdeletewin, netwmname, netwmpid;
 +	Atom xembed, wmdeletewin, netwmname, netwmpid, netwmicon;
  	XIM xim;
@@ -42,9 +42,9 @@ index 191e5dc..3b0c498 100644
 +	XChangeProperty(xw.dpy, xw.win, xw.netwmicon, XA_CARDINAL, 32,
 +			PropModeReplace, (uchar *)icon, (icon[0] * icon[1] + 2));
 +
+ 	win.mode = MODE_NUMLOCK;
  	resettitle();
- 	XMapWindow(xw.dpy, xw.win);
- 	xhints();
+ 	XMapWindow(xw.dpy, xw.win);;
 -- 
 2.15.0
 
