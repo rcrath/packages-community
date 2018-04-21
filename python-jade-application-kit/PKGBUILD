@@ -2,24 +2,24 @@
 # Original author: Vitor Lopes <vmnlop@gmail.com>
 
 pkgname=('python-jade-application-kit')
-pkgver=0.36
-_shortcommit=8140271
-pkgrel=2
+_pkgname='Jade-Application-Kit'
+pkgver=1.2.1
+pkgrel=1
 pkgdesc="Build desktop applications using web technologies on Linux, with Python, JavaScript, HTML5, and CSS3 and webkit."
-url="https://github.com/codesardine/Jade-Application-Kit"
+url="https://github.com/codesardine/$_pkgname"
 depends=('python' 'python-gobject' 'webkit2gtk')
 makedepends=('python-setuptools')
 license=('GPL')
 arch=('any')
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/codesardine/Jade-Application-Kit/tarball/${_shortcommit}")
-sha256sums=('005a565a43015caf244fddc3f35538663b0124041b17c2a21e45288b0db7c549')
+source=("$url/archive/v$pkgver.tar.gz")
+sha256sums=('e766682e7b6bf3f9484d184e881741f36b084e104474dbaf9bac3880c77d3d69')
 
 build() {
-	cd "${srcdir}/codesardine-Jade-Application-Kit-${_shortcommit}"
+    cd $_pkgname-$pkgver
 	python setup.py build
 }
 
 package() {
-	cd "${srcdir}/codesardine-Jade-Application-Kit-${_shortcommit}"
+    cd $_pkgname-$pkgver
 	python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
 }
