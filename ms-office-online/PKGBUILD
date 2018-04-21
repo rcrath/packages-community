@@ -25,37 +25,15 @@ package() {
     make PREFIX="/usr" DESTDIR="${pkgdir}" install
 
     # Workaround till issue #2 is fixed
-    rm "${pkgdir}"/usr/bin/{ms-office,ms-powerpoint,ms-excel,ms-word,ms-outlook,ms-onenote,ms-skype}
+    rm "${pkgdir}"/usr/bin/*
 
     # Create binaries
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-office
-    echo "cd /usr/share/ms-office/office" >> "${pkgdir}"/usr/bin/ms-office
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-office
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-powerpoint
-    echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/ms-powerpoint
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-powerpoint
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-excel
-    echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/ms-excel
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-excel
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-word
-    echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/ms-word
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-word
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-outlook
-    echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/ms-outlook
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-outlook
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-onenote
-    echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/ms-onenote
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-onenote
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-skype
-    echo "cd /usr/share/ms-office/skype" >> "${pkgdir}"/usr/bin/ms-skype
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-skype
-
+    declare -a arr=(ms-office ms-powerpoint ms-excel ms-word ms-outlook ms-onenote ms-skype)
+    for i in ${arr[@]}; do
+        echo "#!/bin/sh" > "${pkgdir}/usr/bin/$i"
+        echo "cd /usr/share/ms-office/${i//ms-/}" >> "${pkgdir}/usr/bin/$i"
+        echo "./ms-office-online" >> "${pkgdir}/usr/bin/$i"
+    done
     chmod a+x "${pkgdir}"/usr/bin/*
 
     # Workaround till issue #3 is fixed
