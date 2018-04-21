@@ -11,7 +11,7 @@ license=('GPL3' 'custom')
 arch=('any')
 provides=('microsoft-office-online' 'microsoft-office')
 source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz"
-        "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...master.patch")
+        "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...c1acc54.patch")
 sha256sums=('f7bc899379fa4999ed2b2d74b0a6db375018f42c625cb557b9885a20a5f61e8a'
             'e236e3b504d006fe493c5945d1590fa8cb271e017d526f2fc8639aceff181320')
 
