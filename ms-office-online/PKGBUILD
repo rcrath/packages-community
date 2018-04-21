@@ -3,7 +3,8 @@
 
 pkgname=('ms-office-online')
 pkgver=18.04.1
-pkgrel=4
+pkgrel=5
+_commit=284865d
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
 depends=('python-jade-application-kit>=0.36')
@@ -11,9 +12,9 @@ license=('GPL3' 'custom')
 arch=('any')
 provides=('microsoft-office-online' 'microsoft-office')
 source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz"
-        "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...c1acc54.patch")
+        "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...${_commit}.patch")
 sha256sums=('f7bc899379fa4999ed2b2d74b0a6db375018f42c625cb557b9885a20a5f61e8a'
-            'e236e3b504d006fe493c5945d1590fa8cb271e017d526f2fc8639aceff181320')
+            '301ba649471ed288767b2b4c8cd97d10222e591b7373e65ffabe0ca8ee7f8dc2')
 
 prepare() {
     cd "${pkgname}-launcher-${pkgver}"
@@ -35,10 +36,4 @@ package() {
         echo "./ms-office-online" >> "${pkgdir}/usr/bin/$i"
     done
     chmod a+x "${pkgdir}"/usr/bin/*
-
-    # Workaround till issue #3 is fixed
-    for i in $(ls "${pkgdir}"/usr/bin); do
-        sed -i -e "s|^Icon=.*|Icon=/usr/share/icons/hicolor/1024x1024/apps/$i.png|g" \
-        "${pkgdir}/usr/share/applications/$i.desktop"
-    done
 }
