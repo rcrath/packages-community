@@ -1,150 +1,66 @@
 # Maintainer: Philip Müller <philm@manjaro.org>
-# Contributor: Vitor Lopes https://vitorlopes.me/#contact
+# Contributor: Vitor Lopes <vmnlop@gmail.com>
 
 pkgname=('ms-office-online')
 pkgver=18.04.1
-pkgrel=3
+pkgrel=4
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
 depends=('python-jade-application-kit>=0.36')
 license=('GPL3' 'custom')
 arch=('any')
 provides=('microsoft-office-online' 'microsoft-office')
-source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz")
-sha256sums=('f7bc899379fa4999ed2b2d74b0a6db375018f42c625cb557b9885a20a5f61e8a')
+source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz"
+        "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...master.patch")
+sha256sums=('f7bc899379fa4999ed2b2d74b0a6db375018f42c625cb557b9885a20a5f61e8a'
+            'e236e3b504d006fe493c5945d1590fa8cb271e017d526f2fc8639aceff181320')
+
+prepare() {
+    cd "${pkgname}-launcher-${pkgver}"
+    patch -p1 -i "${srcdir}/${pkgname}-${pkgver}-${pkgrel}.patch"
+}
 
 package() {
-    # Install ms-office-online launcher
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/msoffice/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/powerpoint/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/excel/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/word/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/outlook/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/onenote/ms-office-online
-    install -Dm755 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/ms-office-online \
-    "${pkgdir}"/usr/share/ms-office/webskype/ms-office-online
-    
-    # Install json settings
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/excel/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/word/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/outlook/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/onenote/settings.json
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/settings.json \
-    "${pkgdir}"/usr/share/ms-office/webskype/settings.json
+    cd "${pkgname}-launcher-${pkgver}"
+    make PREFIX="/usr" DESTDIR="${pkgdir}" install
 
-    # Install icons
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/Office.png \
-    "${pkgdir}"/usr/share/icons/ms-office/Office.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/PowerPoint.png \
-    "${pkgdir}"/usr/share/icons/ms-office/PowerPoint.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/Excel.png \
-    "${pkgdir}"/usr/share/icons/ms-office/Excel.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/Word.png \
-    "${pkgdir}"/usr/share/icons/ms-office/Word.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/Outlook.png \
-    "${pkgdir}"/usr/share/icons/ms-office/Outlook.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/OneNote.png \
-    "${pkgdir}"/usr/share/icons/ms-office/OneNote.png
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/Skype.png \
-    "${pkgdir}"/usr/share/icons/ms-office/Skype.png
+    # Workaround till issue #1 is fixed
+    rm "${pkgdir}"/usr/bin/{ms-office,ms-powerpoint,ms-excel,ms-word,ms-outlook,ms-onenote,ms-skype}
 
-    # Install desktop files
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/MSOffice.desktop \
-    "${pkgdir}"/usr/share/applications/MSOffice.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/PowerPoint.desktop \
-    "${pkgdir}"/usr/share/applications/PowerPoint.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/Excel.desktop \
-    "${pkgdir}"/usr/share/applications/Excel.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/Word.desktop \
-    "${pkgdir}"/usr/share/applications/Word.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/Outlook.desktop \
-    "${pkgdir}"/usr/share/applications/Outlook.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/OneNote.desktop \
-    "${pkgdir}"/usr/share/applications/OneNote.desktop
-    install -Dm644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/desktop-files/WebSkype.desktop \
-    "${pkgdir}"/usr/share/applications/WebSkype.desktop
-
-    # Install licenses
-    mkdir -p "${pkgdir}/usr/share/licenses/${pkgname}"
-    install -D -m644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/LICENSE \
-    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
-    install -D -m644 "${srcdir}"/"${pkgname}-launcher-${pkgver}"/icons/LICENSE \
-    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE-ICONS"
-    
     # Create binaries
-    mkdir -p "${pkgdir}"/usr/bin
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-office
+    echo "cd /usr/share/ms-office/office" >> "${pkgdir}"/usr/bin/ms-office
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-office
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/msoffice
-    echo "cd /usr/share/ms-office/msoffice" >> "${pkgdir}"/usr/bin/msoffice
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/msoffice
-    sed -i -e "s|_URL_|https://www.office.com/login?es=Click&ru=%2F|" \
-    "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-powerpoint
+    echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/ms-powerpoint
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-powerpoint
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/powerpoint
-    echo "cd /usr/share/ms-office/powerpoint" >> "${pkgdir}"/usr/bin/powerpoint
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/powerpoint
-    sed -i -e "s|_URL_|https://office.live.com/start/PowerPoint.aspx|" \
-    "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-excel
+    echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/ms-excel
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-excel
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/excel
-    echo "cd /usr/share/ms-office/excel" >> "${pkgdir}"/usr/bin/excel
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/excel
-    sed -i -e "s|_URL_|https://office.live.com/start/Excel.aspx|" \
-    "${pkgdir}"/usr/share/ms-office/excel/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-word
+    echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/ms-word
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-word
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/word
-    echo "cd /usr/share/ms-office/word" >> "${pkgdir}"/usr/bin/word
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/word
-    sed -i -e "s|_URL_|https://office.live.com/start/Word.aspx|" \
-    "${pkgdir}"/usr/share/ms-office/word/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-outlook
+    echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/ms-outlook
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-outlook
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/outlook
-    echo "cd /usr/share/ms-office/outlook" >> "${pkgdir}"/usr/bin/outlook
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/outlook
-    sed -i -e "s|_URL_|https://outlook.live.com/owa|" \
-    "${pkgdir}"/usr/share/ms-office/outlook/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-onenote
+    echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/ms-onenote
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-onenote
 
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/onenote
-    echo "cd /usr/share/ms-office/onenote" >> "${pkgdir}"/usr/bin/onenote
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/onenote
-    sed -i -e "s|_URL_|https://www.onenote.com/notebooks|" \
-    "${pkgdir}"/usr/share/ms-office/onenote/settings.json
-
-    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/webskype
-    echo "cd /usr/share/ms-office/webskype" >> "${pkgdir}"/usr/bin/webskype
-    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/webskype
-    sed -i -e "s|_URL_|https://web.skype.com|" \
-    "${pkgdir}"/usr/share/ms-office/webskype/settings.json
+    echo "#!/bin/sh" > "${pkgdir}"/usr/bin/ms-skype
+    echo "cd /usr/share/ms-office/skype" >> "${pkgdir}"/usr/bin/ms-skype
+    echo "./ms-office-online" >> "${pkgdir}"/usr/bin/ms-skype
 
     chmod a+x "${pkgdir}"/usr/bin/*
 
-    # Configure json settings
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Office.png|" \
-    "${pkgdir}"/usr/share/ms-office/msoffice/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/PowerPoint.png|" \
-    "${pkgdir}"/usr/share/ms-office/powerpoint/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Excel.png|" \
-    "${pkgdir}"/usr/share/ms-office/excel/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Word.png|" \
-    "${pkgdir}"/usr/share/ms-office/word/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Outlook.png|" \
-    "${pkgdir}"/usr/share/ms-office/outlook/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/OneNote.png|" \
-    "${pkgdir}"/usr/share/ms-office/onenote/settings.json
-    sed -i -e "s|_icon_|/usr/share/icons/ms-office/Skype.png|" \
-    "${pkgdir}"/usr/share/ms-office/webskype/settings.json
+    # Workaround till issue #2 is fixed
+    for i in $(ls "${pkgdir}"/usr/bin); do
+        sed -i -e "s|^Icon=.*|Icon=/usr/share/icons/hicolor/1024x1024/apps/$i.png|g" \
+        "${pkgdir}/usr/share/applications/$i.desktop"
+    done
 }
