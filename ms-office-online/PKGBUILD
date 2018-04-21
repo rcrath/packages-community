@@ -24,7 +24,7 @@ package() {
     cd "${pkgname}-launcher-${pkgver}"
     make PREFIX="/usr" DESTDIR="${pkgdir}" install
 
-    # Workaround till issue #1 is fixed
+    # Workaround till issue #2 is fixed
     rm "${pkgdir}"/usr/bin/{ms-office,ms-powerpoint,ms-excel,ms-word,ms-outlook,ms-onenote,ms-skype}
 
     # Create binaries
@@ -58,7 +58,7 @@ package() {
 
     chmod a+x "${pkgdir}"/usr/bin/*
 
-    # Workaround till issue #2 is fixed
+    # Workaround till issue #3 is fixed
     for i in $(ls "${pkgdir}"/usr/bin); do
         sed -i -e "s|^Icon=.*|Icon=/usr/share/icons/hicolor/1024x1024/apps/$i.png|g" \
         "${pkgdir}/usr/share/applications/$i.desktop"
