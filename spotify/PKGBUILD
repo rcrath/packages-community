@@ -65,9 +65,11 @@ package() {
 
 	chmod -R go-w "${pkgdir}"/usr
 
-	# Bin Script
-	rm "${pkgdir}"/usr/bin/spotify
-	install -Dm755 "${srcdir}/spotify" "${pkgdir}/usr/bin/spotify"
+	# Wrapper script for i686
+	if [[ "$CARCH" == "i686" ]] ; then
+		rm "${pkgdir}"/usr/bin/spotify
+		install -Dm755 "${srcdir}/spotify" "${pkgdir}/usr/bin/spotify"
+	fi
 
 	# Copy protocol file for KDE
 	install -Dm644 "${srcdir}/spotify.protocol" "${pkgdir}/usr/share/kservices5/spotify.protocol"
