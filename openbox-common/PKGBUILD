@@ -10,7 +10,7 @@ url="https://github.com/fhdk/openbox-common.git"
 license=('GPL3')
 makedepends=('git')
 provides=('manjaro-openbox-common')
-conflicts=('manjaro-openbox-scripts' 'openbox-scripts' 'manjaro-openbox-settings')
+conflicts=('manjaro-openbox-settings')
 source=(git+$url)
 makedepends=('git')
 md5sums=('SKIP')
@@ -21,7 +21,7 @@ package() {
 	install -dm755   ${pkgdir}/usr/bin
 	install -dm755   ${pkgdir}/etc
 	cd ${srcdir}/$_gitname
-	cp -r common     ${pkgdir}/usr/lib/manjaro
+	cp -r lib        ${pkgdir}/usr/lib/manjaro
 	cp -r doc        ${pkgdir}/usr/share
 	cp -r licenses   ${pkgdir}/usr/share
 	cp  scripts/*    ${pkgdir}/usr/bin
