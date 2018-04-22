@@ -43,7 +43,7 @@ optdepends=('ffmpeg-compat-54: Adds support for playback of local files'
             'libnotify: Desktop notifications')
 
 pkgver() {
-	if [[ $CARCH -eq "x86_64" ]] ; then
+	if [[ $CARCH == "x86_64" ]] ; then
 		echo $_pkgver_x86_64
 	else
 		echo $_pkgver_i686
