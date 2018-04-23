@@ -2,9 +2,9 @@
 # Contributor: Vitor Lopes <vmnlop@gmail.com>
 
 pkgname=('ms-office-online')
-pkgver=18.04.1
-pkgrel=5
-_commit=284865d
+pkgver=18.04.2
+pkgrel=1
+_commit=cf24024
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
 depends=('python-jade-application-kit>=0.36')
@@ -13,8 +13,8 @@ arch=('any')
 provides=('microsoft-office-online' 'microsoft-office')
 source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz"
         "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...${_commit}.patch")
-sha256sums=('f7bc899379fa4999ed2b2d74b0a6db375018f42c625cb557b9885a20a5f61e8a'
-            '301ba649471ed288767b2b4c8cd97d10222e591b7373e65ffabe0ca8ee7f8dc2')
+sha256sums=('714a7d182a45d103b3a94e8053995ae9d57176fb6ab7e1a9b23012cd79f04a70'
+            'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
 
 prepare() {
     cd "${pkgname}-launcher-${pkgver}"
@@ -24,16 +24,4 @@ prepare() {
 package() {
     cd "${pkgname}-launcher-${pkgver}"
     make PREFIX="/usr" DESTDIR="${pkgdir}" install
-
-    # Workaround till issue #2 is fixed
-    rm "${pkgdir}"/usr/bin/*
-
-    # Create binaries
-    declare -a arr=(ms-office ms-powerpoint ms-excel ms-word ms-outlook ms-onenote ms-skype)
-    for i in ${arr[@]}; do
-        echo "#!/bin/sh" > "${pkgdir}/usr/bin/$i"
-        echo "cd /usr/share/ms-office/${i//ms-/}" >> "${pkgdir}/usr/bin/$i"
-        echo "./ms-office-online" >> "${pkgdir}/usr/bin/$i"
-    done
-    chmod a+x "${pkgdir}"/usr/bin/*
 }
