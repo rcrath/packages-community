@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.6.7
-pkgrel=4
+pkgrel=5
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 url="https://github.com/linuxmint/Cinnamon"
@@ -12,9 +12,11 @@ _commit=2962ef882905bd759d870df494c8a50d81623899
 license=('GPL2')
 depends=('accountsservice'
     'caribou'
-    'cinnamon-settings-daemon'
+    'cinnamon-control-center'
+    'cinnamon-menus'
+    'cinnamon-screensaver'
     'cinnamon-session'
-    'cinnamon-translations'
+    'cinnamon-settings-daemon'
     'cjs'
     'clutter-gtk'
     'gettext'
@@ -22,33 +24,29 @@ depends=('accountsservice'
     'gnome-themes-standard'
     'gstreamer'
     'iso-flag-png'
+    'libgnomekbd'
     'libkeybinder3'
     'librsvg'
     'muffin>=3.8'
+    'nemo'
+    'network-manager-applet'
+    'polkit-gnome'
     'python2-cairo'
-    'python-dbus'
     'python2-dbus'
-    'python2-pillow'
+    'python2-gobject'
     'python2-pam'
     'python2-pexpect'
+    'python2-pillow'
     'python2-pyinotify'
-    'python2-lxml'
-    'cinnamon-control-center'
-    'cinnamon-screensaver'
-    'cinnamon-menus'
-    'libgnomekbd'
-    'network-manager-applet'
-    'nemo'
-    'polkit-gnome'
+    'python-dbus'
     'xapps'
-    'xdg-utils'
-    'python2-gobject')
-makedepends=('autoconf-archive'
-    'git'
+    'xdg-utils')
+makedepends=('git'
     'gnome-common'
     'intltool'
     'gobject-introspection')
 optdepends=('blueberry: Bluetooth support'
+    'cinnamon-translations: i18n'
     'gnome-panel: fallback mode'
     'metacity: fallback mode'
     'system-config-printer: printer settings'
@@ -56,31 +54,36 @@ optdepends=('blueberry: Bluetooth support'
 options=('!emptydirs')
 source=( #"$pkgname-$pkgver.tar.gz::$url/archive/$pkgver.tar.gz"
     "git+$_url#commit=$_commit"
+    "gnome-terminal.patch::${url}/commit/2dc04b8a26fa7a672c579ed62a70dca6c6e4b295.patch"
+    "muffin-3.8.patch::$url/commit/5c9848a48da3387825f627117ad58521474e0b2e.patch"
+    "cs_user.py-add-compatibility-for-multiple-pam-module.patch"
+    "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch'
     "user-applet.patch::$url/commit/12ac916942e9fb15d6e94bbff73d7a645818a70f.patch"
-    "muffin-3.8.patch::$url/commit/5c9848a48da3387825f627117ad58521474e0b2e.patch"
-    "cs_user.py-add-compatibility-for-multiple-pam-module.patch"
-    "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
 )
 sha256sums=('SKIP'
+            '505814a7a98ce8a9075af6747bbb592e598af5d1daa8aad4a50e25e84fb8b716'
+            '6b7288144a650d1af6d7e589b671594f1ce57c01ce94e770dc7f89d9cf184641'
+            '1d87754153369acb9fc6e8a301ba6194907ebc27fb8183f5787700880f76be36'
+            'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '5890a3723c28a6679db92cbd87d7e06ea5e5ecf6b7be3494b38decbe814c1f0e'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
             '6bd365915fc400be2e245104659744a038c61fe618c47d96977d750ba3e4e3d7'
-            'cbac2c3ae5a5180464b6bd50bd2a360b2351a3af309074d5ef9386119470abe5'
-            '6b7288144a650d1af6d7e589b671594f1ce57c01ce94e770dc7f89d9cf184641'
-            '1d87754153369acb9fc6e8a301ba6194907ebc27fb8183f5787700880f76be36'
-            'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101')
+            'cbac2c3ae5a5180464b6bd50bd2a360b2351a3af309074d5ef9386119470abe5')
             
 prepare() {
   cd ${srcdir}/Cinnamon*
+
+  # GNOME Terminal desktop file was renamed in GNOME 3.20
+  patch -p1 < ../gnome-terminal.patch
 
   # https://github.com/linuxmint/Cinnamon/issues/7497 Work with muffin 3.8
   patch -p1 < ../muffin-3.8.patch
 
   # Backport https://github.com/linuxmint/Cinnamon/pull/7327
-  patch -p1 < ../cs_user.py-add-compatibility-for-multiple-pam-module.patch
+  patch -p1 < '../cs_user.py-add-compatibility-for-multiple-pam-module.patch'
 
   # Check for the cc-panel module path, not for the irrelevant binary
   patch -p1 < ../cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch
@@ -97,30 +100,21 @@ prepare() {
   # user-applet: fix loading with newer accountsservice
   patch -Np1 -i ../user-applet.patch
 
+   # Python2 fix
+   sed -i 's:/usr/bin/python :/usr/bin/python2 :' files/usr/share/cinnamon/cinnamon-settings/bin/TreeListWidgets.py
+
+  # Replace MintInstall with GNOME Software
+  sed -i 's/mintinstall.desktop/org.gnome.Software.desktop/' data/org.cinnamon.gschema.xml.in
+
   # Add polkit agent to required components
   sed -i 's/RequiredComponents=\(.*\)$/RequiredComponents=\1polkit-gnome-authentication-agent-1;/' \
     files/usr/share/cinnamon-session/sessions/cinnamon*.session
-
-  # Use pkexec instead of gksu
-  sed -i 's/gksu/pkexec/' files/usr/bin/cinnamon-settings-users
-
-  # Check for the cc-panel path, not for the unneeded binary
-  sed -i 's|/usr/bin/cinnamon-control-center|/usr/lib/cinnamon-control-center-1/panels|' \
-    files/usr/bin/cinnamon-settings
 
   # Cinnamon has no upstream backgrounds, use GNOME backgrounds instead
   sed -i 's|/usr/share/cinnamon-background-properties|/usr/share/gnome-background-properties|' \
     files/usr/share/cinnamon/cinnamon-settings/modules/cs_backgrounds.py
 
-  # GNOME Terminal desktop file was renamed in GNOME 3.20
-  sed -i 's/gnome-terminal.desktop/org.gnome.Terminal.desktop/' data/org.cinnamon.gschema.xml.in \
-    files/usr/share/cinnamon/applets/panel-launchers@cinnamon.org/settings-schema.json
-
-  # Replace MintInstall with GNOME Software
-  sed -i 's/mintinstall.desktop/org.gnome.Software.desktop/' data/org.cinnamon.gschema.xml.in
-
-  # Remove broken symlink
-  rm files/etc/xdg/menus/cinnamon-applications-merged
+  NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
@@ -132,7 +126,6 @@ build() {
     --localstatedir=/var \
     --disable-static \
     --disable-schemas-compile \
-    --enable-gtk-doc \
     --enable-compile-warnings=yes
 
   #https://bugzilla.gnome.org/show_bug.cgi?id=656231
