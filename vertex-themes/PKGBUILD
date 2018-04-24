@@ -4,7 +4,7 @@
 _repo=Vertex-theme
 pkgname="${_repo,}s"
 pkgver=20180424
-pkgrel=1
+pkgrel=2
 pkgdesc='Vertex Gtk2, Gtk3, Metacity, Xfwm, Cinnamon and GNOME Shell themes.'
 _gnomever=3.22
 arch=('any')

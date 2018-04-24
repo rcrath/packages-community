@@ -7,7 +7,7 @@
 
 pkgname=vertex-maia-themes
 pkgver=20180424
-pkgrel=1
+pkgrel=3
 pkgdesc="Manjaro's Maia colored variant of the Vertex-themes"
 _gnomever=3.22
 arch=('any')
@@ -19,11 +19,11 @@ depends=('gtk-engine-murrine')
 makedepends=('git' 'imagemagick')
 source=("git+$_url.git"
 	"git+$_maia_url.git"
-	'whiskermenu-rabideau.patch')
+	'whiskermenu-manjaro.patch')
 install=$pkgname.install
 sha256sums=('SKIP'
-    'SKIP'
-    '7ea204b5f3f57faa24cf7c7bd96cd0a4a7c6836539a24fb3001731e2c5f26eb2')
+            'SKIP'
+            '2fb9a789457acb96a736ceb026e4176730fb03965192a516866fe58f51488bd4')
 options=('!strip')
 
 pkgver() {
@@ -363,8 +363,8 @@ package() {
   cp $srcdir/vertex-theme/common/metacity-1/thumbnail-light.png $pkgdir/usr/share/themes/Vertex-Maia-Light/metacity-1/thumbnail.png
 
   ## customization for whiskermenu
-  cd $pkgdir/usr/share/themes/Vertex-Maia
-  patch -p1 < $srcdir/whiskermenu-rabideau.patch
+  cd $pkgdir/usr/share/themes
+  patch -p1 < $srcdir/whiskermenu-manjaro.patch
   
   ## add openbox themes
   cd $srcdir/vertex-manjaro
