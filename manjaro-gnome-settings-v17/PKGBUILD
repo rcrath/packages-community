@@ -2,14 +2,15 @@
 # Maintainer: Stefano Capitani  <stefanoatmanjarodotorg>
 
 pkgbase=manjaro-gnome-settings
-pkgname=('manjaro-gnome-settings' 'manjaro-gnome-extension-settings')
+_branch=17.0
+pkgname=(manjaro-gnome-settings-$_branch manjaro-gnome-extension-settings-$_branch)
 #          'manjaro-gnome-minimal-settings')
-pkgver=20180413
-pkgrel=4
+pkgver=20180424
+pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
 license=('GPL')
-source=("git+$url.git"
+source=(manjaro-gnome-settings::git+$url.git#branch=$_branch
 		'disable-gdm-night-light.hook'
 		'disable-gdm-night-light.script'
 		'manjaro-gnome-messages.hook'
@@ -24,10 +25,6 @@ sha256sums=('SKIP'
             '5e27249cfe4bdd655b63ee6b3cc82e0fc272c5cba00a8a09266cde05a0fe9d99'
             '4e17fac482415309fddf61de1ae67e25e1646f61dc5596bfe760011dcc5c9dbd'
             '45ddcda03b504a9f7ab8ab8795b6187d8467ab37b2bd722c9515fcfa3a5fb7c1')
-
-pkgver() {
-	date +%Y%m%d
-}
 
 _inst_dir(){
 	install -d $pkgdir/etc
@@ -48,32 +45,20 @@ _inst_dir-extension(){
 	cp $srcdir/$pkgbase/schemas/10_arc-menu.gschema.override $pkgdir/usr/share/gnome-shell/extensions/arc-menu@linxgem33.com/schemas
 }
 
-package_manjaro-gnome-settings() {
-pkgdesc='Manjaro Linux Gnome settings'
-depends=('gnome-shell'
-     	 'gnome-shell-extension-taskbar'
-       	 'gnome-shell-extensions'
-	     'gnome-shell-extension-openweather'
-	     'gnome-shell-extension-arc-menu'
-		 'gnome-shell-extension-dash-to-dock'
-		 'gnome-shell-extension-appindicator'
-		 'manjaro-gnome-extension-settings'
-		 'chrome-gnome-shell'
-         'gnome-wallpapers'
-         'adapta-maia-theme'
-         'xcursor-breeze'
-         'manjaro-base-skel'
-         'qt5-styleplugins'
-         'qt5ct'
-         'ttf-hack'
-         'noto-fonts-compat'
-         'kvantum-manjaro')
+pkgver() {
+    date +%Y%m%d
+}
+
+package_manjaro-gnome-settings-17.0() {
+pkgdesc="Manjaro Linux Gnome settings v$_branch"
+
 optdepends=('plymouth-theme-manjaro-gnome-17.0: Plymouth theme'
 			'manjaro-gnome-maia-theme: Branding theme for Gdm and Dash to Dock'
 			'lighter-gnome: some gnome-settings-daemon components'
 			'papirus-maia-icon-theme: default icons set')
-conflicts=('manjaro-desktop-settings')
-provides=('manjaro-desktop-settings')
+conflicts=("manjaro-gnome-settings-$_branch")
+replaces=("manjaro-gnome-settings-$_branch")
+provides=("manjaro-desktop-settings")
 backup=('etc/gdm/PostLogin/Default')
 
 	_inst_dir
@@ -92,10 +77,12 @@ backup=('etc/gdm/PostLogin/Default')
 }
 
 
-package_manjaro-gnome-extension-settings() {
+package_manjaro-gnome-extension-settings-17.0() {
 
-pkgdesc='Manjaro Linux Gnome extensions settings'
-optdepends=('manjaro-gnome-settings')
+pkgdesc="Manjaro Linux Gnome extensions settings v$_branch"
+optdepends=("manjaro-gnome-settings-$_branch")
+conflicts=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch")
+replaces=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch")
 
 	_inst_dir-extension	
 	install -Dm644 ${srcdir}/manjaro-extensions.hook ${pkgdir}/usr/share/libalpm/hooks/manjaro-extensions.hook	
