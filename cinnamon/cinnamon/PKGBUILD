@@ -51,14 +51,12 @@ optdepends=('blueberry: Bluetooth support'
 options=('!emptydirs')
 source=( #"$pkgname-$pkgver.tar.gz::$url/archive/$pkgver.tar.gz"
     "$_url/archive/$pkgver.tar.gz"
-    "gnome-terminal.patch::${url}/commit/2dc04b8a26fa7a672c579ed62a70dca6c6e4b295.patch"
     "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch'
 )
 sha256sums=('a1a4b55832abd9fe5d9a1da5e1445ea5580cdbdf0d8731ff6923c36f14be3c69'
-            '505814a7a98ce8a9075af6747bbb592e598af5d1daa8aad4a50e25e84fb8b716'
             'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '7517d651d440361947f9539fe8f42548d5eb43a09c28c9a11f51cfdfdefd042f'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
