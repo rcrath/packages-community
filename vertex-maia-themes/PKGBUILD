@@ -6,27 +6,24 @@
 # Author: horst3180 @ deviantart
 
 pkgname=vertex-maia-themes
-pkgver=20171114
+pkgver=20180424
 pkgrel=1
-pkgdesc='Official Manjaro Gtk2/3, Metacity, Xfwm, Cinnamon, Openbox and GNOME Shell themes, based on Vertex'
+pkgdesc="Manjaro's Maia colored variant of the Vertex-themes"
 _gnomever=3.22
-_vertex_commit=67a36e8968eab4405614b86a746954fdcfb138a6
-_manjaro_commit=ca836dd9326c3f0efe2923175f527a0af2904c8e
 arch=('any')
-url='http://horst3180.deviantart.com/art/Vertex-Theme-470663601'
+url="http://horst3180.deviantart.com/art/Vertex-Theme-470663601"
+_url="https://github.com/oberon2007/vertex-theme"
+_maia_url="https://github.com/manjaro/vertex-manjaro"
 license=('GPL3')
 depends=('gtk-engine-murrine')
-makedepends=('imagemagick')
-optdepends=('ff-theme-util: set Firefox and Palemoon themes automatically')
-conflicts=('vertex-manjaro-themes' 'vertex-maia-dark-ob')
-replaces=('vertex-manjaro-themes' 'vertex-maia-dark-ob')
-source=("vertex-$_vertex_commit.tar.gz::https://github.com/oberon2007/vertex-theme/archive/$_vertex_commit.tar.gz"
-	"vertex-manjaro-$_manjaro_commit.tar.gz::https://github.com/manjaro/vertex-manjaro/archive/$_manjaro_commit.tar.gz"
+makedepends=('git' 'imagemagick')
+source=("git+$_url.git"
+	"git+$_maia_url.git"
 	'whiskermenu-rabideau.patch')
 install=$pkgname.install
-sha256sums=('58387221bf1efc0e411b6085b4987cda195c3e579113cc9df7fc97b592edb05b'
-            '5ce02d295a4b0322ce327173bd15435635924e7e2c1ecc54e2371f9e5e21cd54'
-            '7ea204b5f3f57faa24cf7c7bd96cd0a4a7c6836539a24fb3001731e2c5f26eb2')
+sha256sums=('SKIP'
+    'SKIP'
+    '7ea204b5f3f57faa24cf7c7bd96cd0a4a7c6836539a24fb3001731e2c5f26eb2')
 options=('!strip')
 
 pkgver() {
@@ -34,12 +31,12 @@ pkgver() {
 }
 
 build() {
-  cd vertex-theme-$_vertex_commit
+  cd vertex-theme
   ./autogen.sh --prefix=/usr --disable-unity --with-gnome=$_gnomever
 }
 
 package() {
-  cd vertex-theme-$_vertex_commit
+  cd vertex-theme
   make DESTDIR="$pkgdir" install
 
   cd extra
@@ -338,7 +335,7 @@ package() {
     s/154\;\;158/158\;\;154/" dock.theme
 
   ## add custom items and Square variant
-  cd "$srcdir/vertex-manjaro-$_manjaro_commit"
+  cd "$srcdir/vertex-manjaro"
   cp -r images/* "$pkgdir/usr/share/themes/Vertex-Maia"
   cp -r images/gtk-{2,3}.0 "$pkgdir/usr/share/themes/Vertex-Maia-Light"
   rm -rf $pkgdir/usr/share/themes/Vertex-Maia-Dark/{gtk-2.0/{Menu,ProgressBar},gtk-3.0/assets,xfwm4}
@@ -362,14 +359,14 @@ package() {
   ln -s /usr/share/themes/Firefox/Vertex-Maia $pkgdir/usr/share/themes/Palemoon/Vertex-Maia-Square
 
   ## fix corrupt metacity thumbnail
-  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/vertex-theme-$_vertex_commit/common/metacity-1/thumbnail.png >/dev/null
-  cp $srcdir/vertex-theme-$_vertex_commit/common/metacity-1/thumbnail-light.png $pkgdir/usr/share/themes/Vertex-Maia-Light/metacity-1/thumbnail.png
+  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/vertex-theme/common/metacity-1/thumbnail.png >/dev/null
+  cp $srcdir/vertex-theme/common/metacity-1/thumbnail-light.png $pkgdir/usr/share/themes/Vertex-Maia-Light/metacity-1/thumbnail.png
 
   ## customization for whiskermenu
   cd $pkgdir/usr/share/themes/Vertex-Maia
   patch -p1 < $srcdir/whiskermenu-rabideau.patch
   
   ## add openbox themes
-  cd $srcdir/vertex-manjaro-$_manjaro_commit
+  cd $srcdir/vertex-manjaro
   cp -r Vertex-Maia{,-Dark} $pkgdir/usr/share/themes
 }
