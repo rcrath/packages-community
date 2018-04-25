@@ -1,11 +1,11 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=conky-i3
-pkgver=20180109
+pkgver=20180425
 pkgrel=1
 pkgdesc="Conkies for manjaro-i3 in grey, green, solarized or 'maia' colors"
 _repo=conkies
-url=github.com/oberon2007/$_repo
+url=https://github.com/oberon2007/$_repo
 arch=(any)
 groups=('i3-manjaro')
 license=(GPL)
@@ -21,7 +21,7 @@ backup=('usr/share/conky/conky_green'
     'usr/share/conky/conky1.10_shortcuts_grey'
     'usr/share/conky/conky1.10_shortcuts_maia'
     'usr/share/conky/conky1.10_shortcuts_solarized')
-source=("git://$url.git")
+source=("git+$url.git")
 md5sums=('SKIP')
 
 pkgver() {
