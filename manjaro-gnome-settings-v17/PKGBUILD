@@ -5,7 +5,7 @@ pkgbase=manjaro-gnome-settings
 _branch=17.0
 pkgname=(manjaro-gnome-settings-$_branch manjaro-gnome-extension-settings-$_branch)
 #          'manjaro-gnome-minimal-settings')
-pkgver=20180424
+pkgver=20180425
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
@@ -21,8 +21,8 @@ makedepends=('git')
 sha256sums=('SKIP'
             '430c34abc34b7016eb649dafb4580223bc48d3131a01dd1b1c017dcb8b9d290c'
             'b88f69aafc874428d2638c342f3532c7570aa9979f43354bdb66accdfb3b0986'
-            '89fce95f80bb8277042d8610850e5c8163696ca94099a0b7442ed74c82cef3fd'
-            '5e27249cfe4bdd655b63ee6b3cc82e0fc272c5cba00a8a09266cde05a0fe9d99'
+            '746a179ac4aa716e151253c90cd9e2f897710fdcbb0e6ad0641327db46c33189'
+            '7724af7daefb3057c4e56294237de3f377f85fcd508f2ab57d2e49f63620e0c5'
             '4e17fac482415309fddf61de1ae67e25e1646f61dc5596bfe760011dcc5c9dbd'
             '45ddcda03b504a9f7ab8ab8795b6187d8467ab37b2bd722c9515fcfa3a5fb7c1')
 
@@ -56,8 +56,8 @@ optdepends=('plymouth-theme-manjaro-gnome-17.0: Plymouth theme'
 			'manjaro-gnome-maia-theme: Branding theme for Gdm and Dash to Dock'
 			'lighter-gnome: some gnome-settings-daemon components'
 			'papirus-maia-icon-theme: default icons set')
-conflicts=("manjaro-gnome-settings-$_branch")
-replaces=("manjaro-gnome-settings-$_branch")
+conflicts=("manjaro-gnome-settings")
+replaces=("manjaro-gnome-settings")
 provides=("manjaro-desktop-settings")
 backup=('etc/gdm/PostLogin/Default')
 
@@ -81,8 +81,8 @@ package_manjaro-gnome-extension-settings-17.0() {
 
 pkgdesc="Manjaro Linux Gnome extensions settings v$_branch"
 optdepends=("manjaro-gnome-settings-$_branch")
-conflicts=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch")
-replaces=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch")
+conflicts=('manjaro-gnome-extension-settings')
+replaces=('manjaro-gnome-extension-settings')
 
 	_inst_dir-extension	
 	install -Dm644 ${srcdir}/manjaro-extensions.hook ${pkgdir}/usr/share/libalpm/hooks/manjaro-extensions.hook	

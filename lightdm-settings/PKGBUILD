@@ -3,7 +3,7 @@
 
 pkgname=lightdm-settings
 pkgver=1.1.4
-pkgrel=3
+pkgrel=4
 pkgdesc="A configuration tool for the LightDM display manager "
 _add_group=add-autologin-group
 arch=('any')
