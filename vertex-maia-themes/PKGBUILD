@@ -7,7 +7,7 @@
 
 pkgname=vertex-maia-themes
 pkgver=20180424
-pkgrel=3
+pkgrel=4
 pkgdesc="Manjaro's Maia colored variant of the Vertex-themes"
 _gnomever=3.22
 arch=('any')
@@ -23,7 +23,7 @@ source=("git+$_url.git"
 install=$pkgname.install
 sha256sums=('SKIP'
             'SKIP'
-            '2fb9a789457acb96a736ceb026e4176730fb03965192a516866fe58f51488bd4')
+            'be4a349c08d2586d11fa8aab265a4f113c5444aadd49baf95fa76e515621a377')
 options=('!strip')
 
 pkgver() {

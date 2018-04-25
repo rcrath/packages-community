@@ -7,7 +7,7 @@
 
 pkgname=vertex-maia-gtk3
 pkgver=20180424
-pkgrel=2
+pkgrel=3
 pkgdesc='gtk3-only version of the official Manjaro theme'
 _gnomever=3.22
 arch=('any')
