@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.8.0
-pkgrel=1.1
+pkgrel=1.5
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 url="https://github.com/linuxmint/Cinnamon"
@@ -60,7 +60,7 @@ sha256sums=('a1a4b55832abd9fe5d9a1da5e1445ea5580cdbdf0d8731ff6923c36f14be3c69'
             'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '7517d651d440361947f9539fe8f42548d5eb43a09c28c9a11f51cfdfdefd042f'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
-            '57ee000e92c52154e2df9deae34006ea2c91f524cd2541f4fce1f7ccf2309e9c')
+            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d')
             
 prepare() {
   cd ${srcdir}/Cinnamon*
