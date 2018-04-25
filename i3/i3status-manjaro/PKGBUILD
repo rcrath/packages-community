@@ -4,7 +4,7 @@
 _pkgname=i3status
 pkgname=$_pkgname-manjaro
 pkgver=2.11
-pkgrel=3
+pkgrel=4
 pkgdesc='customized status bar for manjaro-i3, dzen2 or xmobar'
 arch=('i686' 'x86_64')
 groups=('i3-manjaro')
@@ -13,7 +13,7 @@ license=('BSD')
 depends=('confuse'
 	'libpulse'
 	'libnl'
-	'ttf-font-icons'
+	'ttf-dejavu'
 	'wireless_tools'
 	'yajl')
 makedepends=('asciidoc'
@@ -25,15 +25,9 @@ provides=('i3status')
 backup=('etc/i3status.conf')
 install=$pkgname.install
 source=("$url/archive/$pkgver.tar.gz"
-    # "git+$url.git"
 	'manjaro.diff')
 md5sums=('bd18bb58235cc7cd460cedf7082854b6'
          '59842c3318c2f430e5934daa807c53c8')
-
-#pkgver() {
-#  cd "$_pkgname"
-#  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-#}
 
 prepare() {
   cd $_pkgname-$pkgver
