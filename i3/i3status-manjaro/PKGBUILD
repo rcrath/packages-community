@@ -4,7 +4,7 @@
 _pkgname=i3status
 pkgname=$_pkgname-manjaro
 pkgver=2.11
-pkgrel=4
+pkgrel=5
 pkgdesc='customized status bar for manjaro-i3, dzen2 or xmobar'
 arch=('i686' 'x86_64')
 groups=('i3-manjaro')
@@ -14,6 +14,7 @@ depends=('confuse'
 	'libpulse'
 	'libnl'
 	'ttf-dejavu'
+    'ttf-font-icons'
 	'wireless_tools'
 	'yajl')
 makedepends=('asciidoc'
