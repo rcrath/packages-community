@@ -6,22 +6,21 @@
 # Author: horst3180 @ deviantart
 
 pkgname=vertex-maia-gtk3
-pkgver=20171114
-pkgrel=1
+pkgver=20180424
+pkgrel=3
 pkgdesc='gtk3-only version of the official Manjaro theme'
 _gnomever=3.22
-_vertex_commit=67a36e8968eab4405614b86a746954fdcfb138a6
-_manjaro_commit=ca836dd9326c3f0efe2923175f527a0af2904c8e
 arch=('any')
-url='http://horst3180.deviantart.com/art/Vertex-Theme-470663601'
+url="http://horst3180.deviantart.com/art/Vertex-Theme-470663601"
+_url="https://github.com/oberon2007/vertex-theme"
+_maia_url="https://github.com/manjaro/vertex-manjaro"
 license=('GPL3')
-makedepends=('imagemagick')
-optdepends=('ff-theme-util: set Firefox and Palemoon themes automatically')
+makedepends=('git' 'imagemagick')
 conflicts=('vertex-maia-themes')
-source=("vertex-$_vertex_commit.tar.gz::https://github.com/oberon2007/Vertex-theme/archive/$_vertex_commit.tar.gz"
-	    "vertex-manjaro-$_manjaro_commit.tar.gz::https://github.com/manjaro/vertex-manjaro/archive/$_manjaro_commit.tar.gz")
-sha256sums=('faaeb996cd529a59fd556ced4f14e41d60c03d2668fc7aa0490d34e1a753032a'
-            'e965fea1ad35bc76e02a5a6e8fbd69a99600f1a4fbfc203e3df57264e6e83b07')
+source=("git+$_url.git"
+	    "git+$_maia_url.git")
+sha256sums=('SKIP'
+        'SKIP')
 options=('!strip')
 
 pkgver() {
@@ -29,7 +28,7 @@ pkgver() {
 }
 
 build() {
-  cd vertex-theme-$_vertex_commit
+  cd vertex-theme
   ./autogen.sh \
 	--prefix=/usr \
 	--disable-unity \
@@ -38,7 +37,7 @@ build() {
 }
 
 package() {
-  cd vertex-theme-$_vertex_commit
+  cd vertex-theme
   make DESTDIR="$pkgdir" install
 
   cd extra
@@ -313,7 +312,7 @@ cd ..
 	s/FFFFFF/F9FAF9/g" gtkrc
 
   ## add some custom items and Square variant, remove xfce stuff
-  cd "$srcdir/vertex-manjaro-$_manjaro_commit"
+  cd "$srcdir/vertex-manjaro"
   rm -rf images/gtk-2.0
   cp -r images/* "$pkgdir/usr/share/themes/Vertex-Maia"
   cp -r images/* "$pkgdir/usr/share/themes/Vertex-Maia-Light"
@@ -338,5 +337,5 @@ cd ..
   ln -s /usr/share/themes/Firefox/Vertex-Maia $pkgdir/usr/share/themes/Palemoon/Vertex-Maia-Square
 
   ## fix corrupt metacity thumbnail
-  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/vertex-theme-$_vertex_commit/common/metacity-1/thumbnail.png >/dev/null
+  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/vertex-theme/common/metacity-1/thumbnail.png >/dev/null
 }

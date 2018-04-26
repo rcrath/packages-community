@@ -11,9 +11,8 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
-        'manjaro-bspwm-mate-settings'
-		)
-pkgver=20180420
+        )
+pkgver=20180425
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/desktop-settings"
@@ -181,7 +180,7 @@ package_manjaro-lxde-settings() {
             'i3-scrot'
             'lxde-wallpapers'
             'manjaro-base-skel'
-            'vibrancy-colors'
+            'vibrancy-icons-teal'
             'xcursor-breeze'
             )
     conflicts=('manjaro-desktop-settings')
