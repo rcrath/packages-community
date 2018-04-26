@@ -11,6 +11,7 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-lxde-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
+        'manjaro-openbox-settings'
         )
 pkgver=20180425
 pkgrel=1
@@ -187,6 +188,15 @@ package_manjaro-lxde-settings() {
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/lxde'
+}
+
+package_manjaro-openbox-settings() {
+    pkgdesc='Manjaro Linux openbox settings'
+    depends=('manjaro-base-skel' 'manjaro-openbox-base')
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox'
 }
 
 package_manjaro-mate-settings() {
