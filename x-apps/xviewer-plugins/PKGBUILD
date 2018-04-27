@@ -2,20 +2,27 @@
 # AUR-Maintainer: Nate Simon <aurpkg (at natesimon.net)>
 
 pkgname=xviewer-plugins
-pkgver=1.2.0
+_gitrel=master.mint19
+pkgver=master.lmde3.r0.gba9ce0f
 pkgrel=1
+_commit=ba9ce0f2d0bb923a56a61a6b0c03de6d15440d50 #tag master.mint19
 pkgdesc="Plugins for xviewer. X-Apps Project"
 arch=('i686' 'x86_64')
 license=('GPL')
-url="https://github.com/linuxmint/${pkgname}"
+url="https://github.com/linuxmint/$pkgname"
 groups=('x-apps')
-depends=('xviewer' 'libpeas')
-makedepends=('gnome-common')
-source=("${url}/archive/${pkgver}.tar.gz")
-md5sums=('359029dd46d5c18c43faf7080ad46ed4')
+depends=('libpeas' 'xviewer')
+makedepends=('git' 'gnome-common')
+source=("git+$url.git#commit=$_commit")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$pkgname"
+  git describe | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd $pkgname
     ./autogen.sh --prefix="/usr" \
         --localstatedir="/var" \
         --libexecdir="/usr/lib/${pkgname}"
@@ -23,6 +30,6 @@ build() {
 }
 
 package(){
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd $pkgname
     make DESTDIR="$pkgdir/" install
 }
