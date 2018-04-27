@@ -33,7 +33,7 @@ optdepends=('brasero: Burn discs'
     'libjpeg-turbo: Jpeg writing support'
     'liboauth: Web albums'
     'libopenraw: Support for RAW photos'
-    'libtiff: Tiff writing support'    )
+    'libtiff: Tiff writing support')
 source=("$url/archive/$_gitrel.tar.gz")
 md5sums=('7e09e5fc1831a895eb40de815bdd9534')
 
