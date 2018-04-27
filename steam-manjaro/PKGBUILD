@@ -8,12 +8,12 @@
 pkgname=steam-manjaro
 _package=steam
 pkgver=1.0.0.54
-pkgrel=10
+pkgrel=11
 pkgdesc="Valve's digital software delivery system"
 url='http://steampowered.com/'
 arch=('i686' 'x86_64')
 license=('custom')
-depends=('lsb-release' 'desktop-file-utils' 'curl' 'dbus' 'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity')
+depends=('lsb-release' 'desktop-file-utils' 'curl' 'dbus' 'freetype2' 'gdk-pixbuf2' 'ttf-font' 'xorg-xrandr' 'zenity')
 depends_x86_64=('lib32-libgl' 'lib32-mesa' 'lib32-gcc-libs' 'lib32-libx11' 'lib32-libxss' 'lib32-alsa-plugins')
 optdepends=('steam-native: steam native runtime support')
 provides=('steam')
