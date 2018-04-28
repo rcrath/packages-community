@@ -16,12 +16,9 @@ depends=('android-file-transfer'
          'gvfs-afc'
          'gvfs-mtp'
          'gvfs-smb'
-         'manjaro-pulse'
          'mpv'
          'pamixer'
          'pavucontrol'
          'playerctl'
-         'pulseaudio-bluetooth'
-
          )
 provides=('manjaro-openbox-extra')
