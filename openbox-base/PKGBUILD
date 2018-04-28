@@ -1,8 +1,8 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname="manjaro-openbox-base"
-pkgver=1.0
-pkgrel=2
+pkgver=1.1
+pkgrel=1
 pkgdesc="Manjaro Openbox base"
 arch=('any')
 license=('GPL3')

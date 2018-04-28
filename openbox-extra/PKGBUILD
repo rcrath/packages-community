@@ -2,7 +2,7 @@
 
 pkgname="manjaro-openbox-extra"
 pkgver=1.0
-pkgrel=2
+pkgrel=1
 pkgdesc="Manjaro Openbox extra"
 arch=('any')
 license=('GPL3')
