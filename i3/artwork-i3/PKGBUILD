@@ -2,7 +2,7 @@
 
 pkgbase=artwork-i3
 pkgname=('artwork-i3' 'i3-default-artwork')
-pkgver=20180423
+pkgver=20180428
 pkgrel=1
 arch=(any)
 groups=('i3-manjaro')
