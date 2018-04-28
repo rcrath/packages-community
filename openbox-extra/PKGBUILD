@@ -9,6 +9,8 @@ license=('GPL3')
 depends=('android-file-transfer'
          'android-tools'
          'android-udev'
+         'audacious-gtk3'
+         'audacious-plugins-gtk3'
          'blueman'
          'gparted'
          'guake'
