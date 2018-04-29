@@ -1,32 +1,32 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 # Author: horst3180 @ deviantart
+# Contributor: Germán Franco <dev.germanfr@gmail.com>
+# Contributor: @Photon89
 
-_repo=Vertex-theme
-pkgname="${_repo,}s"
-pkgver=20180424
-pkgrel=3
+pkgname=vertex-theme
+pkgver=20180429
+pkgrel=1
 pkgdesc='Vertex Gtk2, Gtk3, Metacity, Xfwm, Cinnamon and GNOME Shell themes.'
 _gnomever=3.22
 arch=('any')
 url="http://horst3180.deviantart.com/art/Vertex-Theme-470663601"
-_url="https://github.com/oberon2007/$_repo"
+_url="https://github.com/oberon2007/$pkgname"
 license=('GPL3')
 depends=('gtk-engine-murrine')
-makedepends=('git')
-optdepends=('ff-theme-util: set Firefox and Palemoon themes automatically')
-source=("git+$_url.git")
-sha256sums=('SKIP')
-
-pkgver() {
-    date +%Y%m%d
-}
+conflicts=('vertex-themes')
+replaces=('vertex-themes')
+source=("$_url/archive/$pkgver.tar.gz")
+md5sums=('40e863530c2b015dd0fef5dcedd34195')
 
 build() {
-  cd $_repo
-  ./autogen.sh --prefix=/usr --disable-unity --with-gnome=${_gnomever}
+  cd $pkgname-$pkgver
+  ./autogen.sh \
+    --prefix=/usr \
+    --disable-unity \
+    --with-gnome=${_gnomever}
 }
 package() {
-  cd $_repo
+  cd $pkgname-$pkgver
 
   make DESTDIR="$pkgdir" install
   cd extra

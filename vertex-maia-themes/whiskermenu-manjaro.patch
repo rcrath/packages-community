@@ -27,12 +27,12 @@ diff -rupN a/Vertex-Maia/gtk-2.0/gtkrc b/Vertex-Maia/gtk-2.0/gtkrc
 +widget "whiskermenu-window*"                                        style "darkback"
 +widget "whiskermenu-window*TreeView*"                               style "darktree"
 diff -rupN a/Vertex-Maia/gtk-3.0/gtk.css b/Vertex-Maia/gtk-3.0/gtk.css
---- a/Vertex-Maia/gtk-3.0/gtk.css	2018-04-24 16:52:33.830317434 +0200
-+++ b/Vertex-Maia/gtk-3.0/gtk.css	2018-04-24 16:52:07.274527146 +0200
-@@ -4324,6 +4324,37 @@ ClockBox {
-       border-color: transparent; }
+--- a/Vertex-Maia/gtk-3.0/gtk.css	2018-04-29 20:20:33.830317434 +0200
++++ b/Vertex-Maia/gtk-3.0/gtk.css	2018-04-29 20:20:07.274527146 +0200
+@@ -4417,6 +4417,37 @@ ClockBox {
+
  #whiskermenu-button {
- 	padding-top: 2px; }
+   padding-top: 2px; }
 +#whiskermenu-window border {
 +  background-color: #454947; }
 +#whiskermenu-window {
@@ -68,12 +68,12 @@ diff -rupN a/Vertex-Maia/gtk-3.0/gtk.css b/Vertex-Maia/gtk-3.0/gtk.css
  .nautilus-window .floating-bar {
    padding: 0;
 diff -rupN a/Vertex-Maia-Dark/gtk-3.0/gtk.css b/Vertex-Maia-Darkgtk-3.0/gtk.css
---- a/Vertex-Maia-Dark/gtk-3.0/gtk.css	2018-04-24 16:52:33.830317434 +0200
-+++ b/Vertex-Maia-Dark/gtk-3.0/gtk.css	2018-04-24 16:52:07.274527146 +0200
-@@ -4315,6 +4315,37 @@ ClockBox {
-       border-radius: 0; }
+--- a/Vertex-Maia-Dark/gtk-3.0/gtk.css	2018-04-29 20:20:33.830317434 +0200
++++ b/Vertex-Maia-Dark/gtk-3.0/gtk.css	2018-04-29 20:20:07.274527146 +0200
+@@ -4406,6 +4406,37 @@ ClockBox {
+
  #whiskermenu-button {
- 	padding-top: 2px; }
+   padding-top: 2px; }
 +#whiskermenu-window border {
 +  background-color: #454947; }
 +#whiskermenu-window {

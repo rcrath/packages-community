@@ -6,29 +6,26 @@
 # Author: horst3180 @ deviantart
 
 pkgname=vertex-maia-gtk3
-pkgver=20180424
-pkgrel=3
+pkgver=20180429
+pkgrel=1
 pkgdesc='gtk3-only version of the official Manjaro theme'
+_repo=vertex-theme
 _gnomever=3.22
 arch=('any')
 url="http://horst3180.deviantart.com/art/Vertex-Theme-470663601"
-_url="https://github.com/oberon2007/vertex-theme"
+_url="https://github.com/oberon2007/$_repo"
 _maia_url="https://github.com/manjaro/vertex-manjaro"
 license=('GPL3')
-makedepends=('git' 'imagemagick')
+makedepends=('imagemagick')
 conflicts=('vertex-maia-themes')
-source=("git+$_url.git"
-	    "git+$_maia_url.git")
-sha256sums=('SKIP'
-        'SKIP')
+source=("$_repo-$pkgver::$_url/archive/$pkgver.tar.gz"
+	"maia-$pkgver::$_maia_url/archive/$pkgver.tar.gz")
+sha256sums=('f20f2863bc8ba37ea27fc6bcb29cce3fbb8fdb4a741a5d966f90b63f96436bf2'
+            '66711896b9aafd9e0392f9c2b347ac02d00cb4933ac0fdecdc6f18f5f6d8d0e2')
 options=('!strip')
 
-pkgver() {
-    date +%Y%m%d
-}
-
 build() {
-  cd vertex-theme
+  cd $_repo-$pkgver
   ./autogen.sh \
 	--prefix=/usr \
 	--disable-unity \
@@ -37,7 +34,7 @@ build() {
 }
 
 package() {
-  cd vertex-theme
+  cd $_repo-$pkgver
   make DESTDIR="$pkgdir" install
 
   cd extra
@@ -312,7 +309,7 @@ cd ..
 	s/FFFFFF/F9FAF9/g" gtkrc
 
   ## add some custom items and Square variant, remove xfce stuff
-  cd "$srcdir/vertex-manjaro"
+  cd "$srcdir/vertex-manjaro-$pkgver"
   rm -rf images/gtk-2.0
   cp -r images/* "$pkgdir/usr/share/themes/Vertex-Maia"
   cp -r images/* "$pkgdir/usr/share/themes/Vertex-Maia-Light"
@@ -337,5 +334,5 @@ cd ..
   ln -s /usr/share/themes/Firefox/Vertex-Maia $pkgdir/usr/share/themes/Palemoon/Vertex-Maia-Square
 
   ## fix corrupt metacity thumbnail
-  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/vertex-theme/common/metacity-1/thumbnail.png >/dev/null
+  tee $pkgdir/usr/share/themes/Vertex-Maia{,-Dark}/metacity-1/thumbnail.png < $srcdir/$_repo-$pkgver/common/metacity-1/thumbnail.png >/dev/null
 }
