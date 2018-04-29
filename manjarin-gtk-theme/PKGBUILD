@@ -1,0 +1,18 @@
+# Maintainer: Paul
+pkgname=manjarin-gtk-theme
+pkgver=1.0
+pkgrel=1
+pkgdesc="This theme (which is a variation of the Telinkrin-theme) is made to blend with the Manjaro-Gnome-Edition"
+arch=('any')
+url='https://www.opendesktop.org/p/1215199/'
+license=('GPL')
+depends=('gtk-engine-murrine' 'gtk-engines' 'gtk3>=3.20')
+provides=('manjarin-gtk-theme')
+source=("${pkgname}-${pkgver}.tar.xz::https://dl.opendesktop.org/api/files/downloadfile/id/1524957778/s/aa0755d45f0f82dd0097bd3ebd1b845c/t/1524994010/u/455718/Manjarin.tar.xz")
+sha512sums=('5f7bb7ab130d8c26cd010f8f0d14a41113dae34862b50cabfb4afa061426909d72422fea47d104dc372695383baab7dfa6f8603074aa2c113a51189cd94d82a7')
+package() {
+  cd "${srcdir}"/Manjarin
+  install -d "$pkgdir"/usr/share/themes/Manjarin
+  cp -rf gtk-* "$pkgdir"/usr/share/themes/Manjarin
+}
+
