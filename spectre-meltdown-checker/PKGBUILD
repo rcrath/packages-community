@@ -3,16 +3,16 @@
 
 pkgbase=spectre-meltdown-checker
 pkgname=('spectre-meltdown-checker')
-pkgver=0.35
+pkgver=0.37
 pkgrel=1
 arch=('any')
 url="https://github.com/speed47/spectre-meltdown-checker"
 license=('GPL')
 source=("smc-$pkgver-$pkgrel.tar.gz::$url/archive/v$pkgver.tar.gz")
-sha256sums=('4140cd46f11ce6eed942aa0881138b56c6b5153592cccb216995e9af5847d0d1')
+sha256sums=('b1b28048005725b963ff0de715d5155e01dc6266c6a18db40f5349ab4565c5a8')
 
 package_spectre-meltdown-checker() {
-  pkgdesc="Spectre & Meltdown Checker"
+  pkgdesc="Spectre & Meltdown vulnerability/mitigation checker (CVE-2017-5753, CVE-2017-5715, CVE-2017-5754)"
   depends=('bash')
   cd ${srcdir}/${pkgname}-${pkgver}
 

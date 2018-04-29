@@ -64,6 +64,4 @@ package() {
   ln -s gimp-${pkgver%.*}.1.gz "${pkgdir}/usr/share/man/man1/gimp.1.gz"
 
   ln -s gimptool-2.0 "${pkgdir}/usr/bin/gimptool"
-  ln -s gimp-${pkgver%.*} ${pkgdir}/usr/bin/gimp
-  ln -s gimp-console-${pkgver%.*} ${pkgdir}/usr/bin/gimp-console
 }
