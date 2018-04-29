@@ -11,16 +11,16 @@ groups=('deepin-manjaro')
 conflicts=('manjaro-desktop-settings')
 provides=('manjaro-desktop-settings')
 depends=('deepin-desktop'
-	'deepin-desktop-schemas-manjaro'
-	'deepin-dock'
-        'deepin-gtk-theme'
-	'deepin-launcher'
-	'deepin-session-ui'
-	'file-roller'
-	'manjaro-base-skel')
+    'deepin-desktop-schemas-manjaro'
+    'deepin-dock'
+    'deepin-gtk-theme'
+    'deepin-launcher'
+    'deepin-session-ui'
+    'file-roller'
+    'manjaro-base-skel')
 makedepends=('git')
 optdepends=('plymouth-theme-manjaro-deepin-circle'
-	'manjaro-wallpapers-17.0')
+    'manjaro-wallpapers-18.0')
 source=("git+$url.git")
 sha256sums=('SKIP')
 
