@@ -4,7 +4,7 @@ pkgver=1.0
 pkgrel=1
 pkgdesc="This theme (which is a variation of the Telinkrin-theme) is made to blend with the Manjaro-Gnome-Edition"
 arch=('any')
-url='https://www.opendesktop.org/p/1215199/'
+url='https://github.com/paullinuxthemer/Manjarin'
 license=('GPL')
 depends=('gtk-engine-murrine' 'gtk-engines' 'gtk3>=3.20')
 provides=('manjarin-gtk-theme')
