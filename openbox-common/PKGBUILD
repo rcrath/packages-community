@@ -2,17 +2,22 @@
 
 pkgname="manjaro-openbox-common"
 _gitname="openbox-common"
-pkgver=1.2.2
+_branch="stable17"
+pkgver=20180430
 pkgrel=1
 pkgdesc="Manjaro Openbox common scripts and settings"
 arch=('any')
-url="https://github.com/fhdk/${_gitname}.git"
+url="https://github.com/fhdk/${_gitname}"
 license=('GPL3')
 makedepends=('git')
 provides=('manjaro-openbox-common')
-source=(git+$url)
+source=(git+$url.git#branch=${_branch})
 makedepends=('git')
-md5sums=('SKIP')
+sha256sums=('SKIP')
+
+pkgver() {
+    date +%Y%m%d
+}
 
 package() {
 	install -dm755   ${pkgdir}/usr/lib/manjaro
