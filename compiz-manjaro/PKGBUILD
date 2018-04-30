@@ -4,11 +4,11 @@
 
 _name=compiz
 pkgname=compiz-manjaro
-_revno=r4138
+_revno=r4143
 _upstream='~compiz-team'
-_greybirdver=1.6.2
+_greybirdver=3.22.8
 pkgver=0.9.13.1.${_revno}
-pkgrel=5
+pkgrel=1
 pkgdesc="OpenGL compositing window manager. Includes friendly defaults, GWD theme selector and autostart for Xfce & MATE."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/${_name}"
@@ -38,7 +38,7 @@ source=("${pkgname}-${pkgver}.tar.gz::http://bazaar.launchpad.net/${_upstream}/$
         "compiz-xfce-uninstall-helper"
         "compiz-xfce-uninstall-helper.desktop"
         "greybird-${_greybirdver}.tar.gz::https://github.com/shimmerproject/Greybird/archive/v${_greybirdver}.tar.gz")
-sha256sums=('d3dca4215d2727d0075c7bf6d659dade46207e3192cdf62ae42cbf4d0f302ddf'
+sha256sums=('f5cae4e1490b90d416e0bf3590cd20ad77e430e2a71aa0daf30beaed89605f98'
             'f4897590b0f677ba34767a29822f8f922a750daf66e8adf47be89f7c2550cf4b'
             '16ddb6311ce42d958505e21ca28faae5deeddce02cb558d55e648380274ba4d9'
             '89ee91a8ea6b1424ef76661ea9a2db43412366aacddc12d24a7adf5e04bfbc61'
@@ -51,7 +51,7 @@ sha256sums=('d3dca4215d2727d0075c7bf6d659dade46207e3192cdf62ae42cbf4d0f302ddf'
             'd23b8633186bb3a2a841734ad0b917500f3536a67046f5d8fbb08818eab59160'
             '5c471a34a1d79a45e8c4a924f0f58d71199328e45c80472fe32ecaac76c987ee'
             '02eec20f75eb1f9571a2cf92013fc3c78d13c155a8ede0467cc10b83cdeba43c'
-            '473a38b379381311b68dcc579005c0d5bbfbabefe1de7107d897c68b81e6b460')
+            'f8808d10b55d32ea69a9030d6ac6a707e7274ee2528f94fc7809bb2eeedfcdb9')
 install="${pkgname}.install"
 
 prepare() {

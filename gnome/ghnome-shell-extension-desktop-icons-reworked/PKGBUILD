@@ -1,0 +1,30 @@
+# Maintainer: Stefano Capitani <stefano@manjaro.org>
+
+_pkgbase=gnome-shell-extension-desktop-icons
+pkgname=$_pkgbase-reworked
+pkgver=0.1
+pkgrel=1
+_commit=a76ea4badf97507484874b880975593d2a1e122e
+_ext_dir=org.gnome.desktop-icons-reworked
+pkgdesc="Add icons to the desktop"
+arch=('any')
+url="https://github.com/Ste74/$_ext_dir"
+license=("LGPL3")
+depends=('gnome-shell' 'gnome-shell-extensions')
+makedepends=('cmake')
+conflicts=("$_pkgbase")
+options=('!strip')
+source=("$url/archive/$_commit.tar.gz")
+sha512sums=('fd613c8c20e1d4ffa2322dffcf6685a1b8772239a21ca8ebd94294d0a3c95e0887727772f51373cfd49bacd4d06b2a9ffbfd739a9bae08879619cdfead5fc4bc')
+
+build() {
+    mkdir -p $_ext_dir-$_commit/build
+    cd $_ext_dir-$_commit/build
+    cmake ../
+    make
+}
+
+package() {
+	cd $_ext_dir-$_commit/build
+    make DESTDIR="${pkgdir}" install
+}

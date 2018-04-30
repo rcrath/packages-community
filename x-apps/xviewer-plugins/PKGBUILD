@@ -3,7 +3,7 @@
 
 pkgname=xviewer-plugins
 _gitrel=master.mint19
-pkgver=master.lmde3.r0.gba9ce0f
+pkgver=1.2.0.r1.gba9ce0f
 pkgrel=1
 _commit=ba9ce0f2d0bb923a56a61a6b0c03de6d15440d50 #tag master.mint19
 pkgdesc="Plugins for xviewer. X-Apps Project"
