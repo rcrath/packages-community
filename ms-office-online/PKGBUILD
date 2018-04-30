@@ -2,18 +2,18 @@
 # Contributor: Vitor Lopes <vmnlop@gmail.com>
 
 pkgname=('ms-office-online')
-pkgver=18.04.3
+pkgver=18.04.4
 pkgrel=1
-_commit=b5c1c0b
+_commit=877225f
 pkgdesc="Microsoft Office Suite Online for Manjaro Linux"
 url="https://www.office.com/"
-depends=('python-jade-application-kit>=0.36')
-license=('GPL3' 'custom')
+depends=('python-jade-application-kit>=1.3.3')
+license=('GPL3' 'CC')
 arch=('any')
 provides=('microsoft-office-online' 'microsoft-office')
 source=("${pkgname}-${pkgver}-${pkgrel}.tar.gz::https://github.com/manjaro/${pkgname}-launcher/archive/${pkgver}.tar.gz"
         "${pkgname}-${pkgver}-${pkgrel}.patch::https://github.com/manjaro/ms-office-online-launcher/compare/${pkgver}...${_commit}.patch")
-sha256sums=('5b6a7a9469020bbda8ebdd054b51918d13659d939cc8099fc1fc48ac7179f661'
+sha256sums=('9ece1c87cc4f937ced47692a36179d899375bb4825ee3480d06849b541e4f6d3'
             'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
 
 prepare() {

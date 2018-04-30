@@ -1,0 +1,28 @@
+# $Id$
+# Maintainer: Philip Müller <philm@manjaro.org>
+# Contributor: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=(noto-fonts-compat)
+pkgver=20151217
+_commit=5329592b9d0fee9fc8e462b328884a011811ff2c  # master
+pkgrel=1
+pkgdesc="Google Noto TTF fonts (compat-package)"
+arch=(any)
+url="https://www.google.com/get/noto/"
+license=(custom:SIL)
+source=("https://github.com/googlei18n/noto-fonts/raw/$_commit/hinted/NotoMono-Regular.ttf"
+        "https://github.com/googlei18n/noto-fonts/raw/$_commit/LICENSE"
+        '66-noto-mono-compat.conf')
+sha256sums=('41fd7ccc82375e2a1e47f0cc2c941c14d7c99ba2f57cf69c9f738d07fb257686'
+            '6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2'
+            '8c541eab8b44f6c7b02e981a4fbbd082eb6c1aa8285e11dede5f0a3ec0617772')
+
+package_noto-fonts-compat() {
+  depends=('noto-fonts')
+
+  install -Dm644 $srcdir/NotoMono-Regular.ttf -t "$pkgdir"/usr/share/fonts/noto/NotoMono-Regular.ttf
+  install -Dm644 $srcdir/LICENSE -t "$pkgdir"/usr/share/licenses/noto-fonts-compat
+
+  # Install fontconfig files
+  install -Dm644 "$srcdir"/*.conf -t "$pkgdir"/etc/fonts/conf.avail/
+}
