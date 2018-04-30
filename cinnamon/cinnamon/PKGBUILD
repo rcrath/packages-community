@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.8.0
-pkgrel=2
+pkgrel=1.10
 _commit=4d8cadfd90e8b3ec9eae008ec34e63bebad0df31
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
@@ -55,12 +55,14 @@ source=("$pkgname-$_commit::$_url/archive/$_commit.tar.gz"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch'
+    "upstream-git-2018-04-30.patch::$_url/compare/319958f...0888bfb.patch"
 )
 sha256sums=('fccccdef7cf76ca6ac3d64097f9ebefd183b91e4d3d5079753834266e39f42f6'
             'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '7517d651d440361947f9539fe8f42548d5eb43a09c28c9a11f51cfdfdefd042f'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
-            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d')
+            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d'
+            '771bff06893d48712db57e74b68cde9df1f2bb32761eaa187f92e4ea59a03e67')
             
 prepare() {
   cd ${pkgname^}-$_commit
@@ -76,6 +78,9 @@ prepare() {
   
   # add MSM to cinnamon-settings
   patch -Np1 -i ../add-msm.patch
+
+  # add upstream fixes
+  patch -Np1 -i ../upstream-git-2018-04-30.patch
 
   # Replace MintInstall with GNOME Software
   sed -i 's/mintinstall.desktop/org.gnome.Software.desktop/' data/org.cinnamon.gschema.xml.in
