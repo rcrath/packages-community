@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.8.0
-pkgrel=1.11
+pkgrel=2.1
 _commit=4d8cadfd90e8b3ec9eae008ec34e63bebad0df31
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
@@ -82,6 +82,7 @@ prepare() {
   patch -Np1 -i ../add-msm.patch
 
   # https://github.com/linuxmint/Cinnamon/issues/7522
+  # this reopens https://github.com/linuxmint/Cinnamon/issues/5573
   patch -Rp1 -i ../revert-fa9a5c7.patch
 
   # add upstream fixes
