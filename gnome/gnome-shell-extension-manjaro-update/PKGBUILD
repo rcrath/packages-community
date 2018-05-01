@@ -4,7 +4,7 @@
 pkgname=gnome-shell-extension-manjaro-update
 _pkgname=manjaro-update
 _notray=no-tray-icon
-pkgver=4
+pkgver=5
 pkgrel=1
 #_commit=e261fd258a18dc762ea41f9fffa8e42b540bf444
 pkgdesc="Convenient indicator for Manjaro updates in GNOME Shell."
@@ -20,7 +20,7 @@ source=("$url/archive/v$pkgver.tar.gz"
         "$_notray-remove.hook"
         "$_notray-remove.script")
         
-md5sums=('75a8ee2f590e22da6ac38fa05269d0e4'
+md5sums=('912475fc8ae93a49c9df5ae57b31648f'
          'a04f49caef5583ce9b8c581d4630e38f'
          'e833709e7f0dedc737559f116a7861fa'
          'fffd68e0249da86384823b6319727951'
