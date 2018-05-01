@@ -3,7 +3,7 @@
 
 pkgname=cinnamon
 pkgver=3.8.0
-pkgrel=2.1
+pkgrel=2.2
 _commit=4d8cadfd90e8b3ec9eae008ec34e63bebad0df31
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
@@ -27,6 +27,7 @@ depends=('accountsservice'
     'libgnomekbd'
     'libkeybinder3'
     'librsvg'
+    'metacity'
     'muffin>=3.8'
     'nemo'
     'network-manager-applet'
@@ -38,6 +39,7 @@ depends=('accountsservice'
     'python-pexpect'
     'python-pillow'
     'python-pyinotify'
+    'tint2'
     'xapps'
     'xdg-utils')
 makedepends=('gnome-common'
@@ -46,9 +48,10 @@ makedepends=('gnome-common'
 optdepends=('blueberry: Bluetooth support'
     'cinnamon-translations: i18n'
     'gnome-panel: fallback mode'
-    'metacity: fallback mode'
+#    'metacity: fallback mode'
     'system-config-printer: printer settings'
-    'tint2: fallback mode')
+#    'tint2: fallback mode'
+)
 options=('!emptydirs')
 source=("$pkgname-$_commit::$_url/archive/$_commit.tar.gz"
     "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
