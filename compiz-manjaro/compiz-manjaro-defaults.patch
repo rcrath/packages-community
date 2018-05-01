@@ -125,43 +125,6 @@ diff -Naur a/plugins/grid/grid.xml.in b/plugins/grid/grid.xml.in
  			    <alpha>0x4f4f</alpha>
  			</default>
  		</option>
-diff -Naur a/plugins/place/place.xml.in b/plugins/place/place.xml.in
---- a/plugins/place/place.xml.in	2016-07-01 21:39:57.000000000 +1000
-+++ b/plugins/place/place.xml.in	2016-08-03 15:58:02.123188823 +1000
-@@ -84,21 +84,33 @@
- 			<_short>Positioned windows</_short>
- 			<_long>Windows that should be positioned by default</_long>
- 			<type>match</type>
-+			<default>
-+			  <value>title=Whisker Menu</value>
-+			</default>
- 		    </option>
- 		    <option name="position_x_values" type="list">
- 			<_short>X Positions</_short>
- 			<_long>X position values</_long>
- 			<type>int</type>
-+			<default>
-+			  <value>-1</value>
-+			</default>
- 		    </option>
- 		    <option name="position_y_values" type="list">
- 			<_short>Y Positions</_short>
- 			<_long>Y position values</_long>
- 			<type>int</type>
-+			<default>
-+			  <value>-1</value>
-+			</default>
- 		    </option>
- 		    <option name="position_constrain_workarea" type="list">
- 			<_short>Keep In Workarea</_short>
- 			<_long>Keep placed window in work area, even if that means that the position might differ from the specified position</_long>
- 			<type>bool</type>
-+			<default>
-+			  <value>false</value>
-+			</default>
- 		    </option>
- 		</subgroup>
- 		<subgroup>
 diff -Naur a/plugins/resize/resize.xml.in b/plugins/resize/resize.xml.in
 --- a/plugins/resize/resize.xml.in	2016-07-01 21:39:57.000000000 +1000
 +++ b/plugins/resize/resize.xml.in	2016-08-03 16:06:14.100335645 +1000

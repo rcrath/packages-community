@@ -15,6 +15,6 @@ sha256sums=('SKIP')
 package() {
 	cd $srcdir/$pkgname
 	install -d $pkgdir/usr/share/fonts/TTF/
-	install -m644 polybar-icons.ttf $pkgdir/usr/share/fonts/TTF/polybar-icons.ttf
+	install -m644 ma-polybar-icons.ttf $pkgdir/usr/share/fonts/TTF/polybar-icons.ttf
 }
 

@@ -19,13 +19,14 @@ conflicts=("${_pkgname}")
 source=("git://git.suckless.org/st"
         "config.h"
         "st.desktop"
-#	"st-icon-20171120-247073c.diff"
+	"st-icon-20171120-247073c.diff"
 	"icon.argb"
 	"st.svg")
 
 md5sums=('SKIP'
-         '8a31b7d3b350c9466f4bdc78f2dcb9cc'
+         '63411629fec291647f6386a6b1f8298e'
          'fb3a8e83f84f18aec09e89a60569f086'
+         '8678696776579d7ef570ade048867f56'
          '4333f3007a526d97cb74c6dbe05e57bc'
          'ebe50386dbdefbc6fd171fdf3120f90c')
 

@@ -2,9 +2,8 @@
 # AUR-Maintainer: Nate Simon <aurpkg (at natesimon.net)>
 
 pkgname=xviewer
-pkgver=1.6.1
-pkgrel=2
-_commit=61a2da998bf447c0e9aea9d5d0c1a7472715b1df
+pkgver=1.8.0
+pkgrel=1
 pkgdesc="A simple and easy to use image viewer. X-Apps Project"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -15,18 +14,17 @@ depends=('exempi'
     'cinnamon-desktop'
     'gtk3'
     'libpeas')
-makedepends=('git'
-    'gnome-common'
+makedepends=('gnome-common'
     'gobject-introspection'
     'libglade')
+optdepends=('xviewer-plugins: Extra pluging')
 
 source=(
-#    "${url}/archive/${pkgver}.tar.gz")
-    "$url/archive/$_commit.tar.gz")
-md5sums=('0c6093e7a49a900e096ddfc8db36ffa2')
+    "${url}/archive/${pkgver}.tar.gz")
+md5sums=('1789b9c8255ce360b47b70ee7b31b630')
 
 build() {
-    cd $pkgname-$_commit
+    cd $pkgname-$pkgver
     gnome-autogen.sh --prefix="/usr" \
         --localstatedir="/var" \
          --libexecdir="/usr/lib/${pkgname}"
@@ -34,6 +32,6 @@ build() {
 }
 
 package(){
-    cd $pkgname-$_commit
+    cd $pkgname-$pkgver
     make DESTDIR="$pkgdir/" install
 }

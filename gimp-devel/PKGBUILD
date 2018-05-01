@@ -2,16 +2,16 @@
 
 _pkgname=gimp
 pkgname=${_pkgname}-devel
-pkgver=2.9.8
-pkgrel=2
+pkgver=2.10.0
+pkgrel=1
 pkgdesc="GNU Image Manipulation Program (Development version)"
 arch=('i686' 'x86_64')
 url="http://www.gimp.org/"
 license=('GPL' 'LGPL')
 depends=('pygtk' 'lcms' 'libxpm' 'libwmf' 'libxmu' 'librsvg' 'libmng' 'dbus-glib'
-         'libexif' 'gegl>=0.3.24' 'jasper' 'desktop-file-utils' 'hicolor-icon-theme' 'babl>=0.1.38'
-         'openexr' 'libgudev' 'libgexiv2' 'libmypaint>=1.3.0' 'libwebp' 'aalib')
-makedepends=('intltool' 'poppler-glib' 'alsa-lib' 'iso-codes' 'curl' 'ghostscript' 'gtk-doc')
+         'libexif' 'gegl>=0.4.0' 'jasper' 'desktop-file-utils' 'hicolor-icon-theme' 'babl>=0.1.46'
+         'openexr' 'libgudev' 'libgexiv2' 'libmypaint>=1.3.0' 'libwebp' 'aalib' 'mypaint-brushes')
+makedepends=('intltool' 'poppler-glib' 'poppler-data' 'alsa-lib' 'iso-codes' 'curl' 'ghostscript' 'gtk-doc' 'glib-networking')
 optdepends=('gutenprint: for sophisticated printing only as gimp has built-in cups print support'
             'poppler-glib: for pdf support'
             'alsa-lib: for MIDI event controller module'
@@ -19,9 +19,9 @@ optdepends=('gutenprint: for sophisticated printing only as gimp has built-in cu
             'ghostscript: for postscript support')
 options=('!makeflags')
 conflicts=("${_pkgname}")
-provides=("${_pkgname}=$pkgver")
+provides=("${_pkgname}=${pkgver}")
 source=(https://download.gimp.org/pub/gimp/v${pkgver%.*}/${_pkgname}-${pkgver}.tar.bz2 linux.gpl)
-sha256sums=('a94983ea4ab230629ae2515506917a49d1df62816d8fac0cf60ef548ea3d9162'
+sha256sums=('7fcc96fb88cb0a0595d2610f63a15dec245bb37bf9db527d37a24fb75e547de2'
             '1003bbf5fc292d0d63be44562f46506f7b2ca5729770da9d38d3bb2e8a2f36b3')
 
 prepare() {
@@ -64,7 +64,4 @@ package() {
   ln -s gimp-${pkgver%.*}.1.gz "${pkgdir}/usr/share/man/man1/gimp.1.gz"
 
   ln -s gimptool-2.0 "${pkgdir}/usr/bin/gimptool"
-  ln -s gimp-${pkgver%.*} ${pkgdir}/usr/bin/gimp
-  ln -s gimp-console-${pkgver%.*} ${pkgdir}/usr/bin/gimp-console
 }
-

@@ -1,25 +1,37 @@
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
-pkgname=artwork-i3
-pkgver=20180123
+pkgbase=artwork-i3
+pkgname=('artwork-i3' 'i3-default-artwork')
+pkgver=20180428
 pkgrel=1
-pkgdesc="Wallpapers for manjaro-i3"
 arch=(any)
 groups=('i3-manjaro')
 license=(GPL3)
 url="https://github.com/oberon2007/$pkgname"
-_snapshot=ceb8de1f9df2d7326a20b9fa08bdba16ac72e122
-depends=('i3-default-artwork')
-conflicts=('i3-wallpapers')
-source=("$pkgname-$_snapshot.tar.gz::$url/archive/$_snapshot.tar.gz")
-md5sums=('6189bd167270ac4e09403a384e93aadb')
+makedepends=('git')
+source=("git+$url.git")
+md5sums=('SKIP')
 
 pkgver() {
 date +%Y%m%d
 }
 
-package() {
-	cd $srcdir/$pkgname-$_snapshot
+package_artwork-i3() {
+    pkgdesc="Wallpapers for manjaro-i3"
+    depends=('i3-default-artwork')
+	cd $pkgbase
 	install -dm755 $pkgdir/usr/share
 	cp -r backgrounds $pkgdir/usr/share
+    rm $pkgdir/usr/share/backgrounds/illyria-default-i3.jpg
+}
+
+package_i3-default-artwork() {
+    pkgdesc="Default wallpaper and icons for manjaro-i3"
+	cd $pkgbase
+	install -dm755 $pkgdir/usr/share
+	cp -r icons $pkgdir/usr/share
+	cp -r moc $pkgdir/usr/share
+	cp -r pixmaps $pkgdir/usr/share
+	install -Dm644 backgrounds/illyria-default-i3.jpg \
+      $pkgdir/usr/share/backgrounds/i3_default_background.jpg
 }

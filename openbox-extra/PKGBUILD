@@ -1,0 +1,26 @@
+# Maintainer: fhdk <fh at manjaro org>
+
+pkgname="manjaro-openbox-extra"
+pkgver=1.2.2
+pkgrel=1
+pkgdesc="Manjaro Openbox extra"
+arch=('any')
+license=('GPL3')
+depends=('android-file-transfer'
+         'android-tools'
+         'android-udev'
+         'audacious-gtk3'
+         'audacious-plugins-gtk3'
+         'blueman'
+         'gparted'
+         'guake'
+         'gvfs'
+         'gvfs-afc'
+         'gvfs-mtp'
+         'gvfs-smb'
+         'mpv'
+         'pamixer'
+         'pavucontrol'
+         'playerctl'
+         )
+provides=('manjaro-openbox-extra')

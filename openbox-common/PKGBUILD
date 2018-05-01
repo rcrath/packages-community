@@ -2,15 +2,14 @@
 
 pkgname="manjaro-openbox-common"
 _gitname="openbox-common"
-pkgver=1.1
+pkgver=1.2.2
 pkgrel=1
-pkgdesc="Manjaro Openbox common files"
+pkgdesc="Manjaro Openbox common scripts and settings"
 arch=('any')
-url="https://github.com/fhdk/openbox-common.git"
+url="https://github.com/fhdk/${_gitname}.git"
 license=('GPL3')
 makedepends=('git')
 provides=('manjaro-openbox-common')
-conflicts=('manjaro-openbox-scripts' 'openbox-scripts' 'manjaro-openbox-settings')
 source=(git+$url)
 makedepends=('git')
 md5sums=('SKIP')
