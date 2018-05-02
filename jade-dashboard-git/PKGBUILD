@@ -2,7 +2,7 @@
 
 _pkgname=jade-dashboard
 pkgname="$_pkgname-git"
-pkgver=0.4.58.r225.81a8c34
+pkgver=0.5.58.r236.81edc75
 pkgrel=1
 pkgdesc="JADE, a linux desktop built with HTML5, CSS, JavaScript and Python."
 arch=('any')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
 	cd "$_pkgname/jade/"
-	local v_ver=$(awk '/"version"/ {print $2}' application-settings.json | cut -d '"' -f2 )
+	local v_ver=$(awk '/"version"/ {print $2}' settings.json | cut -d '"' -f2 )
 	printf "$v_ver.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
