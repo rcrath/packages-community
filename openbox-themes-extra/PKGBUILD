@@ -13,6 +13,7 @@ sha256sums=('SKIP')
 package() {
     cd $srcdir/$pkgname
     install -d $pkgdir/usr/share/themes
-    install -m644 themes $pkgdir/usr/share
+  	#install themes $pkgdir/usr/share/themes
+    cp -r themes $pkgdir/usr/share
 }
 
