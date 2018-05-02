@@ -3,7 +3,7 @@
 pkgname="manjaro-openbox-common"
 _gitname="openbox-common"
 _branch="stable17"
-pkgver=20180430
+pkgver=20180502
 pkgrel=1
 pkgdesc="Manjaro Openbox common scripts and settings"
 arch=('any')
