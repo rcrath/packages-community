@@ -24,7 +24,7 @@ package_manjaro-openbox-theming-fonts() {
 	         'ttf-polybar-icons'
 	         'ttf-roboto'
 	         )
-	provides=('manjaro-openbox-theming-font')	
+	provides=('manjaro-openbox-theming-font')
 }
 
 package_manjaro-openbox-theming-icons() {
@@ -43,6 +43,8 @@ package_manjaro-openbox-theming-icons() {
 
 package_manjaro-openbox-theming-theme() {
 	pkgdesc='Manjaro Openbox Theme'
-	depends=('gtk-theme-breath')
+	depends=('gtk-theme-breath'
+             'openbox-themes'
+             )
     provides=('manjaro-openbox-theming-theme')
 }
