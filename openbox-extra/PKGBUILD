@@ -6,7 +6,7 @@ pkgrel=1
 pkgdesc="Manjaro Openbox Extra"
 arch=('any')
 license=('GPL3')
-depends=()
+depends=(
    'manjaro-openbox-minimal'
    'manjaro-openbox-settings'
    'android-file-transfer'
@@ -48,7 +48,7 @@ depends=()
    'networkmanager-openconnect'
    'networkmanager-openvpn'
    'networkmanager-pptp'
-   'network-manager-vpnc'
+   'networkmanager-vpnc'
    'ntp'
    'mlocate'
    'mobile-broadband-provider-info'
@@ -57,8 +57,7 @@ depends=()
    'openssh'
    'pamac'
    'poppler-data'
-   'poppler-glilb'
-   'samba'
+   'poppler-glib'
    'thunar-gtk3'
    'thunar-archive-plugin-gtk3'
    'thunar-media-tags-plugin'

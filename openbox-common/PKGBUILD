@@ -4,7 +4,7 @@ pkgname="manjaro-openbox-common"
 _gitname="openbox-common"
 _branch="stable17"
 pkgver=20180502
-pkgrel=1
+pkgrel=2
 pkgdesc="Manjaro Openbox common scripts and settings"
 arch=('any')
 url="https://github.com/fhdk/${_gitname}"
@@ -23,11 +23,11 @@ package() {
 	install -dm755   ${pkgdir}/usr/lib/manjaro
 	install -dm755   ${pkgdir}/usr/share
 	install -dm755   ${pkgdir}/usr/bin
-	install -dm755   ${pkgdir}/etc
+	#install -dm755   ${pkgdir}/etc
 	cd ${srcdir}/$_gitname
 	cp -r common     ${pkgdir}/usr/lib/manjaro
 	cp -r doc        ${pkgdir}/usr/share
 	cp -r licenses   ${pkgdir}/usr/share
 	cp  scripts/*    ${pkgdir}/usr/bin
-	cp -r skel       ${pkgdir}/etc
+	#cp -r skel       ${pkgdir}/etc
 }

@@ -12,11 +12,13 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
+        'manjaro-openbox-settings-minimal'
         )
 pkgver=20180502
 pkgrel=1
 arch=('any')
-url="https://github.com/manjaro/desktop-settings"
+#url="https://github.com/manjaro/desktop-settings"
+url="https://github.com/fhdk/desktop-settings"
 license=('GPL')
 makedepends=('git')
 source=("git+$url.git")
@@ -192,8 +194,8 @@ package_manjaro-lxde-settings() {
 
 package_manjaro-openbox-settings() {
     pkgdesc='Manjaro Linux Openbox Settings'
-    #depends=('manjaro-base-skel')
-    #conflicts=('manjaro-desktop-settings')
+    depends=('manjaro-base-skel')
+    conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/openbox'
@@ -201,10 +203,11 @@ package_manjaro-openbox-settings() {
 
 package_manjaro-openbox-settings-minimal() {
     pkgdesc='Manjaro Linux Openbox Minimal Settings'
-    #depends=('manjaro-base-skel')
-    #conflicts=('manjaro-desktop-settings')
+    depends=('manjaro-base-skel')
+    conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
-    __inst_dir 'community/openbox-minimal'
+
+    _inst_dir 'community/openbox-minimal'
 }
 
 package_manjaro-mate-settings() {
