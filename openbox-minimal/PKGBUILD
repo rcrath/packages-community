@@ -1,7 +1,7 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname="manjaro-openbox-minimal"
-pkgver=1.2.2
+pkgver=20180502
 pkgrel=1
 pkgdesc="Manjaro Openbox Minimal"
 arch=('any')
@@ -12,10 +12,9 @@ pkgver() {
 }
 depends=(
    'manjaro-openbox-base'
-   'base-devel'
-   'falcon'
+   'falkon'
    'galculator'
-   'gpicview'
+   'gpicview-gtk3'
    'gsimplecal'
    'networkmanager'
    'pacui'
@@ -25,5 +24,4 @@ depends=(
    'sublime-text-dev'
    'sylpheed'
    'wicd-patched'
-   'yaourt'
 )

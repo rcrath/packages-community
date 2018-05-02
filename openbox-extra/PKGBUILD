@@ -54,6 +54,7 @@ depends=()
    'mobile-broadband-provider-info'
    'modemmanager'
    'openresolv'
+   'openssh'
    'pamac'
    'poppler-data'
    'poppler-glilb'

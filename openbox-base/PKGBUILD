@@ -3,7 +3,7 @@
 pkgname="manjaro-openbox-base"
 pkgver=1.2.2
 pkgrel=1
-pkgdesc="Manjaro Openbox base"
+pkgdesc="Manjaro Openbox Base"
 arch=('any')
 license=('MIT')
 provides=('manjaro-openbox-base')
@@ -12,12 +12,17 @@ pkgver() {
 }
 depends=(
    'manjaro-openbox-common'
+   'manjaro-openbox-grub-theme'
    'manjaro-openbox-settings-minimal'
+   'manjaro-openbox-theming-fonts'
+   'manjaro-openbox-theming-icons'
+   'manjaro-openbox-theming-theme'
    'manjaro-zsh-config'
    'arandr'
    'compton'
    'conky'
    'dunst'
+   'htop'
    'i3lock'
    'imagemagick'
    'jsoncpp'
@@ -30,7 +35,7 @@ depends=(
    'numlockx'
    'ob-autostart'
    'obconf'
-   'obkey'
+   'obkey-gtk3'
    'obmenu-generator'
    'openbox'
    'mate-polkit'
@@ -42,7 +47,7 @@ depends=(
    'stalonetray'
    'termite'
    'tint2'
-   'update-checker'
+   'update-notifier'
    'wmctrl'
    'xcape'
    'xcmenu'
