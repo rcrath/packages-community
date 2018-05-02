@@ -1,12 +1,12 @@
 # Maintainer: fhdk <fh at manjaro org>
 
-pkgname="manjaro-openbox-base"
+pkgname="manjaro-openbox-minimal"
 pkgver=1.2.2
 pkgrel=1
-pkgdesc="Manjaro Openbox base"
+pkgdesc="Manjaro Openbox Minimal"
 arch=('any')
 license=('MIT')
-provides=('manjaro-openbox-base')
+provides=('manjaro-openbox-minimal')
 pkgver() {
     date +%Y%m%d
 }
