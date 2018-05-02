@@ -2,8 +2,8 @@
 # Maintainer: Alexandre Filgueira <alexfilgueira@cinnarch.com>
 
 pkgname=cinnamon
-pkgver=3.8.0
-pkgrel=2
+pkgver=3.8.1
+pkgrel=1
 _commit=4d8cadfd90e8b3ec9eae008ec34e63bebad0df31
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
@@ -27,6 +27,7 @@ depends=('accountsservice'
     'libgnomekbd'
     'libkeybinder3'
     'librsvg'
+    'metacity'
     'muffin>=3.8'
     'nemo'
     'network-manager-applet'
@@ -38,6 +39,7 @@ depends=('accountsservice'
     'python-pexpect'
     'python-pillow'
     'python-pyinotify'
+    'tint2'
     'xapps'
     'xdg-utils')
 makedepends=('gnome-common'
@@ -46,21 +48,24 @@ makedepends=('gnome-common'
 optdepends=('blueberry: Bluetooth support'
     'cinnamon-translations: i18n'
     'gnome-panel: fallback mode'
-    'metacity: fallback mode'
+#    'metacity: fallback mode'
     'system-config-printer: printer settings'
-    'tint2: fallback mode')
+#    'tint2: fallback mode'
+)
 options=('!emptydirs')
 source=("$pkgname-$_commit::$_url/archive/$_commit.tar.gz"
     "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
     "set_wheel.patch"
     "default-theme.patch"
     'add-msm.patch'
+    "upstream-git-2018-05-01.patch::$_url/compare/319958f...fbb3e9a.patch"
 )
 sha256sums=('fccccdef7cf76ca6ac3d64097f9ebefd183b91e4d3d5079753834266e39f42f6'
             'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '7517d651d440361947f9539fe8f42548d5eb43a09c28c9a11f51cfdfdefd042f'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
-            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d')
+            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d'
+            '42a5112dd3ccb6efad1cd990dd02a9618642b70d3bbc13e239014921276c8bae')
             
 prepare() {
   cd ${pkgname^}-$_commit
@@ -76,6 +81,9 @@ prepare() {
   
   # add MSM to cinnamon-settings
   patch -Np1 -i ../add-msm.patch
+
+  # add upstream fixes
+  patch -Np1 -i ../upstream-git-2018-05-01.patch
 
   # Replace MintInstall with GNOME Software
   sed -i 's/mintinstall.desktop/org.gnome.Software.desktop/' data/org.cinnamon.gschema.xml.in
