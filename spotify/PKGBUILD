@@ -6,11 +6,11 @@
 # $ wget "http://repository.spotify.com/pool/non-free/s/spotify-client/" -q -O /tmp/sv.html && awk '{print $2;}' /tmp/sv.html |cut -b 7-50|grep spotify;rm /tmp/sv.html
 
 pkgname=spotify
-pkgver=1.0.77.338
+pkgver=1.0.79.223
 pkgrel=1
-_pkgver_x86_64=1.0.77.338
-_commit_x86_64=.g758ebd78
-_pkgrel_x86_64=41
+_pkgver_x86_64=1.0.79.223
+_commit_x86_64=.g92622cc2
+_pkgrel_x86_64=21
 _pkgver_i686=1.0.72.117
 _commit_i686=.g6bd7cc73
 _pkgrel_i686=35
@@ -32,7 +32,7 @@ sha256sums=('989920e9360cadc1a8103b8c04acf0c87cb7911eb9a09dddb0cf4708d6249d34'
 
 source_x86_64=("http://repository.spotify.com/pool/non-free/s/spotify-client/spotify-client_${_pkgver_x86_64}${_commit_x86_64}-${_pkgrel_x86_64}_amd64.deb")
 source_i686=("http://repository.spotify.com/pool/non-free/s/spotify-client/spotify-client_${_pkgver_i686}${_commit_i686}-${_pkgrel_i686}_i386.deb")
-sha256sums_x86_64=('0698d2dbda43f2866d2a6f6ed9816bf8022aa8cf67d0dba347f486410093e1a4')
+sha256sums_x86_64=('86b7f2c83a69cf4b3ccbb4c5b3c3f4a0c14b961980ffabc3af8cd8f8f3bd39f4')
 sha256sums_i686=('f5ac29e8374901ce7401825d13471c03bcf6ec8106f8c210c710b0a8d7b22ca9')
 
 depends=("alsa-lib>=1.0.14" "gconf" "gtk2" "glib2" "nss" "libsystemd" "libxtst" "libx11" "libxss" "openssl-1.0" "desktop-file-utils" "rtmpdump")
