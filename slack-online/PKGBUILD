@@ -19,7 +19,7 @@ sha256sums=('ce007bcf690ff47e624a76333d72d47ee34c2672a2016a1af9696899ba9580ff'
             '92e99e2a87b61aba0b4d7e7f5f1e00e2e716e9d685909b2726842d97aa781a30')
             
 package() {
-	install -Dm644 "$srcdir/settings.json" "$pkgdir/opt/webapps/$pkgname/settings.json"
+    install -Dm644 "$srcdir/settings.json" "$pkgdir/usr/share/webapps/$pkgname/settings.json"
     install -Dm644 "$srcdir/$pkgname.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
     install -Dm755 "$srcdir/$pkgname" "$pkgdir/usr/bin/$pkgname"
     
