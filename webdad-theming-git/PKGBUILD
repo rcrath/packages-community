@@ -13,7 +13,7 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 conflicts=('webdad-theming')
 provides=('webdad-theming')
-depends=('adapta-maia-theme')
+depends=('adapta-maia-theme' 'paper-icon-theme-git' 'xcursor-breeze' 'adapta-kde' 'kvantum-theme-adapta')
 
 pkgver() {
     cd "$_pkgname"
