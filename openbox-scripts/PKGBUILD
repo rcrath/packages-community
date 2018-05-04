@@ -1,16 +1,17 @@
 # Maintainer: fhdk <fh at manjaro org>
 
-pkgname="manjaro-openbox-common"
-_gitname="openbox-common"
-_branch="stable17"
-pkgver=1.2.3
+pkgname="manjaro-openbox-scripts"
+_gitname="openbox-scripts"
+_branch="master"
+pkgver=0.9.0
 pkgrel=1
-pkgdesc="Manjaro Openbox common scripts and settings"
+pkgdesc="Manjaro Openbox Scripts"
 arch=('any')
 url="https://github.com/fhdk/${_gitname}"
 license=('GPL3')
 makedepends=('git')
-provides=('manjaro-openbox-common')
+provides=('manjaro-openbox-scripts')
+conflicts=('manjaro-openbox-common')
 source=(git+$url.git#branch=${_branch})
 makedepends=('git')
 sha256sums=('SKIP')
@@ -19,11 +20,9 @@ package() {
 	install -dm755   ${pkgdir}/usr/lib/manjaro
 	install -dm755   ${pkgdir}/usr/share
 	install -dm755   ${pkgdir}/usr/bin
-	install -dm755   ${pkgdir}/etc
 	cd ${srcdir}/$_gitname
 	cp -r common     ${pkgdir}/usr/lib/manjaro
 	cp -r doc        ${pkgdir}/usr/share
 	cp -r licenses   ${pkgdir}/usr/share
 	cp  scripts/*    ${pkgdir}/usr/bin
-	cp -r skel       ${pkgdir}/etc
 }
