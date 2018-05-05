@@ -12,6 +12,7 @@ license=('GPL')
 makedepends=('git')
 source=("git+$url.git")
 sha256sums=('SKIP')
+install=openbox-skel.install
 
 _inst_dir(){
     if [[ -d $srcdir/$pkgbase/$1/skel ]]; then
