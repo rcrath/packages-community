@@ -14,8 +14,8 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-openbox-settings-extra'
         'manjaro-openbox-settings-minimal'
         )
-pkgver=20180502
-pkgrel=1
+pkgver=20180505
+pkgrel=2
 arch=('any')
 #url="https://github.com/manjaro/desktop-settings"
 url="https://github.com/fhdk/desktop-settings"
@@ -231,7 +231,7 @@ package_manjaro-mate-settings() {
 package_manjaro-openbox-settings-extra() {
     pkgdesc='Manjaro Linux Openbox Extra Settings'
     depends=('manjaro-base-skel' 'manjaro-openbox-extra-skel')
-    conflicts=('manjaro-desktop-settings')
+    conflicts=('manjaro-desktop-settings' 'manjaro-openbox-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/openbox-extra'
@@ -240,7 +240,7 @@ package_manjaro-openbox-settings-extra() {
 package_manjaro-openbox-settings-minimal() {
     pkgdesc='Manjaro Linux Openbox Minimal Settings'
     depends=('manjaro-base-skel' 'manjaro-openbox-minimal-skel')
-    conflicts=('manjaro-desktop-settings')
+    conflicts=('manjaro-desktop-settings' 'manjaro-openbox-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/openbox-minimal'
