@@ -1,23 +1,22 @@
 # Maintainer: fhdk <fh at manjaro org>
 
-pkgname="manjaro-openbox-base"
+pkgname="manjaro-openbox-core"
 pkgver=1.2.2
 pkgrel=1
-pkgdesc="Manjaro Openbox Base"
+pkgdesc="Manjaro Openbox Core Packages"
 arch=('any')
 license=('MIT')
-provides=('manjaro-openbox-base')
+provides=('manjaro-openbox-core')
 pkgver() {
     date +%Y%m%d
 }
+optdepends=('manjaro-base-skel'
+            'manjaro-openbox-extra'
+            'manjaro-openbox-extra-skel'
+            'manjaro-openbox-minimal'
+            'manjaro-openbox-minimal-skel'
+            )
 depends=(
-   'manjaro-openbox-common'
-   'manjaro-openbox-grub-theme'
-   'manjaro-openbox-settings-minimal'
-   'manjaro-openbox-theming-fonts'
-   'manjaro-openbox-theming-icons'
-   'manjaro-openbox-theming-theme'
-   'manjaro-zsh-config'
    'arandr'
    'compton'
    'conky'

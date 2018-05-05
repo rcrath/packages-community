@@ -12,7 +12,7 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings-extra'
-        'manjaro-openbox-settings-basic'
+        'manjaro-openbox-settings-minimal'
         )
 pkgver=20180502
 pkgrel=1
@@ -230,16 +230,16 @@ package_manjaro-mate-settings() {
 
 package_manjaro-openbox-settings-extra() {
     pkgdesc='Manjaro Linux Openbox Extra Settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-skel-extra')
+    depends=('manjaro-base-skel' 'manjaro-openbox-extra-skel')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
     _inst_dir 'community/openbox-extra'
 }
 
-package_manjaro-openbox-settings-basic() {
-    pkgdesc='Manjaro Linux Openbox Basic Settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-skel-basic')
+package_manjaro-openbox-settings-minimal() {
+    pkgdesc='Manjaro Linux Openbox Minimal Settings'
+    depends=('manjaro-base-skel' 'manjaro-openbox-minimal-skel')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 

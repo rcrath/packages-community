@@ -3,7 +3,7 @@
 pkgname="manjaro-openbox-minimal"
 pkgver=20180502
 pkgrel=1
-pkgdesc="Manjaro Openbox Minimal"
+pkgdesc="Manjaro Openbox Minimal Packages"
 arch=('any')
 license=('MIT')
 provides=('manjaro-openbox-minimal')
@@ -11,17 +11,20 @@ pkgver() {
     date +%Y%m%d
 }
 depends=(
-   'manjaro-openbox-base'
-   'falkon'
-   'galculator'
-   'gpicview-gtk3'
-   'gsimplecal'
-   'networkmanager'
-   'pacui'
-   'thunar-gtk3'
-   'qpdfview'
-   'screenfetch'
-   'sublime-text-dev'
-   'sylpheed'
-   'wicd-patched'
+    'manjaro-openbox-minimal-skel'
+    'epiphany'
+    'galculator'
+    'gpicview-gtk3'
+    'gsimplecal'
+    'lynx'
+    'mc'
+    'networkmanager'
+    'pacui'
+    'ranger'
+    'pcmanfm'
+    'qpdf'
+    'screenfetch'
+    'sublime-text-dev'
+    'claws'
+    'wicd-patched'
 )

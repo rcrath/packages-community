@@ -3,12 +3,10 @@
 pkgname="manjaro-openbox-extra"
 pkgver=1.2.2
 pkgrel=1
-pkgdesc="Manjaro Openbox Extra"
+pkgdesc="Manjaro Openbox Extra Packages"
 arch=('any')
 license=('GPL3')
 depends=(
-   'manjaro-openbox-minimal'
-   'manjaro-openbox-settings'
    'android-file-transfer'
    'android-tools'
    'android-udev'
