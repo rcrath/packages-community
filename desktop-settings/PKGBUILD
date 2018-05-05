@@ -192,24 +192,6 @@ package_manjaro-lxde-settings() {
     _inst_dir 'community/lxde'
 }
 
-package_manjaro-openbox-settings-extra() {
-    pkgdesc='Manjaro Linux Openbox Extra Settings'
-    depends=('manjaro-base-skel')
-    conflicts=('manjaro-desktop-settings')
-    provides=('manjaro-desktop-settings')
-
-    _inst_dir 'community/openbox-extra'
-}
-
-package_manjaro-openbox-settings-basic() {
-    pkgdesc='Manjaro Linux Openbox Basic Settings'
-    depends=('manjaro-base-skel')
-    conflicts=('manjaro-desktop-settings')
-    provides=('manjaro-desktop-settings')
-
-    _inst_dir 'community/openbox-basic'
-}
-
 package_manjaro-mate-settings() {
     pkgdesc='Manjaro Linux mate settings'
     depends=('manjaro-base-skel'
@@ -244,6 +226,24 @@ package_manjaro-mate-settings() {
 
     #hack to set black color on mate-terminal
     install -Dm755 $srcdir/$pkgbase/community/mate/scripts/set-terminal-color $pkgdir/usr/bin/set-terminal-color
+}
+
+package_manjaro-openbox-settings-extra() {
+    pkgdesc='Manjaro Linux Openbox Extra Settings'
+    depends=('manjaro-base-skel' 'manjaro-openbox-extra-skel')
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox-extra'
+}
+
+package_manjaro-openbox-settings-basic() {
+    pkgdesc='Manjaro Linux Openbox Basic Settings'
+    depends=('manjaro-base-skel' 'manjaro-openbox-basic-skel')
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox-basic'
 }
 
 #package_manjaro-netbook-settings() {
