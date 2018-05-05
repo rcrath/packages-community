@@ -1,11 +1,12 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname="manjaro-openbox-extra"
-pkgver=1.2.2
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="Manjaro Openbox Extra Packages"
 arch=('any')
-license=('GPL3')
+license=('MIT')
+optdepends=('manjaro-openbox-extra-skel')
 depends=(
    'android-file-transfer'
    'android-tools'
