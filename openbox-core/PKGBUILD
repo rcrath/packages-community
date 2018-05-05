@@ -23,6 +23,7 @@ depends=(
    'imagemagick'
    'jsoncpp'
    'kickshaw'
+   'libmpdclient'
    'lightdm-slick-greeter'
    'lxmenu-data'
    'lynx'
