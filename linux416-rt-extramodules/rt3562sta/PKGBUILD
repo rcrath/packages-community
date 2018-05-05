@@ -1,0 +1,49 @@
+# Based on the file created for Arch Linux by:
+# Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
+# Based on SUSE spec https://build.opensuse.org/package/files?package=rt3562sta&project=driver%3Awireless
+
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
+# Maintainer: Philip Müller <philm[at]manjaro[dot]org>
+
+_linuxprefix=linux416-rt
+_extramodules=extramodules-4.16-rt-MANJARO
+pkgbase=rt3562sta
+pkgname="$_linuxprefix-$pkgbase"
+pkgver=2.4.1.1_r4
+_patchrel=${pkgver/*_r/}
+pkgrel=1
+pkgdesc="Ralink RT3562 PCI WLAN adaptors kernel module"
+arch=('x86_64')
+url="http://www.mediatek.com/en/Products/support.php?sn=501"
+license=('GPL')
+depends=("$_linuxprefix" 'rt3562sta-common')
+makedepends=("$_linuxprefix" "$_linuxprefix-headers")
+provides=("$pkgbase=$pkgver")
+groups=("$_linuxprefix-extramodules")
+install=$pkgbase.install
+source=($pkgbase-$pkgver.tar.gz::https://github.com/mtorromeo/$pkgbase-linux/archive/r$_patchrel.tar.gz)
+sha256sums=('6af6dd13ae1e1075974c8d0a54a0c9f73624cecf153f1f75c8c4f106f4719a1d')
+
+prepare() {
+	cd "$srcdir"/rt3562sta-linux-r$_patchrel
+	sed -i -e 's|vfs_write|kernel_write|' os/linux/rt_linux.c
+}
+
+build() {
+    _kernver="$(cat /usr/lib/modules/$_extramodules/version)"
+
+    cd $srcdir/$pkgbase-linux-r$_patchrel
+    EXTRA_CFLAGS="-DVERSION=$pkgver" \
+    LINUX_SRC="/usr/lib/modules/$_kernver/build" \
+    make
+}
+
+package() {
+    cd $srcdir/$pkgbase-linux-r$_patchrel
+    install -Dm 0644 os/linux/$pkgbase.ko "$pkgdir/usr/lib/modules/$_extramodules/$pkgbase.ko"
+
+    # set the kernel we've built for inside the install script
+    sed -i -e "s/EXTRAMODULES=.*/EXTRAMODULES=${_extramodules}/g" "${startdir}/$pkgbase.install"
+
+    find "$pkgdir" -name '*.ko' -exec gzip -9 {} \;
+}
