@@ -3,14 +3,10 @@ pkgname=('manjaro-openbox-theming-fonts'
          'manjaro-openbox-theming-icons'
          'manjaro-openbox-theming-theme'
          )
-pkgver=20180502
+pkgver=1.3.0
 pkgrel=1
 arch=('any')
 licence=('MIT')
-
-pkgver() {
-    date +%Y%m%d
-}
 
 package_manjaro-openbox-theming-fonts() {
     pkgdesc='Manjaro Openbox Font Theming'

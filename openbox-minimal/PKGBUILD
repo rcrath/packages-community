@@ -7,9 +7,6 @@ pkgdesc="Manjaro Openbox Minimal Packages"
 arch=('any')
 license=('MIT')
 provides=('manjaro-openbox-minimal')
-pkgver() {
-    date +%Y%m%d
-}
 depends=(
     'manjaro-openbox-minimal-skel'
     'epiphany'
