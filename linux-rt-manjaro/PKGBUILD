@@ -2,24 +2,26 @@
 # Maintainer: Philip Müller <philm@manjaro.org>
 
 pkgbase=linux-rt-manjaro
-pkgver=4.14
-pkgname=(
-    $pkgbase
+pkgver=4.16
+pkgname=($pkgbase
     $pkgbase-headers
     $pkgbase-acpi_call
     $pkgbase-bbswitch
     $pkgbase-broadcom-wl
     $pkgbase-catalyst
+#    $pkgbase-ndiswrapper
     $pkgbase-nvidia
     $pkgbase-nvidia-304xx
     $pkgbase-nvidia-340xx
     $pkgbase-nvidiabl
     $pkgbase-r8168
     $pkgbase-rt3562sta
+#    $pkgbase-spl
     $pkgbase-tp_smapi
     $pkgbase-vhba-module
     $pkgbase-virtualbox-guest-modules
     $pkgbase-virtualbox-host-modules
+#    $pkgbase-zfs
 )
 pkgrel=1
 arch=('x86_64')
@@ -58,6 +60,11 @@ package_linux-rt-manjaro-catalyst() {
     depends=("$_depver-catalyst")
 }
 
+package_linux-rt-manjaro-ndiswrapper() {
+    pkgdesc='Module for NDIS (Windows Network Drivers) drivers supplied by vendors.'
+    depends=("$_depver-ndiswrapper")
+}
+
 package_linux-rt-manjaro-nvidia() {
     pkgdesc='NVIDIA drivers for linux.'
     depends=("$_depver-nvidia")
@@ -88,6 +95,11 @@ package_linux-rt-manjaro-rt3562sta() {
     depends=("$_depver-rt3562sta")
 }
 
+package_linux-rt-manjaro-spl() {
+    pkgdesc='Solaris Porting Layer kernel modules.'
+    depends=("$_depver-spl")
+}
+
 package_linux-rt-manjaro-tp_smapi() {
     pkgdesc="Modules for ThinkPad's SMAPI functionality"
     depends=("$_depver-tp_smapi")
@@ -106,4 +118,9 @@ package_linux-rt-manjaro-virtualbox-guest-modules() {
 package_linux-rt-manjaro-virtualbox-host-modules() {
     pkgdesc='Host kernel modules for VirtualBox'
     depends=("$_depver-virtualbox-host-modules")
+}
+
+package_linux-rt-manjaro-zfs() {
+    pkgdesc='Kernel modules for the Zettabyte File System.'
+    depends=("$_depver-zfs")
 }
