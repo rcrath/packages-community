@@ -3,7 +3,7 @@
 pkgname=manjaro-openbox-grub-theme
 _gitname=openbox-grub-theme
 pkgver=1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Slick grub theme for Manjaro Openbox"
 arch=('any')
 license=('MIT')
