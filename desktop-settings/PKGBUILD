@@ -243,7 +243,7 @@ package_manjaro-openbox-settings-minimal() {
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
-    _inst_dir 'community/openbox-basic'
+    _inst_dir 'community/openbox-minimal'
 }
 
 #package_manjaro-netbook-settings() {
