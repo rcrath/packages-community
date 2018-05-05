@@ -230,7 +230,7 @@ package_manjaro-mate-settings() {
 
 package_manjaro-openbox-settings-extra() {
     pkgdesc='Manjaro Linux Openbox Extra Settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-extra-skel')
+    depends=('manjaro-base-skel' 'manjaro-openbox-skel-extra')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
@@ -239,7 +239,7 @@ package_manjaro-openbox-settings-extra() {
 
 package_manjaro-openbox-settings-basic() {
     pkgdesc='Manjaro Linux Openbox Basic Settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-basic-skel')
+    depends=('manjaro-base-skel' 'manjaro-openbox-skel-basic')
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
