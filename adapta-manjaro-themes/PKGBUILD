@@ -9,7 +9,7 @@ pkgname=('adapta-maia-theme'
 )
 _pkgname=adapta-gtk-theme
 _theme=manjaro-gnome-theme
-pkgver=3.93.1.7
+pkgver=3.93.1.12
 pkgrel=1
 arch=(any)
 url="https://github.com/adapta-project/${_pkgname}"
@@ -31,18 +31,14 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}.tar.gz.asc"
         'XfdesktopIconView.patch'
         'no-thumbnails.patch')
-sha256sums=('d411e498d7531cdc228a04a437bd4882b2aaf7fa9ed3f47acbd23440d2892fd0'
+sha256sums=('7f6c2d3c52104943c7497e71a1bdab241572e5387aa9f5a74cdc147d820b1f4b'
             'SKIP'
             '143c1440e8173ddf49a37ad148c7f6e1a8259cf395933a9ffd4eb59d0d2781da'
-            '895cb8e9cd1b3ff3f8dbf583d3a4ac346a39c198b0d54346e861d6769404a22b')
+            'fafc7f53ad4e4390b8e71cd8ce750775c11308102a7c7c650829f6c1fbe15194')
             
 prepare() {    
     cd $_pkgname-$pkgver
     patch -p1 -i $srcdir/XfdesktopIconView.patch
-
-    # do not use thumbnails
-    # https://github.com/adapta-project/adapta-gtk-theme/issues/551
-    patch -p1 -i $srcdir/no-thumbnails.patch
 
     cd $srcdir
     #Create separate dir theme
@@ -501,4 +497,3 @@ pkgdesc="An adaptive Gtk+ theme based on Material Design Guidelines.Build with M
     ln -sf /usr/share/themes/Adapta-Black-Nokto-Breath/telegram telegram
     ln -sf /usr/share/themes/Adapta-Black-Breath/xfce-notify-4.0 xfce-notify-4.0
 }
-
