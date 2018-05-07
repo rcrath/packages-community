@@ -3,7 +3,7 @@ pkgname=('manjaro-openbox-theming-fonts'
          'manjaro-openbox-theming-icons'
          'manjaro-openbox-theming-theme'
          )
-pkgver=1.3.0
+pkgver=1.3.0.2
 pkgrel=1
 arch=('any')
 licence=('MIT')
@@ -30,6 +30,7 @@ package_manjaro-openbox-theming-icons() {
              'gnome-icon-theme-extras'
              'gnome-icon-theme-symbolic'
              'gnome-themes-extra'
+             'gtk-theme-breath'
              'hicolor-icon-theme'
              'vibrancy-colors'
              'xcursor-breeze'

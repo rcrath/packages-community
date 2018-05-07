@@ -10,9 +10,9 @@ license=('GPL2')
 depends=('python'  'pygtk')
 makedepends=('git')
 #optdepends=('python-notify')
-source=("git+https://github.com/fhdk/${pkgname}.git")
+source=("git+https://github.com/fhdk/$pkgname.git")
 md5sums=('SKIP')
 
 package() {
-  install -D -m755 "${srcdir}/${pkgname}/ob-autostart" "${pkgdir}/usr/bin/ob-autostart"
+  install -D -m755 "${srcdir}/ob-autostart" "${pkgdir}/usr/bin/ob-autostart"
 }

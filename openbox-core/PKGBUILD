@@ -1,29 +1,35 @@
 # Maintainer: fhdk <fh at manjaro org>
 
 pkgname="manjaro-openbox-core"
-pkgver=1.3.0
+pkgver=1.3.0.4
 pkgrel=1
 pkgdesc="Manjaro Openbox Core Packages"
 arch=('any')
 license=('MIT')
 provides=('manjaro-openbox-core')
-optdepends=('manjaro-base-skel'
-            'manjaro-openbox-extra'
+optdepends=('manjaro-openbox-extra'
             'manjaro-openbox-extra-skel'
             'manjaro-openbox-minimal'
-            'manjaro-openbox-minimal-skel'
-            )
+            'manjaro-openbox-minimal-skel')
 depends=(
+   'manjaro-openbox-common'
+   'manjaro-openbox-grub-theme'
+   'manjaro-openbox-scripts'
+   'manjaro-openbox-theming-fonts'
+   'manjaro-openbox-theming-icons'
+   'manjaro-openbox-theming-theme'
    'arandr'
    'compton'
    'conky'
    'dunst'
+   'guake'
    'htop'
    'i3lock'
    'imagemagick'
    'jsoncpp'
    'kickshaw'
    'libmpdclient'
+   'lightdm'
    'lightdm-slick-greeter'
    'lxmenu-data'
    'lynx'
@@ -39,9 +45,6 @@ depends=(
    'polybar'
    'ranger'
    'rofi'
-   'rxvt-unicode'
-   'rxvt-unicode-terminfo'
-   'urxvt-perls'
    'skippy-xd'
    'scrot'
    'stalonetray'
@@ -49,9 +52,11 @@ depends=(
    'termite-terminfo'
    'tint2'
    'update-notifier'
+   'wireless_tools'
    'wmctrl'
    'xcape'
    'xcmenu'
    'xdotool'
    'zenity'
+   'zensu'
 )
