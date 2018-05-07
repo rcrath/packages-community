@@ -3,7 +3,7 @@
 
 pkgname=pix
 _gitrel=master.mint19
-pkgver=1.6.2+$_gitrel
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Image viewer and browser based on gthumb. X-Apps Project"
 arch=('i686' 'x86_64')
@@ -34,11 +34,11 @@ optdepends=('brasero: Burn discs'
     'liboauth: Web albums'
     'libopenraw: Support for RAW photos'
     'libtiff: Tiff writing support')
-source=("$url/archive/$_gitrel.tar.gz")
-md5sums=('7e09e5fc1831a895eb40de815bdd9534')
+source=("$url/archive/$pkgver.tar.gz")
+md5sums=('48f2423faf1163eaa2b44b439b5323fb')
 
 build() {
-    cd $pkgname-$_gitrel
+    cd $pkgname-$pkgver
     gnome-autogen.sh --prefix="/usr" \
         --localstatedir="/var" \
         --libexecdir="/usr/lib/pix" \
@@ -59,6 +59,6 @@ build() {
 }
 
 package(){
-    cd $pkgname-$_gitrel
+    cd $pkgname-$pkgver
     make DESTDIR="$pkgdir/" install
 }

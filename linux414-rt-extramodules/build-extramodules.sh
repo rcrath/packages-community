@@ -19,6 +19,7 @@ cd ${pwd}/*catalyst && makepkg -df --noconfirm
 cd ${pwd}/*nvidia && $cmd
 cd ${pwd}/*nvidia-304xx && makepkg -d --noconfirm
 cd ${pwd}/*nvidia-340xx && makepkg -d --noconfirm
+cd ${pwd}/*nvidia-390xx && makepkg -d --noconfirm
 cd ${pwd}/*nvidiabl && $cmd
 cd ${pwd}/*r8168 && $cmd
 cd ${pwd}/*rt3562sta && $cmd
@@ -28,5 +29,10 @@ cd ${pwd}/*virtualbox-modules && $cmd
 
 echo '  -> cleaning up ...'
 rm -R ${pwd}/*/{src,pkg} -f
-sudo pacman -R nvidia-304xx-utils --noconfirm
+
+cd $HOME/manjaro/pkg
+echo 'signing packages'
+cd $HOME/manjaro/pkg
+signpkgs
+
 echo 'done.'

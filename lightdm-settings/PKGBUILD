@@ -3,7 +3,7 @@
 
 pkgname=lightdm-settings
 pkgver=1.1.4
-pkgrel=4
+pkgrel=5
 pkgdesc="A configuration tool for the LightDM display manager "
 _add_group=add-autologin-group
 arch=('any')
@@ -12,13 +12,20 @@ license=('GPL3')
 depends=('hicolor-icon-theme' 'lightdm-slick-greeter' 'python-setproctitle' 'python-xapp' 'python-gobject' 'polkit')
 makedepends=('desktop-file-utils' 'gettext')
 source=("${pkgname}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
+        'draw-user-backgrounds.patch'
 		"$_add_group.script"
 		"$_add_group.service")
 install=$_add_group.install
 		
 sha256sums=('264eee65a2a7d07a3f5a3ea2c02cd1988bf2c285751b3a0aebbf6b0f329a201c'
+            '29d516e9b714973bda837210293fb26c639eb91dd80e67207e166ad528131686'
             '475bb4805a419aca106f9f42bcb837c7dc53eeb84b5c50d8ee8d892b55d6c2b4'
             'a356ee9dc1e876d73c49ab30fdc6417edb7a817639122fff7fe0ebff72e33190')
+
+prepare() {
+  cd $pkgname-$pkgver
+  patch -p1 -i ../draw-user-backgrounds.patch
+}
 
 build() {
   cd $pkgname-$pkgver
@@ -30,7 +37,7 @@ package() {
   cp -r usr $pkgdir
   
 #install systemd service
-	cd /$srcdir
-	install -Dm755 $_add_group.script $pkgdir/usr/bin/$_add_group
-	install -Dm644 $_add_group.service $pkgdir/etc/systemd/system/$_add_group.service
+  cd /$srcdir
+  install -Dm755 $_add_group.script $pkgdir/usr/bin/$_add_group
+  install -Dm644 $_add_group.service $pkgdir/etc/systemd/system/$_add_group.service
 }

@@ -1,7 +1,7 @@
 # Maintainer: Vitor Lopes <vmnlop@gmail.com>
 
 pkgname=jade-desktop-mode
-pkgver=20180202
+pkgver=20180502
 pkgrel=1
 pkgdesc='Systemd service to enable jade to run as Desktop Environment'
 arch=(any)

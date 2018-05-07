@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+ 
+[Desktop Entry]
+Name=Slack Online
+Comment=Cloud-based set of proprietary team collaboration tools and services.
+Exec=slack-online
+Icon=applications-internet
+Terminal=false
+Type=Application
+Categories=Network;

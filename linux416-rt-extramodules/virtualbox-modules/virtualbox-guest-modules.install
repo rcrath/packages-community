@@ -1,0 +1,20 @@
+EXTRAMODULES='extramodules-4.16-rt-MANJARO'
+
+run_depmode() {
+    depmod $(cat /usr/lib/modules/$EXTRAMODULES/version)
+}
+
+post_install() {
+cat << EOF
+===> You may want to load vboxguest, vboxsf and vboxvideo
+EOF
+    run_depmode
+}
+
+post_upgrade() {
+    run_depmode
+}
+
+post_remove() {
+    run_depmode
+}

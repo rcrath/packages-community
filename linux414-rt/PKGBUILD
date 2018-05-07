@@ -8,8 +8,8 @@
 pkgbase=linux414-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
 _basekernel=4.14
-_sub=34
-_rtpatchver=rt27
+_sub=39
+_rtpatchver=rt29
 _bfq=v8r12
 _bfqdate=20171108
 _bfqdate2=20180404
@@ -48,7 +48,9 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         # MANJARO Patches
         '0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch::https://bugs.freedesktop.org/attachment.cgi?id=135277'
         '0001-synaptics-lenovo-t460p.patch::https://github.com/torvalds/linux/commit/48282969826b3d3c76e908182f69724d86d995fe.patch'
-        '0001-synaptics-reset-abs_xy-fuzz.patch::https://github.com/torvalds/linux/commit/19eb4ed1141bd1096b9bc84ba9c4d03d5830c143.patch'
+        '0001-Revert-Bluetooth-btusb-Fix-quirk-for-Atheros-1525-QCA6174.patch'
+        '0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
+        '0001-iwlwifi-killer-ac-1550.patch'
         # Zen temperature
         '0001-zen-temp.patch::https://patchwork.kernel.org/patch/9941409/raw/'
         '0002-zen-temp.patch::https://patchwork.kernel.org/patch/9941421/raw/'
@@ -71,8 +73,8 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         https://www.kernel.org/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.{xz,sign}
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
-            'd5981abb1f9f73cc64843eefe1501166b6135ca41f73bb4c5dbe960f739edf6c'
-            'd40d4650d243311bfd3c45b1157c1f226405a5678887c41622e0f67c1ceb1c75'
+            '8686e9a0ff123163799f098767c91af4a0d58bc789a7de2cfe9d7b886f5b4fbd'
+            '6da6b599086cf8c124fa6db275eae24deff7c495c2f2b728b02018aaabe9eb2e'
             '0fb6d51e5d8cd1dc737104c2d1487a38ff7cb50b1f8cce74e1776caa2d51490b'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '057ef44a8f5a7ef10efbc7d96bf72f651e87a0c1d063b07d922c74232e5e7941'
@@ -81,7 +83,9 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'c08d12c699398ef88b764be1837b9ee11f2efd3188bd1bf4e8f85dfbeee58148'
             '2fc534377b4059faa3291a93f193f77f44e7a20237d8c4528d8828f48fc94c7f'
-            '7618a876eccbd928b39d90bf4f910cb00d216230c4bcd793d48c611ea8d957aa'
+            'b7fc4332fb091e30bd79d64ccf7b41f54b2cb33b4011e962dd6d95c9be98e4dd'
+            '61abfab9093bdfec4edda3586fd05afe2f488a92ca99cff51c36b359acdcc815'
+            '0e0d8f32ef3a62d448c2d570992de862cbe9630f0fd803f83390aba9279e7106'
             'ee46e4c25b58d1dbd7db963382cf37aeae83dd0b4c13a59bdd11153dc324d8e8'
             'cd463af7193bcf864c42e95d804976a627ac11132886f25e04dfc2471c28bf6c'
             '70cee696fb4204ac7f787cef0742c50637e8bb7f68e2c7bca01aeefff32affc8'
@@ -98,26 +102,26 @@ sha256sums=('f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
-            '41fd279473c6d43c7edcec3cc9fd5b524d8c3b74c26974ff30d4f728c2f98e82'
+            '9a107cbfb6d4db1fc0efe7661b1c86eec2ee4119cb1732119317a2f99b1c66b1'
             'SKIP'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
             '4FE5E3262872E4CC')
 
 prepare() {
-  cd "${srcdir}/linux-${_basekernel}"
+  cd "linux-${_basekernel}"
 
   # add upstream patch
   msg "upstream mainline patch..."
-  patch -p1 -i "${srcdir}/patch-${_pkgver}"
+  patch -p1 -i "../patch-${_pkgver}"
   chmod +x tools/objtool/sync-check.sh # GNU patch doesn't support git-style file mode
 
   # Add RT patch
   msg "realtime patch..."
-  patch -p1 -i "${srcdir}/patch-${_pkgver}-${_rtpatchver}.patch"
+  patch -p1 -i "../patch-${_pkgver}-${_rtpatchver}.patch"
   # fix X hanging on certain NVIDIA cards
   msg "NVIDIA race in PRT patch..."
-  patch -p1 -i "${srcdir}/fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch"
+  patch -p1 -i '../fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch'
 
   # https://bugs.freedesktop.org/show_bug.cgi?id=103497
   msg "drm-i915-edp patch..."
@@ -126,35 +130,42 @@ prepare() {
   msg "synaptics-lenovo patch..."
   patch -Np1 -i ../0001-synaptics-lenovo-t460p.patch
 
-  msg "synaptics-reset-abs_xy-fuzz..."
-  patch -Np1 -i ../0001-synaptics-reset-abs_xy-fuzz.patch
+  # https://bugzilla.kernel.org/show_bug.cgi?id=199271
+  msg "Bluetooth btusb patches"
+  patch -Np1 -i '../0001-Revert-Bluetooth-btusb-Fix-quirk-for-Atheros-1525-QCA6174.patch'
+  patch -Np1 -i '../0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
+
+  # iwlwifi: add killer cards for 9000 series
+  # https://forum.manjaro.org/t/46167
+  msg "iwlwifi-killer-ac-1550 patch"
+  patch -Np1 -i '../0001-iwlwifi-killer-ac-1550.patch'
 
   # disable USER_NS for non-root users by default
   msg "disallow-unprivileged-CLONE_NEWUSER patch..."
-  patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+  patch -Np1 -i '../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
 
   # Add support for temperature sensors on Family 17h (Ryzen) processors.
   msg "zen temp patches..."
-  patch -Np1 -i "${srcdir}/0001-zen-temp.patch"
-  patch -Np1 -i "${srcdir}/0002-zen-temp.patch"
-  patch -Np1 -i "${srcdir}/0003-zen-temp.patch"
+  patch -Np1 -i '../0001-zen-temp.patch'
+  patch -Np1 -i '../0002-zen-temp.patch'
+  patch -Np1 -i '../0003-zen-temp.patch'
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   msg "bootsplash patches..."
-  patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0002-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0003-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0004-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0005-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0006-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0007-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0008-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0009-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0010-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
-  patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
+  patch -Np1 -i '../0001-bootsplash.patch'
+  patch -Np1 -i '../0002-bootsplash.patch'
+  patch -Np1 -i '../0003-bootsplash.patch'
+  patch -Np1 -i '../0004-bootsplash.patch'
+  patch -Np1 -i '../0005-bootsplash.patch'
+  patch -Np1 -i '../0006-bootsplash.patch'
+  patch -Np1 -i '../0007-bootsplash.patch'
+  patch -Np1 -i '../0008-bootsplash.patch'
+  patch -Np1 -i '../0009-bootsplash.patch'
+  patch -Np1 -i '../0010-bootsplash.patch'
+  patch -Np1 -i '../0011-bootsplash.patch'
+  patch -Np1 -i '../0012-bootsplash.patch'
   # use git-apply to add binary files
-  git apply -p1 < "${srcdir}/0013-bootsplash.patch"
+  git apply -p1 < '../0013-bootsplash.patch'
 
   # add BFQ scheduler
   msg "Fix naming schema in BFQ-MQ patch"
@@ -162,19 +173,19 @@ prepare() {
       -i -e "s|EXTRAVERSION = -rc8|EXTRAVERSION =|g" \
       -i -e "s|EXTRAVERSION = -rc8-bfq-mq|EXTRAVERSION =|g" \
       -i -e "s|NAME = Fearless Coyote|NAME = Petit Gorille|g" \
-      "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
+      "../0001-BFQ-${_bfq}-${_bfqdate}.patch"
   msg "BFQ patches..."
-  patch -Np1 -i "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
-  patch -Np1 -i "${srcdir}/0002-BFQ-${_bfq}-${_bfqdate2}.patch"
+  patch -Np1 -i "../0001-BFQ-${_bfq}-${_bfqdate}.patch"
+  patch -Np1 -i "../0002-BFQ-${_bfq}-${_bfqdate2}.patch"
 
   msg "All patches applied successfully."
 
   msg "kernel config..."
   # kernel config
-  cat "${srcdir}/config.rt" >> ./.config
+  cat '../config.rt' >> ./.config
 
   # set extraversion to pkgrel
-  sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
+  sed -ri "s|^(EXTRAVERSION =).*|\1 |" Makefile
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
@@ -211,7 +222,7 @@ package_linux414-rt() {
   cp arch/x86/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}-rt-x86_64"
 
   # add kernel version
-  echo "${_pkgver}-${pkgrel}-${_rtpatchver}-MANJARO x64" > "${pkgdir}/boot/linux-${_basever}-x86_64.kver"
+  echo "${_pkgver}-${_rtpatchver}-${pkgrel}-MANJARO x64" > "${pkgdir}/boot/linux-${_basever}-x86_64.kver"
 
   # make room for external modules
   local _extramodules="extramodules-${_basekernel}-rt${_kernelname:--MANJARO}"

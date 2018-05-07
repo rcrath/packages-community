@@ -1,0 +1,19 @@
+{
+	"app": {
+		"route": "",
+		"name": "Slack Online",
+		"description": "Slack is a cloud-based set of proprietary team collaboration tools and services."
+	},
+	"window": {
+		"width": 1150,
+		"height": 650,
+		"icon": ""
+	},
+	"webkit": {
+		"cache": "online",
+		"context_menu": false,
+		"user_agent": "",
+		"site_quirks": false,
+		"same_frame": []
+	}
+}

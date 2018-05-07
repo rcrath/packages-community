@@ -1,0 +1,23 @@
+diff -rupN a/usr/lib/lightdm-settings/lightdm-settings b/usr/lib/lightdm-settings/lightdm-settings
+--- a/usr/lib/lightdm-settings/lightdm-settings	2017-11-23 13:52:01.000000000 +0100
++++ b/usr/lib/lightdm-settings/lightdm-settings	2018-05-06 23:41:47.464447437 +0200
+@@ -135,16 +135,9 @@ class Application(Gtk.Application):
+         row.set_tooltip_text(_("Background color"))
+         section.add_row(row)
+ 
+-        try:
+-            distro = lsb_release.get_lsb_information()['ID']
+-            if distro.lower() in ['linuxmint', 'ubuntu', 'elementary']:
+-                # AccountsService doesn't support Background selection. It's something that is patched in Ubuntu, so only support this feature
+-                # in Ubuntu derivatives
+-                row = SettingsRow(Gtk.Label(_("Draw user backgrounds")), SettingsSwitch(keyfile, settings, "draw-user-backgrounds"))
+-                row.set_tooltip_text(_("When a user is selected, show that user's background."))
+-                section.add_row(row)
+-        except:
+-            pass
++        row = SettingsRow(Gtk.Label(_("Draw user backgrounds")), SettingsSwitch(keyfile, settings, "draw-user-backgrounds"))
++        row.set_tooltip_text(_("When a user is selected, show that user's background."))
++        section.add_row(row)
+ 
+         row = SettingsRow(Gtk.Label(_("Draw a grid")), SettingsSwitch(keyfile, settings, "draw-grid"))
+         row.set_tooltip_text(_("Draw a grid of white dots on top of the background."))
