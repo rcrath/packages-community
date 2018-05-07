@@ -3,15 +3,16 @@
 pkgbase=artwork-manjaro-cinnamon
 pkgname=('artwork-cinnamon-minimal' 'cinnamon-wallpapers')
 _grepo=gnome-backgrounds
-pkgver=20180204
-pkgrel=2
+pkgver=20180507
+pkgrel=1
 pkgdesc="Wallpapers for Manjaro Cinnamon"
 arch=('any')
 license=('GPL3')
 makedepends=('git'
     'glib2'
     'meson')
-default="backgrounds/adapta-maia.jpg" # default wallpaper to be packaged in artwork-minimal
+default="backgrounds/adapta-maia.jpg"     # default wallpaper to be packaged in artwork-minimal
+greeter_default=backgrounds/MJR-tiles.jpg # default background
 _gurl="https://git.gnome.org/browse/$_grepo"
 _gcommit=ebb69030864690831b431a95dcea02dcd143815f
 _murl="https://github.com/oberon2007/$pkgbase"
@@ -38,6 +39,7 @@ package_artwork-cinnamon-minimal() {
     conflicts=("$_grepo")
 
     ext=$(echo $default | cut -d'.' -f2)
+    ext2=$(echo $greeter_default | cut -d'.' -f2)
 
     cd build
     DESTDIR="$pkgdir" ninja install
@@ -49,7 +51,9 @@ package_artwork-cinnamon-minimal() {
 
 	cd $srcdir/$pkgbase
 	install -Dm644 $default $pkgdir/usr/share/$default
+    install -m644 $greeter_default $pkgdir/usr/share/$greeter_default
     ln -s /usr/share/$default $pkgdir/usr/share/backgrounds/cinnamon_default.$ext
+    ln -s /usr/share/$greeter_default $pkgdir/usr/share/backgrounds/greeter_default.$ext2
 
 	cp -r icons $pkgdir/usr/share/
 	ln -s /usr/share/icons/manjaro/maia/48x48.png $pkgdir/usr/share/icons/manjaro-maia.png
@@ -59,5 +63,5 @@ package_cinnamon-wallpapers() {
     cd $srcdir/$pkgbase
     install -Dm644 manjaro.xml $pkgdir/usr/share/gnome-background-properties/manjaro-backgrounds.xml
     cp -r backgrounds $pkgdir/usr/share/
-    rm $pkgdir/usr/share/$default
+    rm $pkgdir/usr/share/{$default,$greeter_default}
 }
