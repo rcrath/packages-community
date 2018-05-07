@@ -2,12 +2,13 @@
 
 pkgname=openbox-themes-extra
 pkgver=1.0
-pkgrel=3
-pkgdesc="Openbox Themes by Cybercop <echo Y3liZXJjb3BfbW9udGFuYUBhYnYuYmc= | base64 -d>"
+pkgrel=4
+pkgdesc="Openbox Themes by Cybercop"
+url="https://github.com/fhdk/$pkgname"
 arch=('any')
 license=('MIT')
 makedepends=('git')
-source=('git+https://github.com/fhdk/openbox-themes-extra.git')
+source=("git+$url.git")
 sha256sums=('SKIP')
 
 package() {
@@ -16,4 +17,3 @@ package() {
   	#install themes $pkgdir/usr/share/themes
     cp -r themes $pkgdir/usr/share
 }
-
