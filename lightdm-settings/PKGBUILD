@@ -1,39 +1,49 @@
-# Maintainer: Sam Burgos < sam dot burgos1089 at gmail dot com >
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgname=lightdm-settings
-pkgver=1.1.4
-pkgrel=5
+_commit=f25d985c19a3e5e0a07856aa34337d5eceb883d5
+pkgver=1.1.4.r4.gf25d985
+pkgrel=1
 pkgdesc="A configuration tool for the LightDM display manager "
 _add_group=add-autologin-group
 arch=('any')
 url="https://github.com/linuxmint/${pkgname}"
 license=('GPL3')
-depends=('hicolor-icon-theme' 'lightdm-slick-greeter' 'python-setproctitle' 'python-xapp' 'python-gobject' 'polkit')
-makedepends=('desktop-file-utils' 'gettext')
-source=("${pkgname}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
-        'draw-user-backgrounds.patch'
-		"$_add_group.script"
-		"$_add_group.service")
+depends=('hicolor-icon-theme'
+    'lightdm-slick-greeter'
+    'polkit'
+    'python-gobject'
+    'python-setproctitle'
+    'python-xapp')
+makedepends=('desktop-file-utils' 'gettext' 'git')
 install=$_add_group.install
-		
-sha256sums=('264eee65a2a7d07a3f5a3ea2c02cd1988bf2c285751b3a0aebbf6b0f329a201c'
-            '29d516e9b714973bda837210293fb26c639eb91dd80e67207e166ad528131686'
+source=("git+$url.git"
+    'user_background.patch'
+    "$_add_group.script"
+    "$_add_group.service")
+sha256sums=('SKIP'
+            'c406f5b8625f99250d14059c20446641e87958a9e17078138f7c988851f4b7e3'
             '475bb4805a419aca106f9f42bcb837c7dc53eeb84b5c50d8ee8d892b55d6c2b4'
             'a356ee9dc1e876d73c49ab30fdc6417edb7a817639122fff7fe0ebff72e33190')
 
+pkgver() {
+  cd $pkgname
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
 prepare() {
-  cd $pkgname-$pkgver
-  patch -p1 -i ../draw-user-backgrounds.patch
+  cd $pkgname
+  patch -p1 -i ../user_background.patch
 }
 
 build() {
-  cd $pkgname-$pkgver
+  cd $pkgname
   make
 }
 
 package() {
-  cd $pkgname-$pkgver
+  cd $pkgname
   cp -r usr $pkgdir
   
 #install systemd service
