@@ -2,8 +2,7 @@
 # AUR-Maintainer: Nate Simon <aurpkg (at natesimon.net)>
 
 pkgname=pix
-_gitrel=master.mint19
-pkgver=1.8.0
+pkgver=1.8.1
 pkgrel=1
 pkgdesc="Image viewer and browser based on gthumb. X-Apps Project"
 arch=('i686' 'x86_64')
@@ -35,7 +34,7 @@ optdepends=('brasero: Burn discs'
     'libopenraw: Support for RAW photos'
     'libtiff: Tiff writing support')
 source=("$url/archive/$pkgver.tar.gz")
-md5sums=('48f2423faf1163eaa2b44b439b5323fb')
+md5sums=('38d18ef43f2b49444375a673c0e9c7db')
 
 build() {
     cd $pkgname-$pkgver
