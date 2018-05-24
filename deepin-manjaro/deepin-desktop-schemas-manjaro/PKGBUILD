@@ -4,7 +4,7 @@
 _pkgname=deepin-desktop-schemas
 pkgname=$_pkgname-manjaro
 pkgver=3.2.12
-pkgrel=1
+pkgrel=2
 pkgdesc='Manjaro Linux Deepin gschemas'
 arch=('any')
 url="https://github.com/linuxdeepin/$_pkgname"
@@ -22,12 +22,19 @@ conflicts=("$_pkgname"
 replaces=('deepin-artwork-themes' 'deepin-artwork-themes-manjaro')
 provides=("$_pkgname")
 source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/deepin-desktop-schemas/archive/$pkgver.tar.gz"
+    'https://github.com/linuxdeepin/deepin-desktop-schemas/commit/bf0c4e43f6b6d508ddd346c2d1e865dae9ae947d.patch'
     'manjaro.diff')
 sha256sums=('6a7b3edce2f45e96e9d29da4e9d071282a08e4174306b00b9906f154d163b80c'
+            'd995cfd8f36f08dce62b5aed3c23872c7a18e559deeaf0cd6ec30cf2e403dc51'
             '3d2d1e29bb41d940c425b47726515f4b480d12b65e130f274760fe1c2a2231da')
 
 prepare() {
     cd $_pkgname-$pkgver
+
+    # disable swap-sched
+    patch -Rp1 -i ../bf0c4e43f6b6d508ddd346c2d1e865dae9ae947d.patch
+
+    # add Manjaro specific settings
     patch -p1 < ../manjaro.diff
 }
 
