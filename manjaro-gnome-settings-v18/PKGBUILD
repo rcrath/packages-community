@@ -3,9 +3,10 @@
 
 pkgbase=manjaro-gnome-settings
 _branch=18.0
+_oldbranch=17.0
 pkgname=(manjaro-gnome-settings-$_branch manjaro-gnome-extension-settings-$_branch)
 #          'manjaro-gnome-minimal-settings')
-pkgver=20180519
+pkgver=20180527
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
@@ -56,7 +57,7 @@ optdepends=('plymouth-theme-manjaro-gnome-17.0: Plymouth theme'
 			'manjaro-gnome-maia-theme: Branding theme for Gdm and Dash to Dock'
 			'lighter-gnome: some gnome-settings-daemon components'
 			'papirus-maia-icon-theme: default icons set')
-conflicts=("manjaro-gnome-settings" "manjaro-gnome-settings-$_branch")
+conflicts=("manjaro-gnome-settings" "manjaro-gnome-settings-$_branch" "manjaro-gnome-settings-$_oldbranch")
 replaces=("manjaro-gnome-settings")
 provides=("manjaro-desktop-settings")
 #backup=('etc/gdm/PostLogin/Default')
@@ -65,7 +66,7 @@ provides=("manjaro-desktop-settings")
 	
 #Add Postlogin script here (remove in future)
 	
-	#install -Dm755 ${srcdir}/$pkgbase/PostLogin/Default ${pkgdir}/etc/gdm/PostLogin/Default
+	install -Dm755 ${srcdir}/$pkgbase/PostLogin/Default ${pkgdir}/etc/gdm/PostLogin/Default
 	
 #Add Hook to inform user about night-light bug into GDM (https://bugzilla.gnome.org/show_bug.cgi?id=785273)
 	
@@ -81,7 +82,7 @@ package_manjaro-gnome-extension-settings-18.0() {
 
 pkgdesc="Manjaro Linux Gnome extensions settings v$_branch"
 optdepends=("manjaro-gnome-settings-$_branch")
-conflicts=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch")
+conflicts=('manjaro-gnome-extension-settings' "manjaro-gnome-extension-settings-$_branch" "manjaro-gnome-extension-settings-$_oldbranch")
 replaces=('manjaro-gnome-extension-settings')
 
 	_inst_dir-extension	
