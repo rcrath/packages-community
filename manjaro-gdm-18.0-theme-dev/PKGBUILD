@@ -2,8 +2,8 @@
 
 _pkgbase=manjaro-gdm-18.0-theme
 pkgname=$_pkgbase-dev
-pkgver=20180523
-_commit=f5c70b5939ba8a720ded67948812e074e94a9c2d
+pkgver=20180528
+_commit=ef205ade9e31f5205126af208f4fb50a1fe7dc1b
 _branch=18.0-Illyria
 _theme=manjaro-gnome-theme
 _hook=gdm-theme-maia
@@ -15,7 +15,7 @@ license=('GPL3')
 depends=('gnome-shell' 'yad' 'manjaro-icons')
 source=("$_theme-$_commit.tar.gz::$url/archive/$_branch/_$commit.tar.gz")
 conflicts=('$_pkgbase' 'manjaro-gnome-maia-theme')
-md5sums=('7a053409029dc282cb65b6b2b1414897')
+md5sums=('73edfc67004f5c9db839603ccdcb7330')
 
 pkgver() {
 	date +%Y%m%d
