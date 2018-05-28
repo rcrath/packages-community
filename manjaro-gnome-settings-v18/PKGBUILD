@@ -7,7 +7,7 @@ _oldbranch=17.0
 pkgname=(manjaro-gnome-settings-$_branch manjaro-gnome-extension-settings-$_branch)
 #          'manjaro-gnome-minimal-settings')
 pkgver=20180528
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://github.com/manjaro/manjaro-gnome-settings"
 license=('GPL')
