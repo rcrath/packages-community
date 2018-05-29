@@ -1,8 +1,8 @@
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
-_commit=b230dbf77793ffb888a968d2cc201eba186b581f
+_commit=23646291355ff6b495bbe55d2d633394b3948068
 pkgname=inxi
-pkgver=3.0.08
+pkgver=3.0.10
 pkgrel=1
 pkgdesc="script to get system information"
 arch=('any')
@@ -27,7 +27,7 @@ optdepends=(
 )
 options=('zipman')
 source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_commit.tar.gz")
-sha256sums=('255c6a0d1f8a806dffa18f552e66f40a7fa8faa01a819187ab3522f37d3d9c7d')
+sha256sums=('6758e894a472e806d8c8de25c1d5a99a7aaac74c0f7df81fab2e6381bcde0d7b')
 
 pkgver() {
     cd $pkgname-$_commit
