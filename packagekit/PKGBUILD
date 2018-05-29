@@ -5,7 +5,7 @@
 pkgbase='packagekit'
 pkgname=('packagekit' 'libpackagekit-glib')
 pkgver=1.1.10
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='A system designed to make installation and updates of packages easier'
 arch=('x86_64')
 url='https://www.freedesktop.org/software/PackageKit/'
@@ -14,7 +14,8 @@ makedepends=('polkit' 'sqlite' 'gobject-introspection' 'gtk-doc' 'intltool'
              'bash-completion' 'vala' 'autoconf-archive')
 options=('!emptydirs')
 source=(
-    "https://www.freedesktop.org/software/PackageKit/releases/PackageKit-${pkgver}.tar.xz"{,.asc}
+    "https://www.freedesktop.org/software/PackageKit/releases/PackageKit-${pkgver}.tar.xz"
+#{,.asc}
     # tmporary download location due to freedesktop upload being disabled due to pending Meltdown fixes
     #"https://kalev.fedorapeople.org/PackageKit/releases/PackageKit-${pkgver}.tar.xz"{,.asc}
     '0001-Fix-SyncFirst-crash.patch'
@@ -22,7 +23,7 @@ source=(
 validpgpkeys=('163EB50119225DB3DF8F49EA17ACBA8DFA970E17'	# Richard Hughes <richard@hughsie.com>
               'EC60AABDF42AAE8FB062640480858FA38F62AF74')	# Kalev Lember <klember@redhat.com>
 sha256sums=('4bc4061420e6fc831e1eeab167bc3e096da0d132282fbd0d1d9a5426c4aa4ed7'
-            'SKIP'
+#            'SKIP'
             'ef6f5dfec55dd535e17ee89e51b94101658305b497f674e1c7f0fa0c077a5b9d')
 
 prepare() {
@@ -53,7 +54,7 @@ build() {
 }
 
 package_packagekit() {
-	depends=('libpackagekit-glib' 'pacman>=5.0.0' 'polkit' 'sqlite')
+	depends=('libpackagekit-glib' 'pacman>=5.1' 'polkit' 'sqlite')
 	optdepends=('bash-completion: command completion in bash')
 	backup=('var/lib/PackageKit/transactions.db'
 		'etc/PackageKit/alpm.d/pacman.conf'
