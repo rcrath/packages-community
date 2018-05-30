@@ -4,9 +4,8 @@
 # Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-session-ui
-pkgver=4.4.0
-pkgrel=0
-_commit=aecb143c528d7fe151ceb7886bb6f342cf126025
+pkgver=4.4.1
+pkgrel=1.1
 pkgdesc='Deepin desktop-environment - Session UI module'
 arch=('i686' 'x86_64')
 url="https://github.com/linuxdeepin/dde-session-ui"
@@ -19,11 +18,14 @@ provides=('lightdm-deepin-greeter')
 conflicts=('dde-workspace' 'dde-session-ui')
 replaces=('dde-workspace' 'dde-session-ui')
 source=("https://github.com/felixonmars/dde-session-ui/archive/$pkgver.tar.gz"
+        'use-new-functions.patch'
         'rm_unneeded.patch')
-sha256sums=('f5573aaabe22e4854db4b492d84c586e08efd2cfa5550b879bfa085ec8128cca'
+sha256sums=('cb2c6674e81fa101e1f821a49afcf30f30a686c21208c67b2a90eaae02118618'
+            'c73b116dab5af0cabdcf3f5850a5aee1451878f98097883f15eb7353eddd4941'
             '2c15090dee295efa5a9666eee87ea2ab8e3360e8b2272fb86182ad3d9a718bb5')
 prepare() {
   cd dde-session-ui-$pkgver
+  patch -p1 -i $srcdir/use-new-functions.patch
   patch -p1 -i $srcdir/rm_unneeded.patch
 }
 
