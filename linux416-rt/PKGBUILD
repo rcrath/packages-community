@@ -8,8 +8,8 @@
 pkgbase=linux416-rt
 pkgname=("$pkgbase" "$pkgbase-headers")
 _basekernel=4.16
-_sub=8
-_rtpatchver=rt3
+_sub=12
+_rtpatchver=rt5
 _bfq=v8r12
 _bfqdate=20180412
 _basever=${pkgbase//linux}
@@ -58,7 +58,6 @@ source=("$url/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         0002-Partially-revert-swiotlb-remove-various-exports.patch
         # MANJARO Patches
         '0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch'
-        '0001-Revert-Bluetooth-btusb-Fix-quirk-for-Atheros-1525-QCA6174.patch'
         '0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
         '0001-iwlwifi-killer-ac-1550.patch'
         # Bootsplash
@@ -76,14 +75,15 @@ source=("$url/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0012-bootsplash.patch'
         'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0013-bootsplash.patch'
         # RT Patch
-        $url/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.{xz,sign}
+        $url/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.xz
+#{,sign}
         'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
 sha256sums=('63f6dc8e3c9f3a0273d5d6f4dca38a2413ca3a5f689329d05b750e4c87bb21b9'
-            '6fb2db1e38f762e6a028dfa5e6d094f0eb4324572667923aca3d64c87117772d'
+            '70a6381aca28b1d271e85bc38fab05af4525d9fdc2c5bb87182b3351db8c4fa2'
             '0d2ac82871694368a563f6082ffffc891cbbb7a5a16ca1d18792fdda95ed4840'
             '46d7929976781187de803b1d600e7e5577d633b0c9ae4e6e222801e9787594a1'
             '94b1f14b4cdb336556e23d4c737e9a805c798380508a75c18c23a5a7ff11eda8'
-            '91a3dee321852dfd64720cc19b3f2fa04c12655426d1ed66de7f4816ec368031'
+            '685e493c1c7919fb5abaa1105fce3a061c7bf39b51a15947eb6adc5094c566f5'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '0fb6d51e5d8cd1dc737104c2d1487a38ff7cb50b1f8cce74e1776caa2d51490b'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -100,7 +100,6 @@ sha256sums=('63f6dc8e3c9f3a0273d5d6f4dca38a2413ca3a5f689329d05b750e4c87bb21b9'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'd365ce80dab359d5277bd2f8568cad50a30ab269f222ed1bb12b8d74571e24a6'
             'c08d12c699398ef88b764be1837b9ee11f2efd3188bd1bf4e8f85dfbeee58148'
-            'b7fc4332fb091e30bd79d64ccf7b41f54b2cb33b4011e962dd6d95c9be98e4dd'
             '61abfab9093bdfec4edda3586fd05afe2f488a92ca99cff51c36b359acdcc815'
             '863a02c53b5096a005cdde60d558f3e5d48d33d8360e513b915fa06e0df38c62'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
@@ -116,8 +115,7 @@ sha256sums=('63f6dc8e3c9f3a0273d5d6f4dca38a2413ca3a5f689329d05b750e4c87bb21b9'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
-            '7db2144b16314b1dcc3aefc993d6c9c54690de342a043d0b02d0f114713e880d'
-            'SKIP'
+            '753a22311c369dd10d26b7c8696494f14c5015c6723e4bf81eb11687d196332e'
             '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
 validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
             '4FE5E3262872E4CC')
@@ -152,7 +150,6 @@ prepare() {
   patch -Np1 -i '../0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch'
 
   # https://bugzilla.kernel.org/show_bug.cgi?id=199271
-  patch -Np1 -i '../0001-Revert-Bluetooth-btusb-Fix-quirk-for-Atheros-1525-QCA6174.patch'
   patch -Np1 -i '../0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
 
   # iwlwifi: add killer cards for 9000 series; https://forum.manjaro.org/t/46167
