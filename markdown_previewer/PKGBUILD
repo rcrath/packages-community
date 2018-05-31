@@ -2,11 +2,11 @@
 # Maintainer: Tomasz Gąsior <tomaszgasior.pl>
 
 pkgname=markdown_previewer
-pkgver=0.r5.36ef5c0
+pkgver=0.r6.64ad4d7
 pkgrel=1
 pkgdesc='Simple Markdown files previewer.'
 arch=('i686' 'x86_64')
-url="https://github.com/TomaszGasior/$pkgname"
+url="https://github.com/oberon-manjaro/$pkgname"
 depends=('php' 'zenity')
 source=("git+$url.git")
 sha256sums=('SKIP')
@@ -23,6 +23,6 @@ build() {
 
 package() {
 	cd $pkgname
-    install -Dm755 markdown_previewer $pkgdir/usr/bin/markdown_previewer
-    install -Dm644 archlinux/markdown_previewer.desktop $pkgdir/usr/share/applications/markdown_previewer.desktop
+    install -Dm755 $pkgname $pkgdir/usr/bin/$pkgname
+    install -Dm644 archlinux/$pkgname.desktop $pkgdir/usr/share/applications/$pkgname.desktop
 }
