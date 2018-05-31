@@ -1,27 +1,28 @@
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
 # Maintainer: Tomasz Gąsior <tomaszgasior.pl>
 
 pkgname=markdown_previewer
-pkgver=0
+pkgver=0.r5.36ef5c0
 pkgrel=1
 pkgdesc='Simple Markdown files previewer.'
 arch=('i686' 'x86_64')
 url="https://github.com/TomaszGasior/$pkgname"
 depends=('php' 'zenity')
-source=(
-	"git+$url.git"
-	"markdown_previewer.desktop"
-)
-sha256sums=('SKIP' 'SKIP')
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd $pkgname
+    printf "0.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
-	cd "$srcdir/$pkgname"
+	cd $pkgname
 	php "prepare_application.php"
 }
 
 package() {
-	mkdir -p "$pkgdir/usr/bin" "$pkgdir/usr/share/applications"
-
-	cd "$srcdir/$pkgname"
-	cp "markdown_previewer" "$pkgdir/usr/bin/"
-	cp "../markdown_previewer.desktop" "$pkgdir/usr/share/applications/"
+	cd $pkgname
+    install -Dm755 markdown_previewer $pkgdir/usr/bin/markdown_previewer
+    install -Dm644 archlinux/markdown_previewer.desktop $pkgdir/usr/share/applications/markdown_previewer.desktop
 }
