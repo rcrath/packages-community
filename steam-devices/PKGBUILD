@@ -1,0 +1,30 @@
+# Maintainer: Fabian Bornschein <plusfabi(At)gmail(Dot)com>
+pkgname=steam-devices
+pkgver=0.1
+pkgrel=1
+pkgdesc="Udev rules for controllers to work with steam"
+url='https://github.com/Tids/steam-devices'
+arch=('x86_64')
+license=('MIT')
+depends=('systemd')
+install=${pkgname}.install
+source=("https://github.com/Tids/${pkgname}/archive/0.1.zip")
+sha512sums=('b48d4ffd5a59cb46280e6970d903ec85f6d8871174ad9b66287105d75b0438c0383c8c5c9a9be3dcadb1e049ed9c44d7e15d3f28e4cf93eeb776a3671ec93f30')
+
+package()
+{
+    # install license
+    install -dm 755 "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+    install -Dm 644 "${srcdir}/${pkgname}-${pkgver}/LICENSE" \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+    # install udev rules
+    install -dm 755 "${pkgdir}/usr/lib/udev/rules.d"
+    cp "${srcdir}/${pkgname}-${pkgver}"/*.rules \
+    "${pkgdir}/usr/lib/udev/rules.d/"
+    
+    # start uinput at boot
+    install -dm 755 "${pkgdir}/usr/lib/modules-load.d"
+    install -Dm 644 "${srcdir}/${pkgname}-${pkgver}/uinput.conf" \
+    "${pkgdir}/usr/lib/modules-load.d/uinput.conf"
+}
