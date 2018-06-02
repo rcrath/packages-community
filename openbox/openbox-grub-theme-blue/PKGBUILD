@@ -2,7 +2,7 @@
 
 pkgname=manjaro-openbox-grub-theme-blue
 _gitname=openbox-grub-theme
-_branch=v18-blue
+_branch='v18-blue'
 pkgver=1.0
 pkgrel=1
 pkgdesc="Slick grub theme for Manjaro Openbox"
@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 package() {
     cd $srcdir/$_gitname
-    install -d $pkgdir/boot/grub/themes/openbox
-    install -m644 theme/* $pkgdir/boot/grub/themes/openbox/
+    install -d -m755 $pkgdir/boot/grub/themes/openbox
+    install -m755 theme/* $pkgdir/boot/grub/themes/openbox/
 }
 
