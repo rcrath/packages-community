@@ -4,7 +4,7 @@
 pkgname=limepanel
 _ver=0.43
 pkgver=0.43.r126.gbd57eb7
-pkgrel=1
+pkgrel=2
 pkgdesc="Panel script for bspwm using lemonbar"
 arch=('any')
 url="https://github.com/Chrysostomus/$pkgname"

@@ -1,7 +1,7 @@
 # Maintainer: P Sherbet <psherbet at psherbet dot com>
 pkgname=nerd-fonts-terminus
 pkgver=2.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Patched font Terminus from nerd-fonts library"
 arch=('any')
 url='https://github.com/ryanoasis/nerd-fonts'
