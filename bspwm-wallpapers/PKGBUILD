@@ -3,7 +3,7 @@
 _snapshot=b9cdf640db45a55bcc5db76c4028968c457cb3a0
 pkgname=bspwm-wallpapers
 pkgver=20180522
-pkgrel=1
+pkgrel=2
 pkgdesc="Wallpapers for bspwm"
 arch=('any')
 license=('GPL3')

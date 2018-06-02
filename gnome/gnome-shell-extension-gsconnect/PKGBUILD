@@ -1,8 +1,9 @@
 # Maintainer: Guillaume Hayot <ghayot@postblue.info>
 # Maintaner: Matti Hyttinen <matti@manjaro.org>
+
 pkgname=gnome-shell-extension-gsconnect
 pkgver=11
-pkgrel=1
+pkgrel=2
 pkgdesc="KDE Connect implementation with GNOME Shell integration"
 arch=('any')
 url="https://github.com/andyholmes/gnome-shell-extension-gsconnect"
