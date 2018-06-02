@@ -1,0 +1,120 @@
+From 7ac37d8ae463d749c9f5aeb9428ed3523a5a53fb Mon Sep 17 00:00:00 2001
+From: Dan Elkouby <streetwalkermc@gmail.com>
+Date: Fri, 1 Jun 2018 18:55:35 +0300
+Subject: [PATCH] Reframe swallowed windows if depth doesn't match
+
+X will not allow a window with ParentRelative background to be created
+or reparented under a window with mismatching color depth.
+Deal with this by destroying the container frame and creating a new one
+with the right depth upon swallowing.
+Defer destruction of the frame window until after the updated tree has
+been rendered to avoid some distracting flickering.
+
+Fixes #3297
+---
+ include/x.h  |  6 ++++++
+ src/manage.c | 14 ++++++++++++++
+ src/x.c      | 25 +++++++++++++++++++------
+ 3 files changed, 39 insertions(+), 6 deletions(-)
+
+diff --git a/include/x.h b/include/x.h
+index 3e81bc364..8b7664f26 100644
+--- a/include/x.h
++++ b/include/x.h
+@@ -49,6 +49,12 @@ void x_reinit(Con *con);
+  */
+ void x_con_kill(Con *con);
+ 
++/*
++ * Completely reinitializes the container's frame, without destroying the old window.
++ *
++ */
++void x_con_reframe(Con *con);
++
+ /**
+  * Returns true if the client supports the given protocol atom (like WM_DELETE_WINDOW)
+  *
+diff --git a/src/manage.c b/src/manage.c
+index d591df154..b4d0af959 100644
+--- a/src/manage.c
++++ b/src/manage.c
+@@ -355,8 +355,16 @@ void manage_window(xcb_window_t window, xcb_get_window_attributes_cookie_t cooki
+             }
+         }
+     }
++    xcb_window_t old_frame = XCB_NONE;
+     if (nc->window != cwindow && nc->window != NULL) {
+         window_free(nc->window);
++        /* Match frame and window depth. This is needed because X will refuse to reparent a
++         * window whose background is ParentRelative under a window with a different depth. */
++        if (nc->depth != cwindow->depth) {
++            old_frame = nc->frame.id;
++            nc->depth = cwindow->depth;
++            x_con_reframe(nc);
++        }
+     }
+     nc->window = cwindow;
+     x_reinit(nc);
+@@ -647,6 +655,12 @@ void manage_window(xcb_window_t window, xcb_get_window_attributes_cookie_t cooki
+ 
+     tree_render();
+ 
++    /* Destroy the old frame if we had to reframe the container. This needs to be done
++     * after rendering in order to prevent the background from flickering in its place. */
++    if (old_frame != XCB_NONE) {
++        xcb_destroy_window(conn, old_frame);
++    }
++
+     /* Windows might get managed with the urgency hint already set (Pidgin is
+      * known to do that), so check for that and handle the hint accordingly.
+      * This code needs to be in this part of manage_window() because the window
+diff --git a/src/x.c b/src/x.c
+index 629520d4e..25f341b6e 100644
+--- a/src/x.c
++++ b/src/x.c
+@@ -249,11 +249,7 @@ void x_move_win(Con *src, Con *dest) {
+     }
+ }
+ 
+-/*
+- * Kills the window decoration associated with the given container.
+- *
+- */
+-void x_con_kill(Con *con) {
++static void _x_con_kill(Con *con) {
+     con_state *state;
+ 
+     if (con->colormap != XCB_NONE) {
+@@ -262,7 +258,6 @@ void x_con_kill(Con *con) {
+ 
+     draw_util_surface_free(conn, &(con->frame));
+     draw_util_surface_free(conn, &(con->frame_buffer));
+-    xcb_destroy_window(conn, con->frame.id);
+     xcb_free_pixmap(conn, con->frame_buffer.id);
+     state = state_for_frame(con->frame.id);
+     CIRCLEQ_REMOVE(&state_head, state, state);
+@@ -275,6 +270,24 @@ void x_con_kill(Con *con) {
+     focused_id = last_focused = XCB_NONE;
+ }
+ 
++/*
++ * Kills the window decoration associated with the given container.
++ *
++ */
++void x_con_kill(Con *con) {
++    _x_con_kill(con);
++    xcb_destroy_window(conn, con->frame.id);
++}
++
++/*
++ * Completely reinitializes the container's frame, without destroying the old window.
++ *
++ */
++void x_con_reframe(Con *con) {
++    _x_con_kill(con);
++    x_con_init(con);
++}
++
+ /*
+  * Returns true if the client supports the given protocol atom (like WM_DELETE_WINDOW)
+  *
