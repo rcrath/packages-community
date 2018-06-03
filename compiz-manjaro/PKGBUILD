@@ -38,7 +38,7 @@ source=("${pkgname}-${pkgver}.tar.gz::http://bazaar.launchpad.net/${_upstream}/$
         "compiz-xfce-uninstall-helper"
         "compiz-xfce-uninstall-helper.desktop"
         "greybird-${_greybirdver}.tar.gz::https://github.com/shimmerproject/Greybird/archive/v${_greybirdver}.tar.gz")
-sha256sums=('5d8e4ef96721301e43a284c2da3c26f9816faccc72f288d995806b591444c6c5'
+sha256sums=('4e4502ecf648da22e1be3e19e5fb02b4543251dfd73227659086e8471dbd00dc'
             'f4897590b0f677ba34767a29822f8f922a750daf66e8adf47be89f7c2550cf4b'
             '16ddb6311ce42d958505e21ca28faae5deeddce02cb558d55e648380274ba4d9'
             '89ee91a8ea6b1424ef76661ea9a2db43412366aacddc12d24a7adf5e04bfbc61'

@@ -1,0 +1,141 @@
+From e8613527b65fda27213e65e1b0f345480a085445 Mon Sep 17 00:00:00 2001
+From: Alexandre Arnt <falso@correio.com>
+Date: Sat, 21 Apr 2018 19:08:41 -0300
+Subject: [PATCH] BugFix: Exec internet tests before some commands.
+
+---
+ CHANGELOG                      |  1 +
+ src/mainwindow.h               |  1 +
+ src/mainwindow_events.cpp      |  2 ++
+ src/mainwindow_news.cpp        |  7 +++++++
+ src/mainwindow_transaction.cpp | 23 +++++++++++++++++++++++
+ src/unixcommand.cpp            |  4 ++--
+ 6 files changed, 36 insertions(+), 2 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index f178491..5a7fbbe 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -21,6 +21,7 @@
+   Find line edit is always focused when the program starts.
+   Prevent user to install partial upgrades in his system (only some of the outdated packages).
+   BugFix: Do not let program display an avalanche of internet related errors.
++  BugFix: Exec internet tests before some commands.
+   BugFix: Parser was not outputing repository errors when syncinc.
+   BugFix: repoeditor now runs as normal user and asks for root password on save.
+   BugFix: If Notifier hid Octopi and was closed, Octopi's window would stay hidden.
+diff --git a/src/mainwindow.h b/src/mainwindow.h
+index c6ae4c5..66a5223 100644
+--- a/src/mainwindow.h
++++ b/src/mainwindow.h
+@@ -303,6 +303,7 @@ public slots:
+   void ensureTabVisible(const int index);
+   bool isPropertiesTabWidgetVisible();
+   bool isSUAvailable();
++  bool isInternetAvailable();
+   void writeToTabOutput(const QString &msg, TreatURLLinks treatURLLinks = ectn_TREAT_URL_LINK);
+ 
+   void initTabOutput();
+diff --git a/src/mainwindow_events.cpp b/src/mainwindow_events.cpp
+index 54fb070..ebcb099 100644
+--- a/src/mainwindow_events.cpp
++++ b/src/mainwindow_events.cpp
+@@ -121,6 +121,8 @@ void MainWindow::keyPressEvent(QKeyEvent
+     {
+       if (UnixCommand::getLinuxDistro() == ectn_KAOS && ui->actionUseInstantSearch->isChecked()) return;
+ 
++      if (!isInternetAvailable()) return;
++
+       m_progressWidget->setMaximum(100);
+       m_progressWidget->setValue(0);
+       m_progressWidget->show();
+diff --git a/src/mainwindow_news.cpp b/src/mainwindow_news.cpp
+index 1deaef1..5749db4 100644
+--- a/src/mainwindow_news.cpp
++++ b/src/mainwindow_news.cpp
+@@ -49,6 +49,13 @@ void MainWindow::refreshDistroNews(bool searchForLatestNews, bool gotoNewsTab)
+ 
+   if (searchForLatestNews)
+   {
++    if (!isInternetAvailable())
++    {
++      ui->actionGetNews->setEnabled(true);
++      ui->twProperties->setCurrentIndex(ctn_TABINDEX_NEWS);
++      return;
++    }
++
+     LinuxDistro distro = UnixCommand::getLinuxDistro();
+ 
+     if (gotoNewsTab)
+diff --git a/src/mainwindow_transaction.cpp b/src/mainwindow_transaction.cpp
+index b46f663..7813d0c 100644
+--- a/src/mainwindow_transaction.cpp
++++ b/src/mainwindow_transaction.cpp
+@@ -671,6 +671,23 @@ void MainWindow::onPressDelete()
+   }
+ }
+ 
++/*
++ * Checks if Internet connection is up/down
++ */
++bool MainWindow::isInternetAvailable()
++{
++  bool res=true;
++
++  //Test if Internet access exists
++  if (!UnixCommand::hasInternetConnection())
++  {
++    QMessageBox::critical(this, StrConstants::getError(), StrConstants::getInternetUnavailableError());
++    res=false;
++  }
++
++  return res;
++}
++
+ /*
+  * Checks if some SU utility is available...
+  * Returns false if not!
+@@ -727,6 +744,8 @@ void MainWindow::doSyncDatabase()
+   //if (!doRemovePacmanLockFile()) return;
+   if (!isSUAvailable()) return;
+ 
++  if (!isInternetAvailable()) return;
++
+   //Let's synchronize kcp database too...
+   if (UnixCommand::getLinuxDistro() == ectn_KAOS && UnixCommand::hasTheExecutable(ctn_KCP_TOOL) && !UnixCommand::isRootRunning())
+     UnixCommand::execCommandAsNormalUser("kcp -u");
+@@ -843,6 +862,8 @@ void MainWindow::doSystemUpgrade(SystemUpgradeOptions systemUpgradeOptions)
+ 
+   if (!isSUAvailable()) return;
+ 
++  if(!isInternetAvailable()) return;
++
+   qApp->processEvents();
+   int res;
+ 
+@@ -1683,6 +1704,8 @@ void MainWindow::toggleSystemActions(const bool value)
+  */
+ void MainWindow::commitTransaction()
+ {
++  if (!isInternetAvailable()) return;
++
+   //Are there any remove actions to be commited?
+   if(getRemoveTransactionParentItem()->rowCount() > 0 && getInstallTransactionParentItem()->rowCount() > 0)
+   {
+diff --git a/src/unixcommand.cpp b/src/unixcommand.cpp
+index 013564a..f48483b 100644
+--- a/src/unixcommand.cpp
++++ b/src/unixcommand.cpp
+@@ -595,10 +595,10 @@ bool UnixCommand::hasInternetConnection()
+   }
+ 
+   //It seems to be alright, but let's make a ping to see the result
+-  /*if (result == true)
++  if (result == true)
+   {
+     result = UnixCommand::doInternetPingTest();
+-  }*/
++  }
+ 
+   return result;
+ }

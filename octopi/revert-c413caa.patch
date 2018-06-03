@@ -1,0 +1,22 @@
+From c413caadd11883ffcebf13ce515fb17bc23ebd27 Mon Sep 17 00:00:00 2001
+From: Alexandre Arnt <falso@correio.com>
+Date: Sun, 6 May 2018 19:55:25 -0300
+Subject: [PATCH] - BugFix: sysinfo tests for internet connection.
+
+---
+ src/mainwindow.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/mainwindow.cpp b/src/mainwindow.cpp
+index 602f3b8..8fb816a 100644
+--- a/src/mainwindow.cpp
++++ b/src/mainwindow.cpp
+@@ -1698,6 +1698,8 @@ void MainWindow::ptpbSysInfo()
+   if (!UnixCommand::hasTheExecutable("curl") ||
+       m_commandExecuting != ectn_NONE) return;
+ 
++  if (!isInternetAvailable()) return;
++
+   CPUIntensiveComputing *cic = new CPUIntensiveComputing(this);
+ 
+   disableTransactionActions();

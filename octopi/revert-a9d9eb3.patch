@@ -1,0 +1,99 @@
+From a9d9eb30d37e97369cfc64204fe0bde9e0e29918 Mon Sep 17 00:00:00 2001
+From: Alexandre Arnt <falso@correio.com>
+Date: Sun, 6 May 2018 18:23:46 -0300
+Subject: [PATCH] - BugFix: Exec internet tests before some commands in Octopi
+ and Notifier.
+
+---
+ CHANGELOG                               |  2 +-
+ notifier/octopi-notifier/mainwindow.cpp | 32 +++++++++++++++++++++++++++++++-
+ notifier/octopi-notifier/mainwindow.h   |  1 +
+ 3 files changed, 33 insertions(+), 2 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 49f1936..bb9044a 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -21,7 +21,7 @@
+   Find line edit is always focused when the program starts.
+   Prevent user to install partial upgrades in his system (only some of the outdated packages).
+   BugFix: Do not let program display an avalanche of internet related errors.
+-  BugFix: Exec internet tests before some commands.
++  BugFix: Exec internet tests before some commands in Octopi and Notifier.
+   BugFix: Parser was not outputing repository errors when syncinc.
+   BugFix: repoeditor now runs as normal user and asks for root password on save.
+   BugFix: If Notifier hid Octopi and was closed, Octopi's window would stay hidden.
+diff --git a/notifier/octopi-notifier/mainwindow.cpp b/notifier/octopi-notifier/mainwindow.cpp
+index 3dadbb0..3b92b91 100644
+--- a/notifier/octopi-notifier/mainwindow.cpp
++++ b/notifier/octopi-notifier/mainwindow.cpp
+@@ -179,7 +179,7 @@ void MainWindow::pacmanHelperTimerTimeout()
+ {
+   static bool firstTime=true;
+ 
+-  if (!UnixCommand::hasInternetConnection() || m_commandExecuting != ectn_NONE) return;
++  if (/*!UnixCommand::hasInternetConnection() ||*/ m_commandExecuting != ectn_NONE) return;
+ 
+   if (firstTime)
+   {
+@@ -337,6 +337,8 @@ bool MainWindow::_isSUAvailable()
+  */
+ void MainWindow::doSystemUpgrade()
+ {
++  if (!isInternetAvailable()) return;
++
+   //If, for whatever reason, the pacman db is locked, let's ask for lock removal
+   if (PacmanExec::isDatabaseLocked())
+   {
+@@ -616,11 +618,39 @@ void MainWindow::afterPacmanHelperSyncDatabase()
+   }
+ }
+ 
++/*
++ * Checks if Internet connection is up/down
++ */
++bool MainWindow::isInternetAvailable()
++{
++  bool res=true;
++
++  //First we create a fake window to act as about dialog's parent
++  //Otherwise the dialog appears at a random screen point!
++  QMainWindow *fake = new QMainWindow();
++  fake->setWindowIcon(m_icon);
++  fake->setVisible(false);
++  QScreen *sc = QGuiApplication::primaryScreen();
++  fake->setGeometry(sc->geometry());
++
++  //Test if Internet access exists
++  if (!UnixCommand::hasInternetConnection())
++  {
++    QMessageBox::critical(fake, StrConstants::getError(), StrConstants::getInternetUnavailableError());
++    res=false;
++    delete fake;
++  }
++
++  return res;
++}
++
+ /*
+  * Called every time user selects "Sync databases..." menu option
+  */
+ void MainWindow::syncDatabase()
+ {
++  if (!isInternetAvailable()) return;
++
+   //If, for whatever reason, the pacman db is locked, let's ask for lock removal
+   if (PacmanExec::isDatabaseLocked())
+   {
+diff --git a/notifier/octopi-notifier/mainwindow.h b/notifier/octopi-notifier/mainwindow.h
+index 738c22f..4e28479 100644
+--- a/notifier/octopi-notifier/mainwindow.h
++++ b/notifier/octopi-notifier/mainwindow.h
+@@ -114,6 +114,7 @@ private slots:
+   PacmanHelperClient *m_pacmanHelperClient;
+ 
+   bool _isSUAvailable();
++  bool isInternetAvailable();
+   void initActions();
+   void initSystemTrayIcon();
+   void sendNotification(const QString &msg);
