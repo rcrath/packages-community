@@ -9,11 +9,12 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-budgie-settings'
         'manjaro-jwm-settings'
         'manjaro-lxde-settings'
+        'manjaro-lxde-settings-dev'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
         )
-pkgver=20180602
+pkgver=20180603
 pkgrel=1
 arch=('any')
 #url="https://github.com/manjaro/desktop-settings"
@@ -183,6 +184,22 @@ package_manjaro-lxde-settings() {
             'lxde-wallpapers'
             'manjaro-base-skel'
             'vibrancy-icons-teal'
+            'xcursor-breeze'
+            )
+    conflicts=('manjaro-desktop-settings')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/lxde'
+}
+
+package_manjaro-lxde-settings-dev() {
+    pkgdesc='Manjaro Linux lxde settings'
+    depends=('adapta-maia-theme'
+            'i3-scrot'
+            'lxde-wallpapers'
+            'manjaro-base-skel'
+            'papirus-icon-theme'
+            'papirus-maia-icon-theme'
             'xcursor-breeze'
             )
     conflicts=('manjaro-desktop-settings')
