@@ -8,8 +8,8 @@ arch=('x86_64')
 license=('MIT')
 depends=('systemd')
 install=${pkgname}.install
-source=("https://github.com/Tids/${pkgname}/archive/0.1.zip")
-sha512sums=('b48d4ffd5a59cb46280e6970d903ec85f6d8871174ad9b66287105d75b0438c0383c8c5c9a9be3dcadb1e049ed9c44d7e15d3f28e4cf93eeb776a3671ec93f30')
+source=("https://gitlab.com/Fabish/${pkgname}/-/archive/${pkgver}/${pkgname}-${pkgver}.zip")
+sha512sums=('b5a9177a303ca5f5e5418abf6d8d7780b78be87d23c86f051662bf459d343bedca889f6d44fffee425d0cc62a60a880af68c7c5425c1cf5f1c5ed5763f959c8c')
 
 package()
 {
