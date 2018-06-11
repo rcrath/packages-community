@@ -1,0 +1,38 @@
+# Maintainer: fhdk <fh at manjaro org>
+# Contributor: Nathaniel Maia <natemaia10@gmail.com>
+# Contributor: Marcus Shaetzle
+# Contributor: Eric Vidal <eric@obarun.org>
+
+pkgname=kickshaw
+pkgver=0.6.4
+pkgrel=1
+pkgdesc='A menu editor for freedesktop standard menus'
+url='http://download-mirror.savannah.gnu.org/releases/obladi'
+_giturl="https://github.com/fhdk/$pkgname"
+arch=('x86_64')
+sha256sums=('SKIP'
+            'f78976930cdbd9900bf177565b8cc087128e401faf0a82a8154528f2bc061716')
+license=('MIT')
+source=("git+${_giturl}"
+        "$url/kickshaw_${pkgver}_GTK3_source_only.tar.bz2"
+        )
+makedepends=('git' 'gtk3' 'gcc')
+depends=('gtk3')
+
+build() {
+  cd "${srcdir}/kickshaw_${pkgver}_GTK3_source_only/source" || exit
+  make
+}
+
+package() {
+  cd "${srcdir}/kickshaw_${pkgver}_GTK3_source_only/source"
+  install -Dm755 kickshaw "$pkgdir/usr/bin/kickshaw"
+
+  # COPYING & README in license directory
+  cd ../ || exit
+  install -Dm644 README "$pkgdir/usr/share/licenses/kickshaw/README"
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/kickshaw/COPYING"
+
+  # COPYING kickshaw.desktop
+  install -Dm644 "${srcdir}/${pkgname}/kickshaw.desktop" "$pkgdir/usr/share/applications/kickshaw.desktop"
+}
