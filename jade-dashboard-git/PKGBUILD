@@ -3,15 +3,13 @@
 _pkgname=jade-dashboard
 pkgname="$_pkgname-git"
 pkgver=0.6.1
-pkgrel=2
+pkgrel=1
 pkgdesc="JADE, a linux desktop built with HTML5, CSS, JavaScript and Python."
 arch=('any')
 url="https://github.com/codesardine/Jadesktop"
 license=('GPL3')
 depends=('python-jade-application-kit' 'jade-menu-data' 'python-xdg')
 optdepends=('papirus-icon-theme')
-provides=('jade-dashboard')
-replaces=('jade-dashboard')
 source=("$url/archive/v0.6.1.tar.gz")
 md5sums=('8f87e3fee179c0695c454d8818632c96')
 
