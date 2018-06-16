@@ -3,23 +3,23 @@
 _pkgname=jade-dashboard
 pkgname="$_pkgname-git"
 pkgver=0.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="JADE, a linux desktop built with HTML5, CSS, JavaScript and Python."
 arch=('any')
 url="https://github.com/codesardine/Jadesktop"
-license=('GPL')
+license=('GPL3')
 depends=('python-jade-application-kit' 'jade-menu-data' 'python-xdg')
-optdepends=('paper-icon-theme-git')
+optdepends=('papirus-icon-theme')
 provides=('jade-dashboard')
-replaces=('jade-dashboard' 'jade-dashboard-git')
+replaces=('jade-dashboard')
 source=("$url/archive/v0.6.1.tar.gz")
 md5sums=('8f87e3fee179c0695c454d8818632c96')
 
-pkgver() {
-	cd "$srcdir/Jadesktop-$pkgver/jade/"
-	local v_ver=$(awk '/"version"/ {print $2}' settings.json | cut -d '"' -f2 )
-    printf "$v_ver"
-}
+# pkgver() {
+#	cd "$srcdir/Jadesktop-$pkgver/jade/"
+#	local v_ver=$(awk '/"version"/ {print $2}' settings.json | cut -d '"' -f2 )
+#       printf "$v_ver"
+# }
 
 package() {
     cp -r $srcdir/Jadesktop-$pkgver/usr $pkgdir/
