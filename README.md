@@ -1,4 +1,4 @@
-packages
-========
+Migration Branch
+======================
 
-Manjaro Linux Community PKGBUILDS
+please remove all migrated packages from this branch. A empty branch marks **community** fully migrated.
