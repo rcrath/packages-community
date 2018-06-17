@@ -1,3 +1,0 @@
-post_install() {
-    sed -e 's|^Current=.*|Current=manjaro|' -i etc/sddm.conf
-}
