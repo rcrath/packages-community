@@ -1,9 +1,0 @@
-# Maintainer: Bernhard Landauer <oberon@manjaro.org>
-
-pkgname=deepin-session-ui-manjaro
-pkgver=20170706
-pkgrel=1
-pkgdesc='Deepin desktop-environment - Session UI module'
-arch=('any')
-url='https://github.com/linuxdeepin/dde-session-ui'
-depends=('deepin-session-ui')
