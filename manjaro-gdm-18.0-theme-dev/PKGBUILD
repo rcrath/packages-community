@@ -2,8 +2,8 @@
 
 _pkgbase=manjaro-gdm-18.0-theme
 pkgname=$_pkgbase-dev
-pkgver=20180409
-_commit=af0a6e135b4433cc91ff7502bc58ac1473ddd9eb
+pkgver=20180528
+_commit=ef205ade9e31f5205126af208f4fb50a1fe7dc1b
 _branch=18.0-Illyria
 _theme=manjaro-gnome-theme
 _hook=gdm-theme-maia
@@ -12,10 +12,10 @@ pkgdesc="Manjaro Gnome 18.0 GDM theme (development)"
 arch=(any)
 url="https://github.com/Ste74/$_theme"
 license=('GPL3')
-depends=(gnome-shell)
+depends=('gnome-shell' 'yad' 'manjaro-icons')
 source=("$_theme-$_commit.tar.gz::$url/archive/$_branch/_$commit.tar.gz")
 conflicts=('$_pkgbase' 'manjaro-gnome-maia-theme')
-md5sums=('365cb4d03d32e1950c3ce5f1f930a8ac')
+md5sums=('73edfc67004f5c9db839603ccdcb7330')
 
 pkgver() {
 	date +%Y%m%d
@@ -26,11 +26,16 @@ package() {
     install -Dm644 $srcdir/$_theme-$_branch/.face $pkgdir/etc/skel/.face
     install -dm644 $pkgdir/usr/share/themes/$_pkgbase
     cp -R $srcdir/$_theme-$_branch/theme/* $pkgdir/usr/share/themes/$_pkgbase/
+    install -Dm644 $srcdir/$_theme-$_branch/check-warning.png $pkgdir/usr/share/icons/hicolor/40x40/status/check-warning.png
+    install -Dm755 $srcdir/$_theme-$_branch/check-theme $pkgdir/usr/bin/check-theme
+    install -Dm644 $srcdir/$_theme-$_branch/check-theme.desktop $pkgdir/etc/xdg/autostart/check-theme.desktop
     
     #Hook
     install -Dm644 $srcdir/$_theme-$_branch/$_hook-install.hook $pkgdir/usr/share/libalpm/hooks/$_hook-install.hook
     install -Dm755 $srcdir/$_theme-$_branch/$_hook-install.script $pkgdir/usr/share/libalpm/scripts/$_hook-install
     install -Dm644 $srcdir/$_theme-$_branch/$_hook-remove.hook $pkgdir/usr/share/libalpm/hooks/$_hook-remove.hook
     install -Dm755 $srcdir/$_theme-$_branch/$_hook-remove.script $pkgdir/usr/share/libalpm/scripts/$_hook-remove
+    install -Dm644 $srcdir/$_theme-$_branch/gdm-theme-backup.hook $pkgdir/usr/share/libalpm/hooks/gdm-theme-backup.hook
+    install -Dm755 $srcdir/$_theme-$_branch/gdm-theme-backup.script $pkgdir/usr/share/libalpm/scripts/gdm-theme-backup
 }
 

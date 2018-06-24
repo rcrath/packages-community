@@ -3,13 +3,14 @@
 pkgname=pamac-classic
 _pkgver=6.6.4
 pkgver=$_pkgver
-pkgrel=1
+pkgrel=2
 pkgdesc="A Gtk3 frontend for libalpm - classic version"
 arch=('i686' 'x86_64')
 url="https://github.com/cromnix/pamac-classic"
 license=('GPL3')
-depends=('gtk3' 'pango' 'atk' 'cairo' 'gdk-pixbuf2' 'glib2' 'json-glib' 'pacman' 'curl' 'libsoup' 'polkit' 'libnotify' 'vte3' 'zlib' 'pcre2' 'gnutls')
-makedepends=('vala' 'glibc' 'pacman' 'cmake' 'gettext' 'intltool')
+depends=('gtk3' 'pango' 'atk' 'cairo' 'gdk-pixbuf2' 'glib2' 'json-glib' 'pacman>=5.1' 'pacman<5.2'
+         'curl' 'libsoup' 'polkit' 'libnotify' 'vte3' 'zlib' 'pcre2' 'gnutls')
+makedepends=('vala' 'glibc' 'cmake' 'gettext' 'intltool')
 optdepends=('polkit-gnome: needed for authentication in Cinnamon, Gnome'
             'mate-polkit: needed for authentication in MATE'
             'lxsession: needed for authentication in Xfce, LXDE etc.')
@@ -19,12 +20,19 @@ replaces=('pamac5')
 provides=('pamac' 'pamac5' 'pamac-aur')
 install=pamac-classic.install
 
-source=("pamac-classic-$pkgver-$pkgrel.tar.gz::$url/archive/v$_pkgver.tar.gz")
-sha256sums=('258a6787ce98ebffc17b1d4ba02b1c70927997ce61b0b4ea168fa00036d910b6')
+source=("pamac-classic-$pkgver-$pkgrel.tar.gz::$url/archive/v$_pkgver.tar.gz"
+        'https://github.com/manjaro/pamac/commit/451d28d774cc8786486ff9b10c76faab69784a13.patch'
+        'https://github.com/manjaro/pamac/commit/65ae0a678a97d5f31875d9b6279ec8bc8e03d9b3.patch')
+sha256sums=('258a6787ce98ebffc17b1d4ba02b1c70927997ce61b0b4ea168fa00036d910b6'
+            '232b8c086d3b823886dceb8084e87493a612f139d5a776d1cca1d382e5994160'
+            'eb2ce83352ee38e5ddeabf6794b5a66afc5a054f9f63e1f1daabb47b9b8f4a35')
 
 prepare() {
   cd "${srcdir}/pamac-classic-$_pkgver"
   # patches here
+  cd src/vapis
+  patch -p2 -i "${srcdir}/451d28d774cc8786486ff9b10c76faab69784a13.patch" # fix typos
+  patch -p2 -i "${srcdir}/65ae0a678a97d5f31875d9b6279ec8bc8e03d9b3.patch" # pacman 5.1 support
 }
 
 build() {

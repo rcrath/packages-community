@@ -12,10 +12,10 @@
 pkgbase=octopi
 pkgname=('octopi' 'octopi-repoeditor' 'octopi-pacmanhelper' 'octopi-cachecleaner'
          'octopi-notifier-qt5' 'octopi-notifier-frameworks')
-pkgver=0.8.12
+pkgver=0.8.13
 pkgrel=1
 # This is the release package so the below _gitcommit variable should (usually) be commented out.
-_gitcommit="27de3460cbf1879e7ecc8dfbc1f722e7b018b7d3"
+_gitcommit="b9654265f915fad6b70606852bbac6e8bcd7138a"
 arch=('i686' 'x86_64')
 url="http://octopiproject.wordpress.com"
 license=('GPL2')
@@ -26,8 +26,13 @@ if [ "${_gitcommit}" != "" ]; then
 else
   source=("octopi-${pkgver}.tar.gz::https://github.com/aarnt/octopi/archive/v${pkgver}.tar.gz")
 fi
-
-sha256sums=('d401953c2a62e5e1e26d20e6a4c802dc97cab13fa330053337561b6fc8cb5044')
+  source+=('revert-c413caa.patch'
+           'revert-a9d9eb3.patch'
+           'revert-e861352.patch')
+sha256sums=('02a4fd997409141af35f698f15c2d91d3c608bdd486b196de105a6a6a2be8016'
+            '29d34fbe528fe43f9f962f7b471d3e0957dcab67117756101dee7ee1bf6a5aa6'
+            '0531aa7afe0eccc1c8c80eb5729b5998ee0b9f453037b15c496f5503684214fe'
+            '26cf422b63b89b71eb093fe16efded95db79c133eefafddbb61424fe95b0586f')
 
 
 prepare() {
@@ -43,6 +48,10 @@ prepare() {
   cp -r notifier notifier-qt5
   cp -r notifier notifier-frameworks
   sed -i 's|#KSTATUS|KSTATUS|' notifier-frameworks/octopi-notifier/octopi-notifier.pro
+
+  patch -Rp1 -i $srcdir/revert-c413caa.patch
+  patch -Rp1 -i $srcdir/revert-a9d9eb3.patch
+  patch -Rp1 -i $srcdir/revert-e861352.patch
 }
 
 build() {

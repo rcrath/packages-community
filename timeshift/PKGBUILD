@@ -1,39 +1,32 @@
 # Maintainer: Stefano Capitani <stefano@manjarodotorg>
 
-_pkgbase=timeshift
-pkgname=$_pkgbase
-_ver=18.4
-pkgver=v$_ver
-pkgrel=1
+pkgname=timeshift
+pkgver=18.4
+pkgrel=2
 pkgdesc="A system restore utility for Linux"
 arch=('i686' 'x86_64')
-url="https://github.com/teejee2008/$_pkgbase"
+url="https://github.com/teejee2008/$pkgname"
 license=('GPL')
 depends=('gtk3' 'libsoup' 'desktop-file-utils' 'cron' 'rsync' 'libgee' 'vte3')
 makedepends=('vala' 'diffutils' 'coreutils')
-#conflicts=("$_pkgbase")
-source=("$url/archive/$pkgver.tar.gz"
+source=("$url/archive/v$pkgver.tar.gz"
 		'vte3.patch')
 sha256sums=('5f180ba2ed66531b10e6cc9b1966e60be1c646ebe304dd0a29b4215318892feb'
             '9a6fa9a20122e275f8f13cbd35d151c8f5a76c1c2d16ae99fb676a0c06a7f420')
 
-#pkgver() {
-#    cd $_pkgbase
-#    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-#}
-
 prepare() { 
-  cd $_pkgbase-$_ver
+  cd "$pkgname-$pkgver"
   patch -Nbup0 -i "${srcdir}/vte3.patch"
 }
 
 build() {
-  cd $_pkgbase-$_ver
+  cd "$pkgname-$pkgver"
   make -s -j1
 }
 
 package() {
-  cd $_pkgbase-$_ver
+  cd "$pkgname-$pkgver"
   make -j1 DESTDIR="${pkgdir}" install
+  rm "$pkgdir/usr/bin/timeshift-uninstall"
 }
 

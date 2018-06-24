@@ -2,7 +2,7 @@
 
 _pkgname=webdad-theming
 pkgname="$_pkgname-git"
-pkgver=r7.2dac8b2
+pkgver=r14.95a69f6
 pkgrel=1
 pkgdesc="Theming for Manjaro WebDad"
 arch=('any')
@@ -13,7 +13,7 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 conflicts=('webdad-theming')
 provides=('webdad-theming')
-depends=('adapta-maia-theme')
+depends=('adapta-maia-theme' 'papirus-maia-icon-theme' 'xcursor-breeze' 'adapta-kde' 'kvantum-theme-adapta')
 
 pkgver() {
     cd "$_pkgname"
@@ -23,9 +23,7 @@ pkgver() {
 }
 
 package(){
-	install -d $pkgdir/usr
-        install -d $pkgdir/etc
-	cp -r $srcdir/$_pkgname/usr $pkgdir/
-        cp -r $srcdir/$_pkgname/etc $pkgdir/
+    install -d $pkgdir/usr
+    cp -r $srcdir/$_pkgname/usr $pkgdir/
 }
 

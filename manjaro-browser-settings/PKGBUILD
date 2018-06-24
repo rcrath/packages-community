@@ -3,17 +3,17 @@
 # Maintainer: Stefano Capitani <stefano@manjaro.org>
 
 pkgname=manjaro-browser-settings
-pkgver=20180316
-pkgrel=2
+pkgver=20180523
+pkgrel=1
 pkgdesc="Manjaro Linux settings browser defaults"
 arch=('any')
 url="https://github.com/manjaro/$pkgname"
 license=('GPL')
-_gitcommit=cf796e2a8eef477df2b9d864cb3a2a0682b75de2
+_gitcommit=276094e91c1f0fb1e4529ecbabd1df168e0e8b98
 conflicts=('manjaro-firefox-settings')
 replaces=('manjaro-firefox-settings')
 source=("$pkgname-$_gitcommit.tar.gz::$url/archive/$_gitcommit.tar.gz")
-md5sums=('9e6c0d2024ea14c3fd9795b566214183')
+md5sums=('b591586dcf0875032f30a3bb335289e4')
 
 pkgver() {
   date +%Y%m%d
@@ -21,13 +21,14 @@ pkgver() {
 
 package() {
   cd $pkgname-$_gitcommit
-  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,firefox-developer-edition,palemoon}/distribution}
+  mkdir -p $pkgdir/usr/lib/{chrome,chromium,{firefox,firefox-developer-edition,palemoon,thunderbird}/distribution}
   cp chrome/* $pkgdir/usr/lib/chrome
   cp chrome/* $pkgdir/usr/lib/chromium
   cp palemoon/* $pkgdir/usr/lib/palemoon/distribution
   install -dm755 $pkgdir/etc/skel/.config/qupzilla/profiles
   cp -r qupzilla/* $pkgdir/etc/skel/.config/qupzilla/profiles
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox.ini
+  install -Dm644 thunderbird/distribution.ini $pkgdir/etc/manjaro-thunderbird.ini
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox-developer-edition.ini
   sed -i 's/Firefox/Firefox Developer Edition/;s/firefox/firefox-developer-edition/' $pkgdir/etc/manjaro-firefox-developer-edition.ini
   install -Dm644 firefox/distribution.ini $pkgdir/etc/manjaro-firefox-kde.ini
@@ -44,4 +45,6 @@ package() {
   sed -i 's/firefox/firefox-kde/g' $pkgdir/usr/share/libalpm/hooks/firefox-kde-pre.hook
   install -Dm644 firefox-post.hook $pkgdir/usr/share/libalpm/hooks/firefox-kde-post.hook
   sed -i 's/firefox/firefox-kde/g' $pkgdir/usr/share/libalpm/hooks/firefox-kde-post.hook
+  install -Dm644 thunderbird-pre.hook $pkgdir/usr/share/libalpm/hooks/thunderbird-pre.hook
+  install -Dm644 thunderbird-post.hook $pkgdir/usr/share/libalpm/hooks/thunderbird-post.hook
 }

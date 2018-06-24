@@ -2,7 +2,7 @@
 
 pkgname=rootmenu
 pkgver=0.15
-pkgrel=1
+pkgrel=2
 pkgdesc="A wm independent desktop menu"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"

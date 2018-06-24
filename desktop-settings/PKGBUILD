@@ -9,14 +9,16 @@ pkgname=('manjaro-awesome-settings'
         'manjaro-budgie-settings'
         'manjaro-jwm-settings'
         'manjaro-lxde-settings'
+        'manjaro-lxde-settings-dev'
         'manjaro-mate-settings'
         #'manjaro-netbook-settings'
         'manjaro-openbox-settings'
         )
-pkgver=20180426
+pkgver=20180603
 pkgrel=1
 arch=('any')
-url="https://github.com/manjaro/desktop-settings"
+#url="https://github.com/manjaro/desktop-settings"
+url="https://github.com/fhdk/desktop-settings"
 license=('GPL')
 makedepends=('git')
 source=("git+$url.git")
@@ -25,7 +27,7 @@ sha256sums=('SKIP')
 _inst_dir(){
     if [[ -d $srcdir/$pkgbase/$1/skel ]]; then
         install -d $pkgdir/etc
-        cp -r $srcdir/$pkgbase/$1/skel $pkgdir/etc
+        cp -rL $srcdir/$pkgbase/$1/skel $pkgdir/etc
     fi
 
     if [[ -d $srcdir/$pkgbase/$1/scripts ]]; then
@@ -190,13 +192,20 @@ package_manjaro-lxde-settings() {
     _inst_dir 'community/lxde'
 }
 
-package_manjaro-openbox-settings() {
-    pkgdesc='Manjaro Linux openbox settings'
-    depends=('manjaro-base-skel' 'manjaro-openbox-base')
+package_manjaro-lxde-settings-dev() {
+    pkgdesc='Manjaro Linux lxde settings'
+    depends=('adapta-maia-theme'
+            'i3-scrot'
+            'lxde-wallpapers'
+            'manjaro-base-skel'
+            'papirus-icon-theme'
+            'papirus-maia-icon-theme'
+            'xcursor-breeze'
+            )
     conflicts=('manjaro-desktop-settings')
     provides=('manjaro-desktop-settings')
 
-    _inst_dir 'community/openbox'
+    _inst_dir 'community/lxde'
 }
 
 package_manjaro-mate-settings() {
@@ -233,6 +242,17 @@ package_manjaro-mate-settings() {
 
     #hack to set black color on mate-terminal
     install -Dm755 $srcdir/$pkgbase/community/mate/scripts/set-terminal-color $pkgdir/usr/bin/set-terminal-color
+}
+
+package_manjaro-openbox-settings() {
+    pkgdesc='Manjaro Linux Openbox Settings'
+    depends=('manjaro-base-skel')
+    optdepends=('manjaro-openbox-extra-skel' 'manjaro-openbox-minimal-skel')
+    conflicts=('manjaro-desktop-settings' 'manjaro-openbox-settings')
+    replaces=('manjaro-openbox-settings-extra' 'manjaro-openbox-settings-minimal')
+    provides=('manjaro-desktop-settings')
+
+    _inst_dir 'community/openbox-extra'
 }
 
 #package_manjaro-netbook-settings() {

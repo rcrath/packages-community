@@ -6,13 +6,13 @@ _extramodules=extramodules-4.14-rt-MANJARO
 pkgname=$_linuxprefix-catalyst
 _pkgname=catalyst
 pkgver=15.201.1151
-pkgrel=11
+pkgrel=14
 epoch=1
 _pkgver=$pkgver
 provides=("$_pkgname=$_pkgver")
 groups=("$_linuxprefix-extramodules")
 pkgdesc="AMD/ATI Catalyst drivers for linux. fglrx kernel module only."
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="http://www.amd.com"
 license=('custom')
 depends=("$_linuxprefix" "catalyst-utils=${epoch}:${pkgver}")
@@ -29,7 +29,6 @@ source=("http://www2.ati.com/drivers/linux/amd-catalyst-15.9-linux-installer-$pk
         4.3-kolasa-seq_printf.patch
         4.3-gentoo-mtrr.patch
         4.2-amd-from_crimson_15.11.patch
-        crimson_i686_xg.patch
         4.4-manjaro-xstate.patch
         grsec_arch.patch
         4.7-arch-cpu_has_pge-v2.patch
@@ -40,7 +39,7 @@ source=("http://www2.ati.com/drivers/linux/amd-catalyst-15.9-linux-installer-$pk
         4.12-npfeiler-movsl_mask.patch
         4.13-npfeiler-wait_queue_t.patch
         4.14-npfeiler-task_struct-mm_segment_t.patch
-	4.16-manjaro.patch
+        4.16-manjaro.patch
         LICENSE.TXT)
 
 url_ref="http://support.amd.com/en-us/download/desktop?os=Linux+x86"
@@ -55,7 +54,6 @@ sha256sums=('bf3e6e7d5c51db3d075410a3f116f865b82823debc1d66698d187249feec6a91'
             '33b87af3b1b5ab53b32bf972949db1e845beebe1e3d7effc06d11cf8c57f3768'
             '2881026d607f242efc4569bd39d647eae4f2e402da06de5b90476a57c349777c'
             'd4fdd09b5897eccaccaaa95a3b5a8846ccd7c6f63b3e63659a0fc0f7f3cf661b'
-            'cae7603b0b4dfb6594a7d2c7de83f7e37dd2567486a1aced5870b4611a09f422'
             '411c7aea2929cc9bb776cb1ba1df57e1d0f75ee6c84766a7fb791cb6f82446d2'
             'd3695c90d14de5a52a7f4c878ec161a0282ae169c59bbf953950aad7bfb59fdc'
             '39a09293916c876681591dbf20ee09c2971a016081f8aacb90f40227b13d5677'
@@ -91,27 +89,26 @@ build() {
 
 	## makefile patch to choose arch_compat_alloc_user_space or older compat_alloc_user_space
 	## works only in combination with ati_make.sh script
-        patch -Np1 -i  ${srcdir}/makefile_compat.patch
-        patch -Np1 -i  ${srcdir}/lano1106_fglrx_intel_iommu.patch
-        patch -Np1 -i  ${srcdir}/lano1106_kcl_agp_13_4.patch
-        patch -Np1 -i  ${srcdir}/4.2-amd-from_crimson_15.11.patch
-        patch -Np1 -i  ${srcdir}/4.3-kolasa-seq_printf.patch
-        patch -Np1 -i  ${srcdir}/4.3-gentoo-mtrr.patch
-        patch -Np1 -i  ${srcdir}/fglrx_gpl_symbol.patch
-        test "${CARCH}" = "i686" && patch -Np1 -i  ${srcdir}/crimson_i686_xg.patch
-        patch -Np1 -i  ${srcdir}/4.4-manjaro-xstate.patch
-        patch -Np1 -i  ${srcdir}/grsec_arch.patch
-        patch -Np1 -i  ${srcdir}/4.7-arch-cpu_has_pge-v2.patch
-        patch -Np2 -i  ${srcdir}/4.9-manjaro.patch
-        patch -Np2 -i  ${srcdir}/4.10-manjaro.patch
-        patch -Np1 -i  ${srcdir}/4.11-npfeiler-signal_vmf.patch
-        patch -Np1 -i  ${srcdir}/4.12-npfeiler-PUD_OFFSET.patch
-        patch -Np1 -i  ${srcdir}/4.12-npfeiler-movsl_mask.patch
-        patch -Np1 -i  ${srcdir}/4.13-npfeiler-wait_queue_t.patch
-        patch -Np1 -i  ${srcdir}/4.14-npfeiler-task_struct-mm_segment_t.patch
-        patch -Np1 -i  ${srcdir}/4.16-manjaro.patch
+    patch -Np1 -i  ${srcdir}/makefile_compat.patch
+    patch -Np1 -i  ${srcdir}/lano1106_fglrx_intel_iommu.patch
+    patch -Np1 -i  ${srcdir}/lano1106_kcl_agp_13_4.patch
+    patch -Np1 -i  ${srcdir}/4.2-amd-from_crimson_15.11.patch
+    patch -Np1 -i  ${srcdir}/4.3-kolasa-seq_printf.patch
+    patch -Np1 -i  ${srcdir}/4.3-gentoo-mtrr.patch
+    patch -Np1 -i  ${srcdir}/fglrx_gpl_symbol.patch
+    patch -Np1 -i  ${srcdir}/4.4-manjaro-xstate.patch
+    patch -Np1 -i  ${srcdir}/grsec_arch.patch
+    patch -Np1 -i  ${srcdir}/4.7-arch-cpu_has_pge-v2.patch
+    patch -Np2 -i  ${srcdir}/4.9-manjaro.patch
+    patch -Np2 -i  ${srcdir}/4.10-manjaro.patch
+    patch -Np1 -i  ${srcdir}/4.11-npfeiler-signal_vmf.patch
+    patch -Np1 -i  ${srcdir}/4.12-npfeiler-PUD_OFFSET.patch
+    patch -Np1 -i  ${srcdir}/4.12-npfeiler-movsl_mask.patch
+    patch -Np1 -i  ${srcdir}/4.13-npfeiler-wait_queue_t.patch
+    patch -Np1 -i  ${srcdir}/4.14-npfeiler-task_struct-mm_segment_t.patch
+    patch -Np1 -i  ${srcdir}/4.16-manjaro.patch
 
-        cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
+    cd "${srcdir}/fglrx-$_pkgver/archive_files/common/lib/modules/fglrx/build_mod"
 	cp "${srcdir}/fglrx-$_pkgver/archive_files/arch/x86_64/lib/modules/fglrx/build_mod/libfglrx_ip.a" .
 	cp 2.6.x/Makefile .
 

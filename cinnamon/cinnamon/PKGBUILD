@@ -2,13 +2,12 @@
 # Maintainer: Alexandre Filgueira <alexfilgueira@cinnarch.com>
 
 pkgname=cinnamon
-pkgver=3.8.0
-pkgrel=2.2
-_commit=4d8cadfd90e8b3ec9eae008ec34e63bebad0df31
+pkgver=3.8.3
+_pkgver=3.8.2
+pkgrel=1
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('i686' 'x86_64')
 url="https://github.com/linuxmint/Cinnamon"
-_url="https://github.com/oberon2007/Cinnamon"
 license=('GPL2')
 depends=('accountsservice'
     'caribou'
@@ -53,27 +52,26 @@ optdepends=('blueberry: Bluetooth support'
 #    'tint2: fallback mode'
 )
 options=('!emptydirs')
-source=("$pkgname-$_commit::$_url/archive/$_commit.tar.gz"
+source=("$pkgname-$_pkgver::$url/archive/$_pkgver.tar.gz"
+    "upstream-383.patch::https://github.com/linuxmint/Cinnamon/compare/3.8.2...3.8.3.patch"
     "cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch::$url/pull/7382.patch"
     "set_wheel.patch"
     "default-theme.patch"
-    'add-msm.patch'
-    "upstream-git-2018-04-30.patch::$_url/compare/319958f...0888bfb.patch"
-    "revert-fa9a5c7.patch::$_url/commit/fa9a5c78bfbb6c15b126bf1d79f7d816fecb7b36.patch"
-)
-sha256sums=('fccccdef7cf76ca6ac3d64097f9ebefd183b91e4d3d5079753834266e39f42f6'
+    'add-msm.patch')
+sha256sums=('0464f072341b4d19aeed9f66637a4a0b86e1f2d67a6101f032db245d35accff2'
+            '78eceb8e2f90e4b42d49867963d757f9743d02d505403f6f34560a2d4438f6f8'
             'd46b2d6c60b52aa87f5a30568c2106d77b45c0febe8bf387ffd201b5b4f5a101'
             '7517d651d440361947f9539fe8f42548d5eb43a09c28c9a11f51cfdfdefd042f'
             'bb60a2bb27efbef132798677f61ac46aa6d17f5432f0f81117ec97c1b4601aad'
-            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d'
-            '771bff06893d48712db57e74b68cde9df1f2bb32761eaa187f92e4ea59a03e67'
-            '3070f141d79c719d40698b94e1f53734728c535f6c2b7d91060df40ba7196176')
+            'a793089112b1de3046e11334bc5581785961cc1eb7c33d437dec114dac498b0d')
             
 prepare() {
-  cd ${pkgname^}-$_commit
+  cd "${srcdir}"/Cinnamon-${_pkgver}
+
+  patch -p1 -i ../upstream-383.patch
 
   # Check for the cc-panel module path, not for the irrelevant binary
-  patch -p1 < ../cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch
+  patch -p1 -i ../cinanmon-settings-don-t-rely-on-the-presence-of-cinn.patch
 
   # Use wheel group instread of sudo (taken from Fedora)
   patch -Np1 -i ../set_wheel.patch
@@ -83,13 +81,6 @@ prepare() {
   
   # add MSM to cinnamon-settings
   patch -Np1 -i ../add-msm.patch
-
-  # https://github.com/linuxmint/Cinnamon/issues/7522
-  # this reopens https://github.com/linuxmint/Cinnamon/issues/5573
-  patch -Rp1 -i ../revert-fa9a5c7.patch
-
-  # add upstream fixes
-  patch -Np1 -i ../upstream-git-2018-04-30.patch
 
   # Replace MintInstall with GNOME Software
   sed -i 's/mintinstall.desktop/org.gnome.Software.desktop/' data/org.cinnamon.gschema.xml.in
@@ -106,7 +97,7 @@ prepare() {
 }
 
 build() {
-  cd ${pkgname^}-$_commit
+  cd ${pkgname^}-$_pkgver
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --libexecdir=/usr/lib/cinnamon \
@@ -123,11 +114,14 @@ build() {
 }
 
 package() {
-  cd ${pkgname^}-$_commit
+  cd ${pkgname^}-$_pkgver
   make DESTDIR="${pkgdir}" install
 
   # enable Adwaita themes
   mkdir -p $pkgdir/usr/share/themes/Adwaita{,-dark}/metacity-1/
   echo 'native' > $pkgdir/usr/share/themes/Adwaita/metacity-1/muffin-adwaita.txt
   echo 'native' > $pkgdir/usr/share/themes/Adwaita-dark/metacity-1/muffin-adwaita.txt
+
+  # workaround for lightdm-settings launcher
+  sed -i 's/lightdm-settings\",                    /pkexec lightdm-settings\",             /' $pkgdir/usr/share/cinnamon/cinnamon-settings/cinnamon-settings.py
 }

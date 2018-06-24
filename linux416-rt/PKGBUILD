@@ -1,0 +1,350 @@
+# Based on the file created for Arch Linux by:
+# Tobias Powalowski <tpowa@archlinux.org>
+# Thomas Baechler <thomas@archlinux.org>
+
+# Maintainer: Bernhard Landauer <oberon@manjaro.org
+# Maintainer: Philip Müller <philm@manjaro.org>
+
+pkgbase=linux416-rt
+pkgname=("$pkgbase" "$pkgbase-headers")
+_basekernel=4.16
+_sub=12
+_rtpatchver=rt5
+_bfq=v8r12
+_bfqdate=20180412
+_basever=${pkgbase//linux}
+_kernelname=-MANJARO
+_aufs=20180312
+_pkgver=${_basekernel}.${_sub}
+pkgver=${_pkgver}_${_rtpatchver}
+pkgrel=3
+arch=('x86_64')
+url="https://www.kernel.org/"
+license=('GPL2')
+makedepends=('bc'
+    'docbook-xsl'
+    'elfutils'
+    'git'
+    'inetutils'
+    'kmod'
+    'xmlto')
+options=('!strip')
+source=("$url/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        # upstream patch
+        "$url/pub/linux/kernel/v4.x/patch-${_pkgver}.xz"
+        # gcc8 ojtool patches
+        '0001-objtool_Fix_noreturn_detection_for_recursive_sibling_calls.patch'
+        '0002-objtool_support_GCC8_cold_subfunctions.patch'
+        '0003-objtool_support_GCC8_switch_tables.patch'
+        # rt-config
+        'config.rt'
+        # aufs config
+        'config.aufs'
+        "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
+        '60-linux.hook'     # pacman hook for depmod
+        '90-linux.hook'     # pacman hook for initramfs regeneration
+        "aufs4.x-rcN-${_aufs}.patch.bz2"
+        'aufs4-base.patch'
+        'aufs4-kbuild.patch'
+        'aufs4-loopback.patch'
+        'aufs4-mmap.patch'
+        'aufs4-standalone.patch'
+        'tmpfs-idr.patch'
+        'vfs-ino.patch'
+        # gcc8 ojtool patches
+        '0001-objtool_Fix_noreturn_detection_for_recursive_sibling_calls.patch'
+        '0002-objtool_support_GCC8_cold_subfunctions.patch'
+        '0003-objtool_support_GCC8_switch_tables.patch'
+        # BFQ
+        "0001-BFQ-${_bfq}-${_bfqdate}.patch"
+        # ARCH Patches
+        0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+        0002-Partially-revert-swiotlb-remove-various-exports.patch
+        # MANJARO Patches
+        '0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch'
+        '0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
+        '0001-iwlwifi-killer-ac-1550.patch'
+        # Bootsplash
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0001-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0002-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0003-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0004-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0005-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0006-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0007-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0008-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0009-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0010-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0011-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0012-bootsplash.patch'
+        'https://github.com/philmmanjaro/linux-bootsplash/raw/v4.16/0013-bootsplash.patch'
+        # RT Patch
+        $url/pub/linux/kernel/projects/rt/${_basekernel}/older/patch-${_pkgver}-${_rtpatchver}.patch.xz
+#{,sign}
+        'fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch')
+sha256sums=('63f6dc8e3c9f3a0273d5d6f4dca38a2413ca3a5f689329d05b750e4c87bb21b9'
+            '70a6381aca28b1d271e85bc38fab05af4525d9fdc2c5bb87182b3351db8c4fa2'
+            '0d2ac82871694368a563f6082ffffc891cbbb7a5a16ca1d18792fdda95ed4840'
+            '46d7929976781187de803b1d600e7e5577d633b0c9ae4e6e222801e9787594a1'
+            '94b1f14b4cdb336556e23d4c737e9a805c798380508a75c18c23a5a7ff11eda8'
+            '685e493c1c7919fb5abaa1105fce3a061c7bf39b51a15947eb6adc5094c566f5'
+            'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
+            '0fb6d51e5d8cd1dc737104c2d1487a38ff7cb50b1f8cce74e1776caa2d51490b'
+            'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
+            '057ef44a8f5a7ef10efbc7d96bf72f651e87a0c1d063b07d922c74232e5e7941'
+            'bb59b8d4055295ffdf3d4114c2524f0fd9aa5b41267122a5a27b383c99ffdb90'
+            '31b029232fe5cb6359c63c480415cff11cc24c52eb71d97dec6e80dd3ae373d1'
+            'cdb243b72d61004cefd2bc9f8955681236b2971a417ec07d7b27e0b830215996'
+            'e39db62055bc2ace7942a92dcd3dcedb5f2cc07717602163454e9b8e625e0804'
+            '0f89ecbdf0a83a1d632697b63a44b6b212c05b4a167c224cc94ad96a79184308'
+            'a8d6c0d5ae96ea722ad7842134684a4d44f7d90dd306eca82a88bf3f753fa732'
+            'dd4f4de182a1807796dd6756f67edcf2f354335976c309532157716be07882c1'
+            '00f0e0862dd31e7248df557672ebc540d5b38d34eca57d14d796540b274bf52b'
+            '0d2ac82871694368a563f6082ffffc891cbbb7a5a16ca1d18792fdda95ed4840'
+            '46d7929976781187de803b1d600e7e5577d633b0c9ae4e6e222801e9787594a1'
+            '94b1f14b4cdb336556e23d4c737e9a805c798380508a75c18c23a5a7ff11eda8'
+            'add5d66f3ab452514dbd2591922f440f94fbc003f6e33e588c17f627c2dc80e4'
+            '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
+            'd365ce80dab359d5277bd2f8568cad50a30ab269f222ed1bb12b8d74571e24a6'
+            'c08d12c699398ef88b764be1837b9ee11f2efd3188bd1bf4e8f85dfbeee58148'
+            '61abfab9093bdfec4edda3586fd05afe2f488a92ca99cff51c36b359acdcc815'
+            '863a02c53b5096a005cdde60d558f3e5d48d33d8360e513b915fa06e0df38c62'
+            'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
+            'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
+            '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
+            '1144d51e5eb980fceeec16004f3645ed04a60fac9e0c7cf88a15c5c1e7a4b89e'
+            'dd4b69def2efacf4a6c442202ad5cb93d492c03886d7c61de87696e5a83e2846'
+            'c9ae3f67042a6a008ba0e19c911fae45fbc7003ce704c4a5028c965b2e0881ff'
+            'c8b0cb231659d33c3cfaed4b1f8d7c8305ab170bdd4c77fce85270d7b6a68000'
+            '8dbb5ab3cb99e48d97d4e2f2e3df5d0de66f3721b4f7fd94a708089f53245c77'
+            'a7aefeacf22c600fafd9e040a985a913643095db7272c296b77a0a651c6a140a'
+            'e9f22cbb542591087d2d66dc6dc912b1434330ba3cd13d2df741d869a2c31e89'
+            '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
+            '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
+            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
+            '753a22311c369dd10d26b7c8696494f14c5015c6723e4bf81eb11687d196332e'
+            '85f7612edfa129210343d6a4fe4ba2a4ac3542d98b7e28c8896738e7e6541c06')
+validpgpkeys=('64254695FFF0AA4466CC19E67B96E8162A8CF5D1' # Sebastian Andrzej Siewior
+            '4FE5E3262872E4CC')
+
+prepare() {
+  cd "linux-${_basekernel}"
+
+  # add upstream patch
+  patch -p1 -i "../patch-${_pkgver}"
+
+  # gcc8 ojtool patches
+  msg "gcc8 objtool patches..."
+  patch -p1 -i '../0001-objtool_Fix_noreturn_detection_for_recursive_sibling_calls.patch'
+  patch -p1 -i '../0002-objtool_support_GCC8_cold_subfunctions.patch'
+  patch -p1 -i '../0003-objtool_support_GCC8_switch_tables.patch'
+
+  # Add RT patch
+  msg "realtime patch..."
+  patch -p1 -i "../patch-${_pkgver}-${_rtpatchver}.patch"
+
+  # fix X hanging on certain NVIDIA cards
+  msg "NVIDIA race in PRT patch..."
+  patch -p1 -i '../fix-race-in-PRT-wait-for-completion-simple-wait-code_Nvidia-RT-160319.patch'
+
+  # disable USER_NS for non-root users by default
+  patch -Np1 -i '../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
+
+  # Nvidia driver
+  patch -Np1 -i '../0002-Partially-revert-swiotlb-remove-various-exports.patch'
+
+  # https://bugs.freedesktop.org/show_bug.cgi?id=103497
+  patch -Np1 -i '../0001-drm-i915-edp-Only-use-the-alternate-fixed-mode-if-it.patch'
+
+  # https://bugzilla.kernel.org/show_bug.cgi?id=199271
+  patch -Np1 -i '../0002-Bluetooth-btusb-Apply-QCQ_ROME-setup-for-BTUSB_ATH30.patch'
+
+  # iwlwifi: add killer cards for 9000 series; https://forum.manjaro.org/t/46167
+  patch -Np1 -i "${srcdir}/0001-iwlwifi-killer-ac-1550.patch"
+
+  # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
+  patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0002-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0003-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0004-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0005-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0006-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0007-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0008-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0009-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0010-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
+  # add binary files
+  git apply -p1 < "${srcdir}/0013-bootsplash.patch"
+
+  # add aufs4 support
+  patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs4-base.patch"
+  patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
+  patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
+  patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
+  patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
+  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
+  patch -Np1 -i "${srcdir}/vfs-ino.patch"
+
+  # add BFQ scheduler
+  msg "Fix naming schema in BFQ-MQ patch"
+  sed -i -e "s|SUBLEVEL = 0|SUBLEVEL = ${_sub}|g" \
+      "../0001-BFQ-${_bfq}-${_bfqdate}.patch"
+  patch -Np1 -i "../0001-BFQ-${_bfq}-${_bfqdate}.patch"
+
+  cat '../config.rt' > ./.config
+
+  cat '../config.aufs' >> ./.config
+
+  if [ "${_kernelname}" != "" ]; then
+    sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
+    sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=n|" ./.config
+  fi
+
+  # set extraversion to pkgrel
+  sed -ri "s|^(EXTRAVERSION =).*|\1 |" Makefile
+
+  # don't run depmod on 'make install'. We'll do this ourselves in packaging
+  sed -i '2iexit 0' scripts/depmod.sh
+
+  # get kernel version
+  make prepare
+
+  # rewrite configuration
+  yes "" | make config >/dev/null
+}
+
+build() {
+  cd "${srcdir}/linux-${_basekernel}"
+
+  # build!
+  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+}
+
+package_linux416-rt() {
+  pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
+  depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
+  optdepends=('crda: to set the correct wireless channels of your country')
+  provides=("linux=${pkgver}")
+  backup=("etc/mkinitcpio.d/${pkgbase}.preset")
+  install=${pkgname}.install
+
+  cd "${srcdir}/linux-${_basekernel}"
+
+  # get kernel version
+  _kernver="$(make LOCALVERSION= kernelrelease)"
+
+  mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
+  make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
+  cp arch/x86/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}-rt-x86_64"
+
+  # add kernel version
+  echo "${_pkgver}-${_rtpatchver}-${pkgrel}-MANJARO x64" > "${pkgdir}/boot/linux-${_basever}-x86_64.kver"
+
+  # make room for external modules
+  local _extramodules="extramodules-${_basekernel}-rt${_kernelname:--MANJARO}"
+  ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
+
+  # add real version for building modules and running depmod from hook
+  echo "${_kernver}" |
+    install -Dm644 /dev/stdin "${pkgdir}/usr/lib/modules/${_extramodules}/version"
+
+  # remove build and source links
+  rm "${pkgdir}"/usr/lib/modules/${_kernver}/{source,build}
+
+  # now we call depmod...
+  depmod -b "${pkgdir}/usr" -F System.map "${_kernver}"
+
+  # add vmlinux
+  install -Dt "${pkgdir}/usr/lib/modules/${_kernver}/build" -m644 vmlinux
+
+  # sed expression for following substitutions
+  local _subst="
+    s|%PKGBASE%|${pkgbase}|g
+    s|%BASEKERNEL%|${_basekernel}|g
+    s|%ARCH%|x86_64|g
+    s|%KERNVER%|${_kernver}|g
+    s|%EXTRAMODULES%|${_extramodules}|g
+  "
+
+  # hack to allow specifying an initially nonexisting install file
+  sed "${_subst}" "${startdir}/${install}" > "${startdir}/${install}.pkg"
+  true && install=${install}.pkg
+
+  # install mkinitcpio preset file
+  sed "${_subst}" ${srcdir}/${pkgbase}.preset |
+    install -Dm644 /dev/stdin "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
+
+  # install pacman hooks
+  sed "${_subst}" ${srcdir}/60-linux.hook |
+    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/60-${pkgbase}.hook"
+  sed "${_subst}" ${srcdir}/90-linux.hook |
+    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
+}
+
+package_linux416-rt-headers() {
+  pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
+  provides=("linux-headers=$pkgver")
+
+  cd "${srcdir}/linux-${_basekernel}"
+  local _builddir="${pkgdir}/usr/lib/modules/${_kernver}/build"
+
+  install -Dt "${_builddir}" -m644 Makefile .config Module.symvers
+  install -Dt "${_builddir}/kernel" -m644 kernel/Makefile
+
+  mkdir "${_builddir}/.tmp_versions"
+
+  cp -t "${_builddir}" -a include scripts
+
+  install -Dt "${_builddir}/arch/x86" -m644 "arch/x86/Makefile"
+  install -Dt "${_builddir}/arch/x86/kernel" -m644 "arch/x86/kernel/asm-offsets.s"
+
+  cp -t "${_builddir}/arch/x86" -a "arch/x86/include"
+
+  install -Dt "${_builddir}/drivers/md" -m644 drivers/md/*.h
+  install -Dt "${_builddir}/net/mac80211" -m644 net/mac80211/*.h
+
+  # http://bugs.archlinux.org/task/13146
+  install -Dt "${_builddir}/drivers/media/i2c" -m644 drivers/media/i2c/msp3400-driver.h
+
+  # http://bugs.archlinux.org/task/20402
+  install -Dt "${_builddir}/drivers/media/usb/dvb-usb" -m644 drivers/media/usb/dvb-usb/*.h
+  install -Dt "${_builddir}/drivers/media/dvb-frontends" -m644 drivers/media/dvb-frontends/*.h
+  install -Dt "${_builddir}/drivers/media/tuners" -m644 drivers/media/tuners/*.h
+
+  # add xfs and shmem for aufs building
+  mkdir -p "${_builddir}"/{fs/xfs,mm}
+
+  # copy in Kconfig files
+  find . -name Kconfig\* -exec install -Dm644 {} "${_builddir}/{}" \;
+
+  # add objtool for external module building and enabled VALIDATION_STACK option
+  install -Dt "${_builddir}/tools/objtool" tools/objtool/objtool
+
+  # remove unneeded architectures
+  local _arch
+  for _arch in "${_builddir}"/arch/*/; do
+    [[ ${_arch} == */x86/ ]] && continue
+    rm -r "${_arch}"
+  done
+
+  # remove files already in linux-docs package
+  rm -r "${_builddir}/Documentation"
+
+  # Fix permissions
+  chmod -R u=rwX,go=rX "${_builddir}"
+
+  # strip scripts directory
+  local _binary _strip
+  while read -rd '' _binary; do
+    case "$(file -bi "${_binary}")" in
+      *application/x-sharedlib*)  _strip="${STRIP_SHARED}"   ;; # Libraries (.so)
+      *application/x-archive*)    _strip="${STRIP_STATIC}"   ;; # Libraries (.a)
+      *application/x-executable*) _strip="${STRIP_BINARIES}" ;; # Binaries
+      *) continue ;;
+    esac
+    /usr/bin/strip ${_strip} "${_binary}"
+  done < <(find "${_builddir}/scripts" -type f -perm -u+w -print0 2>/dev/null)
+}

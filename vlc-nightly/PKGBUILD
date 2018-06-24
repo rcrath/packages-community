@@ -4,9 +4,9 @@
 
 pkgname=vlc-nightly
 _pkgname=vlc
-_pkgver=3.0.2
-_pkgdate=20180321
-_pkgtime=0226
+_pkgver=3.0.3
+_pkgdate=20180520
+_pkgtime=0225
 _pkgsuffix=   
 
 pkgver=${_pkgver}v${_pkgdate}
@@ -113,7 +113,7 @@ source=("https://nightlies.videolan.org/build/source/${_pkgname}-${_pkgver}-${_p
         'lua53_compat.patch::https://git.archlinux.org/svntogit/packages.git/plain/trunk/lua53_compat.patch?h=packages/vlc'
         'prevent-including-missing-SVGs.patch')
 
-sha256sums=('e581d6af54d1fdf6ddce065afd5f480bd1086f108883916b063129de60ead9e2'
+sha256sums=('21df7ac2389a23281ba50171195687b55a81d9707308bcb0d905ea9f2f8caf88'
             'c6f60c50375ae688755557dbfc5bd4a90a8998f8cf4d356c10d872a1a0b44f3a'
             'd1cb88a1037120ea83ef75b2a13039a16825516b776d71597d0e2eae5df2d8fa'
             '599ce4bf0db5fc74f54bc03136b662606c22b8435b81440b02fc73f52d09bd7f')

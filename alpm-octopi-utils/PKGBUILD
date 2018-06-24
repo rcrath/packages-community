@@ -1,13 +1,13 @@
 pkgname=alpm-octopi-utils
 _pkgname=alpm_octopi_utils
 pkgver=1.0.0
-pkgrel=2
+pkgrel=3
 _commit=7f3a6c7e0e46bf9acb54af472f4fe45ab632d58c
 pkgdesc="Alpm utils for Octopi"
 url="https://octopiproject.wordpress.com/"
 arch=('i686' 'x86_64')
 license=('GPL3')
-depends=('pacman>=5.0' 'pacman<5.1')
+depends=('pacman>=5.1')
 makedepends=('vala')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/aarnt/${_pkgname}/archive/${_commit}.tar.gz")
 md5sums=('deb726c2690ff4d226dc06d69fac5e12')

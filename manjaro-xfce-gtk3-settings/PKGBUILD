@@ -1,14 +1,27 @@
-# Maintainer: Ramon Buldó <rbuldo@gmail.com>
+# Maintainer:Ramon Buldó <rbuldo@gmail.com>
+# Maintainer: Philip Müller <philm@manjaro.org>
+# Maintainer: Bernhard Landauer <oberon@manjaro.org>
 
 pkgbase=manjaro-xfce-gtk3-settings
 pkgname=('manjaro-xfce-gtk3-settings'
          'manjaro-xfce-gtk3-minimal-settings')
-pkgver=20180429
+pkgver=20180516
 pkgrel=1
 pkgdesc="Manjaro Linux Xfce settings"
 arch=('any')
 url="https://github.com/manjaro/manjaro-xfce-settings"
 license=('GPL')
+depends=('illyria-wallpaper'
+         'kvantum-manjaro'
+         'kvantum-qt5'
+         'manjaro-base-skel'
+         'manjaro-icons'
+         'noto-fonts'
+         'papirus-maia-icon-theme'
+         'qt5-styleplugins'
+         'qt5ct'
+         'xcursor-breeze'
+         'adapta-maia-theme')
 makedepends=('git')
 source=("$pkgbase::git+$url.git" 'manjaro-xfce-settings.hook' 'mxs-bgd-sym')
 sha256sums=('SKIP'
@@ -21,7 +34,7 @@ pkgver() {
 
 _inst_dir(){
 	install -d $pkgdir/etc
-	cp -r $srcdir/$pkgbase/skel $pkgdir/etc
+	cp -rL $srcdir/$pkgbase$1/skel $pkgdir/etc
 
 	install -d $pkgdir/usr/share/glib-2.0/schemas
 	cp $srcdir/$pkgbase/schemas/* $pkgdir/usr/share/glib-2.0/schemas
@@ -29,20 +42,11 @@ _inst_dir(){
 
 package_manjaro-xfce-gtk3-settings() {
 	pkgdesc='Manjaro Linux XFCE-GTK3 Settings'
-	depends=('breath-wallpaper'
-	         'manjaro-base-skel'
-	         'manjaro-icons'
-	         'qt5ct'
-	         'qt5-styleplugins'
-	         'vibrancy-icons-teal'
-	         'adapta-maia-theme'
-	         'kvantum-qt5'
-                 'kvantum-manjaro'
-	         'xcursor-breeze')
 	conflicts=('manjaro-desktop-settings' 'manjaro-xfce-settings')
 	provides=('manjaro-desktop-settings' 'manjaro-xfce-settings' 'manjaro-xfce-gtk3-minimal-settings')
 
 	_inst_dir
+
 	local _subst="
 		s|%BIN%|mxs-bgd-sym|g
 	"
@@ -55,18 +59,11 @@ package_manjaro-xfce-gtk3-settings() {
 
 package_manjaro-xfce-gtk3-minimal-settings() {
 	pkgdesc='Manjaro Linux xfce-minimal settings'
-	depends=('breath-wallpaper'
-	         'manjaro-base-skel'
-	         'manjaro-icons'
-	         'qt5ct'
-	         'qt5-styleplugins'
-	         'vertex-maia-icon-theme'
-	         'vertex-maia-themes'
-	         'xcursor-breeze')
 	conflicts=('manjaro-desktop-settings' 'manjaro-xfce-minimal-settings')
 	provides=('manjaro-desktop-settings' 'manjaro-xfce-minimal-settings')
 
 	_inst_dir '/minimal'
+
 	local _subst="
 		s|%BIN%|mxms-bgd-sym|g
 	"

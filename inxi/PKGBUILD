@@ -1,33 +1,38 @@
 # Maintainer: Stefano Capitani <stefanoatmanjarodotorg>
 
-_commit=48b569eb95bf3b20b36350f81ae1e211faa69d11
+_commit=23646291355ff6b495bbe55d2d633394b3948068
 pkgname=inxi
-pkgver=3.0.07
-pkgrel=1
-pkgdesc="script to get system information"
+pkgver=3.0.10
+pkgrel=2
+pkgdesc="Full featured CLI system information tool"
 arch=('any')
 url="https://github.com/smxi/inxi"
 license=('GPL')
-depends=('coreutils' 'gawk' 'grep' 'pciutils' 'perl' 'procps-ng' 'sed')
+depends=('coreutils' 'pciutils' 'perl' 'procps-ng')
 optdepends=(
+  "bind-tools: -i wlan IP"
   "dmidecode: inxi -M if no sys machine data"
   "file: inxi -o unmounted file system"
   "hddtemp: inxi -Dx show hdd temp"
-  "net-tools: inxi -i ip lan-deprecated"
   "iproute2: inxi -i ip lan"
-  "lm_sensors: inxi -s sensors output"
-  "usbutils: inxi -A usb audio;-N usb networking"
   "kmod: inxi -Ax,-Nx module version"
+  "lm_sensors: inxi -s sensors output"
+  "mesa-demos: inxi -G glx info"
+  "net-tools: inxi -i ip lan-deprecated"
+  "perl-io-socket-ssl: -U; -w,-W; -i (if dig not installed)"
+  "perl-json-xs: --output json - required for export (legacy)"
   "systemd-sysvcompat: inxi -I runlevel"
   "sudo: inxi -Dx hddtemp-user;-o file-user"
-  "mesa-demos: inxi -G glx info"
+  "tree: --debugger 20,21 /sys tree"
+  "usbutils: inxi -A usb audio;-N usb networking"
+  "wmctrl: -S active window manager (not all wm)"
   "xorg-xdpyinfo: inxi -G multi screen resolution"
   "xorg-xprop: inxi -S desktop data"
   "xorg-xrandr: inxi -G single screen resolution"
 )
 options=('zipman')
-source=("$pkgname-$pkgver-$pkgrel.tar.gz::$url/archive/$_commit.tar.gz")
-sha256sums=('5f8f7f85be61429eed1e4b34c93846899076ae1abdaac812293c02fd7453d4ac')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/$_commit.tar.gz")
+sha256sums=('6758e894a472e806d8c8de25c1d5a99a7aaac74c0f7df81fab2e6381bcde0d7b')
 
 pkgver() {
     cd $pkgname-$_commit

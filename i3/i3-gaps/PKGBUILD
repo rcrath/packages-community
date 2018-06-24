@@ -1,54 +1,60 @@
-# Maintainer: Ingo Bürk <admin at airblader dot de>
 # Maintainer: Bernhard Landauer <oberon@manjaro.org>
+# Maintainer: Morten Linderud <foxboron@archlinux.org>
+# Contributor: Ingo Bürk <admin at airblader dot de>
 
 pkgname=i3-gaps
-pkgver=4.14.1
-pkgrel=1
+_pkgsourcename=i3
+pkgver=4.15.0.1
+pkgrel=2.1
 pkgdesc='A fork of i3wm tiling window manager with more features, including gaps'
-url=https://github.com/Airblader/i3
 arch=('i686' 'x86_64')
+url='https://github.com/Airblader/i3'
 license=('BSD')
 provides=('i3-wm')
-conflicts=('i3-wm' 'i3bar' 'i3bar-git' 'i3-git' 'i3-gaps-git' 'i3-gaps-next-git')
-groups=('i3-manjaro')
+conflicts=('i3-wm')
+groups=('i3')
 depends=('xcb-util-keysyms' 'xcb-util-wm' 'libev' 'yajl'
          'startup-notification' 'pango' 'perl' 'xcb-util-cursor' 'xcb-util-xrm'
          'libxkbcommon-x11')
-makedepends=('asciidoc' 'docbook-xsl' 'pkgconfig')
-optdepends=('dmenu: As menu.'
-	'i3lock: For locking your screen.'
-	'i3status: To display system information with a bar.'
-	'perl-anyevent-i3: For i3-save-tree'
-	'perl-json-xs: For i3-save-tree'
-	'rxvt-unicode: The terminal emulator used in the default config.')
-	
+makedepends=('bison' 'flex' 'asciidoc' 'xmlto')
+optdepends=('rxvt-unicode: The terminal emulator used in the default config.'
+            'dmenu: As menu.'
+            'i3lock: For locking your screen.'
+            'i3status: To display system information with a bar.'
+            'perl-json-xs: For i3-save-tree'
+            'perl-anyevent-i3: For i3-save-tree')
+backup=(etc/i3/config)
 options=('docs' '!strip')
-source=("$url/archive/$pkgver.tar.gz")
-sha1sums=('0df480d25f915f312813d9223e9b2025d20e2d56')
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/Airblader/i3/archive/${pkgver}.tar.gz"
+        'Use-OVER-operator-for-drawing-text.patch'
+        'reframe_swallowed_windows.patch::https://github.com/i3/i3/pull/3301/commits/7ac37d8ae463d749c9f5aeb9428ed3523a5a53fb.patch')
+sha256sums=('543998c0cc2a7f7ec7dfe849bc85cbadb442ce2286f34d7afc437a346d5c469b'
+            '0fd400247a1c364061b1f6af140277d6c9fe19b5b2879d95cbf1d01a3d248ca6'
+            'a57aab196c422b5a4f98f087adf4c911956d8706cfe90431f0457a145d32d358')
+
+prepare(){
+  mkdir build
+  cd "${_pkgsourcename}-${pkgver}"
+
+  patch -Np1 -i $srcdir/Use-OVER-operator-for-drawing-text.patch
+  patch -Np1 -i $srcdir/reframe_swallowed_windows.patch
+
+  autoreconf -fvi
+}
 
 build() {
-  cd i3-$pkgver
+  cd build
 
-  autoreconf --force --install
-
-  rm -rf build/
-  mkdir -p build && cd build/
-
-  ../configure \
+  ../i3-$pkgver/configure \
     --prefix=/usr \
-    --sysconfdir=/etc \
-    --disable-sanitizers
-
-  # See https://lists.archlinux.org/pipermail/arch-dev-public/2013-April/024776.html
-  make CPPFLAGS+="-U_FORTIFY_SOURCE"
+    --sysconfdir=/etc
+  make
 }
 
 package() {
-  cd i3-$pkgver
-  cd build/
+  cd build
 
-  make DESTDIR=$pkgdir/ install
-
-  install -Dm644 ../LICENSE \
-    $pkgdir/usr/share/licenses/$pkgname/LICENSE
+  make DESTDIR="${pkgdir}/" install
+  install -Dt "$pkgdir/usr/share/man/man1" -m644 man/*.1
+  install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 ../i3-$pkgver/LICENSE
 }
