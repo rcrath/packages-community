@@ -5,11 +5,11 @@ pkgver=1.2
 pkgrel=1
 pkgdesc="A flat design icon theme by Hayder Majid"
 arch=('any')
-url="https://github.com/masalla-art/$pkgname"
+url="https://notabug.org/masalla-art/$pkgname"
 license=('GPL3')
 makedepends=('git')
 source=("$url/archive/$pkgver.tar.gz")
-md5sums=('0635e4d3e31397d228faa88d4eb0a304')
+md5sums=('0da0f20b3b63807874dca64d3580cbd4')
 
 package() {
   cd $pkgname-$pkgver
