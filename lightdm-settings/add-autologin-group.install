@@ -18,7 +18,7 @@ post_install() {
   
   echo ""
   note "We have enabled autologin for all users."
-  note "Reboot your system the first time, so changes will take affect."
+  note "Reboot your system the first time, so changes will take effect."
   echo ""
 }
 
